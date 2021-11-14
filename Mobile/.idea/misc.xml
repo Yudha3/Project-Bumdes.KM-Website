@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Yoga Andrian/Documents/Android Studio Projects/Coba2/app/src/main/res/drawable/heading_background_1.xml" value="0.23692307692307693" />
+        <entry key="..\:/Users/Yoga Andrian/Documents/Android Studio Projects/Coba2/app/src/main/res/drawable/heading_background_2.xml" value="0.23692307692307693" />
+        <entry key="..\:/Users/Yoga Andrian/Documents/Android Studio Projects/Coba2/app/src/main/res/drawable/ic_shopping_cart_24.xml" value="0.16111111111111112" />
+        <entry key="..\:/Users/Yoga Andrian/Documents/Android Studio Projects/Coba2/app/src/main/res/drawable/search_icon_background.xml" value="0.16111111111111112" />
+        <entry key="..\:/Users/Yoga Andrian/Documents/Android Studio Projects/Coba2/app/src/main/res/drawable/shadows.xml" value="0.23692307692307693" />
+        <entry key="..\:/Users/Yoga Andrian/Documents/Android Studio Projects/Coba2/app/src/main/res/drawable/white_retangle.xml" value="0.16111111111111112" />
+        <entry key="..\:/Users/Yoga Andrian/Documents/Android Studio Projects/Coba2/app/src/main/res/layout/activity_katalog.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/Yoga Andrian/Documents/Android Studio Projects/Coba2/app/src/main/res/layout/activity_keranjang.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/Yoga Andrian/Documents/Android Studio Projects/Coba2/app/src/main/res/layout/activity_login.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/Yoga Andrian/Documents/Android Studio Projects/Coba2/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Yoga Andrian/Documents/Android Studio Projects/Coba2/app/src/main/res/layout/activity_pesanan.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/Yoga Andrian/Documents/Android Studio Projects/Coba2/app/src/main/res/layout/activity_preorder.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/Yoga Andrian/Documents/Android Studio Projects/Coba2/app/src/main/res/layout/activity_register.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/Yoga Andrian/Documents/Android Studio Projects/Coba2/app/src/main/res/layout/content_scrolling.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/Yoga Andrian/Documents/Android Studio Projects/Coba2/app/src/main/res/layout/grid_item.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/Yoga Andrian/Documents/Android Studio Projects/Coba2/app/src/main/res/xml/network_security_config.xml" value="0.22447916666666667" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

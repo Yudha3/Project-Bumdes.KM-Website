@@ -9,7 +9,7 @@
     <title>Bumdes Admin</title>
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-
     static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <link rel="stylesheet" href="css/dasboard.css">
+    <link rel="stylesheet" href="css/Pages.css">
     <link rel="stylesheet" href="1.3.0/css/line-awesome.min.css">
 </head>
 
@@ -24,11 +24,11 @@
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="dasboard.html" class="active"><span class="las la-igloo"></span>
+                    <a href="dasboard.html" class=""><span class="las la-igloo"></span>
                         <span>Dasboard</span></a>
                 </li>
                 <li>
-                    <a href="Pages.html" class=""><span class="las la-tags"></span>
+                    <a href="Pages.html" class="active"><span class="las la-tags"></span>
                         <span>Pages</span></a>
                 </li>
                 <li>
@@ -65,7 +65,7 @@
                 <label for="nav-toggle">
                     <span class="las la-bars"></span>
                 </label>
-                Dasboard
+                Pages
             </h2>
 
             <div class="search-wrapper">
@@ -99,60 +99,32 @@
 
         <main>
 
-            <div class="cards">
-                <div class="card-single">
-                    <div>
-                        <h1>54</h1>
-                        <span>Produk</span>
-                    </div>
-                    <div>
-                        <span class="las la-box"></span>
-                    </div>
-                </div>
-
-                <div class="card-single">
-                    <div>
-                        <h1>18</h1>
-                        <span>Mitra</span>
-                    </div>
-                    <div>
-                        <span class="las la-users"></span>
-                    </div>
-                </div>
-
-                <div class="card-single">
-                    <div>
-                        <h1>20</h1>
-                        <span>Reseller</span>
-                    </div>
-                    <div>
-                        <span class="las la-street-view"></span>
-                    </div>
-                </div>
-
-                <div class="card-single">
-                    <div>
-                        <h1>10</h1>
-                        <span>Pending Request</span>
-                    </div>
-                    <div>
-                        <span class="las la-envelope-open-text"></span>
-                    </div>
-                </div>
-
-            </div>
-
             <div class="recent-grid">
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Recent Projects</h3>
+                            <h3>Recent Pages</h3>
 
-                            <button>See all <span class="las la-arrow-right">
+                            <button>New Pages <span class="las la-arrow-right">
                                 </span></button>
                         </div>
 
                         <div class="card-body">
+                            <div>
+                                <div class="search-wr">
+                                    <span class="las la-search"></span>
+                                    <input type="search" placeholder="Search here..." />
+                                </div>
+                                <!-- <div class="show">
+                                    <div>
+                                        <h4>Show</h4>
+                                        <span>7</span>
+                                    </div>
+                                    <div>
+                                        <span class="las la-arrows-alt-v"></span>
+                                    </div>
+                                </div> -->
+                            </div>
                             <div class="table-responsive">
                                 <table width="100%">
                                     <thead>
@@ -160,6 +132,7 @@
                                             <td>Project Title</td>
                                             <td>Department</td>
                                             <td>Status</td>
+                                            <td>Option</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -170,6 +143,10 @@
                                                 <span class="status purple"></span>
                                                 Review
                                             </td>
+                                            <td>
+                                                <button>Edit</button>
+                                                <button class="hapus">Hapus</button>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Web Development</td>
@@ -178,6 +155,10 @@
                                                 <span class="status pink"></span>
                                                 In progress
                                             </td>
+                                            <td>
+                                                <button>Edit</button>
+                                                <button class="hapus">Hapus</button>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Ushop app</td>
@@ -185,6 +166,10 @@
                                             <td>
                                                 <span class="status orange"></span>
                                                 Pending
+                                            </td>
+                                            <td>
+                                                <button>Edit</button>
+                                                <button class="hapus">Hapus</button>
                                             </td>
                                         </tr>
                                         <tr>
@@ -194,6 +179,10 @@
                                                 <span class="status purple"></span>
                                                 Review
                                             </td>
+                                            <td>
+                                                <button>Edit</button>
+                                                <button class="hapus">Hapus</button>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Web Development</td>
@@ -202,6 +191,10 @@
                                                 <span class="status pink"></span>
                                                 In progress
                                             </td>
+                                            <td>
+                                                <button>Edit</button>
+                                                <button class="hapus">Hapus</button>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Ushop app</td>
@@ -209,6 +202,10 @@
                                             <td>
                                                 <span class="status orange"></span>
                                                 Pending
+                                            </td>
+                                            <td>
+                                                <button>Edit</button>
+                                                <button class="hapus">Hapus</button>
                                             </td>
                                         </tr>
                                         <tr>
@@ -218,6 +215,10 @@
                                                 <span class="status purple"></span>
                                                 Review
                                             </td>
+                                            <td>
+                                                <button>Edit</button>
+                                                <button class="hapus">Hapus</button>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Web Development</td>
@@ -226,6 +227,10 @@
                                                 <span class="status pink"></span>
                                                 In progress
                                             </td>
+                                            <td>
+                                                <button>Edit</button>
+                                                <button class="hapus">Hapus</button>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Ushop app</td>
@@ -233,6 +238,10 @@
                                             <td>
                                                 <span class="status orange"></span>
                                                 Pending
+                                            </td>
+                                            <td>
+                                                <button>Edit</button>
+                                                <button class="hapus">Hapus</button>
                                             </td>
                                         </tr>
                                         <tr>
@@ -242,6 +251,10 @@
                                                 <span class="status purple"></span>
                                                 Review
                                             </td>
+                                            <td>
+                                                <button>Edit</button>
+                                                <button class="hapus">Hapus</button>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Web Development</td>
@@ -250,6 +263,10 @@
                                                 <span class="status pink"></span>
                                                 In progress
                                             </td>
+                                            <td>
+                                                <button>Edit</button>
+                                                <button class="hapus">Hapus</button>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Ushop app</td>
@@ -257,6 +274,10 @@
                                             <td>
                                                 <span class="status orange"></span>
                                                 Pending
+                                            </td>
+                                            <td>
+                                                <button>Edit</button>
+                                                <button class="hapus">Hapus</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -264,125 +285,6 @@
                             </div>
                         </div>
 
-                    </div>
-                </div>
-
-                <div class="customers">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>New Customer</h3>
-
-                            <button>See all <span class="las la-arrow-right">
-                                </span></button>
-                        </div>
-
-                        <div class="card-body">
-                            <div class="customer">
-                                <div class="info">
-                                    <img src="img/p.jpeg" width="40px" height="40px" alt="">
-                                    <div>
-                                        <h4>Lewis S. Cunningham</h4>
-                                        <small>CEO Mandiri</small>
-                                    </div>
-                                </div>
-                                <div class="contact">
-                                    <span class="las la-user-circle"></span>
-                                    <span class="las la-comment"></span>
-                                    <span class="las la-phone"></span>
-                                </div>
-                            </div>
-
-                            <div class="customer">
-                                <div class="info">
-                                    <img src="img/p.jpeg" width="40px" height="40px" alt="">
-                                    <div>
-                                        <h4>Lewis S. Cunningham</h4>
-                                        <small>CEO Mandiri</small>
-                                    </div>
-                                </div>
-                                <div class="contact">
-                                    <span class="las la-user-circle"></span>
-                                    <span class="las la-comment"></span>
-                                    <span class="las la-phone"></span>
-                                </div>
-                            </div>
-
-                            <div class="customer">
-                                <div class="info">
-                                    <img src="img/p.jpeg" width="40px" height="40px" alt="">
-                                    <div>
-                                        <h4>Lewis S. Cunningham</h4>
-                                        <small>CEO Mandiri</small>
-                                    </div>
-                                </div>
-                                <div class="contact">
-                                    <span class="las la-user-circle"></span>
-                                    <span class="las la-comment"></span>
-                                    <span class="las la-phone"></span>
-                                </div>
-                            </div>
-
-                            <div class="customer">
-                                <div class="info">
-                                    <img src="img/p.jpeg" width="40px" height="40px" alt="">
-                                    <div>
-                                        <h4>Lewis S. Cunningham</h4>
-                                        <small>CEO Mandiri</small>
-                                    </div>
-                                </div>
-                                <div class="contact">
-                                    <span class="las la-user-circle"></span>
-                                    <span class="las la-comment"></span>
-                                    <span class="las la-phone"></span>
-                                </div>
-                            </div>
-
-                            <div class="customer">
-                                <div class="info">
-                                    <img src="img/p.jpeg" width="40px" height="40px" alt="">
-                                    <div>
-                                        <h4>Lewis S. Cunningham</h4>
-                                        <small>CEO Mandiri</small>
-                                    </div>
-                                </div>
-                                <div class="contact">
-                                    <span class="las la-user-circle"></span>
-                                    <span class="las la-comment"></span>
-                                    <span class="las la-phone"></span>
-                                </div>
-                            </div>
-
-                            <div class="customer">
-                                <div class="info">
-                                    <img src="img/p.jpeg" width="40px" height="40px" alt="">
-                                    <div>
-                                        <h4>Lewis S. Cunningham</h4>
-                                        <small>CEO Mandiri</small>
-                                    </div>
-                                </div>
-                                <div class="contact">
-                                    <span class="las la-user-circle"></span>
-                                    <span class="las la-comment"></span>
-                                    <span class="las la-phone"></span>
-                                </div>
-                            </div>
-
-                            <div class="customer">
-                                <div class="info">
-                                    <img src="img/p.jpeg" width="40px" height="40px" alt="">
-                                    <div>
-                                        <h4>Lewis S. Cunningham</h4>
-                                        <small>CEO Mandiri</small>
-                                    </div>
-                                </div>
-                                <div class="contact">
-                                    <span class="las la-user-circle"></span>
-                                    <span class="las la-comment"></span>
-                                    <span class="las la-phone"></span>
-                                </div>
-                            </div>
-
-                        </div>
                     </div>
                 </div>
 

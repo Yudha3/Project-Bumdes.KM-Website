@@ -1,14 +1,16 @@
-package com.yogandrn.coba2;
+package com.yogandrn.coba2.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class PreorderActivity extends AppCompatActivity {
+import com.yogandrn.coba2.R;
+
+public class KeranjangActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_preorder);
+        setContentView(R.layout.activity_keranjang);
     }
 }

@@ -1,8 +1,10 @@
-package com.yogandrn.coba2;
+package com.yogandrn.coba2.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.yogandrn.coba2.R;
 
 public class PesananActivity extends AppCompatActivity {
 

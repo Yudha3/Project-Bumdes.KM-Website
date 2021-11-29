@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".RegisterActivity">
+    tools:context=".Activity.RegisterActivity">
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="56dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="24dp"
         android:src="@drawable/logobumdes"/>
@@ -17,11 +17,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Karya Mandiri"
+        android:layout_marginTop="24dp"
+        android:text="Daftar"
         android:textAlignment="center"
         android:layout_gravity="center"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="@color/primaryGreen"
         android:fontFamily="@font/poppins_semibold"/>
@@ -30,7 +30,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40sp"
+        android:layout_marginTop="4sp"
         android:layout_marginLeft="24sp"
         android:layout_marginRight="24sp">
 
@@ -38,6 +38,7 @@
             android:id="@+id/txtFullname_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:fontFamily="@font/poppins_regular"
             android:inputType="textPersonName"
             android:hint="Fullname"/>
@@ -56,7 +57,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:inputType="textPersonName"
-            android:hint="Username"/>
+            android:hint="Username"
+            android:background="@color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -70,6 +72,7 @@
             android:id="@+id/txtEmail_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:fontFamily="@font/poppins_regular"
             android:inputType="textEmailAddress"
             android:hint="Email Address"/>
@@ -87,6 +90,7 @@
             android:id="@+id/txtPassword_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:fontFamily="@font/poppins_regular"
             android:inputType="textPassword"
             android:hint="Password"/>
@@ -104,6 +108,7 @@
             android:id="@+id/txtConfPass_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:fontFamily="@font/poppins_regular"
             android:inputType="textPassword"
             android:hint="Konfirmasi Password"/>
@@ -120,8 +125,7 @@
         android:background="@color/primaryGreen"
         android:fontFamily="@font/poppins_semibold"
         android:text="Daftar"
-        android:textSize="18sp"
-        android:onClick="register"/>
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/txtLogin_register"
@@ -131,7 +135,6 @@
         android:layout_marginTop="14sp"
         android:text="Sudah punya akun? Login"
         android:textColor="#6e6e6e"
-        android:textSize="14sp"
-        android:onClick="login"/>
+        android:textSize="14sp"/>
 
 </LinearLayout>

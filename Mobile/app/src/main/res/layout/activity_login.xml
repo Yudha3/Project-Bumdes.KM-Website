@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".Activity.LoginActivity">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -18,13 +18,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Karya Mandiri"
+        android:text="Selamat Datang"
         android:textAlignment="center"
         android:layout_gravity="center"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="@color/primaryGreen"
         android:fontFamily="@font/poppins_semibold"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Masukkan email dan password Anda"
+        android:textAlignment="center"
+        android:textColor="@color/primaryGreen"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_medium"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -37,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="4dp"
+            android:background="@color/white"
             android:fontFamily="@font/poppins_regular"
             android:inputType="textEmailAddress"
             android:hint="Email" />
@@ -54,6 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="4dp"
+            android:background="@color/white"
             android:fontFamily="@font/poppins_regular"
             android:inputType="textEmailAddress"
             android:hint="Password" />
@@ -71,8 +82,7 @@
         android:text="Login"
         style="@style/Widget.AppCompat.Button.Colored"
         android:fontFamily="@font/poppins_semibold"
-        android:textSize="18sp"
-        android:onClick="login"/>
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/txtRegister_login"
@@ -82,7 +92,6 @@
         android:layout_marginTop="14sp"
         android:text="Belum punya akun? Daftar"
         android:textColor="#6e6e6e"
-        android:textSize="14sp"
-        android:onClick="register"/>
+        android:textSize="14sp"/>
 
 </LinearLayout>

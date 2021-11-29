@@ -4,13 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".KatalogActivity">
+    tools:context=".Activity.KatalogActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/katalog_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleTextColor="@color/white"
+            android:elevation="4dp"
+            app:title="Katalog"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:id="@+id/progressbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_katalog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/grid_item" />
+        android:layout_marginTop="60dp"
+        tools:listitem="@layout/card_item" />
 
 </RelativeLayout>

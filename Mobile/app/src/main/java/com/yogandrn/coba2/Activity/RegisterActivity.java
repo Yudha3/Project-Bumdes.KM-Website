@@ -1,4 +1,4 @@
-package com.yogandrn.coba2;
+package com.yogandrn.coba2.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,22 +7,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
+import com.yogandrn.coba2.R;
+import com.yogandrn.coba2.VolleyConnection;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button btnRegister;
     String fullname, username, email, password, confpass;
     String URL = "http://192.168.1.100:8080/login-register/register.php";
+    String SERVER_REGISTER_URL = "http://192.168.1.100:8080/LoginRegister_Volley/register.php";
     ProgressDialog progressDialog;
 
 
@@ -44,6 +48,8 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
         txtFullname = (TextInputEditText) findViewById(R.id.txtFullname_register);
         txtUsername = (TextInputEditText) findViewById(R.id.txtUsername_register);
         txtEmail = (TextInputEditText) findViewById(R.id.txtEmail_register);
@@ -60,6 +66,8 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(loginIntent);
             }
         });
+
+        txtLogin.setText(fromHtml("Belum punya akun? " + "<font color='#24882A'>Daftar</font>"));
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void CreateDataToServer(final String fullname, final String username, final String email, final String password) {
         if (checkNetworkConnection()) {
             progressDialog.show();
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, DbContract.SERVER_REGISTER_URL,
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, SERVER_REGISTER_URL,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -140,6 +148,16 @@ public class RegisterActivity extends AppCompatActivity {
         ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return (networkInfo != null && networkInfo.isConnected());
+    }
+
+    public static Spanned fromHtml (String html) {
+        Spanned result;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            result = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            result = Html.fromHtml(html);
+        }
+        return result;
     }
 
 //    public void register(View view) {

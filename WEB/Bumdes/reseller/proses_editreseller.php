@@ -23,30 +23,3 @@ if (isset($_POST['submit'])) {
     }
 
 }
-
-//   if($_GET['id'])
-// 		{
-// 			//Data akan di edit
-// 			$edit = mysqli_query($koneksi, "UPDATE data_mitra set
-// 											 	nama_mitra = '$_POST[nama_mitra]',
-// 											 	alamat = '$_POST[alamat]',
-// 												nomer_telepon = '$_POST[no_tlp]',
-// 											 	tgl_gabung = '$_POST[tgl_gabung]',
-//                                                 barang = '$_POST[barang]'
-// 											 WHERE id = '$_GET[id]'
-// 										   ");
-// 			if($edit) //jika edit sukses
-// 			{
-// 				echo "<script>
-// 						alert('Edit data suksess!');
-// 						document.location='Mitra.php';
-// 				     </script>";
-// 			}
-// 			else
-// 			{
-// 				echo "<script>
-// 						alert('Edit data GAGAL!!');
-// 						document.location='Mitra.php';
-// 				     </script>";
-// 			}
-// 		}

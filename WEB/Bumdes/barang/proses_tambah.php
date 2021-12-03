@@ -1,6 +1,6 @@
 <?php
 // memanggil file koneksi.php untuk melakukan koneksi database
-include 'koneksi.php';
+include '../koneksi.php';
 
 	// membuat variabel untuk menampung data dari form
   $nama_barang   = $_POST['nama_brg'];
@@ -20,7 +20,7 @@ if($gambar_produk != "") {
   $angka_acak     = rand(1,999);
   $nama_gambar_baru = $angka_acak.'-'.$gambar_produk; //menggabungkan angka acak dengan nama file sebenarnya
         if(in_array($ekstensi, $ekstensi_diperbolehkan) === true)  {     
-                move_uploaded_file($file_tmp, 'img/gambar/'.$nama_gambar_baru); //memindah file gambar ke folder gambar
+                move_uploaded_file($file_tmp, '../img/gambar/'.$nama_gambar_baru); //memindah file gambar ke folder gambar
                   // jalankan query INSERT untuk menambah data ke database pastikan sesuai urutan (id tidak perlu karena dibikin otomatis)
                   $query = "INSERT INTO data_brg (nama_brg, jenis_brg, harga_brg, stok_brg, deskripsi_brg, gambar_brg) VALUES ('$nama_barang', '$jenis_barang', '$harga_barang', '$stok_barang', '$deskripsi', '$nama_gambar_baru')";
                   $result = mysqli_query($koneksi, $query);

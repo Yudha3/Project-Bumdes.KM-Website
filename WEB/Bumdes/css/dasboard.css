@@ -6,6 +6,7 @@
 	--main-color: #100BF5;
 	--color-dark: #1D2231;
 	--text-grey: #8390A2;
+	--clr-primary: #aa00ff;
 }
 
 * {
@@ -18,7 +19,7 @@
 }
 
 .sidebar {
-	width: 345px;
+	width: 280px;
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -99,7 +100,7 @@
 
 .main-content {
 	transition: margin-left 300ms;
-	margin-left: 345px;
+	margin-left: 280px;
 }
 
 header {
@@ -109,8 +110,8 @@ header {
 	padding: 1rem 1.5rem;
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 	position: fixed;
-	left: 345px;
-	width: calc(100% - 345px);
+	left: 280px;
+	width: calc(100% - 280px);
 	top: 0;
 	z-index: 100;
 	transition: left 300ms;
@@ -201,32 +202,54 @@ main {
 	margin-top: 1rem;
 }
 
-.card-single {
+.card-single1,
+.card-single2,
+.card-single3,
+.card-single4 {
 	display: flex;
 	justify-content: space-between;
 	background: #fff;
 	padding: 2rem;
-	border-radius: 2px;
+	border-radius: 5px;
+	/* border-top: 4px solid #4E73DF; */
 }
 
-.card-single div:last-child span {
+.card-single1 div:last-child span,
+.card-single2 div:last-child span,
+.card-single3 div:last-child span,
+.card-single4 div:last-child span {
 	font-size: 3rem;
 	color: var(--main-color);
 }
 
-.card-single div:first-child span {
+.card-single1 div:first-child span,
+.card-single2 div:first-child span,
+.card-single3 div:first-child span,
+.card-single4 div:first-child span {
 	color: var(--text-grey);
 }
 
-.card-single:last-child {
-	background: var(--main-color);
+.card-single1 {
+	border-top: 4px solid #4E73DF;
 }
 
-.card-single:last-child h1,
+.card-single2 {
+	border-top: 4px solid #1CC88A;
+}
+
+.card-single3 {
+	border-top: 4px solid #cc369a;
+}
+
+.card-single4 {
+	border-top: 4px solid #F6C23E;
+}
+
+/* .card-single:last-child h1,
 .card-single:last-child div:first-child span,
 .card-single:last-child div:last-child span {
 	color: #fff;
-}
+} */
 
 .recent-grid {
 	margin-top: 3.5rem;
@@ -440,7 +463,7 @@ tr td:last-child {
 	#nav-toggle:checked + .sidebar {
 		left: 0 !important;
 		z-index: 100;
-		width: 345px;
+		width: 280px;
 	}
 
 	#nav-toggle:checked + .sidebar .sidebar-brand,

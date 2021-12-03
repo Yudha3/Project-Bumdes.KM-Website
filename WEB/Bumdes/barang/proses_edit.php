@@ -1,6 +1,6 @@
 <?php
 // memanggil file koneksi.php untuk melakukan koneksi database
-include 'koneksi.php';
+include '../koneksi.php';
 
 // membuat variabel untuk menampung data dari form
 $id = $_POST['id'];
@@ -19,7 +19,7 @@ if ($gambar_produk != "") {
     $angka_acak     = rand(1, 999);
     $nama_gambar_baru = $angka_acak . '-' . $gambar_produk; //menggabungkan angka acak dengan nama file sebenarnya
     if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
-        move_uploaded_file($file_tmp, 'img/gambar/' . $nama_gambar_baru); //memindah file gambar ke folder gambar
+        move_uploaded_file($file_tmp, '../img/gambar/' . $nama_gambar_baru); //memindah file gambar ke folder gambar
 
         // jalankan query UPDATE berdasarkan ID yang produknya kita edit
         $query  = "UPDATE data_brg SET nama_brg = '$nama_produk', jenis_brg = '$jenis_barang', harga_brg = '$harga_barang', stok_brg = '$stok_barang', deskripsi_brg = '$deskripsi', gambar_brg = '$nama_gambar_baru'";

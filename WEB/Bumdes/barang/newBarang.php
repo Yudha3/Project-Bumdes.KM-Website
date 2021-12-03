@@ -1,17 +1,13 @@
 <?php
-include('koneksi.php'); //agar index terhubung dengan database, maka koneksi sebagai penghubung harus di include
-// require_once('koneksi.php');
-// require_once('database.php');
 
-// $connection = new Database($host, $user, $pass, $database);
-// include "m_barang.php";
-// $brg = new Barang($connection);
+include('../koneksi.php'); //agar index terhubung dengan database, maka koneksi sebagai penghubung harus di include
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
@@ -19,15 +15,12 @@ include('koneksi.php'); //agar index terhubung dengan database, maka koneksi seb
     <title>Bumdes Admin</title>
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-
     static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <link rel="stylesheet" href="css/barang.css">
-    <link rel="stylesheet" href="1.3.0/css/line-awesome.min.css">
-    <!-- <link rel="stylesheet" href="assets/css/bootstrap.css"> -->
+    <link rel="stylesheet" href="../css/barang.css">
+    <link rel="stylesheet" href="../1.3.0/css/line-awesome.min.css">
 
 </head>
 
 <body>
-
-    <!-- <script type="text/javascript" src="assets/js/bootstrap.js"></script> -->
 
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
@@ -38,27 +31,19 @@ include('koneksi.php'); //agar index terhubung dengan database, maka koneksi seb
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="dasboard.html" class=""><span class="las la-igloo"></span>
+                    <a href="../dasboard.php" class=""><span class="las la-igloo"></span>
                         <span>Dasboard</span></a>
                 </li>
                 <li>
-                    <a href="Pages.html" class=""><span class="las la-tags"></span>
-                        <span>Pages</span></a>
-                </li>
-                <li>
-                    <a href="profile.html" class=""><span class="las la-user"></span>
-                        <span>Profile</span></a>
-                </li>
-                <li>
-                    <a href="Mitra.html" class=""><span class="las la-users"></span>
+                    <a href="../mitra/Mitra.php" class=""><span class="las la-users"></span>
                         <span>Mitra</span></a>
                 </li>
                 <li>
-                    <a href="reseller.html" class=""><span class="las la-street-view"></span>
+                    <a href="../reseller/reseller.php" class=""><span class="las la-street-view"></span>
                         <span>Reseller</span></a>
                 </li>
                 <li>
-                    <a href="barang.html" class="active"><span class="las la-box"></span>
+                    <a href="barang.php" class="active"><span class="las la-box"></span>
                         <span>Barang</span></a>
                 </li>
                 <li>
@@ -87,15 +72,6 @@ include('koneksi.php'); //agar index terhubung dengan database, maka koneksi seb
                 <input type="search" placeholder="Search here..." />
             </div>
 
-            <!-- <div class="icons">
-                <div>
-                    <a href=""><span class="las la-bell"></span></a>
-                </div>
-                <div>
-                    <a href=""><span class="las la-envelope"></span></a>
-                </div>
-            </div> -->
-
             <div class="user-wrapper">
                 <div>
                     <a href=""><span class="las la-bell"></span></a>
@@ -103,7 +79,7 @@ include('koneksi.php'); //agar index terhubung dengan database, maka koneksi seb
                 <div>
                     <a href=""><span class="las la-envelope"></span></a>
                 </div>
-                <img src="img/p.jpeg" width="40px" height="40px" alt="">
+                <img src="../img/avatar.svg" width="40px" height="40px" alt="">
                 <div>
                     <h4>Boy Dymas Hidayat</h4>
                     <small>Admin</small>
@@ -158,18 +134,9 @@ include('koneksi.php'); //agar index terhubung dengan database, maka koneksi seb
                             </form>
 
                         </div>
-
-
-
-
                     </div>
                 </div>
             </div>
-
-
-
-
-
         </main>
     </div>
 

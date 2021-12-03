@@ -1,11 +1,6 @@
 <?php
-include('../koneksi.php'); //agar index terhubung dengan database, maka koneksi sebagai penghubung harus di include
-// require_once('koneksi.php');
-// require_once('database.php');
 
-// $connection = new Database($host, $user, $pass, $database);
-// include "m_barang.php";
-// $brg = new Barang($connection);
+include('../koneksi.php'); //agar index terhubung dengan database, maka koneksi sebagai penghubung harus di include
 
 ?>
 <!DOCTYPE html>
@@ -21,6 +16,9 @@ include('../koneksi.php'); //agar index terhubung dengan database, maka koneksi 
     static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="../css/reseller.css">
     <link rel="stylesheet" href="../1.3.0/css/line-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="../assets/dataTable/datatables.min.css">
+    <script type="text/javascript" src="../assets/dataTable/datatables.min.js"></script>
 </head>
 
 <body>
@@ -34,16 +32,8 @@ include('../koneksi.php'); //agar index terhubung dengan database, maka koneksi 
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="dasboard.html" class=""><span class="las la-igloo"></span>
+                    <a href="../dasboard.php" class=""><span class="las la-igloo"></span>
                         <span>Dasboard</span></a>
-                </li>
-                <li>
-                    <a href="Pages.html" class=""><span class="las la-tags"></span>
-                        <span>Pages</span></a>
-                </li>
-                <li>
-                    <a href="profile.html" class=""><span class="las la-user"></span>
-                        <span>Profile</span></a>
                 </li>
                 <li>
                     <a href="../mitra/Mitra.php" class=""><span class="las la-users"></span>
@@ -83,15 +73,6 @@ include('../koneksi.php'); //agar index terhubung dengan database, maka koneksi 
                 <input type="search" placeholder="Search here..." />
             </div>
 
-            <!-- <div class="icons">
-                <div>
-                    <a href=""><span class="las la-bell"></span></a>
-                </div>
-                <div>
-                    <a href=""><span class="las la-envelope"></span></a>
-                </div>
-            </div> -->
-
             <div class="user-wrapper">
                 <div>
                     <a href=""><span class="las la-bell"></span></a>
@@ -99,7 +80,7 @@ include('../koneksi.php'); //agar index terhubung dengan database, maka koneksi 
                 <div>
                     <a href=""><span class="las la-envelope"></span></a>
                 </div>
-                <img src="img/p.jpeg" width="40px" height="40px" alt="">
+                <img src="../img/avatar.svg" width="40px" height="40px" alt="">
                 <div>
                     <h4>Boy Dymas Hidayat</h4>
                     <small>Admin</small>
@@ -120,21 +101,6 @@ include('../koneksi.php'); //agar index terhubung dengan database, maka koneksi 
                         </div>
 
                         <div class="card-body">
-                            <div>
-                                <div class="search-wr">
-                                    <span class="las la-search"></span>
-                                    <input type="search" placeholder="Search here..." />
-                                </div>
-                                <!-- <div class="show">
-                                    <div>
-                                        <h4>Show</h4>
-                                        <span>7</span>
-                                    </div>
-                                    <div>
-                                        <span class="las la-arrows-alt-v"></span>
-                                    </div>
-                                </div> -->
-                            </div>
 
                             <div class="table-responsive">
                                 <table width="100%">
@@ -186,16 +152,17 @@ include('../koneksi.php'); //agar index terhubung dengan database, maka koneksi 
                             </div>
 
                         </div>
-
-                        
                     </div>
-
                 </div>
-
-
-
+            </div>
         </main>
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('table').DataTable();
+        } );
+    </script>
 
 </body>
 

@@ -21,10 +21,10 @@
         android:text="Daftar"
         android:textAlignment="center"
         android:layout_gravity="center"
-        android:textSize="22sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@color/primaryGreen"
-        android:fontFamily="@font/poppins_semibold"/>
+        android:fontFamily="@font/productsans_medium"/>
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/productsans_regular"
             android:inputType="textPersonName"
             android:hint="Fullname"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -55,7 +55,7 @@
             android:id="@+id/txtUsername_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/productsans_regular"
             android:inputType="textPersonName"
             android:hint="Username"
             android:background="@color/white"/>
@@ -73,9 +73,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/productsans_regular"
             android:inputType="textEmailAddress"
             android:hint="Email Address"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12sp"
+        android:layout_marginLeft="24sp"
+        android:layout_marginRight="24sp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtTelp_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:fontFamily="@font/productsans_regular"
+            android:inputType="textPhonetic"
+            android:hint="Nomor Telepon"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -91,7 +108,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/productsans_regular"
             android:inputType="textPassword"
             android:hint="Password"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -109,7 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/productsans_regular"
             android:inputType="textPassword"
             android:hint="Konfirmasi Password"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -120,12 +137,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24sp"
-        android:layout_marginTop="16sp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="24sp"
-        android:background="@color/primaryGreen"
-        android:fontFamily="@font/poppins_semibold"
+        android:background="@drawable/bg_buttton_green"
+        android:fontFamily="@font/productsans_medium"
         android:text="Daftar"
-        android:textSize="18sp"/>
+        android:textAllCaps="false"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/txtLogin_register"
@@ -135,6 +153,30 @@
         android:layout_marginTop="14sp"
         android:text="Sudah punya akun? Login"
         android:textColor="#6e6e6e"
+        android:fontFamily="@font/productsans_regular"
         android:textSize="14sp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:id="@+id/progressRegister"
+        android:visibility="invisible">
+
+        <ProgressBar
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please wait..."
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:fontFamily="@font/productsans_light"
+            android:layout_marginTop="4dp"/>
+    </LinearLayout>
 
 </LinearLayout>

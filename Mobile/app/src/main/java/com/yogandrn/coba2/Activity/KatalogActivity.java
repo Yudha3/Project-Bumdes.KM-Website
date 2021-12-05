@@ -1,5 +1,6 @@
 package com.yogandrn.coba2.Activity;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,7 +13,7 @@ import com.yogandrn.coba2.API.APIRequestData;
 import com.yogandrn.coba2.API.RetroServer;
 import com.yogandrn.coba2.Adapter.AdapterProduk;
 import com.yogandrn.coba2.Model.ProdukModel;
-import com.yogandrn.coba2.Model.ResponseModel;
+import com.yogandrn.coba2.Model.ResponseProduk;
 import com.yogandrn.coba2.R;
 
 import java.util.ArrayList;
@@ -28,13 +29,16 @@ public class KatalogActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<ProdukModel> listData = new ArrayList<>();
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_katalog);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setTitle("All Products");
 
         layoutManager =  new GridLayoutManager(KatalogActivity.this, 2);
         rvProduk = findViewById(R.id.recycler_katalog);
@@ -44,13 +48,24 @@ public class KatalogActivity extends AppCompatActivity {
         retrieveData();
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
     public void retrieveData() {
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-        Call<ResponseModel> getData = apiRequestData.ReadData();
+        Call<ResponseProduk> getData = apiRequestData.ReadData();
 
-        getData.enqueue(new Callback<ResponseModel>() {
+        getData.enqueue(new Callback<ResponseProduk>() {
             @Override
-            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+            public void onResponse(Call<ResponseProduk> call, Response<ResponseProduk> response) {
                 int kode = response.body().getKode();
                 String pesan = response.body().getPesan();
 
@@ -63,9 +78,10 @@ public class KatalogActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ResponseModel> call, Throwable t) {
+            public void onFailure(Call<ResponseProduk> call, Throwable t) {
                 Toast.makeText(KatalogActivity.this, "Gagal menghubungi server", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }

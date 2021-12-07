@@ -3,7 +3,7 @@
     <style name="Theme.Coba2" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primaryGreen</item>
-        <item name="colorPrimaryVariant">@color/darkGreen</item>
+        <item name="colorPrimaryVariant">@color/primaryGreen</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -19,7 +19,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.Coba2.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.Coba2.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />
 
     <style name="Theme.Coba2.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

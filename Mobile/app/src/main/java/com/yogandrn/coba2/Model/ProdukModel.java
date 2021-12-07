@@ -2,39 +2,47 @@ package com.yogandrn.coba2.Model;
 
 public class ProdukModel {
 
-    private int id_buku ;
-    private String judul, isbn, penulis, gambar;
+    private int id_brg, hg_jual, jml_stok ;
+    private String barang, deskripsi, gambar;
 
-    public int getId_buku() {
-        return id_buku;
+    public int getId_brg() {
+        return id_brg;
     }
 
-    public void setId_buku(int id_buku) {
-        this.id_buku = id_buku;
+    public void setId_brg(int id_brg) {
+        this.id_brg = id_brg;
     }
 
-    public String getJudul() {
-        return judul;
+    public int getHg_jual() {
+        return hg_jual;
     }
 
-    public void setJudul(String judul) {
-        this.judul = judul;
+    public void setHg_jual(int hg_jual) {
+        this.hg_jual = hg_jual;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public int getJml_stok() {
+        return jml_stok;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setJml_stok(int jml_stok) {
+        this.jml_stok = jml_stok;
     }
 
-    public String getPenulis() {
-        return penulis;
+    public String getBarang() {
+        return barang;
     }
 
-    public void setPenulis(String penulis) {
-        this.penulis = penulis;
+    public void setBarang(String barang) {
+        this.barang = barang;
+    }
+
+    public String getDeskripsi() {
+        return deskripsi;
+    }
+
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
     }
 
     public String getGambar() {

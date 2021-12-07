@@ -4,12 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailProduk">
+    tools:context=".Activity.DetailProduk">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Detail Produk"/>
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:nestedScrollingEnabled="true"
+        app:layout_constraintTop_toTopOf="parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/img_detail"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/bg_foto_default"
+            android:elevation="4dp"/>
+
+        <TextView
+            android:id="@+id/tv_id_brg_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_barang_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="12dp"
+            android:text="Nama Barang"
+            android:fontFamily="@font/productsans_medium"
+            android:maxLines="2"
+            android:textColor="#303030"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_harga_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="8dp"
+            android:text="Rp. 000"
+            android:fontFamily="@font/productsans_medium"
+            android:maxLines="2"
+            android:textColor="@color/primaryGreen"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/tv_stok_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="8dp"
+            android:text="Stok : "
+            android:fontFamily="@font/productsans_regular"
+            android:maxLines="2"
+            android:textColor="#303030"
+            android:textSize="16sp"/>
+
+
+
+        <TextView
+            android:id="@+id/tv_deskripsi_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="12dp"
+            android:text="deskripsi produk"
+            android:fontFamily="@font/productsans_light"
+            android:maxLines="@integer/material_motion_duration_long_2"
+            android:textColor="#303030"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginHorizontal="12dp"
+        android:paddingVertical="12dp"
+        android:text="Add to Cart"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,73 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    app:cardElevation="4dp"
+    android:paddingHorizontal="6dp"
+    android:id="@+id/produk_card">
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="8dp"
-        android:layout_gravity="center"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="6dp"
-        android:id="@+id/produk_card">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="8dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/imgProduk"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="8dp">
+            android:src="@drawable/bg_foto_default"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"/>
 
-            <ImageView
-                android:id="@+id/imgProduk"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/bg_foto_default"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"/>
+        <TextView
+            android:id="@+id/tvID_Brg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID Buku"
+            android:visibility="gone"/>
 
-            <TextView
-                android:id="@+id/tvID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ID Buku"
-                android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tvStok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID Buku"
+            android:visibility="gone"/>
 
-            <TextView
-                android:id="@+id/tvISBN"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="ISBN"
-                android:textSize="13sp"
-                android:textColor="#404040"
-                android:fontFamily="@font/poppins_regular"/>
-
-            <TextView
-                android:id="@+id/tvJudul"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Judul Buku"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="#303030"
-                android:fontFamily="@font/poppins_medium"/>
-
-            <TextView
-                android:id="@+id/tvPenulis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Penulis"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:textColor="#303030"
-                android:fontFamily="@font/poppins_medium"/>
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/tvDeskripsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID Buku"
+            android:visibility="gone"/>
 
 
+        <TextView
+            android:id="@+id/tvBarang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="10dp"
+            android:text="Nama Barang"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#303030"
+            android:fontFamily="@font/productsans_regular"/>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvHarga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Penulis"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/primaryGreen"
+            android:fontFamily="@font/productsans_medium"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+

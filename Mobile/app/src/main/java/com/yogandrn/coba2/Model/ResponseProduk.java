@@ -2,9 +2,11 @@ package com.yogandrn.coba2.Model;
 
 import java.util.List;
 
-public class ResponseModel {
+public class ResponseProduk {
+
     private int kode;
     private String pesan;
+    private List<ProdukModel> data ;
 
     public int getKode() {
         return kode;
@@ -22,4 +24,11 @@ public class ResponseModel {
         this.pesan = pesan;
     }
 
+    public List<ProdukModel> getData() {
+        return data;
+    }
+
+    public void setData(List<ProdukModel> data) {
+        this.data = data;
+    }
 }

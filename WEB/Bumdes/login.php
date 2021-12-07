@@ -2,41 +2,24 @@
 require('koneksi.php');
 // $koneksi = mysqli_connect("localhost", "root", "", "user");
 session_start();
-if(isset($_POST['submit'])){
-    $username = $_POST['txt_username'];
-    $pass = $_POST['txt_pass'];
+if(isset($_POST['login'])){
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
-    if(!empty(trim($email)) && !empty(trim($pass))){
-        $query = "SELECT * FROM user WHERE username = '$username'";
-        $result = mysqli_query($koneksi, $query);
-        $num = mysqli_num_rows($result);
+	if($username == "" || $password == "") {
+		header("Location: loginerror.php");
+	}
 
-        while($row = mysqli_fetch_array($result)){
-            $id = $row['id'];
-            $userVal = $row['username'];
-            $passVal = $row['password'];
-            $userName = $row['user_fullname'];
-        }
+	$sql = mysqli_query($koneksi, "SELECT * FROM user WHERE username = '$username' AND password = '$password'");
 
-        if($num != 0) {
-            if($userVal==$email && $passVal==$pass){
-                $_SESSION['id'] = $id;
-                $_SESSION['name'] = $userName;
-                header('Location: home.php?user_fullname=' . urlencode($userName));
-            }else{
-                $error = 'user atau password salah!';
-                header('Location: login.php');
-            }
-        }else{
-            $error = 'Username tidak boleh kosong!';
-            header('Location: login.php');
-        }
-    }else{
-        $error = 'Data tidak boleh kosong!';
-        echo $error;
-    }
+	if(mysqli_num_rows($sql) != 0) {
+		header("Location: dasboard.php");
+	} else {
+		header("Location: loginerror.php");
+	}
+
+    
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +38,7 @@ if(isset($_POST['submit'])){
 			<img src="img/undraw_web_devices_re_m8sc.svg">
 		</div>
 		<div class="login-content">
-			<form action="login.html">
+			<form action="" method="POST">
 				<img src="img/undraw_profile_pic_ic-5-t.svg">
 				<h2 class="title">Welcome</h2>
            		<div class="input-div one">
@@ -64,7 +47,7 @@ if(isset($_POST['submit'])){
            		   </div>
            		   <div class="div">
            		   		<h5>Username</h5>
-           		   		<input type="text" class="input">
+           		   		<input type="text" class="input" name="username">
            		   </div>
            		</div>
            		<div class="input-div pass">
@@ -73,11 +56,11 @@ if(isset($_POST['submit'])){
            		   </div>
            		   <div class="div">
            		    	<h5>Password</h5>
-           		    	<input type="password" class="input">
+           		    	<input type="password" class="input" name="password">
             	   </div>
             	</div>
             	<a href="#">Forgot Password?</a>
-            	<input type="submit" class="btn" value="Login">
+            	<input type="submit" class="btn" name="login" value="Login">
             </form>
         </div>
     </div>

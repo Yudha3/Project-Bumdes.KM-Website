@@ -1,6 +1,28 @@
 <?php
 
-include ('koneksi.php');
+require('koneksi.php');
+
+$data_barang = mysqli_query($koneksi, "SELECT * FROM data_brg");
+$data_mitra = mysqli_query($koneksi, "SELECT * FROM data_mitra");
+$data_reseller = mysqli_query($koneksi, "SELECT * FROM data_reseller");
+
+
+
+$jml_barang = mysqli_num_rows($data_barang);
+$jml_mitra = mysqli_num_rows($data_mitra);
+$jml_reseller = mysqli_num_rows($data_reseller);
+
+// require ('query.php');
+// $username = $_GET['user_fullname'];
+// session_start();
+// // $obj = new crud;
+// if (!isset($_SESSION['name'])) {
+//     $_SESSION['msg'] = 'Anda harus login untuk mengakses halaman ini';
+//     header('Location: login.php');
+// }
+
+// $sesName = $_SESSION['name'];
+?>
 
 ?>
 <!DOCTYPE html>
@@ -80,7 +102,7 @@ include ('koneksi.php');
                 </div>
                 <img src="img/avatar.svg" width="40px" height="40px" alt="">
                 <div>
-                    <h4>Boy Dymas Hidayat</h4>
+                    <h4></h4>
                     <small>Admin</small>
                 </div>
             </div>
@@ -91,7 +113,7 @@ include ('koneksi.php');
             <div class="cards">
                 <div class="card-single1">
                     <div>
-                        <h1>54</h1>
+                        <h1><?php echo $jml_barang; ?></h1>
                         <span>Produk</span>
                     </div>
                     <div>
@@ -101,7 +123,7 @@ include ('koneksi.php');
 
                 <div class="card-single2">
                     <div>
-                        <h1>18</h1>
+                        <h1><?php echo $jml_mitra; ?></h1>
                         <span>Mitra</span>
                     </div>
                     <div>
@@ -111,7 +133,7 @@ include ('koneksi.php');
 
                 <div class="card-single3">
                     <div>
-                        <h1>20</h1>
+                        <h1><?php echo $jml_reseller; ?></h1>
                         <span>Reseller</span>
                     </div>
                     <div>

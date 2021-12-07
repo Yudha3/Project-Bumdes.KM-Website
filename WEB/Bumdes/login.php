@@ -1,3 +1,44 @@
+<?php
+require('koneksi.php');
+// $koneksi = mysqli_connect("localhost", "root", "", "user");
+session_start();
+if(isset($_POST['submit'])){
+    $username = $_POST['txt_username'];
+    $pass = $_POST['txt_pass'];
+
+    if(!empty(trim($email)) && !empty(trim($pass))){
+        $query = "SELECT * FROM user WHERE username = '$username'";
+        $result = mysqli_query($koneksi, $query);
+        $num = mysqli_num_rows($result);
+
+        while($row = mysqli_fetch_array($result)){
+            $id = $row['id'];
+            $userVal = $row['username'];
+            $passVal = $row['password'];
+            $userName = $row['user_fullname'];
+        }
+
+        if($num != 0) {
+            if($userVal==$email && $passVal==$pass){
+                $_SESSION['id'] = $id;
+                $_SESSION['name'] = $userName;
+                header('Location: home.php?user_fullname=' . urlencode($userName));
+            }else{
+                $error = 'user atau password salah!';
+                header('Location: login.php');
+            }
+        }else{
+            $error = 'Username tidak boleh kosong!';
+            header('Location: login.php');
+        }
+    }else{
+        $error = 'Data tidak boleh kosong!';
+        echo $error;
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

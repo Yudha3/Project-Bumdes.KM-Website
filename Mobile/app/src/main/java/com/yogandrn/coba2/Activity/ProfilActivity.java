@@ -16,8 +16,8 @@ public class ProfilActivity extends AppCompatActivity {
 
     private TextView titleUsername, titleEmail, txtEmail, txtFullname, txtUsername, txtID, txtNoTelp;
     private CircleImageView fotoProfil;
-//    private String URL_IMG_USER = "http://undeveloppedcity.000webhostapp.com/android/img/user/";
-    private String URL_IMG_USER = "http://192.168.1.100:8080/android/img/user/";
+    private String URL_IMG_USER = "http://undeveloppedcity.000webhostapp.com/android/img/user/";
+//    private String URL_IMG_USER = "http://192.168.1.100:8080/android/img/user/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

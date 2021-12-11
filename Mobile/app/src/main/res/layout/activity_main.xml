@@ -352,9 +352,9 @@
         <ImageView
             android:id="@+id/img_headline2"
             android:layout_width="108dp"
-            android:layout_height="80dp"
+            android:layout_height="84dp"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/undraw_girfts"
+            android:src="@drawable/undraw_social"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -362,7 +362,7 @@
             android:id="@+id/title_headline2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Penawaran Terbaik Kami"
+            android:text="Ikuti Kami di Sosial Media"
             android:fontFamily="@font/poppins_semibold"
             android:textColor="@color/white"
             android:textSize="14sp"
@@ -376,7 +376,7 @@
             android:id="@+id/text_headline2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Temukan berbagai kerajinan tangan yang unik dan menarik disini"
+            android:text="Dapatkan informasi menarik lainnya dengan follow kami di sosial media"
             android:fontFamily="@font/productsans_regular"
             android:textColor="@color/white"
             android:textSize="11sp"
@@ -399,7 +399,7 @@
             android:lineHeight="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_headline2"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="7dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

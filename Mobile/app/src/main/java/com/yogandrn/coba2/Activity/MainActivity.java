@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,12 +22,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends AppCompatActivity {
 
     LinearLayout btnKatalog, btnPesanan, btnPreorder, btnKeranjang;
-    private TextView txtWelcome;
+    private TextView txtWelcome, btnHeadline1, btnHeadline2;
     private long exitTime = 0;
     private CircleImageView imgProfil;
     private ImageView ic_keranjang, ic_notifikasi;
-//    private String URL_IMG_USER = "http://undeveloppedcity.000webhostapp.com/android/img/user/";
-    private String URL_IMG_USER = "http://192.168.1.100:8080/android/img/user/";
+    private String URL_IMG_USER = "http://undeveloppedcity.000webhostapp.com/android/img/user/";
+//    private String URL_IMG_USER = "http://192.168.1.100:8080/android/img/user/";
 
 
     @Override
@@ -51,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         btnPesanan = (LinearLayout) findViewById(R.id.layoutPesanan);
         btnPreorder = (LinearLayout) findViewById(R.id.layoutPreorder);
         txtWelcome = (TextView) findViewById(R.id.txtuser);
+        btnHeadline1 = (TextView) findViewById(R.id.btn_headline1);
+        btnHeadline2 = (TextView) findViewById(R.id.btn_headline2);
 
         txtWelcome.setText(fullname);
 
@@ -103,6 +107,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, PesananActivity.class));
+            }
+        });
+
+        btnHeadline2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sosmed = new Intent(Intent.ACTION_VIEW, Uri.parse("https://instagram.com/west_bone_craft"));
+                startActivity(sosmed);
             }
         });
     }

@@ -31,8 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4sp"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp">
+        android:layout_marginHorizontal="28dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtFullname_register"
@@ -48,8 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12sp"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp">
+        android:layout_marginHorizontal="28dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtUsername_register"
@@ -82,8 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12sp"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp">
+        android:layout_marginHorizontal="28dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtTelp_register"
@@ -99,8 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12sp"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp"
+        android:layout_marginHorizontal="28dp"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -117,8 +113,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12sp"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp"
+        android:layout_marginHorizontal="28dp"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -131,19 +126,37 @@
             android:hint="Konfirmasi Password"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnRegister_register"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingVertical="6dp"
         android:layout_marginLeft="24sp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="24sp"
-        android:background="@drawable/bg_buttton_green"
+        android:background="@drawable/bg_buttton_green_rounded"
         android:fontFamily="@font/productsans_medium"
         android:text="Daftar"
         android:textAllCaps="false"
-        android:textSize="20sp"/>
+        android:textSize="18sp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogin_register"
+        android:background="@drawable/bg_buttton_light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="24sp"
+        android:layout_marginLeft="24sp"
+        android:paddingVertical="6dp"
+        android:gravity="center"
+        android:text="Masuk"
+        android:textAllCaps="false"
+        android:textColor="@color/primaryGreen"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:fontFamily="@font/productsans_medium"
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/txtLogin_register"
@@ -154,7 +167,8 @@
         android:text="Sudah punya akun? Login"
         android:textColor="#6e6e6e"
         android:fontFamily="@font/productsans_medium"
-        android:textSize="15sp"/>
+        android:textSize="15sp"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="wrap_content"

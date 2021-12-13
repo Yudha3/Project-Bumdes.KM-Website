@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     TextInputEditText txtEmail, txtPassword;
     String email, password;
     TextView txtRegister;
-    Button btnLogin;
+    Button btnLogin,  btnRegister;
     private List<ModelUser> listData = new ArrayList<>();
     String SERVER_LOGIN_URL = "http://undeveloppedcity.000webhostapp.com/android/volley/checklogin.php";
     ProgressDialog progressDialog;
@@ -52,17 +52,26 @@ public class LoginActivity extends AppCompatActivity {
         txtPassword = (TextInputEditText) findViewById(R.id.txtPassword_login);
         txtRegister = (TextView) findViewById(R.id.txtRegister_login);
         btnLogin = (Button) findViewById(R.id.btnLogin_login);
+        btnRegister = (Button) findViewById(R.id.btnRegister_login);
         loading = (LinearLayout) findViewById(R.id.progressLogin);
 
         //mengakses halaman register
-        txtRegister.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(registerIntent);
-                finish();
+                    Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                    startActivity(registerIntent);
+                    finish();
             }
         });
+//        txtRegister.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+//                startActivity(registerIntent);
+//                finish();
+//            }
+//        });
 
         txtRegister.setText(fromHtml("Belum punya akun? " + "<font color='#24882A'>Daftar</font>"));
 

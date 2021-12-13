@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     TextInputEditText txtFullname, txtUsername, txtEmail, txtPassword, txtConfpass, txtNoTelp;
     TextView txtLogin;
-    Button btnRegister;
+    Button btnRegister, btnLogin;
     String fullname, username, email, password, no_telp, confpass;
     String SERVER_REGISTER_URL = "http://undeveloppedcity.000webhostapp.com/android/volley/register.php";
     private LinearLayout loading;
@@ -48,16 +48,25 @@ public class RegisterActivity extends AppCompatActivity {
         txtPassword = (TextInputEditText) findViewById(R.id.txtPassword_register);
         txtConfpass = (TextInputEditText) findViewById(R.id.txtConfPass_register);
         txtLogin = (TextView) findViewById(R.id.txtLogin_register);
+        btnLogin = (Button) findViewById(R.id.btnLogin_register);
         btnRegister = (Button) findViewById(R.id.btnRegister_register);
         loading = (LinearLayout) findViewById(R.id.progressRegister);
 
-        txtLogin.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(loginIntent);
             }
         });
+
+//        txtLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+//                startActivity(loginIntent);
+//            }
+//        });
 
         txtLogin.setText(fromHtml("Sudah punya akun? " + "<font color='#24882A'>Masuk</font>"));
 

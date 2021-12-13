@@ -27,7 +27,7 @@
         android:id="@+id/rvKeranjang"
         android:layout_margin="8dp"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -35,23 +35,27 @@
         android:paddingVertical="12dp"
         android:id="@+id/btnBelanja_keranjang"
         android:text="Mulai Belanja"
-        android:textSize="16sp"
+        android:textSize="17sp"
+        android:textColor="@color/white"
         android:textAllCaps="false"
         android:fontFamily="@font/productsans_medium"
         android:layout_alignParentBottom="true"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:background="@drawable/bg_buttton_green_rounded"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_order_keranjang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="12dp"
-        android:paddingVertical="12dp"
-        android:id="@+id/btn_order_keranjang"
-        android:text="Order"
-        android:textSize="16sp"
-        android:textAllCaps="false"
+        android:layout_marginBottom="8dp"
         android:fontFamily="@font/productsans_medium"
-        android:layout_alignParentBottom="true"/>
+        android:paddingVertical="12dp"
+        android:text="Order"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="17sp"
+        android:background="@drawable/bg_buttton_green_rounded"/>
 
 </RelativeLayout>

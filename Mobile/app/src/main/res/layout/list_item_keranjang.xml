@@ -7,7 +7,7 @@
     android:layout_marginVertical="4dp"
     android:background="@drawable/bg_list_item"
     android:id="@+id/keranjang_card"
-    android:elevation="5dp">
+    android:elevation="3dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/img_keranjang"
-            android:layout_width="84dp"
-            android:layout_height="84dp"
+            android:layout_width="78dp"
+            android:layout_height="78dp"
             android:background="@drawable/bg_list_item"
             android:scaleType="fitCenter" />
 
@@ -43,12 +43,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="12dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/productsans_medium"
                 android:maxLines="3"
                 android:text="Nama Produk"
                 android:textColor="#404040"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/txt_harga_keranjang"
@@ -59,7 +59,7 @@
                 android:fontFamily="@font/productsans_medium"
                 android:text="Nama Produk"
                 android:textColor="@color/primaryGreen"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -88,7 +88,7 @@
                     android:text="100000"
                     android:textAlignment="textEnd"
                     android:textColor="@color/primaryGreen"
-                    android:textSize="17sp" />
+                    android:textSize="15sp" />
             </LinearLayout>
 
         </LinearLayout>

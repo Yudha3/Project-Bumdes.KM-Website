@@ -13,7 +13,7 @@ public class Global {
     public static String fullname;
     public static String IMG_PRODUK_URL = "http://undeveloppedcity.000webhostapp.com/android/img/produk/";
 
-    public int total;
+    public static int total;
 
     public void getTotal(){
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);

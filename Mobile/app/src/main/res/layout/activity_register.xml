@@ -41,7 +41,7 @@
             android:background="@color/white"
             android:fontFamily="@font/productsans_regular"
             android:inputType="textPersonName"
-            android:hint="Fullname"/>
+            android:hint="Nama Lengkap"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:fontFamily="@font/productsans_regular"
-            android:inputType="textPhonetic"
+            android:inputType="phone"
             android:hint="Nomor Telepon"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -150,11 +150,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="14sp"
+        android:layout_marginTop="16sp"
         android:text="Sudah punya akun? Login"
         android:textColor="#6e6e6e"
-        android:fontFamily="@font/productsans_regular"
-        android:textSize="14sp"/>
+        android:fontFamily="@font/productsans_medium"
+        android:textSize="15sp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"

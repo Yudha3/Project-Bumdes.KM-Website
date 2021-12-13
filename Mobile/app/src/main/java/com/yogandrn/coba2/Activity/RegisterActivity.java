@@ -59,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        txtLogin.setText(fromHtml("Sudah punya akun? " + "<font color='#24882A'><b>Masuk</b></font>"));
+        txtLogin.setText(fromHtml("Sudah punya akun? " + "<font color='#24882A'>Masuk</font>"));
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -6,7 +6,7 @@ public class ResponseProduk {
 
     private int kode;
     private String pesan;
-    private List<ProdukModel> data ;
+    private List<ModelProduk> data ;
 
     public int getKode() {
         return kode;
@@ -24,11 +24,11 @@ public class ResponseProduk {
         this.pesan = pesan;
     }
 
-    public List<ProdukModel> getData() {
+    public List<ModelProduk> getData() {
         return data;
     }
 
-    public void setData(List<ProdukModel> data) {
+    public void setData(List<ModelProduk> data) {
         this.data = data;
     }
 }

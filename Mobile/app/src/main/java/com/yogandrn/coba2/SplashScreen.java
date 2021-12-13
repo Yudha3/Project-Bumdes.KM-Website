@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.view.WindowManager;
 
 import com.yogandrn.coba2.Activity.LoginActivity;
+import com.yogandrn.coba2.Activity.MainActivity;
 
 public class SplashScreen extends AppCompatActivity {
 

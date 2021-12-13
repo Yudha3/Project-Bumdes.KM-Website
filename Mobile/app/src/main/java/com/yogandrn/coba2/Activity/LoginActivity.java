@@ -3,16 +3,11 @@ package com.yogandrn.coba2.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Html;
 import android.text.Spanned;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -20,26 +15,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.textfield.TextInputEditText;
 import com.yogandrn.coba2.API.APIRequestData;
 import com.yogandrn.coba2.API.RetroServer;
-import com.yogandrn.coba2.Model.ProdukModel;
+import com.yogandrn.coba2.Global;
 import com.yogandrn.coba2.Model.ResponseUser;
-import com.yogandrn.coba2.Model.UserModel;
+import com.yogandrn.coba2.Model.ModelUser;
 import com.yogandrn.coba2.R;
-import com.yogandrn.coba2.VolleyConnection;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     String email, password;
     TextView txtRegister;
     Button btnLogin;
-    private List<UserModel> listData = new ArrayList<>();
+    private List<ModelUser> listData = new ArrayList<>();
     String SERVER_LOGIN_URL = "http://undeveloppedcity.000webhostapp.com/android/volley/checklogin.php";
     ProgressDialog progressDialog;
     private LinearLayout loading;
@@ -116,6 +101,11 @@ public class LoginActivity extends AppCompatActivity {
                     String email = response.body().getEmail();
                     String no_telp = response.body().getNo_telp();
                     String foto_profil = response.body().getFoto_profil();
+
+                    Global.id_user = id_user;
+                    Global.fullname = fullname;
+                    Global gb = new Global();
+                    gb.getTotal();
 
                     Intent login = new Intent(LoginActivity.this, MainActivity.class);
                     login.putExtra("id_user", id_user);

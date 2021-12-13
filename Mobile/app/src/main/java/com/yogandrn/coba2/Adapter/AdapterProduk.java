@@ -14,8 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.yogandrn.coba2.Activity.DetailProduk;
-import com.yogandrn.coba2.Activity.KatalogActivity;
-import com.yogandrn.coba2.Model.ProdukModel;
+import com.yogandrn.coba2.Model.ModelProduk;
 import com.yogandrn.coba2.R;
 
 import java.text.NumberFormat;
@@ -24,9 +23,9 @@ import java.util.Locale;
 
 public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderProduk> {
     private Context ctx;
-    private List<ProdukModel> listModel;
+    private List<ModelProduk> listModel;
 
-    public AdapterProduk(Context ctx, List<ProdukModel> listModel) {
+    public AdapterProduk(Context ctx, List<ModelProduk> listModel) {
         this.ctx = ctx;
         this.listModel = listModel;
     }
@@ -41,16 +40,16 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderProd
 
     @Override
     public void onBindViewHolder(@NonNull HolderProduk holder, int position) {
-        ProdukModel produkModel = listModel.get(position);
+        ModelProduk modelProduk = listModel.get(position);
 
-        String harga = formatRupiah(produkModel.getHg_jual());
-        holder.tvID.setText(String.valueOf(produkModel.getId_brg()));
-        holder.tvBarang.setText(produkModel.getBarang());
+        String harga = formatRupiah(modelProduk.getHg_jual());
+        holder.tvID.setText(String.valueOf(modelProduk.getId_brg()));
+        holder.tvBarang.setText(modelProduk.getBarang());
         holder.tvHarga.setText(harga);
-        holder.tvStok.setText(String.valueOf((produkModel.getJml_stok())));
-        holder.tvDeskripsi.setText(produkModel.getDeskripsi());
+        holder.tvStok.setText(String.valueOf((modelProduk.getJml_stok())));
+        holder.tvDeskripsi.setText(modelProduk.getDeskripsi());
 
-        Glide.with(holder.itemView.getContext()).load("http://undeveloppedcity.000webhostapp.com/android/img/produk/" + produkModel.getGambar())
+        Glide.with(holder.itemView.getContext()).load("http://undeveloppedcity.000webhostapp.com/android/img/produk/" + modelProduk.getGambar())
 //                .apply(new RequestOptions().centerCrop())
                 .into(holder.imgProduk);
 
@@ -58,12 +57,12 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderProd
             @Override
             public void onClick(View view) {
                 Intent showDetail = new Intent(ctx, DetailProduk.class);
-                showDetail.putExtra("id_brg", String.valueOf(produkModel.getId_brg()));
-                showDetail.putExtra("stok", String.valueOf(produkModel.getJml_stok()));
-                showDetail.putExtra("barang", produkModel.getBarang());
-                showDetail.putExtra("harga", formatRupiah(produkModel.getHg_jual()));
-                showDetail.putExtra("deskripsi", produkModel.getDeskripsi());
-                showDetail.putExtra("gambar", "http://undeveloppedcity.000webhostapp.com/android/img/produk/" + produkModel.getGambar());
+                showDetail.putExtra("id_brg", String.valueOf(modelProduk.getId_brg()));
+                showDetail.putExtra("stok", String.valueOf(modelProduk.getJml_stok()));
+                showDetail.putExtra("barang", modelProduk.getBarang());
+                showDetail.putExtra("harga", String.valueOf(modelProduk.getHg_jual()));
+                showDetail.putExtra("deskripsi", modelProduk.getDeskripsi());
+                showDetail.putExtra("gambar",  modelProduk.getGambar());
                 ctx.startActivity(showDetail);
             }
         });

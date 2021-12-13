@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.yogandrn.coba2.API.APIRequestData;
 import com.yogandrn.coba2.API.RetroServer;
 import com.yogandrn.coba2.Adapter.AdapterProduk;
-import com.yogandrn.coba2.Model.ProdukModel;
+import com.yogandrn.coba2.Model.ModelProduk;
 import com.yogandrn.coba2.Model.ResponseProduk;
 import com.yogandrn.coba2.R;
 
@@ -28,8 +28,9 @@ public class KatalogActivity extends AppCompatActivity {
     private RecyclerView rvProduk;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private List<ProdukModel> listData = new ArrayList<>();
+    private List<ModelProduk> listData = new ArrayList<>();
     ActionBar actionBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class KatalogActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        setTitle("All Products");
+        setTitle("Produk Kami");
 
         layoutManager =  new GridLayoutManager(KatalogActivity.this, 2);
         rvProduk = findViewById(R.id.recycler_katalog);

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -30,7 +31,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity
+//        implements View.OnClickListener
+{
 
     TextInputEditText txtEmail, txtPassword;
     String email, password;
@@ -40,6 +43,9 @@ public class LoginActivity extends AppCompatActivity {
     String SERVER_LOGIN_URL = "http://undeveloppedcity.000webhostapp.com/android/volley/checklogin.php";
     ProgressDialog progressDialog;
     private LinearLayout loading;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
+    public static final String session = "session";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -259,7 +265,20 @@ public class LoginActivity extends AppCompatActivity {
         }
         return result;
     }
-
+//
+//    @Override
+//    public void onClick(View view) {
+//        switch (view.getId()) {
+//            case R.id.btnLogin_login:
+//                pref        = getSharedPreferences(session, MODE_PRIVATE);
+//                editor      = pref.edit();
+//                editor.putString("getemail", txtEmail.getText().toString());
+//                editor.putString("getpassword", txtPassword.getText().toString());
+//                editor.apply();
+//
+//                break;
+//        }
+//    }
 
 
 //    public void login(View view) {

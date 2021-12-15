@@ -51,9 +51,9 @@ public class AdapterTransaksi extends RecyclerView.Adapter<AdapterTransaksi.Hold
         holder.cardTransaksi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent getDetail = new Intent(ctx, DetailTransaksiActivity.class);
-                getDetail.putExtra("id_transaksi", itemModel.getId_transaksi()); // int
-                ctx.startActivity(getDetail);
+                Intent intentku = new Intent(ctx, DetailTransaksiActivity.class);
+                intentku.putExtra("id_transaksi", String.valueOf(itemModel.getId_transaksi())); // int
+                ctx.startActivity(intentku);
             }
         });
     }

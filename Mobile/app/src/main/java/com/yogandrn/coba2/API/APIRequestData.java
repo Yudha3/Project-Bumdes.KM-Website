@@ -1,5 +1,6 @@
 package com.yogandrn.coba2.API;
 
+import com.yogandrn.coba2.Model.ResponseDetailTransaksi;
 import com.yogandrn.coba2.Model.ResponseKeranjang;
 import com.yogandrn.coba2.Model.ResponseModel;
 import com.yogandrn.coba2.Model.ResponseProduk;
@@ -78,6 +79,12 @@ public interface APIRequestData {
     @POST("get_list_transaksi.php")
     Call<ResponseTransaksi> readTransaksi(
             @Field("id_user") String id_user
+    );
+
+    @FormUrlEncoded
+    @POST("detail_transaksi.php")
+    Call<ResponseDetailTransaksi> getDetailTransaksi(
+            @Field("id_transaksi") String id_transaksi
     );
 
     @GET ("retrieve.php")

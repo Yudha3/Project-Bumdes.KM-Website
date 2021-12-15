@@ -42,9 +42,9 @@ public class AdapterKeranjang extends RecyclerView.Adapter<AdapterKeranjang.Hold
 
         holder.txtID.setText(String.valueOf(cartModel.getId_keranjang()));
         holder.txtNama.setText(cartModel.getBarang());
-        holder.txtHarga.setText(formatRupiah(cartModel.getHarga()));
+        holder.txtHarga.setText(Global.formatRupiah(cartModel.getHarga()));
         holder.txtQty.setText("Qty : " + String.valueOf( cartModel.getQty()) + "x");
-        holder.txtSubtotal.setText(formatRupiah(cartModel.getSubtotal()));
+        holder.txtSubtotal.setText(Global.formatRupiah(cartModel.getSubtotal()));
 
         Glide.with(holder.itemView.getContext()).load(Global.IMG_PRODUK_URL + cartModel.getGambar()).fitCenter().into(holder.imgProduk);
     }
@@ -69,14 +69,5 @@ public class AdapterKeranjang extends RecyclerView.Adapter<AdapterKeranjang.Hold
         }
     }
 
-
-    private String formatRupiah(int number) {
-        Locale localeID = new Locale("IND", "ID");
-        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(localeID);
-        String formatRupiah = numberFormat.format(number);
-        String[] split = formatRupiah.split(",");
-        int length = split[0].length();
-        return split[0].substring(0,2) + " " + split[0].substring(2,length);
-    }
 
 }

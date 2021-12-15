@@ -3,12 +3,15 @@
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -20,6 +23,7 @@ import com.yogandrn.coba2.Adapter.AdapterKeranjang;
 import com.yogandrn.coba2.Global;
 import com.yogandrn.coba2.Model.ModelKeranjang;
 import com.yogandrn.coba2.Model.ResponseKeranjang;
+import com.yogandrn.coba2.Model.ResponseModel;
 import com.yogandrn.coba2.R;
 
 import java.text.NumberFormat;
@@ -41,11 +45,13 @@ import retrofit2.Response;
      private RadioGroup rgOngkir, rgBayar;
      private RadioButton ongkir1, ongkir2;
      private TextView txtTotal, txtSubtotal, txtOngkir, txtTotal2, txtSubtotal2, txtOngkir2;
-     private EditText etAlamat, etNoTelp;
+     private EditText etPenerima, etAlamat, etNoTelp;
      private int subtotalitem = Global.total;
      private int ongkir = 30000;
      private String id_ongkir = "1";
-     private String alamat, no_telp;
+     private String penerima, alamat, no_telp;
+     private SwipeRefreshLayout srlOrder;
+     private ProgressBar pbOrder;
 
      @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +64,7 @@ import retrofit2.Response;
         txtOngkir2 = findViewById(R.id.txt_ongkir2_order);
         txtTotal = findViewById(R.id.txt_total_order);
         txtTotal2 = findViewById(R.id.txt_total2_order);
+        etPenerima = findViewById(R.id.et_penerima_transaksi);
         etAlamat = findViewById(R.id.et_alamat_transaksi);
         etNoTelp = findViewById(R.id.et_notelp_transaksi);
         rgOngkir = findViewById(R.id.radioGroup_ongkir);
@@ -65,6 +72,8 @@ import retrofit2.Response;
         ongkir1 = findViewById(R.id.id_ongkir_1);
         ongkir2 = findViewById(R.id.id_ongkir_2);
         btnOrder = findViewById(R.id.btn_transaksi);
+        pbOrder = findViewById(R.id.progress_order);
+        srlOrder = findViewById(R.id.srl_order);
         rvOrder = findViewById(R.id.rvOrder);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
 
@@ -73,8 +82,16 @@ import retrofit2.Response;
         rvOrder.setLayoutManager(layoutManager);
         getItem();
 
-        alamat = etAlamat.getText().toString();
-        no_telp = etNoTelp.getText().toString();
+         Global gb = new Global();
+        srlOrder.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                srlOrder.setRefreshing(true);
+                getItem();
+                gb.getTotal();
+                srlOrder.setRefreshing(false);
+            }
+        });
 
         txtSubtotal.setText(formatRupiah(subtotalitem));
         txtSubtotal2.setText(formatRupiah(subtotalitem));
@@ -106,9 +123,29 @@ import retrofit2.Response;
                 }
             }
         });
+
+        btnOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (etAlamat.getText().toString().equals("")) {
+//                    Toast.makeText(getApplicationContext(), "Kolom Alamat wajib diisi", Toast.LENGTH_SHORT).show();
+                    etAlamat.setError("Wajib diisi!");
+                } else if (etNoTelp.getText().toString().equals("")){
+                    etNoTelp.setError("Wajib diisi!");
+                } else if (etPenerima.getText().toString().equals("")){
+                    etPenerima.setError("Wajib diisi!");
+                } else {
+                    alamat = etAlamat.getText().toString();
+                    no_telp = etNoTelp.getText().toString();
+                    penerima = etPenerima.getText().toString();
+                    buatTransaksi();
+                }
+            }
+        });
     }
 
     public void getItem() {
+         pbOrder.setVisibility(View.VISIBLE);
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
         Call<ResponseKeranjang> getKeranjang = apiRequestData.readCart(Global.id_user);
 
@@ -122,20 +159,46 @@ import retrofit2.Response;
                     adapter = new AdapterKeranjang(OrderActivity.this, listitem);
                     rvOrder.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
+
                 } else if (pesan.equals("Data tidak tersedia")) {
                     Toast.makeText(OrderActivity.this, "Tidak ada", Toast.LENGTH_SHORT).show();
                 }
+                pbOrder.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ResponseKeranjang> call, Throwable t) {
+                pbOrder.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), "Terjadi Kesalahan : " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void buatTransaksi() {
+         pbOrder.setVisibility(View.VISIBLE);
+        APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
+        Call<ResponseModel> transaksi = apiRequestData.createTransaksi(Global.id_user, penerima, alamat, no_telp, id_ongkir);
+        transaksi.enqueue(new Callback<ResponseModel>() {
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                String pesan = response.body().getPesan();
 
+                if (pesan.equals("BERHASIL")) {
+                    pbOrder.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(), "Transaksi Berhasil", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(OrderActivity.this, ListPesanan.class));
+                } else if (pesan.equals("GAGAL")) {
+                    pbOrder.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(), "Gagal melakukan transaksi", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
+                pbOrder.setVisibility(View.GONE);
+                Toast.makeText(getApplicationContext(), "Terjadi kesalahan\n" + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
      private String formatRupiah(int number) {

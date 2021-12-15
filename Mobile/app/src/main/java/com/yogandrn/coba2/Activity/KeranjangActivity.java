@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +39,8 @@ public class KeranjangActivity extends AppCompatActivity {
     private List<ModelKeranjang> listKeranjang = new ArrayList<>();
     private Button btnBelanja, btnOrder;
     private TextView txtEmpty;
+    private SwipeRefreshLayout srlKeranjang;
+    private ProgressBar pbKeranjang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,8 @@ public class KeranjangActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle("Keranjang Belanja");
 
+        pbKeranjang = findViewById(R.id.progress_keranjang);
+        srlKeranjang = findViewById(R.id.srl_keranjang);
         txtEmpty = findViewById(R.id.txt_empty_keranjang);
         btnBelanja = findViewById(R.id.btnBelanja_keranjang);
         btnOrder = findViewById(R.id.btn_order_keranjang);
@@ -54,7 +60,17 @@ public class KeranjangActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
         rvKeranjang.setLayoutManager(layoutManager);
+
         retrieveCart();
+
+        srlKeranjang.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                srlKeranjang.setRefreshing(true);
+                retrieveCart();
+                srlKeranjang.setRefreshing(false);
+            }
+        });
 
         btnBelanja.setVisibility(View.GONE);
         btnBelanja.setOnClickListener(new View.OnClickListener() {
@@ -68,14 +84,16 @@ public class KeranjangActivity extends AppCompatActivity {
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                pbKeranjang.setVisibility(View.VISIBLE);
                 Intent order = new Intent(KeranjangActivity.this, OrderActivity.class);
-                startActivity(order);
+                startActivity(order); pbKeranjang.setVisibility(View.GONE);
             }
         });
 
     }
 
     public void retrieveCart() {
+        pbKeranjang.setVisibility(View.VISIBLE);
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
         Call<ResponseKeranjang> getKeranjang = apiRequestData.readCart(Global.id_user);
 
@@ -89,16 +107,19 @@ public class KeranjangActivity extends AppCompatActivity {
                     adapterKeranjang = new AdapterKeranjang(KeranjangActivity.this, listKeranjang);
                     rvKeranjang.setAdapter(adapterKeranjang);
                     adapterKeranjang.notifyDataSetChanged();
+                    pbKeranjang.setVisibility(View.GONE);
                 } else if (pesan.equals("Data tidak tersedia")) {
                     txtEmpty.setVisibility(View.VISIBLE);
                     rvKeranjang.setVisibility(View.GONE);
                     btnBelanja.setVisibility(View.VISIBLE);
                     btnOrder.setVisibility(View.GONE);
+                    pbKeranjang.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseKeranjang> call, Throwable t) {
+                pbKeranjang.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), "Terjadi Kesalahan : " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

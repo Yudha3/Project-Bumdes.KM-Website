@@ -2,6 +2,7 @@ package com.yogandrn.coba2.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +52,8 @@ public class DetailProduk extends AppCompatActivity {
     private String id_barang, barang, deskripsi, gambar;
     private int stok, harga;
     private int subtotal = 0;
+    private SwipeRefreshLayout srlDetail;
+    private ProgressBar pbDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +82,19 @@ public class DetailProduk extends AppCompatActivity {
         decrement = (Button) findViewById(R.id.btn_decrement);
         qtyProduk = (TextView) findViewById(R.id.et_qty_detail);
         img_produk = (ImageView) findViewById(R.id.img_detail);
+        pbDetail = (ProgressBar) findViewById(R.id.progress_detail_produk);
+        srlDetail = (SwipeRefreshLayout) findViewById(R.id.srl_detail_produk);
 
         getDetailProduk();
+
+        srlDetail.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                srlDetail.setRefreshing(true);
+                getDetailProduk();
+                srlDetail.setRefreshing(false);
+            }
+        });
 
 //        qty = Integer.parseInt(etQty.getText().toString());
 //        qty = etQty.getText().toString();
@@ -204,7 +219,7 @@ public class DetailProduk extends AppCompatActivity {
 
     public void increment(View view){
         if (qty == stok) {
-            Toast.makeText(getApplicationContext(), "Max ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Stok tidak mencukupi", Toast.LENGTH_SHORT).show();
         } else {
             qty++;
             qtyProduk.setText(""+qty);
@@ -213,7 +228,7 @@ public class DetailProduk extends AppCompatActivity {
 
     public void decrement(View view) {
         if (qty == 1) {
-            Toast.makeText(getApplicationContext(),"Min 1", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Minimal jumlah pembelian adalah 1", Toast.LENGTH_SHORT).show();
         } else {
             qty--;
             qtyProduk.setText("" + qty);
@@ -221,6 +236,7 @@ public class DetailProduk extends AppCompatActivity {
     }
 
     public void getDetailProduk() {
+        pbDetail.setVisibility(View.VISIBLE);
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
         Call<ResponseShowDetail> getDetail = apiRequestData.getDetailProduk(id_barang);
 
@@ -242,13 +258,16 @@ public class DetailProduk extends AppCompatActivity {
                     txtstok.setText("Stok : " + stok);
                     txtdeskripsi.setText(deskripsi);
                     setTitle(barang);
+                    pbDetail.setVisibility(View.GONE);
                 }else if (pesan.equals("TIDAK ADA")){
+                    pbDetail.setVisibility(View.GONE);
                     Toast.makeText(DetailProduk.this, "Gagal mengambil data", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseShowDetail> call, Throwable t) {
+                pbDetail.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), "Gagal" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -262,6 +281,8 @@ public class DetailProduk extends AppCompatActivity {
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 String pesan = response.body().getPesan();
                 if (pesan.equals("BERHASIL")) {
+                    Global gb = new Global();
+                    gb.getTotal();
                     Toast.makeText(DetailProduk.this, "Berhasil menambahkan ke keranjang", Toast.LENGTH_SHORT).show();
                 } else if (pesan.equals("GAGAL")) {
                     Toast.makeText(DetailProduk.this, "Gagal menambahkan ke keranjang", Toast.LENGTH_SHORT).show();

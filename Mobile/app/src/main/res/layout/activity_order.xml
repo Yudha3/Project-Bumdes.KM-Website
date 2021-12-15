@@ -7,6 +7,20 @@
     android:background="#E4E4E4"
     tools:context=".Activity.OrderActivity">
 
+    <ProgressBar
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/progress_order"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_order"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,6 +37,37 @@
                 android:layout_marginBottom="12dp"
                 android:orientation="vertical"
                 android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/tPenerima"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Penerima"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/productsans_bold"
+                    android:textColor="#404040"
+                    app:layout_constraintTop_toBottomOf="@id/et_alamat_transaksi"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/et_penerima_transaksi"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="14dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tTelp"
+                    android:background="@drawable/custom_input"
+                    android:layout_marginTop="8dp"
+                    android:hint="Masukkan nama penerima"
+                    android:paddingLeft="12dp"
+                    android:paddingVertical="6dp"
+                    android:textSize="15sp"
+                    android:inputType="textPersonName"
+                    android:maxLines="3"/>
     <TextView
         android:id="@+id/tAlamat"
         android:layout_width="match_parent"
@@ -451,7 +496,8 @@
             </LinearLayout>
 
         </LinearLayout>
-    </ScrollView>
+    </ScrollView></androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"

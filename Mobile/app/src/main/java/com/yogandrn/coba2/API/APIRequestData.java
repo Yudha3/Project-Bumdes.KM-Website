@@ -4,6 +4,7 @@ import com.yogandrn.coba2.Model.ResponseKeranjang;
 import com.yogandrn.coba2.Model.ResponseModel;
 import com.yogandrn.coba2.Model.ResponseProduk;
 import com.yogandrn.coba2.Model.ResponseShowDetail;
+import com.yogandrn.coba2.Model.ResponseTransaksi;
 import com.yogandrn.coba2.Model.ResponseUser;
 
 import retrofit2.Call;
@@ -52,7 +53,7 @@ public interface APIRequestData {
     );
 
     @FormUrlEncoded
-    @POST("retrieve_cart.php")
+    @POST("get_cart.php")
     Call<ResponseKeranjang> readCart(
             @Field("id_user") String id_user
     );
@@ -60,6 +61,22 @@ public interface APIRequestData {
     @FormUrlEncoded
     @POST("countTotal.php")
     Call<ResponseModel> countTotal(
+            @Field("id_user") String id_user
+    );
+
+    @FormUrlEncoded
+    @POST("transaksi_1.php")
+    Call<ResponseModel> createTransaksi(
+            @Field("id_user") String id_user,
+            @Field("penerima") String penerima,
+            @Field("alamat") String alamat,
+            @Field("no_telp") String no_telp,
+            @Field("id_ongkir") String id_ongkir
+    );
+
+    @FormUrlEncoded
+    @POST("get_list_transaksi.php")
+    Call<ResponseTransaksi> readTransaksi(
             @Field("id_user") String id_user
     );
 

@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         btnPesanan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent pesanan = new Intent(MainActivity.this, PesananActivity.class);
+                Intent pesanan = new Intent(MainActivity.this, ListPesanan.class);
                 pesanan.putExtra("id_user", id_user);
                 startActivity(pesanan);
             }

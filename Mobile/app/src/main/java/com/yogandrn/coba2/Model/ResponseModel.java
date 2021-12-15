@@ -6,6 +6,16 @@ public class ResponseModel {
     private int kode;
     private String pesan;
 
+    public List<ModelTransaksi> getListTransaksi() {
+        return listTransaksi;
+    }
+
+    public void setListTransaksi(List<ModelTransaksi> listTransaksi) {
+        this.listTransaksi = listTransaksi;
+    }
+
+    private List<ModelTransaksi> listTransaksi;
+
     public int getKode() {
         return kode;
     }

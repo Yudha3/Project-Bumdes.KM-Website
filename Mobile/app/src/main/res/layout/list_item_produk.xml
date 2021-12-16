@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="8dp"
-    android:layout_marginVertical="4dp"
+    android:layout_marginHorizontal="6dp"
+    android:layout_marginVertical="6dp"
+    app:cardElevation="4dp"
     android:background="@drawable/bg_list_item"
-    android:id="@+id/keranjang_card"
-    android:elevation="3dp">
+    android:id="@+id/produk_card_transaksi">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="6dp">
 
         <ImageView
-            android:id="@+id/img_keranjang"
-            android:layout_width="78dp"
-            android:layout_height="78dp"
+            android:id="@+id/img_list_produk"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:background="@drawable/bg_list_item"
             android:scaleType="fitCenter" />
 
@@ -29,7 +28,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txt_id_keranjang"
+                android:id="@+id/txt_id_produk_produk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
@@ -39,19 +38,12 @@
                 android:textSize="16sp"
                 android:visibility="gone" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
             <TextView
-                android:id="@+id/txt_namaproduk_keranjang"
+                android:id="@+id/txt_namaproduk_produk"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginHorizontal="12dp"
                 android:layout_marginTop="4dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="12dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:fontFamily="@font/productsans_medium"
                 android:maxLines="3"
                 android:text="Nama Produk"
@@ -59,18 +51,8 @@
                 android:textSize="13sp"
                 android:visibility="visible"/>
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/ic_delete"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:id="@+id/btn_hapus_keranjang"
-                    tools:ignore="MissingConstraints" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
             <TextView
-                android:id="@+id/txt_harga_keranjang"
+                android:id="@+id/txt_harga_produk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
@@ -83,10 +65,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/txt_qty_keranjang"
+                    android:id="@+id/txt_qty_produk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12dp"
@@ -97,7 +80,7 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/txt_subtotal_keranjang"
+                    android:id="@+id/txt_subtotal_produk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="60dp"
@@ -114,4 +97,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</androidx.cardview.widget.CardView>

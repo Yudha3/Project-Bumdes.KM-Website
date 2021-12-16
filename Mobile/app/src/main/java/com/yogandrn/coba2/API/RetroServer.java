@@ -8,6 +8,7 @@ public class RetroServer {
 //    private static final String baseURL0 = "http://192.168.1.100:8080/android/retrofit/";
     private static final String baseURL0 = "http://192.168.99.140:8080/android/retrofit/";
     private static Retrofit retro;
+    private static RetroServer retroClient;
 
     public static Retrofit koneksiRetrofit() {
         if (retro == null ) {
@@ -16,5 +17,7 @@ public class RetroServer {
         return retro;
     }
 
-
+    public APIRequestData getAPI() {
+        return retro.create(APIRequestData.class);
+    }
 }

@@ -47,7 +47,7 @@
         android:textAllCaps="false"
         android:fontFamily="@font/productsans_medium"
         android:layout_alignParentBottom="true"
-        android:visibility="gone"
+        android:visibility="invisible"
         android:background="@drawable/bg_buttton_green_rounded"/>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -59,13 +59,13 @@
         android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="12dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_buttton_green_rounded"
         android:fontFamily="@font/productsans_medium"
         android:paddingVertical="12dp"
         android:text="Order"
-        android:textColor="@color/white"
         android:textAllCaps="false"
-        android:textSize="17sp"
-        android:background="@drawable/bg_buttton_green_rounded"/>
+        android:textColor="@color/white"
+        android:textSize="17sp" />
 
     <ProgressBar
         android:layout_width="48dp"

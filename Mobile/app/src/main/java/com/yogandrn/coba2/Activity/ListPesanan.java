@@ -55,7 +55,7 @@ public class ListPesanan extends AppCompatActivity {
         rvPesanan = findViewById(R.id.rvPesanan);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
-        btnBelanja.setVisibility(View.GONE);
+//        btnBelanja.setVisibility(View.GONE);
         rvPesanan.setLayoutManager(layoutManager);
         getTransaksi();
 

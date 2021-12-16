@@ -2,17 +2,21 @@ package com.yogandrn.coba2.API;
 
 import com.yogandrn.coba2.Model.ResponseDetailTransaksi;
 import com.yogandrn.coba2.Model.ResponseKeranjang;
+import com.yogandrn.coba2.Model.ModelListItemTransaksi;
 import com.yogandrn.coba2.Model.ResponseModel;
 import com.yogandrn.coba2.Model.ResponseProduk;
 import com.yogandrn.coba2.Model.ResponseShowDetail;
 import com.yogandrn.coba2.Model.ResponseTransaksi;
 import com.yogandrn.coba2.Model.ResponseUser;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface APIRequestData {
 
@@ -54,6 +58,12 @@ public interface APIRequestData {
     );
 
     @FormUrlEncoded
+    @POST("hapus_keranjang.php")
+    Call<ResponseModel> hapusKeranjang(
+        @Field("id_keranjang") String id_keranjang
+    );
+
+    @FormUrlEncoded
     @POST("get_cart.php")
     Call<ResponseKeranjang> readCart(
             @Field("id_user") String id_user
@@ -84,6 +94,26 @@ public interface APIRequestData {
     @FormUrlEncoded
     @POST("detail_transaksi.php")
     Call<ResponseDetailTransaksi> getDetailTransaksi(
+            @Field("id_transaksi") String id_transaksi
+    );
+
+    @FormUrlEncoded
+    @POST("get_item_detail_transaksi.php")
+    Call<ResponseModel> getItemDetailTransaksi(
+            @Field("id_transaksi") String id_transaksi
+    );
+
+    @Multipart
+    @POST("upload_bukti_bayar.php")
+    Call<ResponseModel> uploadBayar(
+            @Part MultipartBody.Part gambar,
+            @Field("id_transaksi") String id_transaksi
+    );
+
+    @FormUrlEncoded
+    @POST("coba_upload.php")
+    Call<ResponseModel> cobaUpload(
+            @Field("EN_IMAGE") String encodeImage,
             @Field("id_transaksi") String id_transaksi
     );
 

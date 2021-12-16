@@ -142,7 +142,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="16dp"
-            android:text="Nama Penerima "
+            android:text="Alamat Penerima "
             android:textColor="@color/abu_gelap"
             android:textSize="14sp"
             android:fontFamily="@font/productsans_medium"/>
@@ -157,17 +157,7 @@
             android:fontFamily="@font/productsans_regular"
             android:maxLines="5"
             android:text="Nama penerima"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="12dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="16dp"
-            android:text="Alamat Penerima "
-            android:textColor="@color/abu_gelap"
-            android:textSize="14sp"
-            android:fontFamily="@font/productsans_medium"/>
+            android:layout_marginTop="1dp"/>
 
         <TextView
             android:id="@+id/txt_alamat_detail"
@@ -179,17 +169,7 @@
             android:fontFamily="@font/productsans_regular"
             android:maxLines="5"
             android:text="Alamat penerima"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="12dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="16dp"
-            android:text="No. Telepon Penerima "
-            android:textColor="@color/abu_gelap"
-            android:textSize="14sp"
-            android:fontFamily="@font/productsans_medium"/>
+            android:layout_marginTop="1dp"/>
 
         <TextView
             android:id="@+id/txt_telp_detail"
@@ -201,7 +181,7 @@
             android:fontFamily="@font/productsans_regular"
             android:maxLines="5"
             android:text="No. Telp penerima"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="1dp"/>
 
     </LinearLayout>
 
@@ -344,6 +324,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="12dp"
+        android:layout_marginBottom="24dp"
         android:background="@color/white"
         android:paddingHorizontal="16dp">
 
@@ -375,6 +356,22 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="vertical"
+            android:layout_marginVertical="16dp"
+            android:paddingVertical="12dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@color/abu_gelap"
+            android:visibility="invisible"
+            android:layout_marginVertical="16dp"/>
+        </LinearLayout>
+
 </LinearLayout>
         </ScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -382,20 +379,36 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ededed"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:background="#fff"
+        android:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="horizontal">
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_konfirmasi_detail"
+        android:id="@+id/btn_bayar_detail"
         android:background="@drawable/bg_buttton_green_rounded"
-        android:text="Konfirmasi Pesanan"
+        android:text="Bayar"
         android:textSize="18sp"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:fontFamily="@font/productsans_medium"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginVertical="10dp"/>
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="8dp"
+        android:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_konfirmasi_detail"
+            android:background="@drawable/bg_buttton_green_rounded"
+            android:text="Konfirmasi Pesanan"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:fontFamily="@font/productsans_medium"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="8dp"/>
     </LinearLayout>
 
     <ProgressBar

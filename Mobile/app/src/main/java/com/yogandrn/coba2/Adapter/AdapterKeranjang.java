@@ -1,23 +1,35 @@
 package com.yogandrn.coba2.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.yogandrn.coba2.API.APIRequestData;
+import com.yogandrn.coba2.API.RetroServer;
+import com.yogandrn.coba2.Activity.KeranjangActivity;
 import com.yogandrn.coba2.Global;
 import com.yogandrn.coba2.Model.ModelKeranjang;
+import com.yogandrn.coba2.Model.ResponseModel;
 import com.yogandrn.coba2.R;
 
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdapterKeranjang extends RecyclerView.Adapter<AdapterKeranjang.HolderKeranjang>{
     private Context ctx;
@@ -40,13 +52,48 @@ public class AdapterKeranjang extends RecyclerView.Adapter<AdapterKeranjang.Hold
     public void onBindViewHolder(@NonNull HolderKeranjang holder, int position) {
         ModelKeranjang cartModel = listKeranjang.get(position);
 
-        holder.txtID.setText(String.valueOf(cartModel.getId_keranjang()));
+        String id_keranjang = String.valueOf(cartModel.getId_keranjang());
+
+        holder.txtID.setText(id_keranjang);
         holder.txtNama.setText(cartModel.getBarang());
         holder.txtHarga.setText(Global.formatRupiah(cartModel.getHarga()));
         holder.txtQty.setText("Qty : " + String.valueOf( cartModel.getQty()) + "x");
         holder.txtSubtotal.setText(Global.formatRupiah(cartModel.getSubtotal()));
 
         Glide.with(holder.itemView.getContext()).load(Global.IMG_PRODUK_URL + cartModel.getGambar()).fitCenter().into(holder.imgProduk);
+
+        holder.btnHapus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dialogHapus = new AlertDialog.Builder(ctx);
+                dialogHapus.setCancelable(true);
+                dialogHapus.setIcon(R.drawable.ic_delete_title);
+                dialogHapus.setTitle("Hapus Item");
+                dialogHapus.setMessage("Apakah Anda ingin menghapus item ini dari Keranjang?");
+
+                dialogHapus.setPositiveButton("Hapus", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        hapusKeranjang(id_keranjang);
+                        dialogInterface.dismiss();
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                ((KeranjangActivity) ctx).retrieveCart();
+                            }
+                        }, 1000);
+                    }
+                });
+                dialogHapus.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                dialogHapus.show();
+            }
+        });
     }
 
     @Override
@@ -56,7 +103,7 @@ public class AdapterKeranjang extends RecyclerView.Adapter<AdapterKeranjang.Hold
 
     public class HolderKeranjang extends RecyclerView.ViewHolder{
         TextView txtNama, txtID, txtHarga, txtSubtotal, txtQty;
-        ImageView imgProduk;
+        ImageView imgProduk, btnHapus;
 
         public HolderKeranjang(@NonNull View itemView) {
             super(itemView);
@@ -66,8 +113,31 @@ public class AdapterKeranjang extends RecyclerView.Adapter<AdapterKeranjang.Hold
             txtSubtotal = itemView.findViewById(R.id.txt_subtotal_keranjang);
             txtQty = itemView.findViewById(R.id.txt_qty_keranjang);
             imgProduk = itemView.findViewById(R.id.img_keranjang);
+            btnHapus = itemView.findViewById(R.id.btn_hapus_keranjang);
         }
     }
 
+    private void hapusKeranjang(String id){
+        APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
+        Call<ResponseModel> callHapusKeranjang = apiRequestData.hapusKeranjang(id);
+        callHapusKeranjang.enqueue(new Callback<ResponseModel>() {
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                String pesan = response.body().getPesan();
+                if (pesan.equals("BERHASIL")) {
+                    Toast.makeText(ctx.getApplicationContext(), "Berhasil dihapus", Toast.LENGTH_SHORT).show();
+                } else if (pesan.equals("GAGAL")) {
+                    Toast.makeText(ctx.getApplicationContext(), "Gagal menghapus data", Toast.LENGTH_SHORT).show();
+                } else if (pesan.equals("NOT CONNECTED")) {
+                    Toast.makeText(ctx.getApplicationContext(), "Gagal menghubungi server", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
+                Toast.makeText(ctx.getApplicationContext(), "Terjadi kesalahan :\n" + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 }

@@ -1,8 +1,15 @@
 <?php
 
+ob_start();
 require('koneksi.php');
+require('models/database.php');
+include "models/m_barang.php";
+$connection = new Database($host, $user, $pass, $nama_db);
+session_start();
+$sesName = $_SESSION['name'];
+$rsl = new Reseller($connection);
 
-
+if (@$_GET['act'] == '') {
 
 ?>
 
@@ -71,7 +78,7 @@ require('koneksi.php');
                 </a>
             </li>
             <li class="log_out">
-                <a href="#">
+                <a href="logout.php">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -90,7 +97,7 @@ require('koneksi.php');
             </div>
             <div class="profile-details">
                 <img src="images/profile.jpg" alt="">
-                <span class="admin_name">Prem Shahi</span>
+                <span class="admin_name"><?php echo $sesName; ?></span>
                 <i class='bx bx-chevron-down'></i>
             </div>
         </nav>
@@ -98,17 +105,22 @@ require('koneksi.php');
         <div class="home-content">
             <div class="sales-boxes">
                 <div class="recent-sales1 box">
-                    <div class="card-header">
+                    <div class="card-header1">
                         <h3>Recent Reseller</h3>
 
-                        <button>
-                            <a href="reseller/newReseller.php" style="text-decoration: none;">New Reseller</a>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">
+                            New Reseller
                             <span class="bx bx-right-arrow-alt"></span>
                         </button>
+                        <!-- <button>
+                            <a href="reseller/newReseller.php" style="text-decoration: none;">New Reseller</a>
+                            <span class="bx bx-right-arrow-alt"></span>
+                        </button> -->
                     </div>
-                    <div class="card-body">
+                    <div class="card-body1">
                         <div class="table-responsive">
-                            <table width="100%">
+                            <table width="100%" class="table">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -120,41 +132,159 @@ require('koneksi.php');
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
-                                    $query = "SELECT * FROM data_reseller ORDER BY id ASC";
-                                    $result = mysqli_query($koneksi, $query);
-                                    //mengecek apakah ada error ketika menjalankan query
-                                    if (!$result) {
-                                        die("Query Error: " . mysqli_errno($koneksi) .
-                                            " - " . mysqli_error($koneksi));
-                                    }
-
-                                    //buat perulangan untuk element tabel dari data mahasiswa
-                                    $no = 1; //variabel untuk membuat nomor urut
-                                    // hasil query akan disimpan dalam variabel $data dalam bentuk array
-                                    // kemudian dicetak dengan perulangan while
-                                    while ($row = mysqli_fetch_assoc($result)) {
+                                <?php
+                                    $no = 1;
+                                    $tampil = $rsl->tampil();
+                                    while ($data = $tampil->fetch_object()) {
                                     ?>
                                         <tr>
-                                            <td align="center"><?php echo $no; ?></td>
-                                            <td><?php echo $row['nama_reseller']; ?></td>
-                                            <td><?php echo $row['alamat']; ?></td>
-                                            <td><?php echo $row['no_tlp']; ?></td>
-                                            <td><?php echo $row['tgl_gabung']; ?></td>
-                                            <td>
-                                                <a href="reseller/editReseller.php?id=<?php echo $row['id']; ?>">Edit</a> |
-                                                <a href="reseller/proses_hapus.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
+                                            <td align="center"><?php echo $no++ . "."; ?></td>
+                                            <td><?php echo $data->nama_reseller; ?></td>
+                                            <td><?php echo $data->alamat; ?></td>
+                                            <td><?php echo $data->no_tlp; ?></td>
+                                            <td><?php echo $data->tgl_gabung; ?></td>
+                                            <td align="center">
+                                                <a id="edit_reseller" data-toggle="modal" data-target="#edit" data-id="<?php echo $data->id; ?>"
+                                                    data-nama="<?php echo $data->nama_reseller; ?>" data-alamat="<?php echo $data->alamat; ?>" data-nomer="<?php echo $data->no_tlp; ?>"
+                                                    data-gabung="<?php echo $data->tgl_gabung; ?>" >
+                                                    <button class="btn btn-info btn-xs"> <i class="bx bx-reset"></i> Edit </button></a>
+                                                <a href="?page=reseller&act=del&id=<?php echo $data->id; ?>" onclick="return confirm('Yakin akan menghapus data ini?')">
+                                                    <button class="btn btn-danger btn-xs"> <i class="bx bxs-trash-alt"></i> Hapus </button>
+                                                </a>
                                             </td>
                                         </tr>
                                     <?php
-                                        $no++; //untuk nomor urut terus bertambah 1
+                                        // $no++; //untuk nomor urut terus bertambah 1
                                     }
                                     ?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+
+                    <!-- Modal Tambah -->
+                    <div id="tambah" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Tambah Reseller</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label class="control-label" for="nama_reseller">Nama Reseller</label>
+                                            <input type="text" name="nama_reseller" class="form-control" id="nama_reseller" autofocus="" required="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="alamat">Alamat</label>
+                                            <input type="text" name="alamat" class="form-control" id="alamat" autofocus="" required="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="no_tlp">Nomer Telepon</label>
+                                            <input type="number" name="no_tlp" class="form-control" id="no_tlp" autofocus="" required="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="tgl_gabung">Tanggal Gabung</label>
+                                            <input type="date" name="tgl_gabung" class="form-control" id="tgl_gabung" autofocus="" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        <input type="submit" class="btn btn-success" name="tambah" value="Simpan">
+                                        <!-- <button type="submit" class="btn btn-success" name="tambah" value="Simpan">Save changes</button> -->
+                                    </div>
+                                </form>
+                                <?php
+                                if (@$_POST['tambah']) {
+                                    $nama_reseller = $connection->conn->real_escape_string($_POST['nama_reseller']);
+                                    $alamat = $connection->conn->real_escape_string($_POST['alamat']);
+                                    $no_tlp = $connection->conn->real_escape_string($_POST['no_tlp']);
+                                    $tgl_gabung = $connection->conn->real_escape_string($_POST['tgl_gabung']);
+                                    $rsl->tambah($nama_reseller, $alamat, $no_tlp, $tgl_gabung);
+                                    header("location: ?page=reseller");
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal Edit -->
+                    <div id="edit" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Edit Reseller</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form id="form" enctype="multipart/form-data">
+                                    <div class="modal-body" id="modal-edit">
+                                        <div class="form-group">
+                                            <label class="control-label" for="nama_reseller">Nama Reseller</label>
+                                            <input type="hidden" name="id" id="id">
+                                            <input type="text" name="nama_reseller" class="form-control" id="nama_reseller" autofocus="" required="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="alamat">Alamat</label>
+                                            <input type="text" name="alamat" class="form-control" id="alamat" autofocus="" required="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="no_tlp">Nomer Telepon</label>
+                                            <input type="number" name="no_tlp" class="form-control" id="no_tlp" autofocus="" required="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="tgl_gabung">Tanggal Gabung</label>
+                                            <input type="date" name="tgl_gabung" class="form-control" id="tgl_gabung" autofocus="" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        <input type="submit" class="btn btn-success" name="edit" value="Simpan">
+                                        <!-- <button type="submit" class="btn btn-success" name="tambah" value="Simpan">Save changes</button> -->
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <script src="assets/js/jquery-1.10.2.js"></script>
+                    <script type="text/javascript">
+                        $(document).on("click", "#edit_reseller", function(){
+                            var id = $(this).data('id');
+                            var namarsl = $(this).data('nama');
+                            var alamatrsl = $(this).data('alamat');
+                            var nomerrsl = $(this).data('nomer');
+                            var gabungrsl = $(this).data('gabung');
+
+                            $("#modal-edit #id").val(id);
+                            $("#modal-edit #nama_reseller").val(namarsl);
+                            $("#modal-edit #alamat").val(alamatrsl);
+                            $("#modal-edit #no_tlp").val(nomerrsl);
+                            $("#modal-edit #tgl_gabung").val(gabungrsl);
+                        })
+
+                        $(document).ready(function(e){
+                            $("#form").on("submit", (function(e){
+                                e.preventDefault();
+                                $.ajax({
+                                    url : 'models/proses_editReseller.php',
+                                    type : 'POST',
+                                    data : new FormData(this),
+                                    contentType : false,
+                                    cache : false,
+                                    processData : false,
+                                    success : function(msg) {
+                                        $('.table').html(msg);
+                                    }
+                                });
+                            }));
+                        })
+
+                    </script>
+
                 </div>
             </div>
         </div>
@@ -174,10 +304,26 @@ require('koneksi.php');
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $('table').DataTable();
+            $('table').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+                responsive : true,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search Your Data",
+                }
+            });
         } );
     </script>
 
 </body>
 
 </html>
+<?php
+} else if(@$_GET['act'] == 'del') {
+    $rsl->hapus($_GET['id']);
+    header("location: ?page=reseller");
+}

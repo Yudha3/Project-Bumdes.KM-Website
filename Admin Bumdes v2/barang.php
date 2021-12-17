@@ -1,8 +1,16 @@
 <?php
 
+ob_start();
 require('koneksi.php');
+require ('models/database.php');
+include "models/m_barang.php";
 
+$connection = new Database($host, $user, $pass, $nama_db);
+session_start();
+$sesName = $_SESSION['name'];
+$brg = new Barang($connection);
 
+if (@$_GET['act'] == '') {
 
 ?>
 
@@ -19,6 +27,9 @@ require('koneksi.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="assets/dataTable/datatables.min.css">
     <script type="text/javascript" src="assets/dataTable/datatables.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="assets/dataTable/DataTables-1.11.3/css/dataTables.bootstrap4.min.css">
+    <script type="text/javascript" src="assets/dataTable/DataTables-1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="assets/dataTable/DataTables-1.11.3/js/dataTables.bootstrap4.min.js"></script> -->
 </head>
 
 <body>
@@ -71,7 +82,7 @@ require('koneksi.php');
                 </a>
             </li>
             <li class="log_out">
-                <a href="#">
+                <a href="logout.php">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -90,7 +101,7 @@ require('koneksi.php');
             </div>
             <div class="profile-details">
                 <img src="images/profile.jpg" alt="">
-                <span class="admin_name">Prem Shahi</span>
+                <span class="admin_name"><?php echo $sesName; ?></span>
                 <i class='bx bx-chevron-down'></i>
             </div>
         </nav>
@@ -101,14 +112,20 @@ require('koneksi.php');
                     <div class="card-header1">
                         <h3>Recent Barang</h3>
 
-                        <button>
-                            <a href="barang/newBarang.php" style="text-decoration: none;">New Produk</a>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">
+                            New Produk
                             <span class="bx bx-right-arrow-alt"></span>
                         </button>
+
+                        <!-- <button>
+                            <a href="barang/newBarang.php" style="text-decoration: none;">New Produk</a>
+                            <span class="bx bx-right-arrow-alt"></span>
+                        </button> -->
                     </div>
                     <div class="card-body1">
                         <div class="table-responsive">
-                            <table width="100%">
+                            <table width="100%" class="table">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -121,40 +138,192 @@ require('koneksi.php');
                                 </thead>
                                 <tbody>
                                     <?php
-                                    // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
-                                    $query = "SELECT * FROM data_brg ORDER BY id ASC";
-                                    $result = mysqli_query($koneksi, $query);
-                                    //mengecek apakah ada error ketika menjalankan query
-                                    if (!$result) {
-                                        die("Query Error: " . mysqli_errno($koneksi) .
-                                            " - " . mysqli_error($koneksi));
-                                    }
-
-                                    //buat perulangan untuk element tabel dari data mahasiswa
-                                    $no = 1; //variabel untuk membuat nomor urut
-                                    // hasil query akan disimpan dalam variabel $data dalam bentuk array
-                                    // kemudian dicetak dengan perulangan while
-                                    while ($row = mysqli_fetch_assoc($result)) {
+                                    $no = 1;
+                                    $tampil = $brg->tampil();
+                                    while ($data = $tampil->fetch_object()) {
                                     ?>
                                         <tr>
-                                            <td align="center"><?php echo $no; ?></td>
-                                            <td><?php echo $row['nama_brg']; ?></td>
-                                            <td>Rp <?php echo $row['harga_brg']; ?></td>
-                                            <td><?php echo $row['stok_brg']; ?></td>
-                                            <td style="text-align: center;"><img src="images/gambar/<?php echo $row['gambar_brg']; ?>" style="width: 120px;"></td>
-                                            <td>
-                                                <a href="barang/editBarang.php?id=<?php echo $row['id']; ?>">Edit</a> |
-                                                <a href="barang/proses_hapus.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
+                                            <td align="center"><?php echo $no++."."; ?></td>
+                                            <td><?php echo $data->nama_brg; ?></td>
+                                            <td>Rp <?php echo $data->harga_brg; ?></td>
+                                            <td><?php echo $data->stok_brg; ?></td>
+                                            <td style="text-align: center;"><img src="images/barang/<?php echo $data->gambar_brg; ?>" style="width: 120px;"></td>
+                                            <td align="center">
+                                                <a id="edit_brg" data-toggle="modal" data-target="#edit" data-id="<?php echo $data->id; ?>"
+                                                    data-nama="<?php echo $data->nama_brg; ?>" data-jenis="<?php echo $data->jenis_brg; ?>" data-harga="<?php echo $data->harga_brg; ?>"
+                                                    data-stok="<?php echo $data->stok_brg; ?>" data-deskripsi="<?php echo $data->deskripsi_brg; ?>" data-gambar="<?php echo $data->gambar_brg; ?>">
+                                                    <button class="btn btn-info btn-xs"> <i class="bx bx-reset"></i> Edit </button></a>
+                                                <a href="?page=barang&act=del&id=<?php echo $data->id; ?>" onclick="return confirm('Yakin akan menghapus data ini?')">
+                                                    <button class="btn btn-danger btn-xs"> <i class="bx bxs-trash-alt"></i> Hapus </button>
+                                                </a>
                                             </td>
                                         </tr>
                                     <?php
-                                        $no++; //untuk nomor urut terus bertambah 1
+                                        // $no++; //untuk nomor urut terus bertambah 1
                                     }
                                     ?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+
+                    <!-- Modal Tambah -->
+                    <div id="tambah" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Tambah Barang</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label class="control-label" for="nama_brg">Nama Barang</label>
+                                            <input type="text" name="nama_brg" class="form-control" id="nama_brg" autofocus="" required="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="jenis_brg">Jenis Barang</label>
+                                            <input type="text" name="jenis_brg" class="form-control" id="jenis_brg" autofocus="" required="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="harga_brg">Harga Barang</label>
+                                            <input type="number" name="harga_brg" class="form-control" id="harga_brg" autofocus="" required="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="stok_brg">Stok Barang</label>
+                                            <input type="number" name="stok_brg" class="form-control" id="stok_brg" autofocus="" required="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="deskripsi_brg">Deskripsi Barang</label>
+                                            <input type="text" name="deskripsi_brg" class="form-control" id="deskripsi_brg" autofocus="" required="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="gambar_brg">Gambar Barang</label>
+                                            <input type="file" name="gambar_brg" class="form-control" id="gambar_brg" autofocus="" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        <input type="submit" class="btn btn-success" name="tambah" value="Simpan">
+                                        <!-- <button type="submit" class="btn btn-success" name="tambah" value="Simpan">Save changes</button> -->
+                                    </div>
+                                </form>
+                                <?php
+                                    if(@$_POST['tambah']) {
+                                        $nama_brg = $connection->conn->real_escape_string($_POST['nama_brg']);
+                                        $jenis_brg = $connection->conn->real_escape_string($_POST['jenis_brg']);
+                                        $harga_brg = $connection->conn->real_escape_string($_POST['harga_brg']);
+                                        $stok_brg = $connection->conn->real_escape_string($_POST['stok_brg']);
+                                        $deskripsi_brg = $connection->conn->real_escape_string($_POST['deskripsi_brg']);
+
+                                        $extensi = explode(".", $_FILES['gambar_brg']['name']);
+                                        $gambar_brg = "brg-".round(microtime(true)).".".end($extensi);
+                                        $sumber = $_FILES['gambar_brg']['tmp_name'];
+
+                                        $upload = move_uploaded_file($sumber, "images/barang/".$gambar_brg);
+                                        if($upload) {
+                                            $brg->tambah($nama_brg, $jenis_brg, $harga_brg, $stok_brg, $deskripsi_brg, $gambar_brg);
+                                            header("location: ?page=barang");
+                                        } else {
+                                            echo "<script>alert('Upload gambar gagal!')</script>";
+                                        }
+                                    }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal Edit -->
+                    <div id="edit" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Edit Barang</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form id="form" enctype="multipart/form-data">
+                                    <div class="modal-body" id="modal-edit">
+                                        <div class="form-group">
+                                            <label class="control-label" for="nama_brg">Nama Barang</label>
+                                            <input type="hidden" name="id" id="id">
+                                            <input type="text" name="nama_brg" class="form-control" id="nama_brg" autofocus="" required="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="jenis_brg">Jenis Barang</label>
+                                            <input type="text" name="jenis_brg" class="form-control" id="jenis_brg" autofocus="" required="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="harga_brg">Harga Barang</label>
+                                            <input type="number" name="harga_brg" class="form-control" id="harga_brg" autofocus="" required="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="stok_brg">Stok Barang</label>
+                                            <input type="number" name="stok_brg" class="form-control" id="stok_brg" autofocus="" required="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="deskripsi_brg">Deskripsi Barang</label>
+                                            <input type="text" name="deskripsi_brg" class="form-control" id="deskripsi_brg" autofocus="" required="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="gambar_brg">Gambar Barang</label>
+                                            <div style="padding-bottom:5px">
+                                                <img src="" width="80px" id="pict">
+                                            </div>
+                                            <input type="file" name="gambar_brg" class="form-control" id="gambar_brg">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        <input type="submit" class="btn btn-success" name="edit" value="Simpan">
+                                        <!-- <button type="submit" class="btn btn-success" name="tambah" value="Simpan">Save changes</button> -->
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <script src="assets/js/jquery-1.10.2.js"></script>
+                    <script type="text/javascript">
+                        $(document).on("click", "#edit_brg", function(){
+                            var id = $(this).data('id');
+                            var namabrg = $(this).data('nama');
+                            var jenisbrg = $(this).data('jenis');
+                            var hargabrg = $(this).data('harga');
+                            var stokbrg = $(this).data('stok');
+                            var deskripsibrg = $(this).data('deskripsi');
+                            var gambarbrg = $(this).data('gambar');
+
+                            $("#modal-edit #id").val(id);
+                            $("#modal-edit #nama_brg").val(namabrg);
+                            $("#modal-edit #jenis_brg").val(jenisbrg);
+                            $("#modal-edit #harga_brg").val(hargabrg);
+                            $("#modal-edit #stok_brg").val(stokbrg);
+                            $("#modal-edit #deskripsi_brg").val(deskripsibrg);
+                            $("#modal-edit #pict").attr("src", "images/barang/"+gambarbrg);
+                        })
+
+                        $(document).ready(function(e){
+                            $("#form").on("submit", (function(e){
+                                e.preventDefault();
+                                $.ajax({
+                                    url : 'models/proses_editBarang.php',
+                                    type : 'POST',
+                                    data : new FormData(this),
+                                    contentType : false,
+                                    cache : false,
+                                    processData : false,
+                                    success : function(msg) {
+                                        $('.table').html(msg);
+                                    }
+                                });
+                            }));
+                        })
+
+                    </script>
+
                 </div>
             </div>
         </div>
@@ -174,10 +343,31 @@ require('koneksi.php');
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $('table').DataTable();
-        } );
+            $('#table').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+                responsive: true,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search Your Data",
+                }
+            });
+        });
     </script>
+
 
 </body>
 
 </html>
+
+<?php
+} else if(@$_GET['act'] == 'del') {
+    $gambar_awal = $brg->tampil($_GET['id'])->fetch_object()->gambar_brg;
+    unlink("images/barang/".$gambar_awal);
+
+    $brg->hapus($_GET['id']);
+    header("location: ?page=barang");
+}

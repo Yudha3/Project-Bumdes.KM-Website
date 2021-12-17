@@ -219,11 +219,26 @@ nav .profile-details i{
   font-size: 20px;
   margin-right: 5px;
 }
+.box .indicator i.right{
+  color: #66b0ff;
+  background: #cce5ff;
+}
+.box .indicator i.left{
+  color: #2BD47D;
+  background: #C0F2D8;
+}
+.box .indicator i.up{
+  color: #ffc233;
+  background: #ffe8b3;
+}
 .box .indicator i.down{
-  background: #e87d88;
+  color: #e05260;
+  background: #f7d4d7;
 }
 .home-content .box .indicator .text{
   font-size: 12px;
+  /* text-decoration: none;
+  color: #222; */
 }
 .home-content .box .cart{
   display: inline-block;

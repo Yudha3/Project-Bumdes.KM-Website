@@ -4,14 +4,9 @@ require('koneksi.php');
 
 // $username = $_GET['user_fullname'];
 session_start();
-// $obj = new crud;
-// if (!isset($_SESSION['id'])) {
-//     $_SESSION['msg'] = 'Anda harus login untuk mengakses halaman ini';
-//     header('Location: login.php');
-// }
-// $sesID = $_SESSION['id'];
-// $sesName = $_SESSION['user_fullname'];
-// $sesLvl = $_SESSION['level'];
+
+$sesName = $_SESSION['name'];
+
 
 $data_barang = mysqli_query($koneksi, "SELECT * FROM data_brg");
 $data_mitra = mysqli_query($koneksi, "SELECT * FROM data_mitra");
@@ -105,7 +100,7 @@ $jml_reseller = mysqli_num_rows($data_reseller);
       </div>
       <div class="profile-details">
         <img src="images/profile.jpg" alt="">
-        <span class="admin_name">param</span>
+        <span class="admin_name"><?php echo $sesName; ?></span>
         <i class='bx bx-chevron-down'></i>
       </div>
     </nav>
@@ -117,7 +112,7 @@ $jml_reseller = mysqli_num_rows($data_reseller);
             <div class="box-topic">Total Order</div>
             <div class="number">40,876</div>
             <div class="indicator">
-              <i class='bx bx-up-arrow-alt'></i>
+              <i class='bx bx-left-arrow-alt right'></i>
               <span class="text">Up from yesterday</span>
             </div>
           </div>
@@ -128,100 +123,97 @@ $jml_reseller = mysqli_num_rows($data_reseller);
             <div class="box-topic">Total Produk</div>
             <div class="number"><?php echo $jml_barang; ?></div>
             <div class="indicator">
-              <i class='bx bx-up-arrow-alt'></i>
+              <i class='bx bx-left-arrow-alt left'></i>
               <span class="text">Up from yesterday</span>
             </div>
           </div>
-          <i class='bx bxs-cart-add cart two'></i>
+          <i class='bx bx-box cart two'></i>
         </div>
         <div class="box">
           <div class="right-side">
             <div class="box-topic">Total Mitra</div>
             <div class="number"><?php echo $jml_mitra; ?></div>
             <div class="indicator">
-              <i class='bx bx-up-arrow-alt'></i>
+              <i class='bx bx-left-arrow-alt up'></i>
               <span class="text">Up from yesterday</span>
             </div>
           </div>
-          <i class='bx bx-cart cart three'></i>
+          <i class='bx bx-badge-check cart three'></i>
         </div>
         <div class="box">
           <div class="right-side">
             <div class="box-topic">Total Reseller</div>
             <div class="number"><?php echo $jml_reseller; ?></div>
             <div class="indicator">
-              <i class='bx bx-down-arrow-alt down'></i>
-              <span class="text">Down From Today</span>
+              <i class='bx bx-left-arrow-alt down'></i>
+              <!-- <a href="reseller.php"><span class="text">See All</span></a> -->
+              <span class="text">See All</span>
             </div>
           </div>
-          <i class='bx bxs-cart-download cart four'></i>
+          <i class='bx bxs-collection cart four'></i>
         </div>
       </div>
 
       <div class="sales-boxes">
-        <div class="recent-sales box">
-          <div class="title">Recent Sales</div>
-          <div class="sales-details">
-            <ul class="details">
-              <li class="topic">Date</li>
-              <li><a href="#">02 Jan 2021</a></li>
-              <li><a href="#">02 Jan 2021</a></li>
-              <li><a href="#">02 Jan 2021</a></li>
-              <li><a href="#">02 Jan 2021</a></li>
-              <li><a href="#">02 Jan 2021</a></li>
-              <li><a href="#">02 Jan 2021</a></li>
-              <li><a href="#">02 Jan 2021</a></li>
-            </ul>
-            <ul class="details">
-              <li class="topic">Customer</li>
-              <li><a href="#">Alex Doe</a></li>
-              <li><a href="#">David Mart</a></li>
-              <li><a href="#">Roe Parter</a></li>
-              <li><a href="#">Diana Penty</a></li>
-              <li><a href="#">Martin Paw</a></li>
-              <li><a href="#">Doe Alex</a></li>
-              <li><a href="#">Aiana Lexa</a></li>
-              <li><a href="#">Rexel Mags</a></li>
-              <li><a href="#">Tiana Loths</a></li>
-            </ul>
-            <ul class="details">
-              <li class="topic">Sales</li>
-              <li><a href="#">Delivered</a></li>
-              <li><a href="#">Pending</a></li>
-              <li><a href="#">Returned</a></li>
-              <li><a href="#">Delivered</a></li>
-              <li><a href="#">Pending</a></li>
-              <li><a href="#">Returned</a></li>
-              <li><a href="#">Delivered</a></li>
-              <li><a href="#">Pending</a></li>
-              <li><a href="#">Delivered</a></li>
-            </ul>
-            <ul class="details">
-              <li class="topic">Total</li>
-              <li><a href="#">$204.98</a></li>
-              <li><a href="#">$24.55</a></li>
-              <li><a href="#">$25.88</a></li>
-              <li><a href="#">$170.66</a></li>
-              <li><a href="#">$56.56</a></li>
-              <li><a href="#">$44.95</a></li>
-              <li><a href="#">$67.33</a></li>
-              <li><a href="#">$23.53</a></li>
-              <li><a href="#">$46.52</a></li>
-            </ul>
+        <div class="recent-sales1 box">
+          <div class="card-header1">
+            <h3>Recent Barang</h3>
+
+            <button>
+              <a href="barang.php" style="text-decoration: none;">Detail</a>
+              <span class="bx bx-right-arrow-alt"></span>
+            </button>
           </div>
-          <div class="button">
-            <a href="#">See All</a>
+          <div class="card-body1">
+            <div class="table-responsive">
+              <table width="100%">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama Barang</th>
+                    <th>Harga Barang</th>
+                    <th>Stok Barang</th>
+                    <th>Gambar Barang</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
+                  $query = "SELECT * FROM data_brg ORDER BY id ASC";
+                  $result = mysqli_query($koneksi, $query);
+                  //mengecek apakah ada error ketika menjalankan query
+                  if (!$result) {
+                    die("Query Error: " . mysqli_errno($koneksi) .
+                      " - " . mysqli_error($koneksi));
+                  }
+
+                  //buat perulangan untuk element tabel dari data mahasiswa
+                  $no = 1; //variabel untuk membuat nomor urut
+                  // hasil query akan disimpan dalam variabel $data dalam bentuk array
+                  // kemudian dicetak dengan perulangan while
+                  while ($row = mysqli_fetch_assoc($result)) {
+                  ?>
+                    <tr>
+                      <td align="center"><?php echo $no; ?></td>
+                      <td><?php echo $row['nama_brg']; ?></td>
+                      <td>Rp <?php echo $row['harga_brg']; ?></td>
+                      <td><?php echo $row['stok_brg']; ?></td>
+                      <td style="text-align: center;"><img src="images/gambar/<?php echo $row['gambar_brg']; ?>" style="width: 120px;"></td>
+                    </tr>
+                  <?php
+                    $no++; //untuk nomor urut terus bertambah 1
+                  }
+                  ?>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-        <div class="top-sales box">
+        <!-- <div class="top-sales box">
           <div class="title">Top Seling Product</div>
           <ul class="top-sales-details">
             <li>
-              <a href="#">
-                <img src="images/sunglasses.jpg" alt="">
-                <span class="product">Vuitton Sunglasses</span>
-              </a>
-              <span class="price">$1107</span>
+                
             </li>
             <li>
               <a href="#">
@@ -272,7 +264,7 @@ $jml_reseller = mysqli_num_rows($data_reseller);
               <span class="price">$1245</span>
             </li>
           </ul>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>

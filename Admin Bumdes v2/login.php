@@ -1,25 +1,40 @@
 <?php
 require('koneksi.php');
-// $koneksi = mysqli_connect("localhost", "root", "", "user");
+
 session_start();
 if(isset($_POST['login'])){
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-	if($username == "" || $password == "") {
-		header("Location: loginerror.php");
-	}
+    if(!empty(trim($username)) && !empty(trim($password))){
+        $query = "SELECT * FROM user WHERE username = '$username'";
+        $result = mysqli_query($koneksi, $query);
+        $num = mysqli_num_rows($result);
 
-	$sql = mysqli_query($koneksi, "SELECT * FROM user WHERE username = '$username' AND password = '$password'");
+        while($row = mysqli_fetch_array($result)){
+            $userVal = $row['username'];
+            $passVal = $row['password'];
+            $userName = $row['user_fullname'];
+        }
 
-	if(mysqli_num_rows($sql) != 0) {
-		header("Location: index.php");
-	} else {
-		header("Location: loginerror.php");
-	}
-
-    
+        if($num != 0) {
+            if($userVal==$username && $passVal==$password){
+                $_SESSION['name'] = $userName;
+                header('Location: index.php?user_fullname=' . urlencode($userName));
+            }else{
+                $error = 'username atau password salah!';
+                header('Location: login.php');
+            }
+        }else{
+            $error = 'Username tidak boleh kosong!';
+            header('Location: login.php');
+        }
+    }else{
+        $error = 'Data tidak boleh kosong!';
+        echo $error;
+    }
 }
+
 ?>
 
 <!DOCTYPE html>

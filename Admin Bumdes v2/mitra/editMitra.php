@@ -1,6 +1,9 @@
 <?php
 
 require('../koneksi.php');
+session_start();
+
+$sesName = $_SESSION['name'];
 
 // mengecek apakah di url ada nilai GET id
 if (isset($_GET['id'])) {
@@ -91,7 +94,7 @@ if (isset($_GET['id'])) {
                 </a>
             </li>
             <li class="log_out">
-                <a href="#">
+                <a href="../logout.php">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -110,7 +113,7 @@ if (isset($_GET['id'])) {
             </div>
             <div class="profile-details">
                 <img src="../images/profile.jpg" alt="">
-                <span class="admin_name">Prem Shahi</span>
+                <span class="admin_name"><?php echo $sesName; ?></span>
                 <i class='bx bx-chevron-down'></i>
             </div>
         </nav>
@@ -118,7 +121,7 @@ if (isset($_GET['id'])) {
         <div class="home-content">
             <div class="sales-boxes">
                 <div class="recent-sales1 box">
-                    <div class="card-header">
+                    <div class="card-header1">
                         <h3>Recent Mitra</h3>
                     </div>
                     <div class="tambah">

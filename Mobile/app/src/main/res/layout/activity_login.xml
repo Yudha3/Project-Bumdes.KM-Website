@@ -48,7 +48,7 @@
             android:background="@color/white"
             android:fontFamily="@font/productsans_regular"
             android:inputType="textEmailAddress"
-            android:hint="Email" />
+            android:hint="Email/Username" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

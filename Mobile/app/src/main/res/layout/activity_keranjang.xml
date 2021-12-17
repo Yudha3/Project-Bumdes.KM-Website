@@ -8,31 +8,36 @@
     android:background="@color/bg_white"
     tools:context=".Activity.KeranjangActivity">
 
-    <TextView
-        android:id="@+id/txt_empty_keranjang"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="48dp"
-        android:text="Anda belum menambahkan produk apapun\nke dalam Keranjang"
-        android:textSize="15sp"
-        android:fontFamily="@font/productsans_regular_italic"
-        android:textColor="#404040"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_centerInParent="true"
-        android:visibility="gone"/>
+
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srl_keranjang"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="10dp">
+        android:paddingTop="8dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rvKeranjang"
-        android:layout_margin="8dp"/>
+        android:id="@+id/rvKeranjang"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_order_keranjang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_buttton_green_rounded"
+            android:fontFamily="@font/productsans_medium"
+            android:paddingVertical="12dp"
+            android:text="Order"
+            android:visibility="visible"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
@@ -47,25 +52,24 @@
         android:textAllCaps="false"
         android:fontFamily="@font/productsans_medium"
         android:layout_alignParentBottom="true"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:background="@drawable/bg_buttton_green_rounded"/>
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_order_keranjang"
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/txt_empty_keranjang"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/bg_buttton_green_rounded"
-        android:fontFamily="@font/productsans_medium"
-        android:paddingVertical="12dp"
-        android:text="Order"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="17sp" />
+        android:layout_marginHorizontal="48dp"
+        android:text="Anda belum menambahkan produk apapun\nke dalam Keranjang"
+        android:textSize="15sp"
+        android:fontFamily="@font/productsans_regular_italic"
+        android:textColor="#404040"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
 
     <ProgressBar
         android:layout_width="48dp"

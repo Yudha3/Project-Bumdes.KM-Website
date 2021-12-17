@@ -1,6 +1,7 @@
 package com.yogandrn.coba2.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,8 +11,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +24,7 @@ import com.yogandrn.coba2.API.RetroServer;
 import com.yogandrn.coba2.Global;
 import com.yogandrn.coba2.Model.ResponseUser;
 import com.yogandrn.coba2.R;
+import com.yogandrn.coba2.SessionManager;
 
 import java.util.List;
 
@@ -34,12 +38,14 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout btnKatalog, btnPesanan, btnPreorder, btnKeranjang;
     private String id_user;
     private TextView txtWelcome, btnHeadline1, btnHeadline2;
+    private ImageView btnSearch;
+    private EditText etSearch;
     private long exitTime = 0;
     private CircleImageView imgProfil;
     private ImageView ic_keranjang, ic_notifikasi;
-    private String URL_IMG_USER = "http://undeveloppedcity.000webhostapp.com/android/img/user/";
-//    private String URL_IMG_USER = "http://192.168.1.100:8080/android/img/user/";
-
+    private SwipeRefreshLayout srlMainmenu;
+    private ProgressBar pbMainmenu;
+    SessionManager sessionManager;
 
 
     @Override
@@ -51,33 +57,8 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
-        //Tangkap data intent login
-//        Bundle data = getIntent().getExtras();
-//        String id_user = data.getString("id_user");
-//        String fullname = data.getString("fullname");
-//        String username = data.getString("username");
-//        String email = data.getString("email");
-//        String no_telp = data.getString("no_telp");
-//        String foto_profil = data.getString("foto_profil");
-
-//        APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-//        Call<ResponseUser> getData = apiRequestData.getUser(id_user);
-//        getData.enqueue(new Callback<ResponseUser>() {
-//            @Override
-//            public void onResponse(Call<ResponseUser> call, Response<ResponseUser> response) {
-//                String fullname = response.body().getFullname();
-//                String username = response.body().getUsername();
-//                String email = response.body().getEmail();
-//                String no_telp = response.body().getNo_telp();
-//                String foto_profil = response.body().getFoto_profil();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseUser> call, Throwable t) {
-//
-//            }
-//        });
-
+        btnSearch = (ImageView) findViewById(R.id.btn_search);
+        etSearch = (EditText) findViewById(R.id.et_searchbar);
         ic_keranjang = (ImageView) findViewById(R.id.keranjang_main);
         imgProfil = (CircleImageView) findViewById(R.id.img_profil_main);
         btnKatalog = (LinearLayout) findViewById(R.id.layoutKatalog);
@@ -87,12 +68,34 @@ public class MainActivity extends AppCompatActivity {
         txtWelcome = (TextView) findViewById(R.id.txtuser);
         btnHeadline1 = (TextView) findViewById(R.id.btn_headline1);
         btnHeadline2 = (TextView) findViewById(R.id.btn_headline2);
+        srlMainmenu = findViewById(R.id.srl_main_menu);
+        pbMainmenu= findViewById(R.id.progress_main_menu);
 
+        sessionManager = new SessionManager(MainActivity.this);
+        if (!sessionManager.getLogin()){
+            moveToLogin();
+        }
         getUserData();
 
-//        txtWelcome.setText(fullname);
-//
-//        Glide.with(this).load(URL_IMG_USER + foto_profil).placeholder(R.drawable.bg_foto_default).circleCrop().into(imgProfil);
+        srlMainmenu.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                srlMainmenu.setRefreshing(true);
+                getUserData();
+                srlMainmenu.setRefreshing(false);
+            }
+        });
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String keyword = etSearch.getText().toString();
+                Intent search = new Intent(MainActivity.this, SearchActivity.class);
+                search.putExtra("keyword", keyword);
+                etSearch.setText("");
+                startActivity(search);
+            }
+        });
 
         ic_keranjang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,12 +109,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent profil = new Intent(MainActivity.this, ProfilActivity.class);
-//                profil.putExtra("id_user", id_user);
-//                profil.putExtra("fullname", fullname);
-//                profil.putExtra("username", username);
-//                profil.putExtra("email", email);
-//                profil.putExtra("no_telp", no_telp);
-//                profil.putExtra("foto_profil", foto_profil);
                 startActivity(profil);
             }
         });
@@ -120,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent katalog = new Intent(MainActivity.this, KatalogActivity.class);
-                katalog.putExtra("id_user", id_user);
+//                katalog.putExtra("id_user", id_user);
                 startActivity(katalog);
             }
         });
@@ -129,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent preorder = new Intent(MainActivity.this, PreorderActivity.class);
-                preorder.putExtra("id_user", id_user);
+//                preorder.putExtra("id_user", id_user);
                 startActivity(preorder);
             }
         });
@@ -138,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent keranjang = new Intent(MainActivity.this, KeranjangActivity.class);
-                keranjang.putExtra("id_user", id_user);
+//                keranjang.putExtra("id_user", id_user);
                 startActivity(keranjang);
             }
         });
@@ -147,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent pesanan = new Intent(MainActivity.this, ListPesanan.class);
-                pesanan.putExtra("id_user", id_user);
+//                pesanan.putExtra("id_user", id_user);
                 startActivity(pesanan);
             }
         });
@@ -169,9 +166,19 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void moveToLogin() {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
     public void getUserData(){
+        pbMainmenu.setVisibility(View.VISIBLE);
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-        Call<ResponseUser> getData = apiRequestData.getUser(Global.id_user);
+        Call<ResponseUser> getData = apiRequestData.getUser(sessionManager.getSessionID());
         getData.enqueue(new Callback<ResponseUser>() {
             @Override
             public void onResponse(Call<ResponseUser> call, Response<ResponseUser> response) {
@@ -183,13 +190,13 @@ public class MainActivity extends AppCompatActivity {
 
                 txtWelcome.setText(fullname);
 
-                Glide.with(getApplicationContext()).load(URL_IMG_USER + foto_profil).placeholder(R.drawable.bg_foto_default).circleCrop().into(imgProfil);
-
+                Glide.with(getApplicationContext()).load(Global.IMG_USER_URL + foto_profil).placeholder(R.drawable.bg_foto_default).circleCrop().into(imgProfil);
+                pbMainmenu.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ResponseUser> call, Throwable t) {
-
+                pbMainmenu.setVisibility(View.GONE);
             }
         });
 

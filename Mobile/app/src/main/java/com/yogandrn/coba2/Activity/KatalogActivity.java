@@ -18,6 +18,7 @@ import com.yogandrn.coba2.Adapter.AdapterProduk;
 import com.yogandrn.coba2.Model.ModelProduk;
 import com.yogandrn.coba2.Model.ResponseProduk;
 import com.yogandrn.coba2.R;
+import com.yogandrn.coba2.SessionManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,7 @@ public class KatalogActivity extends AppCompatActivity {
     private List<ModelProduk> listData = new ArrayList<>();
     private SwipeRefreshLayout srlKatalog;
     private ProgressBar pbKatalog;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,8 @@ public class KatalogActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle("Produk Kami");
+
+//        sessionManager = new SessionManager(KatalogActivity.this);
 
         srlKatalog = findViewById(R.id.srl_katalog);
         pbKatalog = findViewById(R.id.progress_katalog);

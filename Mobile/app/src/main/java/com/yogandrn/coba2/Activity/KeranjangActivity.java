@@ -23,6 +23,7 @@ import com.yogandrn.coba2.Global;
 import com.yogandrn.coba2.Model.ModelKeranjang;
 import com.yogandrn.coba2.Model.ResponseKeranjang;
 import com.yogandrn.coba2.R;
+import com.yogandrn.coba2.SessionManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,7 @@ public class KeranjangActivity extends AppCompatActivity {
     private TextView txtEmpty;
     private SwipeRefreshLayout srlKeranjang;
     private ProgressBar pbKeranjang;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,7 @@ public class KeranjangActivity extends AppCompatActivity {
             }
         });
 
-        btnBelanja.setVisibility(View.GONE);
+//        btnBelanja.setVisibility(View.GONE);
         btnBelanja.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,8 +96,9 @@ public class KeranjangActivity extends AppCompatActivity {
 
     public void retrieveCart() {
         pbKeranjang.setVisibility(View.VISIBLE);
+        sessionManager = new SessionManager(KeranjangActivity.this);
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-        Call<ResponseKeranjang> getKeranjang = apiRequestData.readCart(Global.id_user);
+        Call<ResponseKeranjang> getKeranjang = apiRequestData.readCart(String.valueOf(sessionManager.getSessionID()));
 
         getKeranjang.enqueue(new Callback<ResponseKeranjang>() {
             @Override
@@ -110,9 +113,9 @@ public class KeranjangActivity extends AppCompatActivity {
                     pbKeranjang.setVisibility(View.GONE);
                 } else if (pesan.equals("Data tidak tersedia")) {
                     txtEmpty.setVisibility(View.VISIBLE);
-                    rvKeranjang.setVisibility(View.GONE);
                     btnBelanja.setVisibility(View.VISIBLE);
                     btnOrder.setVisibility(View.GONE);
+                    rvKeranjang.setVisibility(View.GONE);
                     pbKeranjang.setVisibility(View.GONE);
                 }
             }

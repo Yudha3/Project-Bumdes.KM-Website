@@ -8,6 +8,16 @@
     android:background="@color/bg_white"
     tools:context=".Activity.MainActivity">
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/srl_main_menu"
+        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
     <!-- layout header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutheader"
@@ -38,13 +48,15 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/searchbar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:id="@+id/et_searchbar"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
                     android:layout_weight="1"
+                    android:maxLines="1"
                     android:background="@null"
-                    android:fontFamily="@font/poppins_regular"
                     android:hint="Cari"
+                    android:textColor="#404040"
                     android:imeOptions="actionSearch"
                     android:importantForAutofill="no"
                     android:paddingVertical="6dp"
@@ -52,7 +64,7 @@
                     android:textSize="14sp" />
 
                 <ImageView
-                    android:id="@+id/search"
+                    android:id="@+id/btn_search"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:background="@drawable/search_icon_background"
@@ -74,7 +86,8 @@
                 android:id="@+id/notifikasi_main"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:src="@drawable/ic_notifications_white" />
+                android:src="@drawable/ic_notifications_white"
+                android:visibility="gone"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="32dp"
@@ -107,7 +120,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="12dp"
             android:fontFamily="@font/productsans_medium"
-            android:text="@string/username"
+            android:text="Nama Pengguna"
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/txtwelcome"
@@ -115,18 +128,13 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
-        android:id="@+id/main_menu"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:overScrollMode="never"
-        android:scrollbars="none"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutheader">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_menu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/layoutheader"
+            app:layout_constraintStart_toStartOf="parent">
 
            <LinearLayout
                 android:id="@+id/layoutKatalog"
@@ -273,7 +281,6 @@
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/headline1"
@@ -402,6 +409,17 @@
             android:layout_marginTop="7dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <ProgressBar
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/progress_main_menu"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="invisible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

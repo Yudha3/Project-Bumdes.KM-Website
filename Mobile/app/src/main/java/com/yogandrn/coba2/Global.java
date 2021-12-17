@@ -15,12 +15,14 @@ public class Global {
     public static String id_user;
     public static String fullname;
     public static String IMG_PRODUK_URL = "http://undeveloppedcity.000webhostapp.com/android/img/produk/";
-
+    public static String IMG_USER_URL = "http://undeveloppedcity.000webhostapp.com/android/img/user/";
     public static int total;
+    SessionManager sessionManager;
+    public static  String id;
 
     public void getTotal(){
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-        Call<ResponseModel> countTotal = apiRequestData.countTotal(id_user);
+        Call<ResponseModel> countTotal = apiRequestData.countTotal(String.valueOf(sessionManager.getSessionID()));
         countTotal.enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {

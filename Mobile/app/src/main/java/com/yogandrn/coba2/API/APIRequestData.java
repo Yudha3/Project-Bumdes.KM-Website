@@ -1,5 +1,6 @@
 package com.yogandrn.coba2.API;
 
+import com.yogandrn.coba2.Model.ModelUser;
 import com.yogandrn.coba2.Model.ResponseDetailTransaksi;
 import com.yogandrn.coba2.Model.ResponseKeranjang;
 import com.yogandrn.coba2.Model.ModelListItemTransaksi;
@@ -41,6 +42,16 @@ public interface APIRequestData {
     @POST("get_user.php")
     Call<ResponseUser> getUser(
             @Field("id_user") String id_user
+    );
+
+    @FormUrlEncoded
+    @POST("update_user.php")
+    Call<ResponseUser> updateUser(
+            @Field("id_user") String id_user,
+            @Field("fullname") String fullname,
+            @Field("email") String email,
+            @Field("no_telp") String no_telp,
+            @Field("EN_IMAGE") String encodeImage
     );
 
     @FormUrlEncoded
@@ -119,4 +130,10 @@ public interface APIRequestData {
 
     @GET ("retrieve.php")
     Call<ResponseProduk> ReadData();
+
+    @FormUrlEncoded
+    @POST("search_item.php")
+    Call<ResponseProduk> searchProduk(
+            @Field("keyword") String keyword
+    );
 }

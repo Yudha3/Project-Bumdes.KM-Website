@@ -9,10 +9,12 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import com.yogandrn.coba2.R;
+import com.yogandrn.coba2.SessionManager;
 
 public class PreorderActivity extends AppCompatActivity {
 
     private Button btnBelanja;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -25,6 +25,7 @@ import com.yogandrn.coba2.Model.ModelKeranjang;
 import com.yogandrn.coba2.Model.ResponseKeranjang;
 import com.yogandrn.coba2.Model.ResponseModel;
 import com.yogandrn.coba2.R;
+import com.yogandrn.coba2.SessionManager;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -52,11 +53,14 @@ import retrofit2.Response;
      private String penerima, alamat, no_telp;
      private SwipeRefreshLayout srlOrder;
      private ProgressBar pbOrder;
+     SessionManager sessionManager;
 
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+
+//        sessionManager = new SessionManager(OrderActivity.this);
 
         txtSubtotal = findViewById(R.id.txt_total_item);
         txtSubtotal2 = findViewById(R.id.txt_total2_item);
@@ -146,8 +150,9 @@ import retrofit2.Response;
 
     public void getItem() {
          pbOrder.setVisibility(View.VISIBLE);
+        sessionManager = new SessionManager(OrderActivity.this);
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-        Call<ResponseKeranjang> getKeranjang = apiRequestData.readCart(Global.id_user);
+        Call<ResponseKeranjang> getKeranjang = apiRequestData.readCart(String.valueOf(sessionManager.getSessionID()));
 
         getKeranjang.enqueue(new Callback<ResponseKeranjang>() {
             @Override

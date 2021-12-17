@@ -1,11 +1,19 @@
 package com.yogandrn.coba2.Activity;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yogandrn.coba2.API.APIRequestData;
@@ -13,6 +21,7 @@ import com.yogandrn.coba2.API.RetroServer;
 import com.yogandrn.coba2.Global;
 import com.yogandrn.coba2.Model.ResponseUser;
 import com.yogandrn.coba2.R;
+import com.yogandrn.coba2.SessionManager;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -23,8 +32,11 @@ public class ProfilActivity extends AppCompatActivity {
 
     private TextView titleUsername, titleEmail, txtEmail, txtFullname, txtUsername, txtID, txtNoTelp;
     private CircleImageView fotoProfil;
-    private String URL_IMG_USER = "http://undeveloppedcity.000webhostapp.com/android/img/user/";
-//    private String URL_IMG_USER = "http://192.168.1.100:8080/android/img/user/";
+    private Button btnEdit, btnLogout;
+    private SwipeRefreshLayout srlProfil;
+    private ProgressBar pbProfil;
+    SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +55,8 @@ public class ProfilActivity extends AppCompatActivity {
 //        String no_telp = data.getString("no_telp");
 //        String foto_profil = data.getString("foto_profil");
 
+        btnEdit = (Button) findViewById(R.id.btn_edit_profil);
+        btnLogout = (Button) findViewById(R.id.btn_logout_profil);
         fotoProfil = (CircleImageView) findViewById(R.id.img_profil_profil);
         titleEmail = (TextView) findViewById(R.id.title_email);
         titleUsername = (TextView) findViewById(R.id.title_username);
@@ -51,7 +65,10 @@ public class ProfilActivity extends AppCompatActivity {
         txtUsername = (TextView) findViewById(R.id.txt_username_profil);
         txtEmail = (TextView) findViewById(R.id.txt_email_profil);
         txtNoTelp = (TextView) findViewById(R.id.txt_notelp_profil);
+        srlProfil = findViewById(R.id.srl_profil);
+        pbProfil =findViewById(R.id.progress_profil);
 
+        sessionManager = new SessionManager(ProfilActivity.this);
         getUserData();
 
 //        Glide.with(this).load(URL_IMG_USER + foto_profil).circleCrop().into(fotoProfil);
@@ -62,13 +79,59 @@ public class ProfilActivity extends AppCompatActivity {
 //        txtUsername.setText(username);
 //        txtEmail.setText(email);
 //        txtNoTelp.setText(no_telp);
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent edit = new Intent(ProfilActivity.this, EditProfilActivity.class);
+                startActivity(edit);
+            }
+        });
 
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dialogLogout = new AlertDialog.Builder(view.getContext());
+                dialogLogout.setCancelable(true);
+                dialogLogout.setTitle("Logout");
+                dialogLogout.setMessage("Apakah Anda yakin ingin keluar?");
+                dialogLogout.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        sessionManager.logoutSession();
+                        Intent intent = new Intent(ProfilActivity.this, LoginActivity.class);
+                        // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                dialogLogout.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                dialogLogout.show();
+            }
+        });
+
+        srlProfil.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                srlProfil.setRefreshing(true);
+                getUserData();
+                srlProfil.setRefreshing(false);
+            }
+        });
     }
 
     public void getUserData(){
+        pbProfil.setVisibility(View.VISIBLE);
+        String id = String.valueOf(sessionManager.getSessionID());
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-        Call<ResponseUser> getData = apiRequestData.getUser(Global.id_user);
-        getData.enqueue(new Callback<ResponseUser>() {
+        Call<ResponseUser> callData = apiRequestData.getUser(id);
+        callData.enqueue(new Callback<ResponseUser>() {
             @Override
             public void onResponse(Call<ResponseUser> call, Response<ResponseUser> response) {
                 String fullname = response.body().getFullname();
@@ -77,18 +140,20 @@ public class ProfilActivity extends AppCompatActivity {
                 String no_telp = response.body().getNo_telp();
                 String foto_profil = response.body().getFoto_profil();
 
-                Glide.with(getApplicationContext()).load(URL_IMG_USER + foto_profil).circleCrop().into(fotoProfil);
+                Glide.with(getApplicationContext()).load(Global.IMG_USER_URL + foto_profil).circleCrop().into(fotoProfil);
                 titleEmail.setText(email);
                 titleUsername.setText(username);
                 txtFullname.setText(fullname);
                 txtUsername.setText(username);
                 txtEmail.setText(email);
                 txtNoTelp.setText(no_telp);
+                pbProfil.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ResponseUser> call, Throwable t) {
-
+                pbProfil.setVisibility(View.GONE);
+                Toast.makeText(ProfilActivity.this, "Terjadi kesalahan :\n" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

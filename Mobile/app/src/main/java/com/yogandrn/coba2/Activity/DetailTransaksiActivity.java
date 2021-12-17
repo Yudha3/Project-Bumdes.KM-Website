@@ -22,6 +22,7 @@ import com.yogandrn.coba2.Model.ModelListItemTransaksi;
 import com.yogandrn.coba2.Model.ResponseDetailTransaksi;
 import com.yogandrn.coba2.Model.ResponseModel;
 import com.yogandrn.coba2.R;
+import com.yogandrn.coba2.SessionManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,12 +42,15 @@ public class DetailTransaksiActivity extends AppCompatActivity {
     private SwipeRefreshLayout srlDetailTransaksi;
     private ProgressBar pbDetailTransaksi;
     private String id_transaksi;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_transaksi);
         setTitle("Detail Pesanan");
+
+//        sessionManager = new SessionManager(DetailTransaksiActivity.this);
 
         txtStatus = findViewById(R.id.txt_status_detail);
         txtAlamat = findViewById(R.id.txt_alamat_detail);

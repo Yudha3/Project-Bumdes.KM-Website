@@ -23,6 +23,7 @@ import com.yogandrn.coba2.Model.ResponseModel;
 import com.yogandrn.coba2.Model.ResponseProduk;
 import com.yogandrn.coba2.Model.ResponseShowDetail;
 import com.yogandrn.coba2.R;
+import com.yogandrn.coba2.SessionManager;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -54,6 +55,7 @@ public class DetailProduk extends AppCompatActivity {
     private int subtotal = 0;
     private SwipeRefreshLayout srlDetail;
     private ProgressBar pbDetail;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,20 +65,16 @@ public class DetailProduk extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+//        sessionManager = new SessionManager(DetailProduk.this);
+
         Bundle data = getIntent().getExtras();
         id_barang = data.getString("id_brg");
-//        String barang = data.getString("barang");
-//        int harga = Integer.parseInt(data.getString("harga"));
-//        int stok = Integer.parseInt(data.getString("stok"));
-//        String deskripsi = data.getString("deskripsi");
-//        String gambar = IMG_URL + data.getString("gambar");
 
         txtid_brg = (TextView) findViewById(R.id.tv_id_brg_detail);
         txtbarang = (TextView) findViewById(R.id.tv_barang_detail);
         txtharga = (TextView) findViewById(R.id.tv_harga_detail);
         txtstok = (TextView) findViewById(R.id.tv_stok_detail);
         txtdeskripsi = (TextView) findViewById(R.id.tv_deskripsi_detail);
-//        etQty = (EditText) findViewById(R.id.et_qty_detail);
         add = (Button) findViewById(R.id.btn_add_to_cart);
         increment = (Button) findViewById(R.id.btn_increment);
         decrement = (Button) findViewById(R.id.btn_decrement);
@@ -96,122 +94,12 @@ public class DetailProduk extends AppCompatActivity {
             }
         });
 
-//        qty = Integer.parseInt(etQty.getText().toString());
-//        qty = etQty.getText().toString();
 
-//        qty = new Integer(etQty.getText().toString()).intValue();
-////        id_barang = id_brg;
-
-//        APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-//        Call<ResponseProduk> getDetail = apiRequestData.getDetailProduk(id_brg);
-//
-//        getDetail.enqueue(new Callback<ResponseProduk>() {
-//            @Override
-//            public void onResponse(Call<ResponseProduk> call, Response<ResponseProduk> response) {
-//                String pesan = response.body().getPesan();
-//                if (pesan.equals("Data tersedia")) {
-//                listData = response.body().getData();
-//                String barang = listData.get(1).getBarang();
-//                int harga = listData.get(2).getHg_jual();
-//                int jml_stok =listData.get(3).getJml_stok();
-//                String gambar = listData.get(4).getGambar();
-//                String deskripsi = listData.get(5).getDeskripsi();
-//
-//                Glide.with(DetailProduk.this).load(IMG_URL+gambar).into(img_produk);
-//                txtid_brg.setText(id_brg);
-//                txtbarang.setText(barang);
-//                txtharga.setText(harga);
-//                txtstok.setText("Stok : " + jml_stok);
-//                txtdeskripsi.setText(deskripsi);
-//
-//                setTitle(barang);
-//                }else {
-//                    Toast.makeText(DetailProduk.this, "Gagal mengambil data", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseProduk> call, Throwable t) {
-//                Toast.makeText(getApplicationContext(), "Gagal" + t.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-//        Glide.with(DetailProduk.this).load(gambar).into(img_produk);
-//        txtid_brg.setText(id_brg);
-//        txtbarang.setText(barang);
-//        txtharga.setText(formatRupiah(harga));
-//        txtstok.setText("Stok : " + stok);
-//        txtdeskripsi.setText(deskripsi);
-//        setTitle(barang);
-
-//        qtyProduk.setText(qty);
-
-//        if (qty == 1) {
-//            btnMin.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Toast.makeText(DetailProduk.this, "Minimum pembelian adalah 1...", Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        } else {
-//            btnMin.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    qty = qty - 1;
-//                    qtyProduk.setText(qty);
-//                }
-//            });
-//            btnPlus.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    qty++;
-//                    qtyProduk.setText(qty);
-//                }
-//            });
-//        }
-//        if (qty == stok) {
-//        btnPlus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                    Toast.makeText(DetailProduk.this, "Stok barang tidak mencukupi..", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        } else if (qty < stok) {
-//        btnPlus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                qty = qty + 1;
-//                qtyProduk.setText(String.valueOf(qty));
-//            }
-//        });
-//        }
-
-//        if (qty == 1) {
-//            btnMin.setVisibility(View.INVISIBLE);
-//        }
-//        if (qty == 1) {
-//        btnMin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                    Toast.makeText(DetailProduk.this, "Minimum pembelian adalah 1...", Toast.LENGTH_SHORT).show();
-//            }
-//        }); } else if (qty > 1) {
-//            btnMin.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    qty = qty - 1;
-//                   qtyProduk.setText(String.valueOf(qty));
-//                }
-//            });
-//        }
-
-//        subtotal = qty * harga;
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addToCart();
-//                Toast.makeText(DetailProduk.this, "Add to Cart", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -275,7 +163,7 @@ public class DetailProduk extends AppCompatActivity {
 
     public void addToCart(){
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-        Call<ResponseModel> addCart = apiRequestData.addToCart(Global.id_user, id_barang, qty);
+        Call<ResponseModel> addCart = apiRequestData.addToCart(String.valueOf(sessionManager.getSessionID()), id_barang, qty);
         addCart.enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {

@@ -22,6 +22,7 @@ import com.yogandrn.coba2.API.APIRequestData;
 import com.yogandrn.coba2.API.RetroServer;
 import com.yogandrn.coba2.Model.ResponseModel;
 import com.yogandrn.coba2.R;
+import com.yogandrn.coba2.SessionManager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -43,6 +44,7 @@ public class BayarActivity extends AppCompatActivity {
     final int REQUEST_GALLERY = 9544;
     private int IMG_REQUEST = 23;
     private Bitmap bitmap;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class BayarActivity extends AppCompatActivity {
 
         Bundle data = getIntent().getExtras();
         id_transaksi = data.getString("id_transaksi");
+//        sessionManager = new SessionManager(BayarActivity.this);
 
         btnUpload = findViewById(R.id.btn_upload_bayar);
         btnChoose = findViewById(R.id.btn_choose_file);
@@ -69,56 +72,15 @@ public class BayarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 uploadBuktiBayar();
-//                File file = new File(imagePath);
-//                RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),file);
-//                MultipartBody.Part body = MultipartBody.Part.createFormData("gambar", file.getName(), requestBody);
-//                APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-//                Call<ResponseModel> call = apiRequestData.uploadBayar(body, id_transaksi);
-//
-//                call.enqueue(new Callback<ResponseModel>() {
-//                    @Override
-//                    public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-//                        if (response.isSuccessful()) {
-//                            Toast.makeText(getApplicationContext(), "Successfully upload image", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<ResponseModel> call, Throwable t) {
-//                        Toast.makeText(getApplicationContext(), "Error :\n" + t.getMessage(), Toast.LENGTH_SHORT).show();
-//                    }
-//                });
             }
         });
 
-//        imgBayar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent();
-//                        intent.setType("image/*");
-//                        intent.setAction(Intent.ACTION_GET_CONTENT);
-//                        startActivityForResult(Intent.createChooser(intent, "open gallery"), REQUEST_GALLERY);
-//            }
-//        });
-//
-//        btnUpload.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if ( resultCode == RESULT_OK && requestCode == IMG_REQUEST && data != null) {
-//            if (data == null) {
-//                Toast.makeText(getApplicationContext(), "Gagal memuat gambar", Toast.LENGTH_SHORT).show();
-//                return;
-//            }
-//            Uri imageURL = data.getData();
-//            imagePath = getRealPathFromUri(imageURL);
 
             Uri path = data.getData();
             try {

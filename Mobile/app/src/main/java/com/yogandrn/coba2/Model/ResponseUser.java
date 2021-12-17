@@ -7,6 +7,15 @@ public class ResponseUser {
 
     private int kode;
     private String pesan, id_user, fullname, username, email, no_telp, foto_profil;
+    private List<ModelUser> datauser;
+
+    public List<ModelUser> getDatauser() {
+        return datauser;
+    }
+
+    public void setDatauser(List<ModelUser> datauser) {
+        this.datauser = datauser;
+    }
 
     public int getKode() {
         return kode;

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -20,6 +21,7 @@ import com.yogandrn.coba2.Global;
 import com.yogandrn.coba2.Model.ModelTransaksi;
 import com.yogandrn.coba2.Model.ResponseTransaksi;
 import com.yogandrn.coba2.R;
+import com.yogandrn.coba2.SessionManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +37,10 @@ public class ListPesanan extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private List<ModelTransaksi> listPesanan =  new ArrayList<>();
     private TextView txtEmpty;
-    private Button btnBelanja;
+    private Button btnBelanja, btnBack;
     private SwipeRefreshLayout srlTransaksi;
     private ProgressBar pbTransaksi;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +51,11 @@ public class ListPesanan extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle("Pesanan Saya");
 
-        txtEmpty = findViewById(R.id.txt_empty_pesanan);
+//        sessionManager = new SessionManager(ListPesanan.this);
+
+        txtEmpty = (TextView) findViewById(R.id.txt_empty_pesanan);
         btnBelanja = findViewById(R.id.btnBelanja_pesanan);
+        btnBack = findViewById(R.id.btnBack_pesanan);
         pbTransaksi = findViewById(R.id.progress_list_pesanan);
         srlTransaksi = findViewById(R.id.srl_transaksi);
         rvPesanan = findViewById(R.id.rvPesanan);
@@ -67,24 +73,42 @@ public class ListPesanan extends AppCompatActivity {
                 srlTransaksi.setRefreshing(false);
             }
         });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent back = new Intent(ListPesanan.this, MainActivity.class);
+                startActivity(back);
+            }
+        });
+
+        btnBelanja.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent belanja = new Intent(ListPesanan.this, KatalogActivity.class);
+                startActivity(belanja);
+            }
+        });
     }
 
     public void getTransaksi(){
         pbTransaksi.setVisibility(View.VISIBLE);
+        sessionManager = new SessionManager(ListPesanan.this);
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-        Call<ResponseTransaksi> getPesanan = apiRequestData.readTransaksi(Global.id_user);
+        Call<ResponseTransaksi> getPesanan = apiRequestData.readTransaksi(String.valueOf(sessionManager.getSessionID()));
         getPesanan.enqueue(new Callback<ResponseTransaksi>() {
             @Override
             public void onResponse(Call<ResponseTransaksi> call, Response<ResponseTransaksi> response) {
                 String pesan = response.body().getPesan();
-                if (pesan.equals("Data tersedia")) {
+                int kode = response.body().getKode();
+                if (kode == 1) {
                 listPesanan = response.body().getData();
 
                 adapterPesanan = new AdapterTransaksi(ListPesanan.this, listPesanan);
                 rvPesanan.setAdapter(adapterPesanan);
                 adapterPesanan.notifyDataSetChanged();
                 pbTransaksi.setVisibility(View.GONE);
-                } else if (pesan.equals("Data tidak tersedia")) {
+                } else if (kode == 0) {
                   txtEmpty.setVisibility(View.VISIBLE);
                   btnBelanja.setVisibility(View.VISIBLE);
                   pbTransaksi.setVisibility(View.GONE);

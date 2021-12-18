@@ -48,6 +48,7 @@ public class EditProfilActivity extends AppCompatActivity {
     private ProgressBar pbEdit;
     private SwipeRefreshLayout srlEdit;
     private String email, fullname, no_telp, jkelamin;
+    private String encodedImage, nullImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +80,8 @@ public class EditProfilActivity extends AppCompatActivity {
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, IMG_REQUEST);
+                Intent intent = new Intent(EditProfilActivity.this, UbahFotoProfil.class);
+                startActivity(intent);
             }
         });
 
@@ -101,32 +101,12 @@ public class EditProfilActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if ( resultCode == RESULT_OK && requestCode == IMG_REQUEST && data != null) {
-
-            Uri path = data.getData();
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
-                imgEdit.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     private void simpanData() {
         pbEdit.setVisibility(View.VISIBLE);
-        String id = String.valueOf(sessionManager.getSessionID());
-
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 45, byteArrayOutputStream);
-        byte[] imageInByte = byteArrayOutputStream.toByteArray();
-        String encodedImage = Base64.encodeToString(imageInByte, Base64.DEFAULT);
-
+       String id = String.valueOf(sessionManager.getSessionID());
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-        Call<ResponseUser> callSimpan = apiRequestData.updateUser(id, fullname, email, no_telp, encodedImage);
+        Call<ResponseUser> callSimpan = apiRequestData.updateUser(id, fullname, email, no_telp);
         callSimpan.enqueue(new Callback<ResponseUser>() {
             @Override
             public void onResponse(Call<ResponseUser> call, Response<ResponseUser> response) {
@@ -137,10 +117,13 @@ public class EditProfilActivity extends AppCompatActivity {
                     pbEdit.setVisibility(View.GONE);
                     startActivity(new Intent(EditProfilActivity.this, ProfilActivity.class));
                     finish();
+                } else if (pesan.equals("EMAIL EXIST")) {
+                    Toast.makeText(EditProfilActivity.this, "Email sudah digunakan\nCobalah menggunakan email yang lain", Toast.LENGTH_SHORT).show();
+                    pbEdit.setVisibility(View.GONE);
                 }else if (pesan.equals("GAGAL")) {
                     Toast.makeText(EditProfilActivity.this, "Gagal mengubah data\nCobalah beberapa saat lagi", Toast.LENGTH_SHORT).show();
                     pbEdit.setVisibility(View.GONE);
-                } else if (pesan.equals("NOT CEONNECTED")) {
+                } else if (pesan.equals("NOT CONNECTED")) {
                     Toast.makeText(EditProfilActivity.this, "Gagal menghubungi server\nPeriksa koneksi internet Anda", Toast.LENGTH_SHORT).show();
                     pbEdit.setVisibility(View.GONE);
                 }

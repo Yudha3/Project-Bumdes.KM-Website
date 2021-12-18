@@ -23,8 +23,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_edit_profil"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
@@ -37,14 +37,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/bg_buttton_green_rounded"
                 android:fontFamily="@font/productsans_medium"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="2dp"
-                android:text="Pilih file"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="4dp"
+                android:text="Ubah Foto Profil"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:layout_width="match_parent"

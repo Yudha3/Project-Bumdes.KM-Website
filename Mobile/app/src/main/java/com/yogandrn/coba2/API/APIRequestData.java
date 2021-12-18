@@ -50,8 +50,14 @@ public interface APIRequestData {
             @Field("id_user") String id_user,
             @Field("fullname") String fullname,
             @Field("email") String email,
-            @Field("no_telp") String no_telp,
-            @Field("EN_IMAGE") String encodeImage
+            @Field("no_telp") String no_telp
+    );
+
+    @FormUrlEncoded
+    @POST("update_foto.php")
+    Call<ResponseUser> updateFotoProfil(
+            @Field("id_user") String id_user,
+            @Field("EN_IMAGE") String encodedImage
     );
 
     @FormUrlEncoded

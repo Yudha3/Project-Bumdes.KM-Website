@@ -1,12 +1,25 @@
 <?php
-
-require('koneksi.php');
-
-// $username = $_GET['user_fullname'];
 session_start();
+if (!isset($_SESSION['LOGIN'])) {
+  header("location: login.php");
+  exit();
+}
+if (isset($_GET['aksi'])) {
+  $aksi = $_GET['aksi'];
 
+  if ($aksi == "logout") {
+    if (isset($_SESSION['LOGIN'])) {
+      unset($_SESSION['LOGIN']);
+      session_unset();
+      session_destroy();
+      $_SESSION = array();
+    }
+    header("location: login.php");
+    exit();
+  }
+}
+require('koneksi.php');
 $sesName = $_SESSION['name'];
-
 
 $data_barang = mysqli_query($koneksi, "SELECT * FROM data_brg");
 $data_mitra = mysqli_query($koneksi, "SELECT * FROM data_mitra");
@@ -24,8 +37,8 @@ $jml_reseller = mysqli_num_rows($data_reseller);
 
 <head>
   <meta charset="UTF-8">
-  <title> Responsiive Admin Dashboard | CodingLab </title>
-  <link rel="stylesheet" href="style.css">
+  <title> Dashboard Bumdes </title>
+  <link rel="stylesheet" href="style/style.css">
   <!-- Boxicons CDN Link -->
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,25 +76,19 @@ $jml_reseller = mysqli_num_rows($data_reseller);
         </a>
       </li>
       <li>
-        <a href="#">
-          <i class='bx bx-user'></i>
-          <span class="links_name">Akun</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
+        <a href="transaksi.php">
           <i class='bx bx-cart'></i>
           <span class="links_name">Transaksi</span>
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="report.php">
           <i class='bx bx-book-alt'></i>
           <span class="links_name">Laporan</span>
         </a>
       </li>
       <li class="log_out">
-        <a href="logout.php">
+        <a href="index.php?aksi=logout">
           <i class='bx bx-log-out'></i>
           <span class="links_name">Log out</span>
         </a>
@@ -157,10 +164,10 @@ $jml_reseller = mysqli_num_rows($data_reseller);
       <div class="sales-boxes">
         <div class="recent-sales1 box">
           <div class="card-header1">
-            <h3>Recent Barang</h3>
+            <h3>Recent Transaksi</h3>
 
             <button>
-              <a href="barang.php" style="text-decoration: none;">Detail</a>
+              <a href="transaksi.php" style="text-decoration: none;">Detail</a>
               <span class="bx bx-right-arrow-alt"></span>
             </button>
           </div>
@@ -170,16 +177,22 @@ $jml_reseller = mysqli_num_rows($data_reseller);
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Nama Barang</th>
-                    <th>Harga Barang</th>
-                    <th>Stok Barang</th>
-                    <th>Gambar Barang</th>
+                    <th>resi</th>
+                    <th>tgl transaksi</th>
+                    <th>Nama</th>
+                    <th>alamat</th>
+                    <th>Nomer Tlp</th>
+                    <th>tipe ongkir</th>
+                    <th>Total</th>
+                    <th>status</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                   // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
-                  $query = "SELECT * FROM data_brg ORDER BY id ASC";
+                  $query = "SELECT * FROM transaksi
+                            INNER JOIN users ON transaksi.id_user = users.id_user
+                            INNER JOIN data_ongkir ON transaksi.id_ongkir = data_ongkir.id_ongkir";
                   $result = mysqli_query($koneksi, $query);
                   //mengecek apakah ada error ketika menjalankan query
                   if (!$result) {
@@ -195,10 +208,14 @@ $jml_reseller = mysqli_num_rows($data_reseller);
                   ?>
                     <tr>
                       <td align="center"><?php echo $no; ?></td>
-                      <td><?php echo $row['nama_brg']; ?></td>
-                      <td>Rp <?php echo $row['harga_brg']; ?></td>
-                      <td><?php echo $row['stok_brg']; ?></td>
-                      <td style="text-align: center;"><img src="images/gambar/<?php echo $row['gambar_brg']; ?>" style="width: 120px;"></td>
+                      <td><?php echo $row['resi']; ?></td>
+                      <td><?php echo $row['tgl_transaksi']; ?></td>
+                      <td><?php echo $row['fullname']; ?></td>
+                      <td><?php echo $row['alamat']; ?></td>
+                      <td><?php echo $row['no_telp']; ?></td>
+                      <td><?php echo $row['jenis_ongkir']; ?></td>
+                      <td><?php echo $row['total_transaksi']; ?></td>
+                      <td><?php echo $row['status']; ?></td>
                     </tr>
                   <?php
                     $no++; //untuk nomor urut terus bertambah 1
@@ -209,62 +226,6 @@ $jml_reseller = mysqli_num_rows($data_reseller);
             </div>
           </div>
         </div>
-        <!-- <div class="top-sales box">
-          <div class="title">Top Seling Product</div>
-          <ul class="top-sales-details">
-            <li>
-                
-            </li>
-            <li>
-              <a href="#">
-                <img src="images/jeans.jpg" alt="">
-                <span class="product">Hourglass Jeans </span>
-              </a>
-              <span class="price">$1567</span>
-            </li>
-            <li>
-              <a href="#">
-                <img src="images/nike.jpg" alt="">
-                <span class="product">Nike Sport Shoe</span>
-              </a>
-              <span class="price">$1234</span>
-            </li>
-            <li>
-              <a href="#">
-                <img src="images/scarves.jpg" alt="">
-                <span class="product">Hermes Silk Scarves.</span>
-              </a>
-              <span class="price">$2312</span>
-            </li>
-            <li>
-              <a href="#">
-                <img src="images/blueBag.jpg" alt="">
-                <span class="product">Succi Ladies Bag</span>
-              </a>
-              <span class="price">$1456</span>
-            </li>
-            <li>
-              <a href="#">
-                <img src="images/bag.jpg" alt="">
-                <span class="product">Gucci Womens's Bags</span>
-              </a>
-              <span class="price">$2345</span>
-            <li>
-              <a href="#">
-                <img src="images/addidas.jpg" alt="">
-                <span class="product">Addidas Running Shoe</span>
-              </a>
-              <span class="price">$2345</span>
-            </li>
-            <li>
-              <a href="#">
-                <img src="images/shirt.jpg" alt="">
-                <span class="product">Bilack Wear's Shirt</span>
-              </a>
-              <span class="price">$1245</span>
-            </li>
-          </ul>
-        </div> -->
       </div>
     </div>
   </section>

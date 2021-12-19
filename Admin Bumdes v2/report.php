@@ -1,8 +1,26 @@
 <?php
+session_start();
+if (!isset($_SESSION['LOGIN'])) {
+	header("location: login.php");
+	exit();
+}
 
+if (isset($_GET['aksi'])) {
+  $aksi = $_GET['aksi'];
+
+  if($aksi == "logout") {
+    if(isset($_SESSION['LOGIN'])) {
+      unset ($_SESSION['LOGIN']);
+      session_unset();
+      session_destroy();
+      $_SESSION = array();
+    }
+    header("location: login.php");
+    exit();
+  }
+}
 require('koneksi.php');
-
-
+$sesName = $_SESSION['name'];
 
 ?>
 
@@ -12,13 +30,13 @@ require('koneksi.php');
 
 <head>
     <meta charset="UTF-8">
-    <title> Responsiive Admin Dashboard | CodingLab </title>
-    <link rel="stylesheet" href="style.css">
+    <title> Laporan </title>
+    <link rel="stylesheet" href="style/style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="assets/dataTable/datatables.min.css">
-    <script type="text/javascript" src="assets/dataTable/datatables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css"/>
 </head>
 
 <body>
@@ -53,12 +71,6 @@ require('koneksi.php');
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <i class='bx bx-user'></i>
-                    <span class="links_name">Akun</span>
-                </a>
-            </li>
-            <li>
                 <a href="transaksi.php">
                     <i class='bx bx-cart'></i>
                     <span class="links_name">Transaksi</span>
@@ -71,7 +83,7 @@ require('koneksi.php');
                 </a>
             </li>
             <li class="log_out">
-                <a href="logout.php">
+                <a href="report.php?aksi=logout">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -90,7 +102,7 @@ require('koneksi.php');
             </div>
             <div class="profile-details">
                 <img src="images/profile.jpg" alt="">
-                <span class="admin_name">Prem Shahi</span>
+                <span class="admin_name"><?php echo $sesName; ?></span>
                 <i class='bx bx-chevron-down'></i>
             </div>
         </nav>
@@ -98,7 +110,7 @@ require('koneksi.php');
         <div class="home-content">
             <div class="sales-boxes">
                 <div class="recent-sales1 box">
-                    <div class="card-header">
+                    <div class="card-header1">
                         <h3>Data Laporan</h3>
                     </div>
                     <div class="card-body">
@@ -176,9 +188,28 @@ require('koneksi.php');
         }
     </script>
 
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function() {
-            $('table').DataTable();
+            $('table').DataTable({
+                // "paging":   false,
+                "ordering": false,
+                "info": false,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+                responsive : true,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search Your Data",
+                }
+            });
         } );
     </script>
 

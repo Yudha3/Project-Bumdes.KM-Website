@@ -3,27 +3,32 @@
 include '../koneksi.php';
 
 // membuat variabel untuk menampung data dari form
-$id = $_POST['id'];
-$nama_barang   = $_POST['nama_brg'];
-$jenis_barang  = $_POST['jenis_brg'];
-$harga_barang    = $_POST['harga_brg'];
-$stok_barang    = $_POST['stok_brg'];
-$deskripsi     = $_POST['deskripsi_brg'];
-$gambar_produk = $_FILES['gambar_brg']['name'];
+$id = $_POST['id_brg'];
+$nama_barang   = $_POST['barang'];
+$tanggal_masuk  = $_POST['tgl_masuk'];
+$harga_beli    = $_POST['hg_beli'];
+$harga_jual    = $_POST['hg_jual'];
+$stok_barang    = $_POST['jml_stok'];
+$deskripsi     = $_POST['deskripsi'];
+$gambar_produk = $_FILES['gambar']['name'];
+$fotolama = $_POST['fotolama'];
 //cek dulu jika merubah gambar produk jalankan coding ini
 if ($gambar_produk != "") {
-    $ekstensi_diperbolehkan = array('png', 'jpg'); //ekstensi file gambar yang bisa diupload 
-    $x = explode('.', $gambar_brg); //memisahkan nama file dengan ekstensi yang diupload
+    unlink('../images/barang/' . $fotolama);
+    $ekstensi_diperbolehkan = array('png', 'jpg', 'jpeg'); //ekstensi file gambar yang bisa diupload 
+    $x = explode('.', $gambar_produk); //memisahkan nama file dengan ekstensi yang diupload
     $ekstensi = strtolower(end($x));
-    $file_tmp = $_FILES['gambar_brg']['tmp_name'];
+    $file_tmp = $_FILES['gambar']['tmp_name'];
     $angka_acak     = rand(1, 999);
     $nama_gambar_baru = $angka_acak . '-' . $gambar_produk; //menggabungkan angka acak dengan nama file sebenarnya
     if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
-        move_uploaded_file($file_tmp, '../images/gambar/' . $nama_gambar_baru); //memindah file gambar ke folder gambar
+        // unlink('../images/barang' . $fotolama);
+
+        move_uploaded_file($file_tmp, '../images/barang/' . $nama_gambar_baru); //memindah file gambar ke folder gambar
 
         // jalankan query UPDATE berdasarkan ID yang produknya kita edit
-        $query  = "UPDATE data_brg SET nama_brg = '$nama_produk', jenis_brg = '$jenis_barang', harga_brg = '$harga_barang', stok_brg = '$stok_barang', deskripsi_brg = '$deskripsi', gambar_brg = '$nama_gambar_baru'";
-        $query .= "WHERE id = '$id'";
+        $query  = "UPDATE data_brg SET barang = '$nama_barang', tgl_masuk = '$tanggal_masuk', hg_beli = '$harga_beli', hg_jual = '$harga_jual', jml_stok = '$stok_barang', deskripsi = '$deskripsi', gambar = '$nama_gambar_baru'";
+        $query .= "WHERE id_brg = '$id'";
         $result = mysqli_query($koneksi, $query);
         // periska query apakah ada error
         if (!$result) {
@@ -40,8 +45,8 @@ if ($gambar_produk != "") {
     }
 } else {
     // jalankan query UPDATE berdasarkan ID yang produknya kita edit
-    $query  = "UPDATE data_brg SET nama_brg = '$nama_barang', jenis_brg = '$jenis_barang', harga_brg = '$harga_barang', stok_brg = '$stok_barang', deskripsi_brg = '$deskripsi'";
-    $query .= "WHERE id = '$id'";
+    $query  = "UPDATE data_brg SET barang = '$nama_barang', tgl_masuk = '$tanggal_masuk', hg_beli = '$harga_beli', hg_jual = '$harga_jual', jml_stok = '$stok_barang', deskripsi = '$deskripsi'";
+    $query .= "WHERE id_brg = '$id'";
     $result = mysqli_query($koneksi, $query);
     // periska query apakah ada error
     if (!$result) {

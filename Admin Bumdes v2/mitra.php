@@ -1,16 +1,27 @@
 <?php
-
-ob_start();
-require('koneksi.php');
-require('models/database.php');
-include "models/m_barang.php";
-
-$connection = new Database($host, $user, $pass, $nama_db);
 session_start();
-$sesName = $_SESSION['name'];
-$mtr = new Mitra($connection);
+if (!isset($_SESSION['LOGIN'])) {
+	header("location: login.php");
+	exit();
+}
 
-if (@$_GET['act'] == '') {
+if (isset($_GET['aksi'])) {
+  $aksi = $_GET['aksi'];
+
+  if($aksi == "logout") {
+    if(isset($_SESSION['LOGIN'])) {
+      unset ($_SESSION['LOGIN']);
+      session_unset();
+      session_destroy();
+      $_SESSION = array();
+    }
+    header("location: login.php");
+    exit();
+  }
+}
+require('koneksi.php');
+$sesName = $_SESSION['name'];
+
 ?>
 
 
@@ -19,13 +30,13 @@ if (@$_GET['act'] == '') {
 
 <head>
     <meta charset="UTF-8">
-    <title> Responsiive Admin Dashboard | CodingLab </title>
-    <link rel="stylesheet" href="style.css">
+    <title> Mitra </title>
+    <link rel="stylesheet" href="style/style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="assets/dataTable/datatables.min.css">
-    <script type="text/javascript" src="assets/dataTable/datatables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css"/>
 </head>
 
 <body>
@@ -60,25 +71,19 @@ if (@$_GET['act'] == '') {
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <i class='bx bx-user'></i>
-                    <span class="links_name">Akun</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
+                <a href="transaksi.php">
                     <i class='bx bx-cart'></i>
                     <span class="links_name">Transaksi</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="report.php">
                     <i class='bx bx-book-alt'></i>
                     <span class="links_name">Laporan</span>
                 </a>
             </li>
             <li class="log_out">
-                <a href="logout.php">
+                <a href="mitra.php?aksi=logout">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -108,20 +113,14 @@ if (@$_GET['act'] == '') {
                     <div class="card-header1">
                         <h3>Recent Mitra</h3>
 
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">
-                            New Mitra
+                        <button>
+                            <a href="mitra/newMitra.php" style="text-decoration: none;">Tambah Mitra</a>
                             <span class="bx bx-right-arrow-alt"></span>
                         </button>
-
-                        <!-- <button>
-                            <a href="mitra/newMitra.php" style="text-decoration: none;">New Mitra</a>
-                            <span class="bx bx-right-arrow-alt"></span>
-                        </button> -->
                     </div>
                     <div class="card-body1">
                         <div class="table-responsive">
-                            <table width="100%" class="table">
+                            <table width="100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -135,171 +134,41 @@ if (@$_GET['act'] == '') {
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $no = 1;
-                                    $tampil = $mtr->tampil();
-                                    while ($data = $tampil->fetch_object()) {
+                                    // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
+                                    $query = "SELECT * FROM data_mitra ORDER BY id ASC";
+                                    $result = mysqli_query($koneksi, $query);
+                                    //mengecek apakah ada error ketika menjalankan query
+                                    if (!$result) {
+                                        die("Query Error: " . mysqli_errno($koneksi) .
+                                            " - " . mysqli_error($koneksi));
+                                    }
+
+                                    //buat perulangan untuk element tabel dari data mahasiswa
+                                    $no = 1; //variabel untuk membuat nomor urut
+                                    // hasil query akan disimpan dalam variabel $data dalam bentuk array
+                                    // kemudian dicetak dengan perulangan while
+                                    while ($row = mysqli_fetch_assoc($result)) {
                                     ?>
                                         <tr>
-                                            <td align="center"><?php echo $no++ . "."; ?></td>
-                                            <td><?php echo $data->nama_mitra; ?></td>
-                                            <td><?php echo $data->alamat; ?></td>
-                                            <td><?php echo $data->no_tlp; ?></td>
-                                            <td><?php echo $data->tgl_gabung; ?></td>
-                                            <td><?php echo $data->barang; ?></td>
-                                            <td align="center">
-                                                <a id="edit_mitra" data-toggle="modal" data-target="#edit" data-id="<?php echo $data->id; ?>"
-                                                    data-nama="<?php echo $data->nama_mitra; ?>" data-alamat="<?php echo $data->alamat; ?>" data-nomer="<?php echo $data->no_tlp; ?>"
-                                                    data-gabung="<?php echo $data->tgl_gabung; ?>" data-barang="<?php echo $data->barang; ?>" >
-                                                    <button class="btn btn-info btn-xs"> <i class="bx bx-reset"></i> Edit </button></a>
-                                                <a href="?page=mitra&act=del&id=<?php echo $data->id; ?>" onclick="return confirm('Yakin akan menghapus data ini?')">
-                                                    <button class="btn btn-danger btn-xs"> <i class="bx bxs-trash-alt"></i> Hapus </button>
-                                                </a>
+                                            <td align="center"><?php echo $no; ?></td>
+                                            <td><?php echo $row['nama_mitra']; ?></td>
+                                            <td><?php echo $row['alamat']; ?></td>
+                                            <td><?php echo $row['no_tlp']; ?></td>
+                                            <td><?php echo $row['tgl_gabung']; ?></td>
+                                            <td><?php echo $row['barang']; ?></td>
+                                            <td>
+                                                <a href="mitra/editMitra.php?id=<?php echo $row['id']; ?>" style="text-decoration: none;">Edit</a> |
+                                                <a href="mitra/proses_hapus.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')" style="text-decoration: none;">Hapus</a>
                                             </td>
                                         </tr>
                                     <?php
-                                        // $no++; //untuk nomor urut terus bertambah 1
+                                        $no++; //untuk nomor urut terus bertambah 1
                                     }
                                     ?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
-                    <!-- Modal Tambah -->
-                    <div id="tambah" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Tambah Barang</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form action="" method="post" enctype="multipart/form-data">
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label class="control-label" for="nama_mitra">Nama Mitra</label>
-                                            <input type="text" name="nama_mitra" class="form-control" id="nama_mitra" autofocus="" required="" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label" for="alamat">Alamat</label>
-                                            <input type="text" name="alamat" class="form-control" id="alamat" autofocus="" required="" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label" for="no_tlp">Nomer Telepon</label>
-                                            <input type="number" name="no_tlp" class="form-control" id="no_tlp" autofocus="" required="" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label" for="tgl_gabung">Tanggal Gabung</label>
-                                            <input type="date" name="tgl_gabung" class="form-control" id="tgl_gabung" autofocus="" required="" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label" for="barang">Barang</label>
-                                            <input type="text" name="barang" class="form-control" id="barang" autofocus="" required="" />
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        <input type="submit" class="btn btn-success" name="tambah" value="Simpan">
-                                        <!-- <button type="submit" class="btn btn-success" name="tambah" value="Simpan">Save changes</button> -->
-                                    </div>
-                                </form>
-                                <?php
-                                if (@$_POST['tambah']) {
-                                    $nama_mitra = $connection->conn->real_escape_string($_POST['nama_mitra']);
-                                    $alamat = $connection->conn->real_escape_string($_POST['alamat']);
-                                    $no_tlp = $connection->conn->real_escape_string($_POST['no_tlp']);
-                                    $tgl_gabung = $connection->conn->real_escape_string($_POST['tgl_gabung']);
-                                    $barang = $connection->conn->real_escape_string($_POST['barang']);
-                                    $mtr->tambah($nama_mitra, $alamat, $no_tlp, $tgl_gabung, $barang);
-                                    header("location: ?page=mitra");
-
-                                }
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Modal Edit -->
-                    <div id="edit" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Edit Barang</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form id="form" enctype="multipart/form-data">
-                                    <div class="modal-body" id="modal-edit">
-                                        <div class="form-group">
-                                            <label class="control-label" for="nama_mitra">Nama Mitra</label>
-                                            <input type="hidden" name="id" id="id">
-                                            <input type="text" name="nama_mitra" class="form-control" id="nama_mitra" autofocus="" required="" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label" for="alamat">Alamat</label>
-                                            <input type="text" name="alamat" class="form-control" id="alamat" autofocus="" required="" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label" for="no_tlp">Nomer Telepon</label>
-                                            <input type="number" name="no_tlp" class="form-control" id="no_tlp" autofocus="" required="" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label" for="tgl_gabung">Tanggal Gabung</label>
-                                            <input type="date" name="tgl_gabung" class="form-control" id="tgl_gabung" autofocus="" required="" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label" for="barang">Barang</label>
-                                            <input type="text" name="barang" class="form-control" id="barang" autofocus="" required="" />
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        <input type="submit" class="btn btn-success" name="edit" value="Simpan">
-                                        <!-- <button type="submit" class="btn btn-success" name="tambah" value="Simpan">Save changes</button> -->
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <script src="assets/js/jquery-1.10.2.js"></script>
-                    <script type="text/javascript">
-                        $(document).on("click", "#edit_mitra", function(){
-                            var id = $(this).data('id');
-                            var namamtr = $(this).data('nama');
-                            var alamatmtr = $(this).data('alamat');
-                            var nomermtr = $(this).data('nomer');
-                            var gabungmtr = $(this).data('gabung');
-                            var barangmtr = $(this).data('barang');
-
-                            $("#modal-edit #id").val(id);
-                            $("#modal-edit #nama_mitra").val(namamtr);
-                            $("#modal-edit #alamat").val(alamatmtr);
-                            $("#modal-edit #no_tlp").val(nomermtr);
-                            $("#modal-edit #tgl_gabung").val(gabungmtr);
-                            $("#modal-edit #barang").val(barangmtr);
-                        })
-
-                        $(document).ready(function(e){
-                            $("#form").on("submit", (function(e){
-                                e.preventDefault();
-                                $.ajax({
-                                    url : 'models/proses_editMitra.php',
-                                    type : 'POST',
-                                    data : new FormData(this),
-                                    contentType : false,
-                                    cache : false,
-                                    processData : false,
-                                    success : function(msg) {
-                                        $('.table').html(msg);
-                                    }
-                                });
-                            }));
-                        })
-
-                    </script>
-
                 </div>
             </div>
         </div>
@@ -317,28 +186,31 @@ if (@$_GET['act'] == '') {
         }
     </script>
 
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#table').DataTable({
+            $('table').DataTable({
+                // "paging":   false,
+                "ordering": false,
+                "info":     false,
                 "pagingType": "full_numbers",
                 "lengthMenu": [
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
                 ],
-                responsive: true,
+                responsive : true,
                 language: {
                     search: "_INPUT_",
                     searchPlaceholder: "Search Your Data",
                 }
             });
-        });
+        } );
     </script>
 
 </body>
 
 </html>
-<?php
-} else if(@$_GET['act'] == 'del') {
-    $mtr->hapus($_GET['id']);
-    header("location: ?page=mitra");
-}

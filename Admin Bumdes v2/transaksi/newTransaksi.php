@@ -1,8 +1,26 @@
 <?php
+session_start();
+if (!isset($_SESSION['LOGIN'])) {
+	header("location: login.php");
+	exit();
+}
 
+if (isset($_GET['aksi'])) {
+  $aksi = $_GET['aksi'];
+
+  if($aksi == "logout") {
+    if(isset($_SESSION['LOGIN'])) {
+      unset ($_SESSION['LOGIN']);
+      session_unset();
+      session_destroy();
+      $_SESSION = array();
+    }
+    header("location: login.php");
+    exit();
+  }
+}
 require('../koneksi.php');
-
-
+$sesName = $_SESSION['name'];
 
 ?>
 
@@ -12,8 +30,8 @@ require('../koneksi.php');
 
 <head>
     <meta charset="UTF-8">
-    <title> Responsiive Admin Dashboard | CodingLab </title>
-    <link rel="stylesheet" href="../style.css">
+    <title> Transaksi </title>
+    <link rel="stylesheet" href="../style/style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,25 +69,19 @@ require('../koneksi.php');
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <i class='bx bx-user'></i>
-                    <span class="links_name">Akun</span>
-                </a>
-            </li>
-            <li>
-                <a href="../transaksi/newTransaksi.php" class="active">
+                <a href="../transaksi.php" class="active">
                     <i class='bx bx-cart'></i>
                     <span class="links_name">Transaksi</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="../report.php">
                     <i class='bx bx-book-alt'></i>
                     <span class="links_name">Laporan</span>
                 </a>
             </li>
             <li class="log_out">
-                <a href="../logout.php">
+                <a href="../transaksi.php?aksi=logout">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -88,7 +100,7 @@ require('../koneksi.php');
             </div>
             <div class="profile-details">
                 <img src="../images/profile.jpg" alt="">
-                <span class="admin_name">Prem Shahi</span>
+                <span class="admin_name"><?php echo $sesName; ?></span>
                 <i class='bx bx-chevron-down'></i>
             </div>
         </nav>
@@ -96,7 +108,7 @@ require('../koneksi.php');
         <div class="home-content">
             <div class="sales-boxes">
                 <div class="recent-sales1 box">
-                    <div class="card-header">
+                    <div class="card-header1">
                         <h3>Order</h3>
                     </div>
                     <div class="tambah">
@@ -109,20 +121,20 @@ require('../koneksi.php');
                         <form method="POST" action="proses_tambah.php" enctype="multipart/form-data bg-dark">
                             <section class="base">
                                 <div>
-                                    <label>Nama Barang</label>
-                                    <input type="text" name="nama_barang" autofocus="" required="" />
+                                    <label for="nama_barang">Nama Barang</label>
+                                    <input type="text" name="nama_barang" id="nama_barang" autofocus="" required="" />
                                 </div>
                                 <div>
-                                    <label>Nama Pembeli</label>
-                                    <input type="text" name="pembli" required="" />
+                                    <label for="pembli">Nama Pembeli</label>
+                                    <input type="text" name="pembli" id="pembli" autofocus="" required="" />
                                 </div>
                                 <div>
-                                    <label>Alamat</label>
-                                    <input type="text" name="almat" required="" />
+                                    <label for="almat">Alamat</label>
+                                    <input type="text" name="almat" id="almat" autofocus="" required="" />
                                 </div>
                                 <div>
-                                    <label>Nomer Telepon</label>
-                                    <input type="number" name="tlp" required="" />
+                                    <label for="tlp">Nomer Telepon</label>
+                                    <input type="number" name="tlp" id="tlp" autofocus="" required="" />
                                 </div>
                                 <div>
                                     <button type="submit" name="bsimpan">OK</button>

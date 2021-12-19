@@ -1,13 +1,16 @@
 <?php
-require('koneksi.php');
-
 session_start();
+if (isset($_SESSION['LOGIN'])) {
+	header("location: index.php");
+	exit();
+}
+require('koneksi.php');
 if(isset($_POST['login'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     if(!empty(trim($username)) && !empty(trim($password))){
-        $query = "SELECT * FROM user WHERE username = '$username'";
+        $query = "SELECT * FROM admin WHERE username = '$username'";
         $result = mysqli_query($koneksi, $query);
         $num = mysqli_num_rows($result);
 
@@ -19,6 +22,8 @@ if(isset($_POST['login'])){
 
         if($num != 0) {
             if($userVal==$username && $passVal==$password){
+				$_SESSION['LOGIN'] =1;
+				session_start();
                 $_SESSION['name'] = $userName;
                 header('Location: index.php?user_fullname=' . urlencode($userName));
             }else{
@@ -40,8 +45,8 @@ if(isset($_POST['login'])){
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Animated Login Form</title>
-	<link rel="stylesheet" type="text/css" href="style_login.css">
+	<title>Login Bumdes</title>
+	<link rel="stylesheet" type="text/css" href="style/style_login.css">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">

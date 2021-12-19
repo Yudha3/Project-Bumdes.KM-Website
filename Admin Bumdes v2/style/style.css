@@ -453,10 +453,10 @@ table tbody tr:hover td {
 
 .tambah h1 {
 	text-transform: uppercase;
-	color: salmon;
+	color: #007BFF;
   }
 .tambah button {
-	background-color: salmon;
+	background-color: #36B9CC;
 	color: #fff;
 	padding: 10px;
 	text-decoration: none;
@@ -476,7 +476,7 @@ table tbody tr:hover td {
   box-sizing: border-box;
   background: #f8f8f8;
   border: 2px solid #ccc;
-  outline-color: salmon;
+  outline-color: #36B9CC;
 }
 .tambah div {
   width: 100%;

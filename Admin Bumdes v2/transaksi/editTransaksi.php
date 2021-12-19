@@ -1,6 +1,26 @@
 <?php
+session_start();
+if (!isset($_SESSION['LOGIN'])) {
+	header("location: login.php");
+	exit();
+}
 
+if (isset($_GET['aksi'])) {
+  $aksi = $_GET['aksi'];
+
+  if($aksi == "logout") {
+    if(isset($_SESSION['LOGIN'])) {
+      unset ($_SESSION['LOGIN']);
+      session_unset();
+      session_destroy();
+      $_SESSION = array();
+    }
+    header("location: login.php");
+    exit();
+  }
+}
 require('../koneksi.php');
+$sesName = $_SESSION['name'];
 
 // mengecek apakah di url ada nilai GET id
 if (isset($_GET['id'])) {
@@ -34,8 +54,8 @@ if (isset($_GET['id'])) {
 
 <head>
     <meta charset="UTF-8">
-    <title> Responsiive Admin Dashboard | CodingLab </title>
-    <link rel="stylesheet" href="../style.css">
+    <title> Transaksi </title>
+    <link rel="stylesheet" href="../style/style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,25 +93,19 @@ if (isset($_GET['id'])) {
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <i class='bx bx-user'></i>
-                    <span class="links_name">Akun</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
+                <a href="../transaksi.php">
                     <i class='bx bx-cart' class="active"></i>
                     <span class="links_name">Transaksi</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="../report.php">
                     <i class='bx bx-book-alt'></i>
                     <span class="links_name">Laporan</span>
                 </a>
             </li>
             <li class="log_out">
-                <a href="#">
+                <a href="../transaksi.php?aksi=logout">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -110,7 +124,7 @@ if (isset($_GET['id'])) {
             </div>
             <div class="profile-details">
                 <img src="../images/profile.jpg" alt="">
-                <span class="admin_name">Prem Shahi</span>
+                <span class="admin_name"><?php echo $sesName; ?></span>
                 <i class='bx bx-chevron-down'></i>
             </div>
         </nav>
@@ -118,7 +132,7 @@ if (isset($_GET['id'])) {
         <div class="home-content">
             <div class="sales-boxes">
                 <div class="recent-sales1 box">
-                    <div class="card-header">
+                    <div class="card-header1">
                     <button><a href="../transaksi.php"><h3>KEMBALI<h3></a></button>
                     </div>
                     <div class="tambah">
@@ -130,12 +144,12 @@ if (isset($_GET['id'])) {
                                 <!-- menampung nilai id produk yang akan di edit -->
                                 <input name="id" value="<?php echo $data['id_transaksi']; ?>" hidden />
                                 <div>
-                                    <label>Alamat</label>
-                                    <input type="text" name="alamat" value="<?php echo $data['alamat']; ?>" />
+                                    <label for="alamat">Alamat</label>
+                                    <input type="text" name="alamat" id="alamat" value="<?php echo $data['alamat']; ?>" autofocus="" required="" />
                                 </div>
                                 <div>
-                                    <label>Status/Ket</label>
-                                    <input type="text" name="statusket" value="<?php echo $data['status']; ?>" />
+                                    <label for="statusket">Status/Ket</label>
+                                    <input type="text" name="statusket" id="statusket" value="<?php echo $data['status']; ?>" autofocus="" required="" />
                                 </div>
                                 <div>
                                     <button type="submit" name="submit">Simpan Perubahan</button>

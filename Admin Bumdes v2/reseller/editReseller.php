@@ -1,8 +1,25 @@
 <?php
-
-require('../koneksi.php');
 session_start();
+if (!isset($_SESSION['LOGIN'])) {
+    header("location: ../login.php");
+    exit();
+}
 
+if (isset($_GET['aksi'])) {
+    $aksi = $_GET['aksi'];
+
+    if ($aksi == "logout") {
+        if (isset($_SESSION['LOGIN'])) {
+            unset($_SESSION['LOGIN']);
+            session_unset();
+            session_destroy();
+            $_SESSION = array();
+        }
+        header("location: ../login.php");
+        exit();
+    }
+}
+require('../koneksi.php');
 $sesName = $_SESSION['name'];
 
 // mengecek apakah di url ada nilai GET id
@@ -37,8 +54,8 @@ if (isset($_GET['id'])) {
 
 <head>
     <meta charset="UTF-8">
-    <title> Responsiive Admin Dashboard | CodingLab </title>
-    <link rel="stylesheet" href="../style.css">
+    <title> Reseller </title>
+    <link rel="stylesheet" href="../style/style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,25 +93,19 @@ if (isset($_GET['id'])) {
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <i class='bx bx-user'></i>
-                    <span class="links_name">Akun</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
+                <a href="../transaksi.php">
                     <i class='bx bx-cart'></i>
                     <span class="links_name">Transaksi</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="../report.php">
                     <i class='bx bx-book-alt'></i>
                     <span class="links_name">Laporan</span>
                 </a>
             </li>
             <li class="log_out">
-                <a href="../logout.php">
+                <a href="../reseller.php?aksi=logout">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -133,20 +144,20 @@ if (isset($_GET['id'])) {
                                 <!-- menampung nilai id produk yang akan di edit -->
                                 <input name="id" value="<?php echo $data['id']; ?>" hidden />
                                 <div>
-                                    <label>Nama Reseller</label>
-                                    <input type="text" name="nama_reseller" value="<?php echo $data['nama_reseller']; ?>" autofocus="" required="" />
+                                    <label for="nama_reseller">Nama Reseller</label>
+                                    <input type="text" name="nama_reseller" id="nama_reseller" value="<?php echo $data['nama_reseller']; ?>" autofocus="" required="" />
                                 </div>
                                 <div>
-                                    <label>Alamat</label>
-                                    <input type="text" name="alamat" value="<?php echo $data['alamat']; ?>" />
+                                    <label for="alamat">Alamat</label>
+                                    <input type="text" name="alamat" id="alamat" value="<?php echo $data['alamat']; ?>" autofocus="" required="" />
                                 </div>
                                 <div>
-                                    <label>Nomer Telepon</label>
-                                    <input type="text" name="no_tlp" required="" value="<?php echo $data['no_tlp']; ?>" />
+                                    <label for="no_tlp">Nomer Telepon</label>
+                                    <input type="text" name="no_tlp" id="no_tlp" value="<?php echo $data['no_tlp']; ?>" autofocus="" required="" />
                                 </div>
                                 <div>
-                                    <label>Tanggal Gabung</label>
-                                    <input type="text" name="tgl_gabung" required="" value="<?php echo $data['tgl_gabung']; ?>" />
+                                    <label for="tgl_gabung">Tanggal Gabung</label>
+                                    <input type="text" name="tgl_gabung" id="tgl_gabung" value="<?php echo $data['tgl_gabung']; ?>" autofocus="" required="" />
                                 </div>
                                 <div>
                                     <button type="submit" name="submit">Simpan Perubahan</button>

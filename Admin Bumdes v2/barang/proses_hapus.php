@@ -1,10 +1,12 @@
 <?php
 include '../koneksi.php';
-$id = $_GET["id"];
+$id = $_GET["id_brg"];
+$gambar = $_GET["gambar"];
 //mengambil id yang ingin dihapus
 
 //jalankan query DELETE untuk menghapus data
-$query = "DELETE FROM data_brg WHERE id='$id' ";
+unlink('../images/barang/'.$gambar);
+$query = "DELETE FROM data_brg WHERE id_brg = '$id' ";
 $hasil_query = mysqli_query($koneksi, $query);
 
 //periksa query, apakah ada kesalahan

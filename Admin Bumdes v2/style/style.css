@@ -237,8 +237,8 @@ nav .profile-details i{
 }
 .home-content .box .indicator .text{
   font-size: 12px;
-  /* text-decoration: none;
-  color: #222; */
+  text-decoration: none;
+  color: #222;
 }
 .home-content .box .cart{
   display: inline-block;

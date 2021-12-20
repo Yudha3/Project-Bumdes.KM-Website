@@ -41,7 +41,7 @@ $sesName = $_SESSION['name'];
 <body>
     <div class="sidebar">
         <div class="logo-details">
-            <i class='bx bxl-c-plus-plus'></i>
+            <i class='bx bx-analyse'></i>
             <span class="logo_name">Bumdes.KM</span>
         </div>
         <ul class="nav-links">
@@ -82,7 +82,7 @@ $sesName = $_SESSION['name'];
                 </a>
             </li>
             <li class="log_out">
-                <a href="../reseller.php?aksi=logout">
+                <a href="../reseller.php?aksi=logout" onclick="return confirm('Apakah anda akan keluar?')">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -95,14 +95,14 @@ $sesName = $_SESSION['name'];
                 <i class='bx bx-menu sidebarBtn'></i>
                 <span class="dashboard">Reseller</span>
             </div>
-            <div class="search-box">
+            <!-- <div class="search-box">
                 <input type="text" placeholder="Search...">
                 <i class='bx bx-search'></i>
-            </div>
+            </div> -->
             <div class="profile-details">
-                <img src="../images/profile.jpg" alt="">
+                <!-- <img src="../images/profile.jpg" alt=""> -->
                 <span class="admin_name"><?php echo $sesName; ?></span>
-                <i class='bx bx-chevron-down'></i>
+                <!-- <i class='bx bx-chevron-down'></i> -->
             </div>
         </nav>
 
@@ -111,6 +111,10 @@ $sesName = $_SESSION['name'];
                 <div class="recent-sales1 box">
                     <div class="card-header1">
                         <h3>Recent Reseller</h3>
+                        <button>
+                            <a href="../reseller.php" style="text-decoration: none;">Kembali</a>
+                            <span class="bx bx-right-arrow-alt"></span>
+                        </button>
                     </div>
                     <div class="tambah">
                         <center>

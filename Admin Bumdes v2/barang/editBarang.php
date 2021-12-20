@@ -64,7 +64,7 @@ if (isset($_GET['id_brg'])) {
 <body>
     <div class="sidebar">
         <div class="logo-details">
-            <i class='bx bxl-c-plus-plus'></i>
+            <i class='bx bx-analyse'></i>
             <span class="logo_name">Bumdes.KM</span>
         </div>
         <ul class="nav-links">
@@ -105,7 +105,7 @@ if (isset($_GET['id_brg'])) {
                 </a>
             </li>
             <li class="log_out">
-                <a href="../barang.php?aksi=logout">
+                <a href="../barang.php?aksi=logout" onclick="return confirm('Apakah anda akan keluar?')">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -118,14 +118,14 @@ if (isset($_GET['id_brg'])) {
                 <i class='bx bx-menu sidebarBtn'></i>
                 <span class="dashboard">Product</span>
             </div>
-            <div class="search-box">
+            <!-- <div class="search-box">
                 <input type="text" placeholder="Search...">
                 <i class='bx bx-search'></i>
-            </div>
+            </div> -->
             <div class="profile-details">
-                <img src="../images/profile.jpg" alt="">
+                <!-- <img src="../images/profile.jpg" alt=""> -->
                 <span class="admin_name"><?php echo $sesName; ?></span>
-                <i class='bx bx-chevron-down'></i>
+                <!-- <i class='bx bx-chevron-down'></i> -->
             </div>
         </nav>
 
@@ -134,6 +134,10 @@ if (isset($_GET['id_brg'])) {
                 <div class="recent-sales1 box">
                     <div class="card-header1">
                         <h3>Recent Product</h3>
+                        <button>
+                            <a href="../barang.php" style="text-decoration: none;">Kembali</a>
+                            <span class="bx bx-right-arrow-alt"></span>
+                        </button>
                     </div>
                     <div class="tambah">
                         <center>

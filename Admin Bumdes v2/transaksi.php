@@ -41,7 +41,7 @@ $sesName = $_SESSION['name'];
 <body>
     <div class="sidebar">
         <div class="logo-details">
-            <i class='bx bxl-c-plus-plus'></i>
+            <i class='bx bx-analyse'></i>
             <span class="logo_name">Bumdes.KM</span>
         </div>
         <ul class="nav-links">
@@ -82,7 +82,7 @@ $sesName = $_SESSION['name'];
                 </a>
             </li>
             <li class="log_out">
-                <a href="transaksi.php?aksi=logout">
+                <a href="transaksi.php?aksi=logout" onclick="return confirm('Apakah anda akan keluar?')">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -95,14 +95,14 @@ $sesName = $_SESSION['name'];
             <i class='bx bx-menu sidebarBtn'></i>
                 <span class="dashboard">Transaksi</span>
             </div>
-            <div class="search-box">
+            <!-- <div class="search-box">
             <input type="text" placeholder="Search...">
             <i class='bx bx-search'></i>
-            </div>
+            </div> -->
             <div class="profile-details">
-                <img src="images/profile.jpg" alt="">
+                <!-- <img src="images/profile.jpg" alt=""> -->
                 <span class="admin_name"><?php echo $sesName; ?></span>
-                <i class='bx bx-chevron-down'></i>
+                <!-- <i class='bx bx-chevron-down'></i> -->
             </div>
         </nav>
 
@@ -112,7 +112,7 @@ $sesName = $_SESSION['name'];
                     <div class="card-header1">
                         <h3>Order list</h3>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body1">
                         <div class="table-responsive">
                             <table width="100%">
                                 <thead>
@@ -159,9 +159,9 @@ $sesName = $_SESSION['name'];
                                             <td><?php echo $row['total_transaksi']; ?></td>
                                             <td><?php echo $row['status']; ?></td>
                                             <td>
-                                                <a href="transaksi/editTransaksi.php?id=<?php echo $row['id_transaksi']; ?>">Edit</a> |
-                                                <a href="transaksi/proses_hapus.php?id=<?php echo $row['id_transaksi']; ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a> |
-                                                <a href="transaksi/endLaporan.php"<?php echo $row['id_transaksi']; ?> onclick="return confirm('Anda yakin?')">Selesai</a>
+                                                <a href="transaksi/editTransaksi.php?id=<?php echo $row['id_transaksi']; ?>" style="text-decoration: none;">Edit</a> |
+                                                <a href="transaksi/proses_hapus.php?id=<?php echo $row['id_transaksi']; ?>" style="text-decoration: none;" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a> |
+                                                <a href="transaksi/endLaporan.php"<?php echo $row['id_transaksi']; ?> style="text-decoration: none;" onclick="return confirm('Anda yakin?')">Selesai</a>
                                             </td>
                                         </tr>
                                     <?php

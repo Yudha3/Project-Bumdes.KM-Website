@@ -24,10 +24,12 @@ $sesName = $_SESSION['name'];
 $data_barang = mysqli_query($koneksi, "SELECT * FROM data_brg");
 $data_mitra = mysqli_query($koneksi, "SELECT * FROM data_mitra");
 $data_reseller = mysqli_query($koneksi, "SELECT * FROM data_reseller");
+$transaksi = mysqli_query($koneksi, "SELECT * FROM transaksi");
 
 $jml_barang = mysqli_num_rows($data_barang);
 $jml_mitra = mysqli_num_rows($data_mitra);
 $jml_reseller = mysqli_num_rows($data_reseller);
+$jml_transaksi = mysqli_num_rows($transaksi);
 
 ?>
 
@@ -47,7 +49,7 @@ $jml_reseller = mysqli_num_rows($data_reseller);
 <body>
   <div class="sidebar">
     <div class="logo-details">
-      <i class='bx bxl-c-plus-plus'></i>
+      <i class='bx bx-analyse'></i>
       <span class="logo_name">Bumdes.KM</span>
     </div>
     <ul class="nav-links">
@@ -88,7 +90,7 @@ $jml_reseller = mysqli_num_rows($data_reseller);
         </a>
       </li>
       <li class="log_out">
-        <a href="index.php?aksi=logout">
+        <a href="index.php?aksi=logout" onclick="return confirm('Apakah anda akan keluar?')">
           <i class='bx bx-log-out'></i>
           <span class="links_name">Log out</span>
         </a>
@@ -101,14 +103,14 @@ $jml_reseller = mysqli_num_rows($data_reseller);
         <i class='bx bx-menu sidebarBtn'></i>
         <span class="dashboard">Dashboard</span>
       </div>
-      <div class="search-box">
+      <!-- <div class="search-box">
         <input type="text" placeholder="Search...">
         <i class='bx bx-search'></i>
-      </div>
+      </div> -->
       <div class="profile-details">
-        <img src="images/profile.jpg" alt="">
+        <!-- <img src="images/profile.jpg" alt=""> -->
         <span class="admin_name"><?php echo $sesName; ?></span>
-        <i class='bx bx-chevron-down'></i>
+        <!-- <i class='bx bx-chevron-down'></i> -->
       </div>
     </nav>
 
@@ -117,10 +119,12 @@ $jml_reseller = mysqli_num_rows($data_reseller);
         <div class="box">
           <div class="right-side">
             <div class="box-topic">Total Order</div>
-            <div class="number">40,876</div>
+            <div class="number"><?php echo $jml_transaksi; ?></div>
             <div class="indicator">
               <i class='bx bx-left-arrow-alt right'></i>
-              <span class="text">Up from yesterday</span>
+              <a href="transaksi.php" class="text">
+                See All
+              </a>
             </div>
           </div>
           <i class='bx bx-cart-alt cart'></i>
@@ -131,7 +135,9 @@ $jml_reseller = mysqli_num_rows($data_reseller);
             <div class="number"><?php echo $jml_barang; ?></div>
             <div class="indicator">
               <i class='bx bx-left-arrow-alt left'></i>
-              <span class="text">Up from yesterday</span>
+              <a href="barang.php" class="text">
+                See All
+              </a>
             </div>
           </div>
           <i class='bx bx-box cart two'></i>
@@ -142,7 +148,9 @@ $jml_reseller = mysqli_num_rows($data_reseller);
             <div class="number"><?php echo $jml_mitra; ?></div>
             <div class="indicator">
               <i class='bx bx-left-arrow-alt up'></i>
-              <span class="text">Up from yesterday</span>
+              <a href="mitra.php" class="text">
+                See All
+              </a>
             </div>
           </div>
           <i class='bx bx-badge-check cart three'></i>
@@ -153,8 +161,9 @@ $jml_reseller = mysqli_num_rows($data_reseller);
             <div class="number"><?php echo $jml_reseller; ?></div>
             <div class="indicator">
               <i class='bx bx-left-arrow-alt down'></i>
-              <!-- <a href="reseller.php"><span class="text">See All</span></a> -->
-              <span class="text">See All</span>
+              <a href="reseller.php" class="text">
+                See All
+              </a>
             </div>
           </div>
           <i class='bx bxs-collection cart four'></i>

@@ -42,7 +42,7 @@ $sesName = $_SESSION['name'];
 <body>
     <div class="sidebar">
         <div class="logo-details">
-            <i class='bx bxl-c-plus-plus'></i>
+            <i class='bx bx-analyse'></i>
             <span class="logo_name">Bumdes.KM</span>
         </div>
         <ul class="nav-links">
@@ -83,7 +83,7 @@ $sesName = $_SESSION['name'];
                 </a>
             </li>
             <li class="log_out">
-                <a href="report.php?aksi=logout">
+                <a href="report.php?aksi=logout" onclick="return confirm('Apakah anda akan keluar?')">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -96,14 +96,14 @@ $sesName = $_SESSION['name'];
             <i class='bx bx-menu sidebarBtn'></i>
                 <span class="dashboard">Laporan</span>
             </div>
-            <div class="search-box">
+            <!-- <div class="search-box">
             <input type="text" placeholder="Search...">
             <i class='bx bx-search'></i>
-            </div>
+            </div> -->
             <div class="profile-details">
-                <img src="images/profile.jpg" alt="">
+                <!-- <img src="images/profile.jpg" alt=""> -->
                 <span class="admin_name"><?php echo $sesName; ?></span>
-                <i class='bx bx-chevron-down'></i>
+                <!-- <i class='bx bx-chevron-down'></i> -->
             </div>
         </nav>
 
@@ -113,7 +113,7 @@ $sesName = $_SESSION['name'];
                     <div class="card-header1">
                         <h3>Data Laporan</h3>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body1">
                         <div class="table-responsive">
                             <table width="100%">
                                 <thead>

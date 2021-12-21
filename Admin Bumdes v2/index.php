@@ -24,7 +24,7 @@ $sesName = $_SESSION['name'];
 $data_barang = mysqli_query($koneksi, "SELECT * FROM data_brg");
 $data_mitra = mysqli_query($koneksi, "SELECT * FROM data_mitra");
 $data_reseller = mysqli_query($koneksi, "SELECT * FROM data_reseller");
-$transaksi = mysqli_query($koneksi, "SELECT * FROM transaksi");
+$transaksi = mysqli_query($koneksi, "SELECT * FROM data_klr");
 
 $jml_barang = mysqli_num_rows($data_barang);
 $jml_mitra = mysqli_num_rows($data_mitra);
@@ -78,9 +78,15 @@ $jml_transaksi = mysqli_num_rows($transaksi);
         </a>
       </li>
       <li>
-        <a href="transaksi.php">
+        <a href="barangMasuk.php">
           <i class='bx bx-cart'></i>
-          <span class="links_name">Transaksi</span>
+          <span class="links_name">Transaksi Masuk</span>
+        </a>
+      </li>
+      <li>
+        <a href="barangKeluar.php" class="">
+          <i class='bx bx-cart'></i>
+          <span class="links_name">Transaksi Keluar</span>
         </a>
       </li>
       <li>
@@ -176,7 +182,7 @@ $jml_transaksi = mysqli_num_rows($transaksi);
             <h3>Recent Transaksi</h3>
 
             <button>
-              <a href="transaksi.php" style="text-decoration: none;">Detail</a>
+              <a href="barangKeluar.php" style="text-decoration: none;">Detail</a>
               <span class="bx bx-right-arrow-alt"></span>
             </button>
           </div>
@@ -186,45 +192,29 @@ $jml_transaksi = mysqli_num_rows($transaksi);
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>resi</th>
-                    <th>tgl transaksi</th>
-                    <th>Nama</th>
-                    <th>alamat</th>
-                    <th>Nomer Tlp</th>
-                    <th>tipe ongkir</th>
-                    <th>Total</th>
-                    <th>status</th>
+                    <th>Tanggal</th>
+                    <th>Barang</th>
+                    <th>Jumlah</th>
+                    <th>Penerima</th>
+                    <th>Keterangan</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                  // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
-                  $query = "SELECT * FROM transaksi
-                            INNER JOIN users ON transaksi.id_user = users.id_user
-                            INNER JOIN data_ongkir ON transaksi.id_ongkir = data_ongkir.id_ongkir";
-                  $result = mysqli_query($koneksi, $query);
-                  //mengecek apakah ada error ketika menjalankan query
-                  if (!$result) {
-                    die("Query Error: " . mysqli_errno($koneksi) .
-                      " - " . mysqli_error($koneksi));
-                  }
-
-                  //buat perulangan untuk element tabel dari data mahasiswa
-                  $no = 1; //variabel untuk membuat nomor urut
-                  // hasil query akan disimpan dalam variabel $data dalam bentuk array
-                  // kemudian dicetak dengan perulangan while
-                  while ($row = mysqli_fetch_assoc($result)) {
+                  $brg = mysqli_query($koneksi, "SELECT * FROM data_klr sb, data_brg st where st.id_brg=sb.id_brg ORDER BY id DESC");
+                  $no = 1;
+                  while ($b = mysqli_fetch_array($brg)) {
+                    $idb = $b['id_brg'];
+                    $id = $b['id'];
                   ?>
                     <tr>
                       <td align="center"><?php echo $no; ?></td>
-                      <td><?php echo $row['resi']; ?></td>
-                      <td><?php echo $row['tgl_transaksi']; ?></td>
-                      <td><?php echo $row['fullname']; ?></td>
-                      <td><?php echo $row['alamat']; ?></td>
-                      <td><?php echo $row['no_telp']; ?></td>
-                      <td><?php echo $row['jenis_ongkir']; ?></td>
-                      <td><?php echo $row['total_transaksi']; ?></td>
-                      <td><?php echo $row['status']; ?></td>
+                      <td><?php $tanggals = $b['tgl_keluar'];
+                          echo date("d-M-Y", strtotime($tanggals)) ?></td>
+                      <td><?php echo $b['barang'] ?></td>
+                      <td><?php echo $b['jml_keluar'] ?></td>
+                      <td><?php echo $b['penerima'] ?></td>
+                      <td><?php echo $b['keterangan'] ?></td>
                     </tr>
                   <?php
                     $no++; //untuk nomor urut terus bertambah 1

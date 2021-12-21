@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2021 at 06:00 PM
+-- Generation Time: Dec 21, 2021 at 07:43 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -85,13 +85,40 @@ CREATE TABLE `data_brg` (
 --
 
 INSERT INTO `data_brg` (`id_brg`, `barang`, `tgl_masuk`, `hg_beli`, `hg_jual`, `jml_stok`, `deskripsi`, `gambar`) VALUES
-(1, 'Asbak Domba', '2021-12-02', 39500, 59000, 7, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque,', '253-ceramic-jar-6585077_1920.jpg'),
-(2, 'Kerajinan Tas Anyaman', '2021-11-27', 58000, 70000, 12, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque, laboriosam ea iusto nisi! Asperiores, impedit expedita labore fugit exercitationem quam maxime! Numquam, error repellendus nihil culpa explicabo saepe corporis eveniet beatae fugiat deleniti!', '735-bag-3688900_1920.jpg'),
-(5, 'Lampu Bambu', '2021-12-01', 45000, 60000, 20, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque, laboriosam ea iusto nisi! Asperiores, impedit expedita labore fugit exercitationem quam maxime! Numquam, error repellendus nihil culpa explicabo saepe corporis eveniet beatae fugiat deleniti!', '571-candle-1021137_1920.jpg'),
-(6, 'Angklung', '2021-11-30', 125000, 160000, 15, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque, laboriosam ea iusto nisi! Asperiores, impedit expedita labore fugit exercitationem quam maxime! Numquam, error repellendus nihil culpa explicabo saepe corporis eveniet beatae fugiat deleniti!', '473-angklung-376513_1920.jpg'),
-(7, 'Vas Bunga', '2021-11-29', 65000, 80000, 24, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque,', '30-flower-3175428_1280.jpg'),
-(8, 'Lampu Kayu Burung Hantu', '2021-12-02', 49000, 64000, 12, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque, laboriosam ea iusto nisi! Asperiores, impedit expedita labore fugit exercitationem quam maxime! Numquam, error repellendus nihil culpa explicabo saepe corporis eveniet beatae fugiat deleniti!', '996-lamps-575870_1280.png'),
-(9, 'Wadah Bambu', '2021-12-03', 38000, 50000, 18, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque, laboriosam ea iusto nisi! Asperiores, impedit expedita labore fugit exercitationem quam maxime! Numquam, error repellendus nihil culpa explicabo saepe corporis eveniet beatae fugiat deleniti!', '294-bamboo-373814_1280.jpg');
+(1, 'Asbak Domba', '2021-12-02', 39500, 59000, 100, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque,', '253-ceramic-jar-6585077_1920.jpg'),
+(2, 'Kerajinan Tas Anyaman', '2021-11-27', 58000, 70000, 212, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque, laboriosam ea iusto nisi! Asperiores, impedit expedita labore fugit exercitationem quam maxime! Numquam, error repellendus nihil culpa explicabo saepe corporis eveniet beatae fugiat deleniti!', '735-bag-3688900_1920.jpg'),
+(5, 'Lampu Bambu', '2021-12-01', 45000, 60000, 520, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque, laboriosam ea iusto nisi! Asperiores, impedit expedita labore fugit exercitationem quam maxime! Numquam, error repellendus nihil culpa explicabo saepe corporis eveniet beatae fugiat deleniti!', '571-candle-1021137_1920.jpg'),
+(6, 'Angklung', '2021-11-30', 125000, 160000, 615, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque, laboriosam ea iusto nisi! Asperiores, impedit expedita labore fugit exercitationem quam maxime! Numquam, error repellendus nihil culpa explicabo saepe corporis eveniet beatae fugiat deleniti!', '473-angklung-376513_1920.jpg'),
+(7, 'Vas Bunga', '2021-11-29', 65000, 80000, 524, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque,', '30-flower-3175428_1280.jpg'),
+(8, 'Lampu Kayu Burung Hantu', '2021-12-02', 49000, 64000, 462, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque, laboriosam ea iusto nisi! Asperiores, impedit expedita labore fugit exercitationem quam maxime! Numquam, error repellendus nihil culpa explicabo saepe corporis eveniet beatae fugiat deleniti!', '996-lamps-575870_1280.png'),
+(9, 'Wadah Bambu', '2021-12-03', 38000, 50000, 518, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque, laboriosam ea iusto nisi! Asperiores, impedit expedita labore fugit exercitationem quam maxime! Numquam, error repellendus nihil culpa explicabo saepe corporis eveniet beatae fugiat deleniti!', '294-bamboo-373814_1280.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `data_klr`
+--
+
+CREATE TABLE `data_klr` (
+  `id` int(10) NOT NULL,
+  `id_brg` int(10) NOT NULL,
+  `tgl_keluar` date NOT NULL,
+  `jml_keluar` int(10) NOT NULL,
+  `penerima` varchar(35) NOT NULL,
+  `keterangan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `data_klr`
+--
+
+INSERT INTO `data_klr` (`id`, `id_brg`, `tgl_keluar`, `jml_keluar`, `penerima`, `keterangan`) VALUES
+(1, 1, '2021-12-21', 400, 'Anton', 'terjual'),
+(2, 2, '2021-12-21', 200, 'Boy', 'terjual'),
+(3, 1, '2021-12-21', 600, 'Dwiki', 'terjual'),
+(4, 2, '2021-12-22', 200, 'Anto', 'terjual'),
+(5, 8, '2021-12-21', 50, 'Lio', 'terjual'),
+(6, 5, '2021-12-22', 200, 'Akbar', 'terjual');
 
 -- --------------------------------------------------------
 
@@ -124,6 +151,34 @@ INSERT INTO `data_mitra` (`id`, `nama_mitra`, `alamat`, `no_tlp`, `tgl_gabung`, 
 (20, 'Scribe', 'Kaliurang', '085731379198', '2021-12-05', 'Kursi'),
 (21, 'The Way', 'Sumbersari', '085731379198', '2021-12-08', 'bola'),
 (22, 'ShenWang', 'Mojokerto', '085731379198', '2021-12-06', 'Kursi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `data_msk`
+--
+
+CREATE TABLE `data_msk` (
+  `id` int(10) NOT NULL,
+  `id_brg` int(10) NOT NULL,
+  `tgl_masuk` date NOT NULL,
+  `jml_masuk` int(10) NOT NULL,
+  `keterangan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `data_msk`
+--
+
+INSERT INTO `data_msk` (`id`, `id_brg`, `tgl_masuk`, `jml_masuk`, `keterangan`) VALUES
+(2, 6, '2021-12-20', 500, 'lunas'),
+(3, 2, '2021-11-27', 600, 'lunas'),
+(4, 7, '2021-12-21', 500, 'lunas'),
+(5, 5, '2021-12-21', 500, 'lunas'),
+(6, 9, '2021-12-21', 500, 'lunas'),
+(7, 8, '2021-12-21', 500, 'lunas'),
+(8, 6, '2021-12-21', 500, 'lunas'),
+(10, 5, '2021-12-22', 200, 'lunas');
 
 -- --------------------------------------------------------
 
@@ -166,7 +221,8 @@ CREATE TABLE `data_reseller` (
 INSERT INTO `data_reseller` (`id`, `nama_reseller`, `alamat`, `no_tlp`, `tgl_gabung`) VALUES
 (2, 'Dwiki Gaming', 'Pasuruan', '085731379198', '2021-11-26'),
 (4, 'Anton Gaming', 'Bondowoso', '085731379198', '2021-12-15'),
-(5, 'Boy Gaming', 'Pasuruan', '085731379198', '2021-12-15');
+(5, 'Boy Gaming', 'Pasuruan', '085731379198', '2021-12-15'),
+(6, 'Anton Pro', 'Kaliurang', '085731379198', '2021-12-21');
 
 -- --------------------------------------------------------
 
@@ -294,9 +350,21 @@ ALTER TABLE `data_brg`
   ADD PRIMARY KEY (`id_brg`);
 
 --
+-- Indexes for table `data_klr`
+--
+ALTER TABLE `data_klr`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `data_mitra`
 --
 ALTER TABLE `data_mitra`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `data_msk`
+--
+ALTER TABLE `data_msk`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -359,10 +427,22 @@ ALTER TABLE `data_brg`
   MODIFY `id_brg` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT for table `data_klr`
+--
+ALTER TABLE `data_klr`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `data_mitra`
 --
 ALTER TABLE `data_mitra`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `data_msk`
+--
+ALTER TABLE `data_msk`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `data_ongkir`
@@ -374,7 +454,7 @@ ALTER TABLE `data_ongkir`
 -- AUTO_INCREMENT for table `data_reseller`
 --
 ALTER TABLE `data_reseller`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `keranjang`

@@ -1,23 +1,23 @@
 <?php
 session_start();
 if (!isset($_SESSION['LOGIN'])) {
-	header("location: login.php");
-	exit();
+    header("location: login.php");
+    exit();
 }
 
 if (isset($_GET['aksi'])) {
-  $aksi = $_GET['aksi'];
+    $aksi = $_GET['aksi'];
 
-  if($aksi == "logout") {
-    if(isset($_SESSION['LOGIN'])) {
-      unset ($_SESSION['LOGIN']);
-      session_unset();
-      session_destroy();
-      $_SESSION = array();
+    if ($aksi == "logout") {
+        if (isset($_SESSION['LOGIN'])) {
+            unset($_SESSION['LOGIN']);
+            session_unset();
+            session_destroy();
+            $_SESSION = array();
+        }
+        header("location: login.php");
+        exit();
     }
-    header("location: login.php");
-    exit();
-  }
 }
 require('koneksi.php');
 $sesName = $_SESSION['name'];
@@ -29,13 +29,13 @@ $sesName = $_SESSION['name'];
 
 <head>
     <meta charset="UTF-8">
-    <title> Transaksi </title>
+    <title> Transaksi Barang Keluar </title>
     <link rel="stylesheet" href="style/style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css" />
 </head>
 
 <body>
@@ -70,9 +70,15 @@ $sesName = $_SESSION['name'];
                 </a>
             </li>
             <li>
-                <a href="transaksi.php" class="active">
+                <a href="barangMasuk.php">
                     <i class='bx bx-cart'></i>
-                    <span class="links_name">Transaksi</span>
+                    <span class="links_name">Transaksi Masuk</span>
+                </a>
+            </li>
+            <li>
+                <a href="barangKeluar.php" class="active">
+                    <i class='bx bx-cart'></i>
+                    <span class="links_name">Transaksi Keluar</span>
                 </a>
             </li>
             <li>
@@ -82,7 +88,7 @@ $sesName = $_SESSION['name'];
                 </a>
             </li>
             <li class="log_out">
-                <a href="transaksi.php?aksi=logout" onclick="return confirm('Apakah anda akan keluar?')">
+                <a href="barangKeluar.php?aksi=logout" onclick="return confirm('Apakah anda akan keluar?')">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -92,8 +98,8 @@ $sesName = $_SESSION['name'];
     <section class="home-section">
         <nav>
             <div class="sidebar-button">
-            <i class='bx bx-menu sidebarBtn'></i>
-                <span class="dashboard">Transaksi</span>
+                <i class='bx bx-menu sidebarBtn'></i>
+                <span class="dashboard">Barang Keluar</span>
             </div>
             <!-- <div class="search-box">
             <input type="text" placeholder="Search...">
@@ -111,6 +117,11 @@ $sesName = $_SESSION['name'];
                 <div class="recent-sales1 box">
                     <div class="card-header1">
                         <h3>Order list</h3>
+
+                        <button>
+                            <a href="transaksi/newBarangkeluar.php" style="text-decoration: none;">Tambah Barang Keluar</a>
+                            <span class="bx bx-right-arrow-alt"></span>
+                        </button>
                     </div>
                     <div class="card-body1">
                         <div class="table-responsive">
@@ -118,50 +129,34 @@ $sesName = $_SESSION['name'];
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>resi</th>
-                                        <th>tgl transaksi</th>
-                                        <th>Nama</th>
-                                        <th>alamat</th>
-                                        <th>Nomer Tlp</th>
-                                        <th>tipe ongkir</th>
-                                        <th>Total</th>
-                                        <th>status</th>
+                                        <th>Tanggal</th>
+                                        <th>Barang</th>
+                                        <th>Jumlah</th>
+                                        <th>Penerima</th>
+                                        <th>Keterangan</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
-                                    $query = "SELECT * FROM transaksi
-                                              INNER JOIN users ON transaksi.id_user = users.id_user
-                                              INNER JOIN data_ongkir ON transaksi.id_ongkir = data_ongkir.id_ongkir";
-                                    $result = mysqli_query($koneksi, $query);
-                                    //mengecek apakah ada error ketika menjalankan query
-                                    if (!$result) {
-                                        die("Query Error: " . mysqli_errno($koneksi) .
-                                            " - " . mysqli_error($koneksi));
-                                    }
-
-                                    //buat perulangan untuk element tabel dari data mahasiswa
-                                    $no = 1; //variabel untuk membuat nomor urut
-                                    // hasil query akan disimpan dalam variabel $data dalam bentuk array
-                                    // kemudian dicetak dengan perulangan while
-                                    while ($row = mysqli_fetch_assoc($result)) {
+                                    $brg = mysqli_query($koneksi, "SELECT * FROM data_klr sb, data_brg st where st.id_brg=sb.id_brg ORDER BY id DESC");
+                                    $no = 1;
+                                    while ($b = mysqli_fetch_array($brg)) {
+                                        $idb = $b['id_brg'];
+                                        $id = $b['id'];
                                     ?>
                                         <tr>
                                             <td align="center"><?php echo $no; ?></td>
-                                            <td><?php echo $row['resi']; ?></td>
-                                            <td><?php echo $row['tgl_transaksi']; ?></td>
-                                            <td><?php echo $row['fullname']; ?></td>
-                                            <td><?php echo $row['alamat']; ?></td>
-                                            <td><?php echo $row['no_telp']; ?></td>
-                                            <td><?php echo $row['jenis_ongkir']; ?></td>
-                                            <td><?php echo $row['total_transaksi']; ?></td>
-                                            <td><?php echo $row['status']; ?></td>
+                                            <td><?php $tanggals = $b['tgl_keluar'];
+                                                echo date("d-M-Y", strtotime($tanggals)) ?></td>
+                                            <td><?php echo $b['barang'] ?></td>
+                                            <td><?php echo $b['jml_keluar'] ?></td>
+                                            <td><?php echo $b['penerima'] ?></td>
+                                            <td><?php echo $b['keterangan'] ?></td>
                                             <td>
-                                                <a href="transaksi/editTransaksi.php?id=<?php echo $row['id_transaksi']; ?>" style="text-decoration: none;">Edit</a> |
-                                                <a href="transaksi/proses_hapus.php?id=<?php echo $row['id_transaksi']; ?>" style="text-decoration: none;" onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a> |
-                                                <a href="transaksi/endLaporan.php"<?php echo $row['id_transaksi']; ?> style="text-decoration: none;" onclick="return confirm('Anda yakin?')">Selesai</a>
+                                                <a href="transaksi/editBarangkeluar.php?id=<?php echo $id; ?>" style="text-decoration: none;">Edit</a> |
+                                                <a href="transaksi/proses_hapus.php?id=<?php echo $id; ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus barang ini dari daftar stock keluar?')" style="text-decoration: none;">Hapus</a> |
+                                                <!-- <a href="transaksi/endLaporan.php"  style="text-decoration: none;" onclick="return confirm('Anda yakin?')">Selesai</a> -->
                                             </td>
                                         </tr>
                                     <?php
@@ -205,13 +200,13 @@ $sesName = $_SESSION['name'];
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
                 ],
-                responsive : true,
+                responsive: true,
                 language: {
                     search: "_INPUT_",
                     searchPlaceholder: "Search Your Data",
                 }
             });
-        } );
+        });
     </script>
 
 </body>

@@ -71,9 +71,15 @@ $sesName = $_SESSION['name'];
                 </a>
             </li>
             <li>
-                <a href="transaksi.php">
+                <a href="barangMasuk.php">
                     <i class='bx bx-cart'></i>
-                    <span class="links_name">Transaksi</span>
+                    <span class="links_name">Transaksi Masuk</span>
+                </a>
+            </li>
+            <li>
+                <a href="barangKeluar.php" class="">
+                    <i class='bx bx-cart'></i>
+                    <span class="links_name">Transaksi Keluar</span>
                 </a>
             </li>
             <li>

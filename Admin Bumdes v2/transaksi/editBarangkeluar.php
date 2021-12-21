@@ -1,26 +1,27 @@
 <?php
 session_start();
 if (!isset($_SESSION['LOGIN'])) {
-	header("location: login.php");
-	exit();
+    header("location: ../login.php");
+    exit();
 }
 
 if (isset($_GET['aksi'])) {
-  $aksi = $_GET['aksi'];
+    $aksi = $_GET['aksi'];
 
-  if($aksi == "logout") {
-    if(isset($_SESSION['LOGIN'])) {
-      unset ($_SESSION['LOGIN']);
-      session_unset();
-      session_destroy();
-      $_SESSION = array();
+    if ($aksi == "logout") {
+        if (isset($_SESSION['LOGIN'])) {
+            unset($_SESSION['LOGIN']);
+            session_unset();
+            session_destroy();
+            $_SESSION = array();
+        }
+        header("location: ../login.php");
+        exit();
     }
-    header("location: login.php");
-    exit();
-  }
 }
 require('../koneksi.php');
 $sesName = $_SESSION['name'];
+                        
 
 ?>
 
@@ -30,7 +31,7 @@ $sesName = $_SESSION['name'];
 
 <head>
     <meta charset="UTF-8">
-    <title> Transaksi </title>
+    <title> Transaksi Barang Keluar </title>
     <link rel="stylesheet" href="../style/style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -63,15 +64,21 @@ $sesName = $_SESSION['name'];
                 </a>
             </li>
             <li>
-                <a href="../reseller.php" >
+                <a href="../reseller.php" class="">
                     <i class='bx bxs-collection'></i>
                     <span class="links_name">Reseller</span>
                 </a>
             </li>
             <li>
-                <a href="../transaksi.php" class="active">
+                <a href="../barangMasuk.php">
                     <i class='bx bx-cart'></i>
-                    <span class="links_name">Transaksi</span>
+                    <span class="links_name">Transaksi Masuk</span>
+                </a>
+            </li>
+            <li>
+                <a href="../barangKeluar.php" class="active">
+                    <i class='bx bx-cart'></i>
+                    <span class="links_name">Transaksi Keluar</span>
                 </a>
             </li>
             <li>
@@ -81,7 +88,7 @@ $sesName = $_SESSION['name'];
                 </a>
             </li>
             <li class="log_out">
-                <a href="../transaksi.php?aksi=logout" onclick="return confirm('Apakah anda akan keluar?')">
+                <a href="../barangKeluar.php?aksi=logout" onclick="return confirm('Apakah anda akan keluar?')">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -92,7 +99,7 @@ $sesName = $_SESSION['name'];
         <nav>
             <div class="sidebar-button">
                 <i class='bx bx-menu sidebarBtn'></i>
-                <span class="dashboard">Transaksi</span>
+                <span class="dashboard">Barang Keluar</span>
             </div>
             <!-- <div class="search-box">
                 <input type="text" placeholder="Search...">
@@ -105,50 +112,65 @@ $sesName = $_SESSION['name'];
             </div>
         </nav>
 
+        <?php
+                                    $brg = mysqli_query($koneksi, "SELECT * FROM data_klr sb, data_brg st where st.id_brg=sb.id_brg ORDER BY id DESC");
+                                    $no = 1;
+                                    while ($b = mysqli_fetch_array($brg)) {
+                                        $idb = $b['id_brg'];
+                                        $id = $b['id'];
+                                    ?>
         <div class="home-content">
             <div class="sales-boxes">
                 <div class="recent-sales1 box">
                     <div class="card-header1">
-                        <h3>Order</h3>
+                        <h3>Edit Order List</h3>
                         <button>
-                            <a href="../transaksi.php" style="text-decoration: none;">Kembali</a>
+                            <a href="../barangKeluar.php" style="text-decoration: none;">Kembali</a>
                             <span class="bx bx-right-arrow-alt"></span>
                         </button>
                     </div>
                     <div class="tambah">
                         <center>
-                            <h1>Transaction</h1>
-                            <div>
-                                    <a href="orderactivity.php"><button>Order Activity</button></a>
-                            </div>
+                            <h1>Edit Product <?php echo $b['barang'] ?></h1>
                         <center>
-                        <form method="POST" action="proses_tambah.php" enctype="multipart/form-data bg-dark">
+                        <form method="POST" action="proses_edit.php" enctype="multipart/form-data">
                             <section class="base">
+                                <!-- menampung nilai id produk yang akan di edit -->
+                                <input name="id" value="<?=$id; ?>" hidden />
+                                <input type="hidden" name="id_brg" value="<?=$idb;?>">
                                 <div>
-                                    <label for="nama_barang">Nama Barang</label>
-                                    <input type="text" name="nama_barang" id="nama_barang" autofocus="" required="" />
+                                    <label for="tgl_keluar">Tanggal keluar</label>
+                                    <input type="date" name="tgl_keluar" id="tgl_keluar" value="<?php echo $b['tgl_keluar'] ?>" autofocus="" required="" />
                                 </div>
                                 <div>
-                                    <label for="pembli">Nama Pembeli</label>
-                                    <input type="text" name="pembli" id="pembli" autofocus="" required="" />
+                                    <label for="barang">Nama Barang</label>
+                                    <input type="text" name="barang" id="barang" value="<?php echo $b['barang'] ?>" autofocus="" required="" disabled />
                                 </div>
                                 <div>
-                                    <label for="almat">Alamat</label>
-                                    <input type="text" name="almat" id="almat" autofocus="" required="" />
+                                    <label for="jml_keluar">Jumlah</label>
+                                    <input type="number" name="jml_keluar" id="jml_keluar" value="<?php echo $b['jml_keluar'] ?>" autofocus="" required="" />
                                 </div>
                                 <div>
-                                    <label for="tlp">Nomer Telepon</label>
-                                    <input type="number" name="tlp" id="tlp" autofocus="" required="" />
+                                    <label for="penerima">Penerima</label>
+                                    <input type="text" name="penerima" id="penerima" value="<?php echo $b['penerima'] ?>" autofocus="" required="" />
                                 </div>
                                 <div>
-                                    <button type="submit" name="bsimpan">OK</button>
+                                    <label for="keterangan">Keterangan</label>
+                                    <input type="text" name="keterangan" id="keterangan" value="<?php echo $b['keterangan'] ?>" autofocus="" required="" />
                                 </div>
+                                <div>
+                                    <button type="submit" name="update">Simpan Perubahan</button>
+                                </div>
+                            
                             </section>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        <?php 
+			}
+		?>
     </section>
 
     <script>
@@ -166,3 +188,4 @@ $sesName = $_SESSION['name'];
 </body>
 
 </html>
+

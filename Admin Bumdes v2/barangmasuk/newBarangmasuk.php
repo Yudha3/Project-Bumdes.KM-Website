@@ -22,30 +22,6 @@ if (isset($_GET['aksi'])) {
 require('../koneksi.php');
 $sesName = $_SESSION['name'];
 
-// mengecek apakah di url ada nilai GET id
-if (isset($_GET['id_brg'])) {
-    // ambil nilai id dari url dan disimpan dalam variabel $id
-    $id = ($_GET["id_brg"]);
-
-    // menampilkan data dari database yang mempunyai id=$id
-    $query = "SELECT * FROM data_brg WHERE id_brg = '$id'";
-    $result = mysqli_query($koneksi, $query);
-    // jika data gagal diambil maka akan tampil error berikut
-    if (!$result) {
-        die("Query Error: " . mysqli_errno($koneksi) .
-            " - " . mysqli_error($koneksi));
-    }
-    // mengambil data dari database
-    $data = mysqli_fetch_assoc($result);
-    // apabila data tidak ada pada database maka akan dijalankan perintah ini
-    if (!count($data)) {
-        echo "<script>alert('Data tidak ditemukan pada database');window.location='../barang.php';</script>";
-    }
-} else {
-    // apabila tidak ada data GET id pada akan di redirect ke index.php
-    echo "<script>alert('Masukkan data id.');window.location='../barang.php';</script>";
-}
-
 ?>
 
 
@@ -54,7 +30,7 @@ if (isset($_GET['id_brg'])) {
 
 <head>
     <meta charset="UTF-8">
-    <title> Product </title>
+    <title> Barang Masuk </title>
     <link rel="stylesheet" href="../style/style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -75,7 +51,7 @@ if (isset($_GET['id_brg'])) {
                 </a>
             </li>
             <li>
-                <a href="../barang.php" class="active">
+                <a href="../barang.php" class="">
                     <i class='bx bx-box'></i>
                     <span class="links_name">Product</span>
                 </a>
@@ -93,9 +69,15 @@ if (isset($_GET['id_brg'])) {
                 </a>
             </li>
             <li>
-                <a href="../transaksi.php">
+                <a href="../barangMasuk.php" class="active">
                     <i class='bx bx-cart'></i>
-                    <span class="links_name">Transaksi</span>
+                    <span class="links_name">Transaksi Masuk</span>
+                </a>
+            </li>
+            <li>
+                <a href="../barangKeluar.php" class="">
+                    <i class='bx bx-cart'></i>
+                    <span class="links_name">Transaksi Keluar</span>
                 </a>
             </li>
             <li>
@@ -105,7 +87,7 @@ if (isset($_GET['id_brg'])) {
                 </a>
             </li>
             <li class="log_out">
-                <a href="../barang.php?aksi=logout" onclick="return confirm('Apakah anda akan keluar?')">
+                <a href="../barangMasuk.php?aksi=logout" onclick="return confirm('Apakah anda akan keluar?')">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -116,7 +98,7 @@ if (isset($_GET['id_brg'])) {
         <nav>
             <div class="sidebar-button">
                 <i class='bx bx-menu sidebarBtn'></i>
-                <span class="dashboard">Product</span>
+                <span class="dashboard">Barang Masuk</span>
             </div>
             <!-- <div class="search-box">
                 <input type="text" placeholder="Search...">
@@ -133,53 +115,46 @@ if (isset($_GET['id_brg'])) {
             <div class="sales-boxes">
                 <div class="recent-sales1 box">
                     <div class="card-header1">
-                        <h3>Recent Product</h3>
+                        <h3>Recent Barang Masuk</h3>
                         <button>
-                            <a href="../barang.php" style="text-decoration: none;">Kembali</a>
+                            <a href="../barangMasuk.php" style="text-decoration: none;">Kembali</a>
                             <span class="bx bx-right-arrow-alt"></span>
                         </button>
                     </div>
                     <div class="tambah">
                         <center>
-                            <h1>Edit Product <?php echo $data['barang']; ?></h1>
+                            <h1>Tambah Barang Masuk</h1>
                         <center>
-                        <form method="POST" action="proses_edit.php" enctype="multipart/form-data">
+                        <form method="POST" action="proses_tambah.php" enctype="multipart/form-data">
                             <section class="base">
-                                <!-- menampung nilai id produk yang akan di edit -->
-                                <input name="id_brg" value="<?php echo $data['id_brg']; ?>" hidden />
                                 <div>
-                                    <label for="barang">Nama Product</label>
-                                    <input type="text" name="barang" id="barang" value="<?php echo $data['barang']; ?>" autofocus="" required="" />
+                                    <label for="tgl_masuk">Tanggal Masuk</label>
+                                    <input type="date" name="tgl_masuk" id="tgl_masuk" autofocus="" required="" />
                                 </div>
                                 <div>
-                                    <label for="tgl_masuk">Tanggal Masuk Product</label>
-                                    <input type="date" name="tgl_masuk" id="tgl_masuk" value="<?php echo $data['tgl_masuk']; ?>" autofocus="" required="" />
+                                    <label for="barang">Nama Barang</label>
+                                    <select name="barang" class="custom-select form-control" id="barang" autofocus="" required="">
+                                        <option selected>Pilih barang</option>
+                                        <?php
+                                        $det = mysqli_query($koneksi, "select * from data_brg order by barang ASC");
+                                        while ($d = mysqli_fetch_array($det)) {
+                                        ?>
+                                            <option value="<?php echo $d['id_brg'] ?>"><?php echo $d['barang'] ?> </option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                                 <div>
-                                    <label for="hg_beli">Harga Beli Product</label>
-                                    <input type="number" name="hg_beli" id="hg_beli" value="<?php echo $data['hg_beli']; ?>" autofocus="" required="" />
+                                    <label for="jml_masuk">Jumlah</label>
+                                    <input type="number" min="1" name="jml_masuk" id="jml_masuk" autofocus="" required="" />
                                 </div>
                                 <div>
-                                    <label for="hg_jual">Harga Jual Product</label>
-                                    <input type="number" name="hg_jual" id="hg_jual" value="<?php echo $data['hg_jual']; ?>" autofocus="" required="" />
+                                    <label for="keterangan">Keterangan</label>
+                                    <input type="text" name="keterangan" id="keterangan" autofocus="" required="" />
                                 </div>
                                 <div>
-                                    <label for="jml_stok">Stok Product</label>
-                                    <input type="number" name="jml_stok" id="jml_stok" value="<?php echo $data['jml_stok']; ?>" autofocus="" required="" disabled />
-                                </div>
-                                <div>
-                                    <label for="deskripsi">Deskripsi</label>
-                                    <input type="text" name="deskripsi" id="deskripsi" value="<?php echo $data['deskripsi']; ?>" autofocus="" required="" />
-                                </div>
-                                <div>
-                                    <label for="gambar">Gambar Product</label>
-                                    <img src="../images/barang/<?php echo $data['gambar']; ?>" style="width: 120px;float: left;margin-bottom: 5px;">
-                                    <input type="file" name="gambar" />
-                                    <i style="float: left;font-size: 11px;color: red">Abaikan jika tidak merubah gambar produk</i>
-                                    <input type="hidden" name="fotolama" value="<?php echo $data['gambar']; ?>">
-                                </div>
-                                <div>
-                                    <button type="submit">Simpan Perubahan</button>
+                                    <button type="submit" name="bsimpan">Simpan Product</button>
                                 </div>
                             </section>
                         </form>

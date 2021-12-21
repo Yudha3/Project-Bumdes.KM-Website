@@ -491,6 +491,14 @@ table tbody tr:hover td {
   background: #ededed;
   margin: 0.5rem;
 }
+.tambah .custom-select {
+  padding: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  background: #f8f8f8;
+  border: 2px solid #ccc;
+  outline-color: #36B9CC;
+}
 
 /* Responsive Media Query */
 @media (max-width: 1240px) {

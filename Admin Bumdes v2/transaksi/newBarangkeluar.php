@@ -22,30 +22,6 @@ if (isset($_GET['aksi'])) {
 require('../koneksi.php');
 $sesName = $_SESSION['name'];
 
-// mengecek apakah di url ada nilai GET id
-if (isset($_GET['id'])) {
-    // ambil nilai id dari url dan disimpan dalam variabel $id
-    $id = ($_GET["id"]);
-
-    // menampilkan data dari database yang mempunyai id=$id
-    $query = "SELECT * FROM transaksi WHERE id_transaksi='$id'";
-    $result = mysqli_query($koneksi, $query);
-    // jika data gagal diambil maka akan tampil error berikut
-    if (!$result) {
-        die("Query Error: " . mysqli_errno($koneksi) .
-            " - " . mysqli_error($koneksi));
-    }
-    // mengambil data dari database
-    $data = mysqli_fetch_assoc($result);
-    // apabila data tidak ada pada database maka akan dijalankan perintah ini
-    if (!count($data)) {
-        echo "<script>alert('Data tidak ditemukan pada database');window.location='../transaksi.php';</script>";
-    }
-} else {
-    // apabila tidak ada data GET id pada akan di redirect ke index.php
-    echo "<script>alert('Masukkan data id.');window.location='../transaksi.php';</script>";
-}
-
 ?>
 
 
@@ -54,7 +30,7 @@ if (isset($_GET['id'])) {
 
 <head>
     <meta charset="UTF-8">
-    <title> Transaksi </title>
+    <title> Transaksi Barang Keluar </title>
     <link rel="stylesheet" href="../style/style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -93,9 +69,15 @@ if (isset($_GET['id'])) {
                 </a>
             </li>
             <li>
-                <a href="../transaksi.php">
-                    <i class='bx bx-cart' class="active"></i>
-                    <span class="links_name">Transaksi</span>
+                <a href="../barangMasuk.php">
+                    <i class='bx bx-cart'></i>
+                    <span class="links_name">Transaksi Masuk</span>
+                </a>
+            </li>
+            <li>
+                <a href="../barangKeluar.php" class="active">
+                    <i class='bx bx-cart'></i>
+                    <span class="links_name">Transaksi Keluar</span>
                 </a>
             </li>
             <li>
@@ -105,7 +87,7 @@ if (isset($_GET['id'])) {
                 </a>
             </li>
             <li class="log_out">
-                <a href="../transaksi.php?aksi=logout" onclick="return confirm('Apakah anda akan keluar?')">
+                <a href="../barangKeluar.php?aksi=logout" onclick="return confirm('Apakah anda akan keluar?')">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -116,7 +98,7 @@ if (isset($_GET['id'])) {
         <nav>
             <div class="sidebar-button">
                 <i class='bx bx-menu sidebarBtn'></i>
-                <span class="dashboard">Transaksi</span>
+                <span class="dashboard">Barang Keluar</span>
             </div>
             <!-- <div class="search-box">
                 <input type="text" placeholder="Search...">
@@ -133,29 +115,51 @@ if (isset($_GET['id'])) {
             <div class="sales-boxes">
                 <div class="recent-sales1 box">
                     <div class="card-header1">
+                        <h3>New Order List</h3>
+
                         <button>
-                            <a href="../transaksi.php" style="text-decoration: none;">Kembali</a>
+                            <a href="../barangKeluar.php" style="text-decoration: none;">Kembali</a>
                             <span class="bx bx-right-arrow-alt"></span>
                         </button>
                     </div>
                     <div class="tambah">
                         <center>
-                            <h1>Edit Order</h1>
+                            <h1>Order</h1>
                         <center>
-                        <form method="POST" action="proses_edit.php" enctype="multipart/form-data">
+                        <form method="POST" action="proses_tambah.php" enctype="multipart/form-data">
                             <section class="base">
-                                <!-- menampung nilai id produk yang akan di edit -->
-                                <input name="id" value="<?php echo $data['id_transaksi']; ?>" hidden />
                                 <div>
-                                    <label for="alamat">Alamat</label>
-                                    <input type="text" name="alamat" id="alamat" value="<?php echo $data['alamat']; ?>" autofocus="" required="" />
+                                    <label for="tgl_keluar">Tanggal Keluar</label>
+                                    <input type="date" name="tgl_keluar" id="tgl_keluar" autofocus="" required="" />
                                 </div>
                                 <div>
-                                    <label for="statusket">Status/Ket</label>
-                                    <input type="text" name="statusket" id="statusket" value="<?php echo $data['status']; ?>" autofocus="" required="" />
+                                    <label for="barang">Nama Barang</label>
+                                    <select name="barang" class="custom-select form-control" id="barang" autofocus="" required="">
+                                        <option selected>Pilih barang</option>
+                                        <?php
+                                        $det = mysqli_query($koneksi, "select * from data_brg order by barang ASC");
+                                        while ($d = mysqli_fetch_array($det)) {
+                                        ?>
+                                            <option value="<?php echo $d['id_brg'] ?>"><?php echo $d['barang'] ?> </option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                                 <div>
-                                    <button type="submit" name="submit">Simpan Perubahan</button>
+                                    <label for="jml_keluar">Jumlah</label>
+                                    <input type="number" min="1" name="jml_keluar" id="jml_keluar" autofocus="" required="" />
+                                </div>
+                                <div>
+                                    <label for="penerima">Penerima</label>
+                                    <input type="text" name="penerima" id="penerima" autofocus="" required="" />
+                                </div>
+                                <div>
+                                    <label for="keterangan">Keterangan</label>
+                                    <input type="text" name="keterangan" id="keterangan" autofocus="" required="" />
+                                </div>
+                                <div>
+                                    <button type="submit" name="bsimpan">Simpan Product</button>
                                 </div>
                             </section>
                         </form>

@@ -14,13 +14,13 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_ubah_foto"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
         android:src="@drawable/user"
         app:civ_border_width="3dp"
         app:civ_border_color="@color/primaryGreen"
         android:layout_gravity="center"
-        android:layout_marginTop="48dp"/>
+        android:layout_marginTop="60dp"/>
 
         <TextView
             android:id="@+id/btn_choose_foto"

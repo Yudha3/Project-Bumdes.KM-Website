@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,13 +49,17 @@ public class EditProfilActivity extends AppCompatActivity {
     private RadioGroup radioKelamin;
     private ProgressBar pbEdit;
     private SwipeRefreshLayout srlEdit;
-    private String email, fullname, no_telp, jkelamin;
+    private String email, fullname, no_telp;
     private String encodedImage, nullImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profil);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setTitle("Edit Profil");
 
         sessionManager = new SessionManager(EditProfilActivity.this);
         imgEdit = findViewById(R.id.img_edit_profil);
@@ -62,7 +68,7 @@ public class EditProfilActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.et_email_edit);
         etFullname = findViewById(R.id.et_fullname_edit);
         etNoTelp = findViewById(R.id.et_notelp_edit);
-        radioKelamin = findViewById(R.id.radio_jkelamin_edit);
+        radioKelamin = (RadioGroup) findViewById(R.id.radio_jkelamin_edit);
         pbEdit = findViewById(R.id.progress_edit);
         srlEdit = findViewById(R.id.srl_edit_profil);
 
@@ -105,8 +111,12 @@ public class EditProfilActivity extends AppCompatActivity {
     private void simpanData() {
         pbEdit.setVisibility(View.VISIBLE);
        String id = String.valueOf(sessionManager.getSessionID());
+        int terpilih = radioKelamin.getCheckedRadioButtonId();
+        RadioButton JK = (RadioButton) findViewById(terpilih);
+        String jkelamin = String.valueOf(JK.getText().toString());
+
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-        Call<ResponseUser> callSimpan = apiRequestData.updateUser(id, fullname, email, no_telp);
+        Call<ResponseUser> callSimpan = apiRequestData.updateUser(id, fullname, jkelamin,email, no_telp);
         callSimpan.enqueue(new Callback<ResponseUser>() {
             @Override
             public void onResponse(Call<ResponseUser> call, Response<ResponseUser> response) {
@@ -164,5 +174,16 @@ public class EditProfilActivity extends AppCompatActivity {
                 pbEdit.setVisibility(View.GONE);
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

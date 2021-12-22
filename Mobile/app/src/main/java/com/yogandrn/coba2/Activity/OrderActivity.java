@@ -60,7 +60,7 @@ import retrofit2.Response;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
 
-//        sessionManager = new SessionManager(OrderActivity.this);
+        sessionManager = new SessionManager(OrderActivity.this);
 
         txtSubtotal = findViewById(R.id.txt_total_item);
         txtSubtotal2 = findViewById(R.id.txt_total2_item);
@@ -92,7 +92,7 @@ import retrofit2.Response;
             public void onRefresh() {
                 srlOrder.setRefreshing(true);
                 getItem();
-                gb.getTotal();
+                gb.getTotal(String.valueOf(sessionManager.getSessionID()));
                 srlOrder.setRefreshing(false);
             }
         });
@@ -150,7 +150,7 @@ import retrofit2.Response;
 
     public void getItem() {
          pbOrder.setVisibility(View.VISIBLE);
-        sessionManager = new SessionManager(OrderActivity.this);
+
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
         Call<ResponseKeranjang> getKeranjang = apiRequestData.readCart(String.valueOf(sessionManager.getSessionID()));
 
@@ -182,7 +182,7 @@ import retrofit2.Response;
     public void buatTransaksi() {
          pbOrder.setVisibility(View.VISIBLE);
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-        Call<ResponseModel> transaksi = apiRequestData.createTransaksi(Global.id_user, penerima, alamat, no_telp, id_ongkir);
+        Call<ResponseModel> transaksi = apiRequestData.createTransaksi(String.valueOf(sessionManager.getSessionID()), penerima, alamat, no_telp, id_ongkir);
         transaksi.enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {

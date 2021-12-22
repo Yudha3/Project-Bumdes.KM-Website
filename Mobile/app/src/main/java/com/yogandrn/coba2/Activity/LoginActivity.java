@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                     sessionManager.setLogin(true);
                     sessionManager.setSessionID(id_user);
                     Global gb = new Global();
-                    gb.getTotal();
+                    gb.getTotal(String.valueOf(sessionManager.getSessionID()));
 
                     Intent login = new Intent(LoginActivity.this, MainActivity.class);
                     loading.setVisibility(View.INVISIBLE);

@@ -6,7 +6,23 @@ import java.util.List;
 public class ResponseUser {
 
     private int kode;
-    private String pesan, id_user, fullname, username, email, no_telp, foto_profil;
+    private String pesan;
+    private String id_user;
+    private String fullname;
+    private String username;
+    private String email;
+    private String no_telp;
+    private String foto_profil;
+
+    public String getJenis_kelamin() {
+        return jenis_kelamin;
+    }
+
+    public void setJenis_kelamin(String jenis_kelamin) {
+        this.jenis_kelamin = jenis_kelamin;
+    }
+
+    private String jenis_kelamin;
     private List<ModelUser> datauser;
 
     public List<ModelUser> getDatauser() {

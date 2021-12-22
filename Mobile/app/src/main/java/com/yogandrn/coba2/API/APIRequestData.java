@@ -49,6 +49,7 @@ public interface APIRequestData {
     Call<ResponseUser> updateUser(
             @Field("id_user") String id_user,
             @Field("fullname") String fullname,
+            @Field("jkelamin") String jkelamin,
             @Field("email") String email,
             @Field("no_telp") String no_telp
     );

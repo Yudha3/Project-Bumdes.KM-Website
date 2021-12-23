@@ -95,7 +95,7 @@ public interface APIRequestData {
 
     @FormUrlEncoded
     @POST("transaksi_1.php")
-    Call<ResponseModel> createTransaksi(
+    Call<ResponseTransaksi> createTransaksi(
             @Field("id_user") String id_user,
             @Field("penerima") String penerima,
             @Field("alamat") String alamat,
@@ -122,17 +122,23 @@ public interface APIRequestData {
     );
 
     @Multipart
-    @POST("upload_bukti_bayar.php")
-    Call<ResponseModel> uploadBayar(
+    @POST("coba_bayar.php")
+    Call<ResponseModel> cobaUpload(
             @Part MultipartBody.Part gambar,
             @Field("id_transaksi") String id_transaksi
     );
 
     @FormUrlEncoded
-    @POST("coba_upload.php")
-    Call<ResponseModel> cobaUpload(
+    @POST("upload_bukti_bayar.php")
+    Call<ResponseModel> uploadBayar(
             @Field("EN_IMAGE") String encodeImage,
             @Field("id_transaksi") String id_transaksi
+    );
+
+    @FormUrlEncoded
+    @POST("konfirmasi_pesanan.php")
+    Call<ResponseModel> konfirmasiPesanan(
+        @Field("id_transaksi") String id_transaksi
     );
 
     @GET ("retrieve.php")

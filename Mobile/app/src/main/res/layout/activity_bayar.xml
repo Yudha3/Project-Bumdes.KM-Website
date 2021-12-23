@@ -39,7 +39,8 @@
             android:id="@+id/img_bukti_bayar"
             android:layout_width="match_parent"
             android:layout_height="420dp"
-            android:scaleType="fitCenter"/>
+            android:scaleType="fitCenter"
+            android:background="@drawable/bg_bordered"/>
 
     </RelativeLayout>
 

@@ -33,7 +33,8 @@ public class RegisterActivity extends AppCompatActivity {
     Button btnRegister, btnLogin;
     String fullname, username, email, password, no_telp, confpass;
     String SERVER_REGISTER_URL = "http://undeveloppedcity.000webhostapp.com/android/volley/register.php";
-    private LinearLayout loading;
+    private ProgressBar pbLoading;
+    private View vLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,8 @@ public class RegisterActivity extends AppCompatActivity {
         txtLogin = (TextView) findViewById(R.id.txtLogin_register);
         btnLogin = (Button) findViewById(R.id.btnLogin_register);
         btnRegister = (Button) findViewById(R.id.btnRegister_register);
-        loading = (LinearLayout) findViewById(R.id.progressRegister);
+        pbLoading = (ProgressBar) findViewById(R.id.progressRegister) ;
+        vLoading = (View) findViewById(R.id.view_loading);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +95,6 @@ public class RegisterActivity extends AppCompatActivity {
                 } else if (!password.equals(confpass)) {
                     txtConfpass.setError("Konfirmasi Password salah!");
                 }else {
-                    loading.setVisibility(View.VISIBLE);
                     registerUser();
                 }
             }
@@ -102,6 +103,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerUser() {
+        vLoading.setVisibility(View.VISIBLE);
+        pbLoading.setVisibility(View.VISIBLE);
         APIRequestData ardData = RetroServer.koneksiRetrofit().create(APIRequestData.class); // menghubungkan class interface ke retrofit
         Call<ResponseUser> simpanData = ardData.userRegister(fullname, username, email, no_telp, password);
 
@@ -109,7 +112,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseUser> call, Response<ResponseUser> response) {
                 String pesan = response.body().getPesan();
-                loading.setVisibility(View.INVISIBLE);
+                pbLoading.setVisibility(View.INVISIBLE);
+                vLoading.setVisibility(View.INVISIBLE);
                 Toast.makeText(RegisterActivity.this, pesan, Toast.LENGTH_SHORT).show();
                 Intent login = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(login);
@@ -117,7 +121,8 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseUser> call, Throwable t) {
-                loading.setVisibility(View.INVISIBLE);
+                pbLoading.setVisibility(View.INVISIBLE);
+                vLoading.setVisibility(View.INVISIBLE);
                 Toast.makeText(RegisterActivity.this, "Terjadi kesalahan : " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

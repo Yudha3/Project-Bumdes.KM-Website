@@ -6,6 +6,16 @@ public class ResponseTransaksi {
     private String pesan;
     private int kode;
 
+    public int getId_transaksi() {
+        return id_transaksi;
+    }
+
+    public void setId_transaksi(int id_transaksi) {
+        this.id_transaksi = id_transaksi;
+    }
+
+    private int id_transaksi;
+
     public int getKode() { return kode; }
 
     public void setKode(int kode) { this.kode = kode; }

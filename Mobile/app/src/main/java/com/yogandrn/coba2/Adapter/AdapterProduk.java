@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.yogandrn.coba2.Activity.DetailProduk;
+import com.yogandrn.coba2.Global;
 import com.yogandrn.coba2.Model.ModelProduk;
 import com.yogandrn.coba2.R;
 
@@ -49,7 +50,7 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderProd
         holder.tvStok.setText(String.valueOf((modelProduk.getJml_stok())));
         holder.tvDeskripsi.setText(modelProduk.getDeskripsi());
 
-        Glide.with(holder.itemView.getContext()).load("http://undeveloppedcity.000webhostapp.com/android/img/produk/" + modelProduk.getGambar())
+        Glide.with(holder.itemView.getContext()).load(Global.IMG_PRODUK_URL + modelProduk.getGambar())
 //                .apply(new RequestOptions().centerCrop())
                 .into(holder.imgProduk);
 

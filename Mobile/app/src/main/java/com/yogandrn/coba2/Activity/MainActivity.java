@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.yogandrn.coba2.API.APIRequestData;
 import com.yogandrn.coba2.API.RetroServer;
 import com.yogandrn.coba2.Global;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView ic_keranjang, ic_notifikasi;
     private SwipeRefreshLayout srlMainmenu;
     private ProgressBar pbMainmenu;
+    private FloatingActionButton floatingButtonChat;
     SessionManager sessionManager;
 
 
@@ -65,11 +67,12 @@ public class MainActivity extends AppCompatActivity {
         btnKeranjang = (LinearLayout) findViewById(R.id.layoutKeranjang);
         btnPesanan = (LinearLayout) findViewById(R.id.layoutPesanan);
         btnPreorder = (LinearLayout) findViewById(R.id.layoutPreorder);
-        txtWelcome = (TextView) findViewById(R.id.txtuser);
+        txtWelcome = (TextView) findViewById(R.id.txtuser_main);
         btnHeadline1 = (TextView) findViewById(R.id.btn_headline1);
         btnHeadline2 = (TextView) findViewById(R.id.btn_headline2);
         srlMainmenu = findViewById(R.id.srl_main_menu);
         pbMainmenu= findViewById(R.id.progress_main_menu);
+        floatingButtonChat = findViewById(R.id.btn_hubungi_kami);
 
         sessionManager = new SessionManager(MainActivity.this);
         if (!sessionManager.getLogin()){
@@ -164,6 +167,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(produk);
             }
         });
+
+        floatingButtonChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sosmed = new Intent(Intent.ACTION_VIEW, Uri.parse("https://wa.me/6285123456789"));
+                startActivity(sosmed);
+            }
+        });
     }
 
     public void moveToLogin() {
@@ -202,14 +213,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        if (System.currentTimeMillis() - exitTime > 2000 ) {
-//            Toast.makeText(MainActivity.this, "Tekan sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
-//            exitTime = System.currentTimeMillis();
-//        } else {
-//            onStop();
-//        }
-//    }
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - exitTime > 2000 ) {
+            Toast.makeText(MainActivity.this, "Tekan sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+        }
+    }
 }

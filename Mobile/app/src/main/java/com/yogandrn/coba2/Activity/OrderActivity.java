@@ -8,6 +8,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -20,10 +21,12 @@ import android.widget.Toast;
 import com.yogandrn.coba2.API.APIRequestData;
 import com.yogandrn.coba2.API.RetroServer;
 import com.yogandrn.coba2.Adapter.AdapterKeranjang;
+import com.yogandrn.coba2.Activity.PertunjukBayarActivity;
 import com.yogandrn.coba2.Global;
 import com.yogandrn.coba2.Model.ModelKeranjang;
 import com.yogandrn.coba2.Model.ResponseKeranjang;
 import com.yogandrn.coba2.Model.ResponseModel;
+import com.yogandrn.coba2.Model.ResponseTransaksi;
 import com.yogandrn.coba2.R;
 import com.yogandrn.coba2.SessionManager;
 
@@ -47,7 +50,7 @@ import retrofit2.Response;
      private RadioButton ongkir1, ongkir2;
      private TextView txtTotal, txtSubtotal, txtOngkir, txtTotal2, txtSubtotal2, txtOngkir2;
      private EditText etPenerima, etAlamat, etNoTelp;
-     private int subtotalitem = Global.total;
+     private int subtotalitem ;
      private int ongkir = 30000;
      private String id_ongkir = "1";
      private String penerima, alamat, no_telp;
@@ -59,8 +62,14 @@ import retrofit2.Response;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+         getSupportActionBar().setDisplayShowHomeEnabled(true);
+         setTitle("Order");
 
         sessionManager = new SessionManager(OrderActivity.this);
+         Global gb = new Global();
+         subtotalitem = gb.getTotal(String.valueOf(sessionManager.getSessionID()));
 
         txtSubtotal = findViewById(R.id.txt_total_item);
         txtSubtotal2 = findViewById(R.id.txt_total2_item);
@@ -86,7 +95,6 @@ import retrofit2.Response;
         rvOrder.setLayoutManager(layoutManager);
         getItem();
 
-         Global gb = new Global();
         srlOrder.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -131,13 +139,13 @@ import retrofit2.Response;
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (etAlamat.getText().toString().equals("")) {
+                if (etPenerima.getText().toString().equals("")) {
 //                    Toast.makeText(getApplicationContext(), "Kolom Alamat wajib diisi", Toast.LENGTH_SHORT).show();
+                    etPenerima.setError("Wajib diisi!");
+                } else if (etAlamat.getText().toString().equals("")){
                     etAlamat.setError("Wajib diisi!");
                 } else if (etNoTelp.getText().toString().equals("")){
                     etNoTelp.setError("Wajib diisi!");
-                } else if (etPenerima.getText().toString().equals("")){
-                    etPenerima.setError("Wajib diisi!");
                 } else {
                     alamat = etAlamat.getText().toString();
                     no_telp = etNoTelp.getText().toString();
@@ -182,16 +190,21 @@ import retrofit2.Response;
     public void buatTransaksi() {
          pbOrder.setVisibility(View.VISIBLE);
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-        Call<ResponseModel> transaksi = apiRequestData.createTransaksi(String.valueOf(sessionManager.getSessionID()), penerima, alamat, no_telp, id_ongkir);
-        transaksi.enqueue(new Callback<ResponseModel>() {
+        Call<ResponseTransaksi> transaksi = apiRequestData.createTransaksi(String.valueOf(sessionManager.getSessionID()), penerima, alamat, no_telp, id_ongkir);
+        transaksi.enqueue(new Callback<ResponseTransaksi>() {
             @Override
-            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+            public void onResponse(Call<ResponseTransaksi> call, Response<ResponseTransaksi> response) {
                 String pesan = response.body().getPesan();
 
                 if (pesan.equals("BERHASIL")) {
+                    int id_transaksi = response.body().getId_transaksi();
                     pbOrder.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Transaksi Berhasil", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(OrderActivity.this, ListPesanan.class));
+                    Intent selesai = new Intent(OrderActivity.this, PertunjukBayarActivity.class);
+                    selesai.putExtra("id_transaksi", String.valueOf(id_transaksi));
+                    selesai.putExtra("total", subtotalitem + ongkir);
+                    startActivity(selesai);
+                    finish();
                 } else if (pesan.equals("GAGAL")) {
                     pbOrder.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Gagal melakukan transaksi", Toast.LENGTH_SHORT).show();
@@ -199,7 +212,7 @@ import retrofit2.Response;
             }
 
             @Override
-            public void onFailure(Call<ResponseModel> call, Throwable t) {
+            public void onFailure(Call<ResponseTransaksi> call, Throwable t) {
                 pbOrder.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), "Terjadi kesalahan\n" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -213,6 +226,17 @@ import retrofit2.Response;
          String[] split = formatRupiah.split(",");
          int length = split[0].length();
          return split[0].substring(0,2) + " " + split[0].substring(2,length);
+     }
+
+     @Override
+     public boolean onSupportNavigateUp() {
+         onBackPressed();
+         return true;
+     }
+
+     @Override
+     public void onBackPressed() {
+         super.onBackPressed();
      }
 
 //     public void getOngkir(View v) {

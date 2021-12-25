@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/productsans_medium"
                     android:maxLines="2"
-                    android:text="Dalam pengiriman"
+                    android:text="..."
                     android:textAlignment="textEnd"
                     android:textAllCaps="true"
                     android:textColor="@color/primaryGreen"
@@ -105,7 +105,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/productsans_medium"
-                    android:text="100000"
+                    android:text="Rp ..."
                     android:textAlignment="textEnd"
                     android:textColor="@color/primaryGreen"
                     android:textSize="14sp" />

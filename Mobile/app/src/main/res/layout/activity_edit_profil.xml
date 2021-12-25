@@ -69,6 +69,37 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/productsans_medium"
+                android:text="Jenis Kelamin"
+                android:textColor="@color/primaryGreen"
+                android:textSize="15sp"
+                android:visibility="visible" />
+
+            <RadioGroup
+                android:id="@+id/radio_jkelamin_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:buttonTint="@color/primaryGreen"
+                    android:text="Laki-laki" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="12dp"
+                    android:buttonTint="@color/primaryGreen"
+                    android:text="Perempuan" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/productsans_medium"
                 android:text="Alamat Email"
@@ -85,37 +116,6 @@
                 android:paddingHorizontal="14dp"
                 android:textColor="#303030"
                 android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/productsans_medium"
-                android:text="Jenis Kelamin"
-                android:textColor="@color/primaryGreen"
-                android:textSize="15sp"
-                android:visibility="gone" />
-
-            <RadioGroup
-                android:id="@+id/radio_jkelamin_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="36dp"
-                    android:backgroundTint="@color/primaryGreen"
-                    android:text="Laki-laki" />
-
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="36dp"
-                    android:layout_marginStart="12dp"
-                    android:backgroundTint="@color/primaryGreen"
-                    android:text="Perempuan" />
-            </RadioGroup>
 
             <TextView
                 android:layout_width="match_parent"

@@ -99,13 +99,15 @@ public class BayarActivity extends AppCompatActivity {
         String encodedImage = Base64.encodeToString(imageInByte, Base64.DEFAULT);
 
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-        Call<ResponseModel> callUpload = apiRequestData.cobaUpload(encodedImage, id_transaksi);
+        Call<ResponseModel> callUpload = apiRequestData.uploadBayar(encodedImage, id_transaksi);
         callUpload.enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 String pesan = response.body().getPesan();
                 if (pesan.equals("BERHASIL")) {
                     Toast.makeText(BayarActivity.this, "Berhasil upload", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(BayarActivity.this, ListPesanan.class));
+                    finish();
                 } else if (pesan.equals("GAGAL")) {
                     Toast.makeText(BayarActivity.this, "Gagal upload", Toast.LENGTH_SHORT).show();
                 } else if (pesan.equals("NOT CONNECTED")) {

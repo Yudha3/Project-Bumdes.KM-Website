@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Activity.RegisterActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -63,8 +72,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12sp"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp">
+        android:layout_marginHorizontal="28dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtEmail_register"
@@ -170,27 +178,28 @@
         android:textSize="15sp"
         android:visibility="gone"/>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical"
-        android:layout_gravity="center"
+        </LinearLayout>
+    </ScrollView>
+
+    <View
+        android:id="@+id/view_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_loading"
+        android:visibility="invisible"/>
+
+    <ProgressBar
         android:id="@+id/progressRegister"
-        android:visibility="invisible">
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:outlineAmbientShadowColor="@color/primaryGreen"
+        android:outlineSpotShadowColor="@color/primaryGreen"
+        android:backgroundTint="@color/primaryGreen"/>
 
-        <ProgressBar
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_gravity="center"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Please wait..."
-            android:textAlignment="center"
-            android:textSize="12sp"
-            android:fontFamily="@font/productsans_light"
-            android:layout_marginTop="4dp"/>
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

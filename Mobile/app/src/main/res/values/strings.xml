@@ -3,6 +3,12 @@
     <string name="welcome">Selamat Datang, </string>
     <string name="username">Yoga Andrian</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="tutor_bayar">"1.	Buka aplikasi i-Banking dari masing-masing Bank, pergi ke ATM jika ingin menggunakan kartu debit.\n"
+"2.	Masuk menu Transfer.\n"
+"3.	Masukkan kode bank BNI diikuti dengan nomor rekening yang tersedia.\n"
+"4.	Masukkan jumlah nominal transfer sesuai pesanan.\n"
+"5.	Periksa informasi yang tertera, jika sudah benar klik YA.\n"
+</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

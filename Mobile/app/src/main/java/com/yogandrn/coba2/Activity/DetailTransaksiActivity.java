@@ -1,14 +1,17 @@
 
 package com.yogandrn.coba2.Activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -48,6 +51,9 @@ public class DetailTransaksiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_transaksi);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle("Detail Pesanan");
 
 //        sessionManager = new SessionManager(DetailTransaksiActivity.this);
@@ -95,6 +101,29 @@ public class DetailTransaksiActivity extends AppCompatActivity {
                 startActivity(bayar);
             }
         });
+
+        btnKonfirmasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dialogConfirm = new AlertDialog.Builder(view.getContext());
+                dialogConfirm.setCancelable(true);
+                dialogConfirm.setTitle("Konfirmasi Pesanan");
+                dialogConfirm.setMessage("Apakah Anda yakin untuk melakukan konfirmasi pesanan?");
+                dialogConfirm.setPositiveButton("Konfirmasi", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        confirOder();
+                    }
+                });
+                dialogConfirm.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                dialogConfirm.show();
+            }
+        });
     }
 
     private void getDetailTransaksi() {
@@ -121,7 +150,7 @@ public class DetailTransaksiActivity extends AppCompatActivity {
                     txtSubtotal.setText(Global.formatRupiah(total - 30000));
                 } else if (id_ongkir == 2) {
                     txtOngkir.setText("Rp 48.000");
-                    txtPengiriman.setText("Reguler");
+                    txtPengiriman.setText("Express");
                     txtSubtotal.setText(Global.formatRupiah(total - 48000));
                 }
                 txtResi.setText(resi);
@@ -182,5 +211,46 @@ public class DetailTransaksiActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Terjadi kesalahan :\n" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void confirOder() {
+        pbDetailTransaksi.setVisibility(View.VISIBLE);
+        APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
+        Call<ResponseModel> callKonfirmasi = apiRequestData.konfirmasiPesanan(id_transaksi);
+        callKonfirmasi.enqueue(new Callback<ResponseModel>() {
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                String pesan = response.body().getPesan();
+                if (pesan.equals("BERHASIL")) {
+                    pbDetailTransaksi.setVisibility(View.GONE);
+                    Toast.makeText(DetailTransaksiActivity.this, "Pesanan Selesai", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(DetailTransaksiActivity.this, ListPesanan.class));
+                    finish();
+                } else if (pesan.equals("GAGAL")) {
+                    pbDetailTransaksi.setVisibility(View.GONE);
+                    Toast.makeText(DetailTransaksiActivity.this, "Gagal melakukan konfirmasi", Toast.LENGTH_SHORT).show();
+                } else if (pesan.equals("NOT CONNECTED")) {
+                    pbDetailTransaksi.setVisibility(View.GONE);
+                    Toast.makeText(DetailTransaksiActivity.this, "Gagal menghubungi server", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
+                pbDetailTransaksi.setVisibility(View.GONE);
+                Toast.makeText(DetailTransaksiActivity.this, "Terjadi kesalahn :\n" + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

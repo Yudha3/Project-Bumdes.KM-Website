@@ -20,9 +20,9 @@ public class Global {
     SessionManager sessionManager;
     public static  String id;
 
-    public void getTotal(){
+    public int getTotal(String id){
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-        Call<ResponseModel> countTotal = apiRequestData.countTotal(String.valueOf(sessionManager.getSessionID()));
+        Call<ResponseModel> countTotal = apiRequestData.countTotal(id);
         countTotal.enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
@@ -36,6 +36,7 @@ public class Global {
                 total = hasil;
             }
         });
+        return total;
     }
 
     public static String formatRupiah(int number) {

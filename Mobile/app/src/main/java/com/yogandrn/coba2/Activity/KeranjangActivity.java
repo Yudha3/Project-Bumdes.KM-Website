@@ -34,6 +34,7 @@ import retrofit2.Response;
 
 public class KeranjangActivity extends AppCompatActivity {
 
+    private int total;
     private RecyclerView rvKeranjang;
     private RecyclerView.Adapter adapterKeranjang;
     private RecyclerView.LayoutManager layoutManager;
@@ -53,6 +54,8 @@ public class KeranjangActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle("Keranjang Belanja");
 
+        sessionManager = new SessionManager(KeranjangActivity.this);
+
         pbKeranjang = findViewById(R.id.progress_keranjang);
         srlKeranjang = findViewById(R.id.srl_keranjang);
         txtEmpty = findViewById(R.id.txt_empty_keranjang);
@@ -62,6 +65,9 @@ public class KeranjangActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
         rvKeranjang.setLayoutManager(layoutManager);
+
+        Global gb = new Global();
+        total = gb.getTotal(String.valueOf(sessionManager.getSessionID()));
 
         retrieveCart();
 
@@ -80,6 +86,7 @@ public class KeranjangActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent belanja = new Intent(KeranjangActivity.this, KatalogActivity.class);
                 startActivity(belanja);
+                finish();
             }
         });
 
@@ -96,7 +103,7 @@ public class KeranjangActivity extends AppCompatActivity {
 
     public void retrieveCart() {
         pbKeranjang.setVisibility(View.VISIBLE);
-        sessionManager = new SessionManager(KeranjangActivity.this);
+
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
         Call<ResponseKeranjang> getKeranjang = apiRequestData.readCart(String.valueOf(sessionManager.getSessionID()));
 

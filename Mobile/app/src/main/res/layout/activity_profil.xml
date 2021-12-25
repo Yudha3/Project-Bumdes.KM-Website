@@ -50,7 +50,7 @@
             android:id="@+id/title_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="username"
+            android:text="..."
             android:textSize="16sp"
             android:textColor="@color/white"
             android:fontFamily="@font/productsans_medium"
@@ -63,7 +63,7 @@
             android:id="@+id/title_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="emaii@example.com"
+            android:text="..."
             android:textSize="16sp"
             android:textColor="@color/white"
             android:fontFamily="@font/productsans_medium"
@@ -74,12 +74,12 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_edit_profil"
             android:layout_width="64dp"
-            android:layout_height="32dp"
+            android:layout_height="28dp"
             android:text="Edit"
             android:textColor="#404040"
             android:textAllCaps="false"
-            android:textSize="14sp"
-            android:fontFamily="@font/productsans_regular"
+            android:textSize="13sp"
+            android:fontFamily="sans-serif-medium"
             android:background="@drawable/white_retangle"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -117,9 +117,27 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:fontFamily="@font/productsans_medium"
-            android:text="Yoga Andrian"
+            android:text="..."
             android:textColor="#404040"
             android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsans_medium"
+                android:text="Jenis Kelamin"
+                android:textColor="@color/primaryGreen"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txt_kelamin_profil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/productsans_medium"
+                android:text="-"
+                android:textColor="#404040"
+                android:textSize="15sp" />
 
         <TextView
             android:id="@+id/txt_username"
@@ -136,7 +154,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:fontFamily="@font/productsans_medium"
-            android:text="yoga"
+            android:text="..."
             android:textColor="#404040"
             android:textSize="15sp" />
 
@@ -155,7 +173,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:fontFamily="@font/productsans_medium"
-            android:text="yoga@gmail.com"
+            android:text="..."
             android:textColor="#404040"
             android:textSize="15sp" />
 
@@ -173,7 +191,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:fontFamily="@font/productsans_medium"
-            android:text="08123456789"
+            android:text="..."
             android:textColor="#404040"
             android:textSize="15sp" />
 

@@ -65,8 +65,7 @@ public class DetailProduk extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-//        sessionManager = new SessionManager(DetailProduk.this);
-
+        sessionManager = new SessionManager(DetailProduk.this);
         Bundle data = getIntent().getExtras();
         id_barang = data.getString("id_brg");
 
@@ -162,23 +161,27 @@ public class DetailProduk extends AppCompatActivity {
     }
 
     public void addToCart(){
+        pbDetail.setVisibility(View.VISIBLE);
+        String id = String.valueOf(sessionManager.getSessionID());
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-        Call<ResponseModel> addCart = apiRequestData.addToCart(String.valueOf(sessionManager.getSessionID()), id_barang, qty);
+        Call<ResponseModel> addCart = apiRequestData.addToCart(id, id_barang, qty);
         addCart.enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 String pesan = response.body().getPesan();
                 if (pesan.equals("BERHASIL")) {
                     Global gb = new Global();
-                    gb.getTotal();
+                    gb.getTotal(id);
                     Toast.makeText(DetailProduk.this, "Berhasil menambahkan ke keranjang", Toast.LENGTH_SHORT).show();
                 } else if (pesan.equals("GAGAL")) {
                     Toast.makeText(DetailProduk.this, "Gagal menambahkan ke keranjang", Toast.LENGTH_SHORT).show();
                 }
+                pbDetail.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable t) {
+                pbDetail.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), "Terjadi kesalahan\n" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

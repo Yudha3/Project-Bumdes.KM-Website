@@ -30,7 +30,7 @@ import retrofit2.Response;
 
 public class ProfilActivity extends AppCompatActivity {
 
-    private TextView titleUsername, titleEmail, txtEmail, txtFullname, txtUsername, txtID, txtNoTelp;
+    private TextView titleUsername, titleEmail, txtEmail, txtFullname, txtUsername, txtID, txtNoTelp, txtJKelamin;
     private CircleImageView fotoProfil;
     private Button btnEdit, btnLogout;
     private SwipeRefreshLayout srlProfil;
@@ -62,6 +62,7 @@ public class ProfilActivity extends AppCompatActivity {
         titleUsername = (TextView) findViewById(R.id.title_username);
         txtID = (TextView) findViewById(R.id.txtID_User);
         txtFullname = (TextView) findViewById(R.id.txt_nama_profil);
+        txtJKelamin = (TextView) findViewById(R.id.txt_kelamin_profil);
         txtUsername = (TextView) findViewById(R.id.txt_username_profil);
         txtEmail = (TextView) findViewById(R.id.txt_email_profil);
         txtNoTelp = (TextView) findViewById(R.id.txt_notelp_profil);
@@ -135,6 +136,7 @@ public class ProfilActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseUser> call, Response<ResponseUser> response) {
                 String fullname = response.body().getFullname();
+                String jkelamin = response.body().getJenis_kelamin();
                 String username = response.body().getUsername();
                 String email = response.body().getEmail();
                 String no_telp = response.body().getNo_telp();
@@ -144,6 +146,7 @@ public class ProfilActivity extends AppCompatActivity {
                 titleEmail.setText(email);
                 titleUsername.setText(username);
                 txtFullname.setText(fullname);
+                txtJKelamin.setText(jkelamin);
                 txtUsername.setText(username);
                 txtEmail.setText(email);
                 txtNoTelp.setText(no_telp);

@@ -63,6 +63,8 @@ public class LoginActivity extends AppCompatActivity {
         btnRegister = (Button) findViewById(R.id.btnRegister_login);
         loading = (LinearLayout) findViewById(R.id.progressLogin);
 
+
+
         //mengakses halaman register
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +98,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void checkLogin() {
         loading.setVisibility(View.VISIBLE);
+        sessionManager =  new SessionManager(LoginActivity.this);
+
         APIRequestData ardData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
         Call<ResponseUser> checkData = ardData.checkLogin(email, password);
         
@@ -112,11 +116,10 @@ public class LoginActivity extends AppCompatActivity {
                     String no_telp = response.body().getNo_telp();
                     String foto_profil = response.body().getFoto_profil();
 
-                    sessionManager =  new SessionManager(LoginActivity.this);
                     sessionManager.setLogin(true);
                     sessionManager.setSessionID(id_user);
                     Global gb = new Global();
-                    gb.getTotal();
+                    gb.getTotal(String.valueOf(sessionManager.getSessionID()));
 
                     Intent login = new Intent(LoginActivity.this, MainActivity.class);
                     loading.setVisibility(View.INVISIBLE);

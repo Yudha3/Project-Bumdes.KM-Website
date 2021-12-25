@@ -71,20 +71,26 @@ $sesName = $_SESSION['name'];
             </li>
             <li>
                 <a href="barangMasuk.php">
-                    <i class='bx bx-cart'></i>
+                    <i class='bx bxs-cart-add'></i>
                     <span class="links_name">Transaksi Masuk</span>
                 </a>
             </li>
             <li>
                 <a href="barangKeluar.php" class="active">
-                    <i class='bx bx-cart'></i>
+                    <i class='bx bxs-cart-download'></i>
                     <span class="links_name">Transaksi Keluar</span>
                 </a>
             </li>
             <li>
-                <a href="report.php">
-                    <i class='bx bx-book-alt'></i>
-                    <span class="links_name">Laporan</span>
+                <a href="reportMasuk.php" class="">
+                    <i class='bx bxs-archive-in'></i>
+                    <span class="links_name">Laporan Masuk</span>
+                </a>
+            </li>
+            <li>
+                <a href="reportKeluar.php" class="">
+                    <i class='bx bxs-archive-out'></i>
+                    <span class="links_name">Laporan Keluar</span>
                 </a>
             </li>
             <li class="log_out">
@@ -129,9 +135,11 @@ $sesName = $_SESSION['name'];
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>ID Transaksi</th>
                                         <th>Tanggal</th>
                                         <th>Barang</th>
                                         <th>Jumlah</th>
+                                        <th>Total Harga</th>
                                         <th>Penerima</th>
                                         <th>Keterangan</th>
                                         <th>Action</th>
@@ -147,16 +155,18 @@ $sesName = $_SESSION['name'];
                                     ?>
                                         <tr>
                                             <td align="center"><?php echo $no; ?></td>
+                                            <td><?php echo $b['id_transaksi'] ?></td>
                                             <td><?php $tanggals = $b['tgl_keluar'];
                                                 echo date("d-M-Y", strtotime($tanggals)) ?></td>
                                             <td><?php echo $b['barang'] ?></td>
                                             <td><?php echo $b['jml_keluar'] ?></td>
+                                            <td><?php echo $b['total_hrg'] ?></td>
                                             <td><?php echo $b['penerima'] ?></td>
                                             <td><?php echo $b['keterangan'] ?></td>
                                             <td>
-                                                <a href="transaksi/editBarangkeluar.php?id=<?php echo $id; ?>" style="text-decoration: none;">Edit</a> |
-                                                <a href="transaksi/proses_hapus.php?id=<?php echo $id; ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus barang ini dari daftar stock keluar?')" style="text-decoration: none;">Hapus</a> |
-                                                <!-- <a href="transaksi/endLaporan.php"  style="text-decoration: none;" onclick="return confirm('Anda yakin?')">Selesai</a> -->
+                                                <a href="transaksi/editBarangkeluar.php?id=<?php echo $b['id'] ?>" style="text-decoration: none;">Edit</a> |
+                                                <a href="transaksi/proses_hapus.php?id=<?php echo $b['id'] ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus barang ini dari daftar stock keluar?')" style="text-decoration: none;">Hapus</a> |
+                                                <a href="transaksi/pindahData.php?id=<?php echo $b['id'] ?>"  style="text-decoration: none;" onclick="return confirm('Anda yakin?')">Selesai</a>
                                             </td>
                                         </tr>
                                     <?php

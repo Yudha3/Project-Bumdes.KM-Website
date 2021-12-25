@@ -22,6 +22,27 @@ if (isset($_GET['aksi'])) {
 require('../koneksi.php');
 $sesName = $_SESSION['name'];
 
+$no = mysqli_query($koneksi, "select id_transaksi from data_klr order by id_transaksi desc");
+$idtran = mysqli_fetch_array($no);
+$kode = isset($idtran['id_transaksi']) ? $idtran['id_transaksi'] : '';
+// $kode = $idtran['id_transaksi'];
+
+
+$urut = substr($kode, 8, 3);
+$tambah = (int) $urut + 1;
+$bulan = date("m");
+$tahun = date("y");
+$day = date("d");
+
+if (strlen($tambah) == 1) {
+    $format = "TRK-" . $bulan . $tahun . "00" . $tambah;
+} else if (strlen($tambah) == 2) {
+    $format = "TRK-" . $bulan . $tahun . "0" . $tambah;
+} else {
+    $format = "TRK-" . $bulan . $tahun . $tambah;
+}
+$tanggal_keluar = date("Y-m-d");
+
 ?>
 
 
@@ -81,9 +102,15 @@ $sesName = $_SESSION['name'];
                 </a>
             </li>
             <li>
-                <a href="../report.php">
+                <a href="../reportMasuk.php" class="">
                     <i class='bx bx-book-alt'></i>
-                    <span class="links_name">Laporan</span>
+                    <span class="links_name">Laporan Masuk</span>
+                </a>
+            </li>
+            <li>
+                <a href="../reportKeluar.php" class="">
+                    <i class='bx bx-book-alt'></i>
+                    <span class="links_name">Laporan Keluar</span>
                 </a>
             </li>
             <li class="log_out">
@@ -129,26 +156,38 @@ $sesName = $_SESSION['name'];
                         <form method="POST" action="proses_tambah.php" enctype="multipart/form-data">
                             <section class="base">
                                 <div>
+                                    <label for="id_transaksi">Id Transaksi</label>
+                                    <input type="text" name="id_transaksi" id="id_transaksi" value="<?php echo $format; ?>" readonly />
+                                </div>
+                                <div>
                                     <label for="tgl_keluar">Tanggal Keluar</label>
-                                    <input type="date" name="tgl_keluar" id="tgl_keluar" autofocus="" required="" />
+                                    <input type="date" readonly name="tgl_keluar" id="tgl_keluar" value="<?php echo $tanggal_keluar; ?>" />
                                 </div>
                                 <div>
                                     <label for="barang">Nama Barang</label>
-                                    <select name="barang" class="custom-select form-control" id="barang" autofocus="" required="">
+                                    <select name="barang" class="custom-select form-control" id="cmb_barang" id="barang" autofocus="" required="">
                                         <option selected>Pilih barang</option>
                                         <?php
                                         $det = mysqli_query($koneksi, "select * from data_brg order by barang ASC");
                                         while ($d = mysqli_fetch_array($det)) {
-                                        ?>
-                                            <option value="<?php echo $d['id_brg'] ?>"><?php echo $d['barang'] ?> </option>
-                                        <?php
+                                        
+                                            echo "<option value='$d[id_brg].$d[barang]'>$d[id_brg] | $d[barang]</option>";
+                            
                                         }
                                         ?>
                                     </select>
                                 </div>
                                 <div>
+                                    <label for="hg_jual">Harga Beli</label>
+                                    <input type="number" name="hg_jual" id="hg_jual" readonly />
+                                </div>
+                                <div>
                                     <label for="jml_keluar">Jumlah</label>
-                                    <input type="number" min="1" name="jml_keluar" id="jml_keluar" autofocus="" required="" />
+                                    <input type="number" min="1" name="jml_keluar" onkeyup="sum()" id="jml_keluar" autofocus="" required="" />
+                                </div>
+                                <div>
+                                    <label for="total_hrg">Total Harga</label>
+                                    <input type="number" name="total_hrg" id="total_hrg" readonly/>
                                 </div>
                                 <div>
                                     <label for="penerima">Penerima</label>
@@ -156,7 +195,7 @@ $sesName = $_SESSION['name'];
                                 </div>
                                 <div>
                                     <label for="keterangan">Keterangan</label>
-                                    <input type="text" name="keterangan" id="keterangan" autofocus="" required="" />
+                                    <input type="text" name="keterangan" id="keterangan" />
                                 </div>
                                 <div>
                                     <button type="submit" name="bsimpan">Simpan Product</button>
@@ -168,6 +207,26 @@ $sesName = $_SESSION['name'];
             </div>
         </div>
     </section>
+
+    <script src="../assets/js/jquery-1.10.2.js"></script>
+    <script>
+        function sum() {
+	        var stok = document.getElementById('hg_jual').value;
+	        var jumlahmasuk = document.getElementById('jml_keluar').value;
+	        var result = parseInt(stok) * parseInt(jumlahmasuk);
+	        if (!isNaN(result)) {
+		        document.getElementById('total_hrg').value = result;
+	        }
+        }
+
+        $('#cmb_barang').change(function(){
+            var selected_id = $(this).val();
+            var data = {id: selected_id};
+            $.post('get_data_brg.php', data, function(data){
+                $('#hg_jual').val(data);
+            })
+        });
+    </script>
 
     <script>
         let sidebar = document.querySelector(".sidebar");

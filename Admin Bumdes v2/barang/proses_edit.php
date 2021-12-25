@@ -8,7 +8,7 @@ $nama_barang   = $_POST['barang'];
 $tanggal_masuk  = $_POST['tgl_masuk'];
 $harga_beli    = $_POST['hg_beli'];
 $harga_jual    = $_POST['hg_jual'];
-$stok_barang    = $_POST['jml_stok'];
+// $stok_barang    = $_POST['jml_stok'];
 $deskripsi     = $_POST['deskripsi'];
 $gambar_produk = $_FILES['gambar']['name'];
 $fotolama = $_POST['fotolama'];
@@ -27,7 +27,7 @@ if ($gambar_produk != "") {
         move_uploaded_file($file_tmp, '../images/barang/' . $nama_gambar_baru); //memindah file gambar ke folder gambar
 
         // jalankan query UPDATE berdasarkan ID yang produknya kita edit
-        $query  = "UPDATE data_brg SET barang = '$nama_barang', tgl_masuk = '$tanggal_masuk', hg_beli = '$harga_beli', hg_jual = '$harga_jual', jml_stok = '$stok_barang', deskripsi = '$deskripsi', gambar = '$nama_gambar_baru'";
+        $query  = "UPDATE data_brg SET barang = '$nama_barang', tgl_masuk = '$tanggal_masuk', hg_beli = '$harga_beli', hg_jual = '$harga_jual',  deskripsi = '$deskripsi', gambar = '$nama_gambar_baru'";
         $query .= "WHERE id_brg = '$id'";
         $result = mysqli_query($koneksi, $query);
         // periska query apakah ada error
@@ -45,7 +45,7 @@ if ($gambar_produk != "") {
     }
 } else {
     // jalankan query UPDATE berdasarkan ID yang produknya kita edit
-    $query  = "UPDATE data_brg SET barang = '$nama_barang', tgl_masuk = '$tanggal_masuk', hg_beli = '$harga_beli', hg_jual = '$harga_jual', jml_stok = '$stok_barang', deskripsi = '$deskripsi'";
+    $query  = "UPDATE data_brg SET barang = '$nama_barang', tgl_masuk = '$tanggal_masuk', hg_beli = '$harga_beli', hg_jual = '$harga_jual', deskripsi = '$deskripsi'";
     $query .= "WHERE id_brg = '$id'";
     $result = mysqli_query($koneksi, $query);
     // periska query apakah ada error

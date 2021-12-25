@@ -6,7 +6,6 @@ if(isset($_POST['update'])){
     $id_brg = $_POST['id_brg']; //idbarang
     $jml_masuk = $_POST['jml_masuk'];
     $keterangan = $_POST['keterangan'];
-    $tgl_masuk = $_POST['tgl_masuk'];
 
     $lihatstock = mysqli_query($koneksi,"select * from data_brg where id_brg='$id_brg'"); //lihat stock barang itu saat ini
     $stocknya = mysqli_fetch_array($lihatstock); //ambil datanya
@@ -22,7 +21,7 @@ if(isset($_POST['update'])){
         $tambahistock = $stockskrg+$hitungselisih;
 
         $queryx = mysqli_query($koneksi,"update data_brg set jml_stok='$tambahistock' where id_brg='$id_brg'");
-        $updatedata1 = mysqli_query($koneksi,"update data_msk set tgl_masuk='$tgl_masuk',jml_masuk='$jml_masuk',keterangan='$keterangan' where id='$id'");
+        $updatedata1 = mysqli_query($koneksi,"update data_msk set jml_masuk='$jml_masuk',keterangan='$keterangan' where id='$id'");
         
         //cek apakah berhasil
         if ($updatedata1 && $queryx){
@@ -44,7 +43,7 @@ if(isset($_POST['update'])){
 
         $query1 = mysqli_query($koneksi,"update data_brg set jml_stok='$kurangistock' where id_brg='$id_brg'");
 
-        $updatedata = mysqli_query($koneksi,"update data_msk set tgl_masuk='$tgl_masuk', jml_masuk='$jml_masuk', keterangan='$keterangan' where id='$id'");
+        $updatedata = mysqli_query($koneksi,"update data_msk set jml_masuk='$jml_masuk', keterangan='$keterangan' where id='$id'");
         
         //cek apakah berhasil
         if ($query1 && $updatedata){

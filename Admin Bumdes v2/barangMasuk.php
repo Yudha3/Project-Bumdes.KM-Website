@@ -24,13 +24,12 @@ $sesName = $_SESSION['name'];
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
     <meta charset="UTF-8">
-    <title> Barang Masuk </title>
+    <title> Transaksi Barang Masuk </title>
     <link rel="stylesheet" href="style/style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -65,27 +64,33 @@ $sesName = $_SESSION['name'];
                 </a>
             </li>
             <li>
-                <a href="reseller.php" class="">
+                <a href="reseller.php">
                     <i class='bx bxs-collection'></i>
                     <span class="links_name">Reseller</span>
                 </a>
             </li>
             <li>
                 <a href="barangMasuk.php" class="active">
-                    <i class='bx bx-cart'></i>
+                    <i class='bx bxs-cart-add'></i>
                     <span class="links_name">Transaksi Masuk</span>
                 </a>
             </li>
             <li>
                 <a href="barangKeluar.php" class="">
-                    <i class='bx bx-cart'></i>
+                    <i class='bx bxs-cart-download'></i>
                     <span class="links_name">Transaksi Keluar</span>
                 </a>
             </li>
             <li>
-                <a href="report.php">
-                    <i class='bx bx-book-alt'></i>
-                    <span class="links_name">Laporan</span>
+                <a href="reportMasuk.php" class="">
+                    <i class='bx bxs-archive-in'></i>
+                    <span class="links_name">Laporan Masuk</span>
+                </a>
+            </li>
+            <li>
+                <a href="reportKeluar.php" class="">
+                    <i class='bx bxs-archive-out'></i>
+                    <span class="links_name">Laporan Keluar</span>
                 </a>
             </li>
             <li class="log_out">
@@ -103,8 +108,8 @@ $sesName = $_SESSION['name'];
                 <span class="dashboard">Barang Masuk</span>
             </div>
             <!-- <div class="search-box">
-                <input type="text" placeholder="Search...">
-                <i class='bx bx-search'></i>
+            <input type="text" placeholder="Search...">
+            <i class='bx bx-search'></i>
             </div> -->
             <div class="profile-details">
                 <!-- <img src="images/profile.jpg" alt=""> -->
@@ -117,7 +122,7 @@ $sesName = $_SESSION['name'];
             <div class="sales-boxes">
                 <div class="recent-sales1 box">
                     <div class="card-header1">
-                        <h3>Recent Barang Masuk</h3>
+                        <h3>Barang Masuk</h3>
 
                         <button>
                             <a href="barangmasuk/newBarangmasuk.php" style="text-decoration: none;">Tambah Barang Masuk</a>
@@ -130,16 +135,19 @@ $sesName = $_SESSION['name'];
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Id Transaksi</th>
                                         <th>Tanggal</th>
-                                        <th>Nama Barang</th>
+                                        <th>Barang</th>
+                                        <th>Pengirim</th>
                                         <th>Jumlah</th>
+                                        <th>Total Harga</th>
                                         <th>Keterangan</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $brg = mysqli_query($koneksi, "SELECT * from data_msk sb, data_brg st where st.id_brg=sb.id_brg order by sb.id DESC");
+                                    $brg = mysqli_query($koneksi, "SELECT * FROM data_msk sb, data_brg st where st.id_brg=sb.id_brg ORDER BY id DESC");
                                     $no = 1;
                                     while ($b = mysqli_fetch_array($brg)) {
                                         $idb = $b['id_brg'];
@@ -147,13 +155,18 @@ $sesName = $_SESSION['name'];
                                     ?>
                                         <tr>
                                             <td align="center"><?php echo $no; ?></td>
-                                            <td><?php $tanggals=$b['tgl_masuk']; echo date("d-M-Y", strtotime($tanggals)) ?></td>
+                                            <td><?php echo $b['id_transaksi'] ?></td>
+                                            <td><?php $tanggals = $b['tgl_msk'];
+                                                echo date("d-M-Y", strtotime($tanggals)) ?></td>
                                             <td><?php echo $b['barang'] ?></td>
+                                            <td><?php echo $b['pengirim'] ?></td>
                                             <td><?php echo $b['jml_masuk'] ?></td>
+                                            <td>Rp.<?php echo $b['total_hrg'] ?></td>
                                             <td><?php echo $b['keterangan'] ?></td>
                                             <td>
-                                                <a href="barangmasuk/editBarangmasuk.php?id=<?php echo $id; ?>" style="text-decoration: none;">Edit</a> |
-                                                <a href="barangmasuk/proses_hapus.php?id=<?php echo $id; ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus barang ini dari daftar stock  masuk?')" style="text-decoration: none;">Hapus</a>
+                                                <a href="barangmasuk/editBarangmasuk.php?id=<?php echo $b['id'] ?>" style="text-decoration: none;">Edit</a> |
+                                                <a href="barangmasuk/proses_hapus.php?id=<?php echo $b['id'] ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus barang ini dari daftar stock masuk?')" style="text-decoration: none;">Hapus</a> |
+                                                <a href="barangmasuk/pindahData.php?id=<?php echo $b['id'] ?>"  style="text-decoration: none;" onclick="return confirm('Anda yakin?')">Selesai</a>
                                             </td>
                                         </tr>
                                     <?php

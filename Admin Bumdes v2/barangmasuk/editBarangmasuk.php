@@ -22,36 +22,13 @@ if (isset($_GET['aksi'])) {
 require('../koneksi.php');
 $sesName = $_SESSION['name'];
 
-if (isset($_GET['id'])) {
-    // ambil nilai id dari url dan disimpan dalam variabel $id
-    $id = ($_GET['id']);
-    // $id_brg = ($_GET["id_brg"]);
-
-    // menampilkan data dari database yang mempunyai id=$id
-    // $query = "SELECT * from data_msk sb, data_brg st where st.id_brg=sb.id_brg order by sb.id DESC";
-    $query = "SELECT * FROM data_msk WHERE id = '$id'";
-    $result = mysqli_query($koneksi, $query);
-    // jika data gagal diambil maka akan tampil error berikut
-    if (!$result) {
-        die("Query Error: " . mysqli_errno($koneksi) .
-            " - " . mysqli_error($koneksi));
-    }
-    // mengambil data dari database
-    $data = mysqli_fetch_assoc($result);
-    // apabila data tidak ada pada database maka akan dijalankan perintah ini
-    if (!count($data)) {
-        echo "<script>alert('Data tidak ditemukan pada database');window.location='../barangMasuk.php';</script>";
-    }
-} else {
-    // apabila tidak ada data GET id pada akan di redirect ke index.php
-    echo "<script>alert('Masukkan data id.');window.location='../barangMasuk.php';</script>";
-}
-
-// $brg = mysqli_query($koneksi, "SELECT * from data_msk sb, data_brg st where st.id_brg=sb.id_brg order by sb.id DESC");
-// $no = 1;
-// while ($b = mysqli_fetch_array($brg)) {
-//     $idb = $b['id_brg'];
-//     $id = $b['id'];
+$id = $_GET['id'];
+// $query = "SELECT * from data_brg INNER JOIN data_msk ON data_brg.id_brg=data_msk.id_brg WHERE data_brg.id_brg='$id'";
+$query = "SELECT * from data_brg INNER JOIN data_msk ON data_brg.id_brg=data_msk.id_brg WHERE data_msk.id='$id'";
+// $query = "SELECT * from data_msk INNER JOIN data_brg ON data_brg.id_brg=data_msk.id_brg WHERE data_msk.id='$id'";
+// $query = "SELECT * from data_msk sb, data_brg st where st.id_brg=sb.id_brg order by sb.id='$id'";
+$result = mysqli_query($koneksi, $query);
+$data = mysqli_fetch_assoc($result);
 
 ?>
 
@@ -112,9 +89,15 @@ if (isset($_GET['id'])) {
                 </a>
             </li>
             <li>
-                <a href="../report.php">
+                <a href="../reportMasuk.php" class="">
                     <i class='bx bx-book-alt'></i>
-                    <span class="links_name">Laporan</span>
+                    <span class="links_name">Laporan Masuk</span>
+                </a>
+            </li>
+            <li>
+                <a href="../reportKeluar.php" class="">
+                    <i class='bx bx-book-alt'></i>
+                    <span class="links_name">Laporan Keluar</span>
                 </a>
             </li>
             <li class="log_out">
@@ -159,23 +142,31 @@ if (isset($_GET['id'])) {
                         <form method="POST" action="proses_edit.php">
                             <section class="base">
                                 <!-- menampung nilai id produk yang akan di edit -->
-                                <input type="hidden" name="id" value="<?php echo $data['id'];?>">
-                                <input type="hidden" name="id_brg" value="<?php echo $data['id_brg'];?>">
+                                <input type="hidden" name="id" value="<?php echo $data['id'] ?>">
+                                <input type="hidden" name="id_brg" value="<?php echo $data['id_brg'] ?>">
                                 <div>
-                                    <label for="tgl_masuk">Tanggal Masuk</label>
-                                    <input type="date" name="tgl_masuk" id="tgl_masuk" value="<?php echo $data['tgl_masuk'] ?>" autofocus="" required="" />
+                                    <label for="id_transaksi">ID Transaksi</label>
+                                    <input type="text" name="id_transaksi" id="id_transaksi" value="<?php echo $data['id_transaksi'] ?>" disabled="" />
                                 </div>
                                 <div>
-                                    <label for="barang">Nama Barang</label>
-                                    <input type="text" name="barang" id="barang" value="<?php echo $data['barang'] ?>" autofocus="" required="" disabled />
+                                    <label for="tgl_msk">Tanggal Masuk</label>
+                                    <input type="date" name="tgl_msk" id="tgl_msk" value="<?php echo $data['tgl_msk'] ?>" disabled="" />
+                                </div>
+                                <div>
+                                    <label for="barang">Barang</label>
+                                    <input type="text" name="barang" id="barang" value="<?php echo $data['barang'] ?>" disabled="" />
+                                </div>
+                                <div>
+                                    <label for="pengirim">Pengirim</label>
+                                    <input type="text" name="pengirim" id="pengirim" value="<?php echo $data['pengirim'] ?>" disabled="" />
                                 </div>
                                 <div>
                                     <label for="jml_masuk">Jumlah</label>
-                                    <input type="number" name="jml_masuk" id="jml_masuk" value="<?php echo $data['jml_masuk'] ?>" autofocus="" required="" />
+                                    <input type="number" name="jml_masuk" id="jml_masuk" value="<?php echo $data['jml_masuk'] ?>" autofocus required="" />
                                 </div>
                                 <div>
                                     <label for="keterangan">Keterangan</label>
-                                    <input type="text" name="keterangan" id="keterangan" value="<?php echo $data['keterangan'] ?>" autofocus="" required="" />
+                                    <input type="text" name="keterangan" id="keterangan" value="<?php echo $data['keterangan'] ?>"  />
                                 </div>
                                 <div>
                                     <button type="submit" name="update">Simpan Perubahan</button>

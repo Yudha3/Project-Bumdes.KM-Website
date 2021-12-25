@@ -19,8 +19,29 @@ if (isset($_GET['aksi'])) {
         exit();
     }
 }
-require('../koneksi.php');
+require '../koneksi.php';
 $sesName = $_SESSION['name'];
+
+$no = mysqli_query($koneksi, "select id_transaksi from data_msk order by id_transaksi desc");
+$idtran = mysqli_fetch_array($no);
+$kode = isset($idtran['id_transaksi']) ? $idtran['id_transaksi'] : '';
+// $kode = $idtran['id_transaksi'];
+
+
+$urut = substr($kode, 8, 3);
+$tambah = (int) $urut + 1;
+$bulan = date("m");
+$tahun = date("y");
+$day = date("d");
+
+if (strlen($tambah) == 1) {
+    $format = "TRM-" . $bulan . $tahun . "00" . $tambah;
+} else if (strlen($tambah) == 2) {
+    $format = "TRM-" . $bulan . $tahun . "0" . $tambah;
+} else {
+    $format = "TRM-" . $bulan . $tahun . $tambah;
+}
+$tanggal_masuk = date("Y-m-d");
 
 ?>
 
@@ -30,7 +51,7 @@ $sesName = $_SESSION['name'];
 
 <head>
     <meta charset="UTF-8">
-    <title> Barang Masuk </title>
+    <title> Transaksi Barang Masuk </title>
     <link rel="stylesheet" href="../style/style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -81,13 +102,19 @@ $sesName = $_SESSION['name'];
                 </a>
             </li>
             <li>
-                <a href="../report.php">
+                <a href="../reportMasuk.php" class="">
                     <i class='bx bx-book-alt'></i>
-                    <span class="links_name">Laporan</span>
+                    <span class="links_name">Laporan Masuk</span>
+                </a>
+            </li>
+            <li>
+                <a href="../reportKeluar.php" class="">
+                    <i class='bx bx-book-alt'></i>
+                    <span class="links_name">Laporan Keluar</span>
                 </a>
             </li>
             <li class="log_out">
-                <a href="../barangMasuk.php?aksi=logout" onclick="return confirm('Apakah anda akan keluar?')">
+                <a  href="../barangMasuk.php?aksi=logout" onclick="return confirm('Apakah anda akan keluar?')">
                     <i class='bx bx-log-out'></i>
                     <span class="links_name">Log out</span>
                 </a>
@@ -124,47 +151,98 @@ $sesName = $_SESSION['name'];
                     <div class="tambah">
                         <center>
                             <h1>Tambah Barang Masuk</h1>
-                        <center>
-                        <form method="POST" action="proses_tambah.php" enctype="multipart/form-data">
-                            <section class="base">
-                                <div>
-                                    <label for="tgl_masuk">Tanggal Masuk</label>
-                                    <input type="date" name="tgl_masuk" id="tgl_masuk" autofocus="" required="" />
-                                </div>
-                                <div>
-                                    <label for="barang">Nama Barang</label>
-                                    <select name="barang" class="custom-select form-control" id="barang" autofocus="" required="">
-                                        <option selected>Pilih barang</option>
-                                        <?php
-                                        $det = mysqli_query($koneksi, "select * from data_brg order by barang ASC");
-                                        while ($d = mysqli_fetch_array($det)) {
-                                        ?>
-                                            <option value="<?php echo $d['id_brg'] ?>"><?php echo $d['barang'] ?> </option>
-                                        <?php
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="jml_masuk">Jumlah</label>
-                                    <input type="number" min="1" name="jml_masuk" id="jml_masuk" autofocus="" required="" />
-                                </div>
-                                <div>
-                                    <label for="keterangan">Keterangan</label>
-                                    <input type="text" name="keterangan" id="keterangan" autofocus="" required="" />
-                                </div>
-                                <div>
-                                    <button type="submit" name="bsimpan">Simpan Product</button>
-                                </div>
-                            </section>
-                        </form>
+                            <center>
+                                <form method="POST" action="proses_tambah.php" enctype="multipart/form-data">
+                                    <section class="base">
+                                        <div>
+                                            <label for="id_transaksi">Id Transaksi</label>
+                                            <input type="text" name="id_transaksi" id="id_transaksi" value="<?php echo $format; ?>" readonly />
+                                        </div>
+                                        <div>
+                                            <label for="tgl_msk">Tanggal Masuk</label>
+                                            <input type="date" name="tgl_msk" id="tgl_msk" value="<?php echo $tanggal_masuk; ?>" />
+                                        </div>
+                                        <div>
+                                            <label for="barang">Barang</label>
+                                            <select name="barang" class="custom-select form-control" id="cmb_barang" autofocus="" required="">
+                                                <option selected>-- Pilih barang --</option>
+                                                <?php
+                                                $det = mysqli_query($koneksi, "select * from data_brg order by barang ASC");
+                                                while ($d = mysqli_fetch_array($det)) {
+
+                                                    // echo "<option value='$d[id_brg].$d[barang]'>$d[id_brg] | $d[barang]</option>";
+                                                    echo "<option value='$d[id_brg].$d[barang]'>$d[id_brg] | $d[barang]</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="hg_beli">Harga Beli</label>
+                                            <input type="number" name="hg_beli" id="hg_beli" readonly />
+                                            <!-- <option value=""></option> -->
+                                    
+                                        </div>
+                                        <div>
+                                            <label for="jml_masuk">Jumlah</label>
+                                            <input type="number" min="1" onkeyup="sum()" name="jml_masuk" id="jml_masuk" autofocus="" required="" />
+                                        </div>
+
+                                        <div>
+                                            <label for="total_hrg">Total Harga</label>
+                                            <input type="number" name="total_hrg" id="total_hrg" readonly/>
+                                        </div>
+
+                                        <div>
+                                            <label for="pengirim">Mitra</label>
+                                            <select name="pengirim" class="custom-select form-control" id="pengirim" autofocus="" required="">
+                                                <option selected>-- Pilih Mitra --</option>
+                                                <?php
+                                                $det = mysqli_query($koneksi, "select * from data_mitra order by nama_mitra ASC");
+                                                while ($d = mysqli_fetch_array($det)) {
+
+
+                                                    echo "<option value='$d[nama_mitra]'>$d[nama_mitra]</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="keterangan">Keterangan</label>
+                                            <input type="text" name="keterangan" id="keterangan" autofocus="" />
+                                        </div>
+                                        <div>
+                                            <button type="submit" name="simpan">Simpan Product</button>
+                                        </div>
+                                    </section>
+                                </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <script src="../assets/js/jquery-1.10.2.js"></script>
     <script>
+        function sum() {
+	        var stok = document.getElementById('hg_beli').value;
+	        var jumlahmasuk = document.getElementById('jml_masuk').value;
+	        var result = parseInt(stok) * parseInt(jumlahmasuk);
+	        if (!isNaN(result)) {
+		        document.getElementById('total_hrg').value = result;
+	        }
+        }
+
+        $('#cmb_barang').change(function(){
+            var selected_id = $(this).val();
+            var data = {id: selected_id};
+            $.post('get_data_brg.php', data, function(data){
+                $('#hg_beli').val(data);
+            })
+        });
+    </script>
+
+    <script>
+
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {

@@ -22,6 +22,13 @@ if (isset($_GET['aksi'])) {
 require('../koneksi.php');
 $sesName = $_SESSION['name'];
                         
+$id = $_GET['id'];
+// $query = "SELECT * from data_brg INNER JOIN data_klr ON data_brg.id_brg=data_klr.id_brg WHERE data_brg.id_brg='$id'";
+$query = "SELECT * from data_brg INNER JOIN data_klr ON data_brg.id_brg=data_klr.id_brg WHERE data_klr.id='$id'";
+// $query = "SELECT * from data_msk INNER JOIN data_brg ON data_brg.id_brg=data_msk.id_brg WHERE data_msk.id='$id'";
+// $query = "SELECT * from data_msk sb, data_brg st where st.id_brg=sb.id_brg order by sb.id='$id'";
+$result = mysqli_query($koneksi, $query);
+$data = mysqli_fetch_assoc($result);
 
 ?>
 
@@ -82,9 +89,15 @@ $sesName = $_SESSION['name'];
                 </a>
             </li>
             <li>
-                <a href="../report.php">
+                <a href="../reportMasuk.php" class="">
                     <i class='bx bx-book-alt'></i>
-                    <span class="links_name">Laporan</span>
+                    <span class="links_name">Laporan Masuk</span>
+                </a>
+            </li>
+            <li>
+                <a href="../reportKeluar.php" class="">
+                    <i class='bx bx-book-alt'></i>
+                    <span class="links_name">Laporan Keluar</span>
                 </a>
             </li>
             <li class="log_out">
@@ -112,13 +125,6 @@ $sesName = $_SESSION['name'];
             </div>
         </nav>
 
-        <?php
-                                    $brg = mysqli_query($koneksi, "SELECT * FROM data_klr sb, data_brg st where st.id_brg=sb.id_brg ORDER BY id DESC");
-                                    $no = 1;
-                                    while ($b = mysqli_fetch_array($brg)) {
-                                        $idb = $b['id_brg'];
-                                        $id = $b['id'];
-                                    ?>
         <div class="home-content">
             <div class="sales-boxes">
                 <div class="recent-sales1 box">
@@ -131,32 +137,36 @@ $sesName = $_SESSION['name'];
                     </div>
                     <div class="tambah">
                         <center>
-                            <h1>Edit Product <?php echo $b['barang'] ?></h1>
+                            <h1>Edit Product <?php echo $data['barang'] ?></h1>
                         <center>
                         <form method="POST" action="proses_edit.php" enctype="multipart/form-data">
                             <section class="base">
                                 <!-- menampung nilai id produk yang akan di edit -->
-                                <input name="id" value="<?=$id; ?>" hidden />
-                                <input type="hidden" name="id_brg" value="<?=$idb;?>">
+                                <input type="hidden" name="id" value="<?php echo $data['id'] ?>">
+                                <input type="hidden" name="id_brg" value="<?php echo $data['id_brg'] ?>">
+                                <div>
+                                    <label for="id_transaksi">ID Transaksi</label>
+                                    <input type="text" name="id_transaksi" id="id_transaksi" value="<?php echo $data['id_transaksi'] ?>" disabled />
+                                </div>
                                 <div>
                                     <label for="tgl_keluar">Tanggal keluar</label>
-                                    <input type="date" name="tgl_keluar" id="tgl_keluar" value="<?php echo $b['tgl_keluar'] ?>" autofocus="" required="" />
+                                    <input type="date" name="tgl_keluar" id="tgl_keluar" value="<?php echo $data['tgl_keluar'] ?>" disabled />
                                 </div>
                                 <div>
                                     <label for="barang">Nama Barang</label>
-                                    <input type="text" name="barang" id="barang" value="<?php echo $b['barang'] ?>" autofocus="" required="" disabled />
+                                    <input type="text" name="barang" id="barang" value="<?php echo $data['barang'] ?>" disabled />
                                 </div>
                                 <div>
                                     <label for="jml_keluar">Jumlah</label>
-                                    <input type="number" name="jml_keluar" id="jml_keluar" value="<?php echo $b['jml_keluar'] ?>" autofocus="" required="" />
+                                    <input type="number" name="jml_keluar" id="jml_keluar" value="<?php echo $data['jml_keluar'] ?>" autofocus="" required="" />
                                 </div>
                                 <div>
                                     <label for="penerima">Penerima</label>
-                                    <input type="text" name="penerima" id="penerima" value="<?php echo $b['penerima'] ?>" autofocus="" required="" />
+                                    <input type="text" name="penerima" id="penerima" value="<?php echo $data['penerima'] ?>" autofocus="" required="" />
                                 </div>
                                 <div>
                                     <label for="keterangan">Keterangan</label>
-                                    <input type="text" name="keterangan" id="keterangan" value="<?php echo $b['keterangan'] ?>" autofocus="" required="" />
+                                    <input type="text" name="keterangan" id="keterangan" value="<?php echo $data['keterangan'] ?>" />
                                 </div>
                                 <div>
                                     <button type="submit" name="update">Simpan Perubahan</button>
@@ -168,9 +178,6 @@ $sesName = $_SESSION['name'];
                 </div>
             </div>
         </div>
-        <?php 
-			}
-		?>
     </section>
 
     <script>

@@ -136,6 +136,7 @@ $sesName = $_SESSION['name'];
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Kode Reseller</th>
                                         <th>Nama Reseller</th>
                                         <th>Alamat</th>
                                         <th>Nomer Telepon</th>
@@ -162,6 +163,7 @@ $sesName = $_SESSION['name'];
                                     ?>
                                         <tr>
                                             <td align="center"><?php echo $no; ?></td>
+                                            <td><?php echo $row['kd_reseller']; ?></td>
                                             <td><?php echo $row['nama_reseller']; ?></td>
                                             <td><?php echo $row['alamat']; ?></td>
                                             <td><?php echo $row['no_tlp']; ?></td>

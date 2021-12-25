@@ -22,6 +22,26 @@ if (isset($_GET['aksi'])) {
 require('../koneksi.php');
 $sesName = $_SESSION['name'];
 
+$no = mysqli_query($koneksi, "select id_brg from data_brg order by id_brg desc");
+$idtran = mysqli_fetch_array($no);
+$kode = isset($idtran['id_brg']) ? $idtran['id_brg'] : '';
+// $kode = $idtran['id_transaksi'];
+
+
+$urut = substr($kode, 8, 3);
+$tambah = rand(1, 999);
+$bulan = date("m");
+$tahun = date("y");
+
+if (strlen($tambah) == 1) {
+    $format = "BRG-" . $bulan . $tahun . "00" . $tambah;
+} else if (strlen($tambah) == 2) {
+    $format = "BRG-" . $bulan . $tahun . "0" . $tambah;
+} else {
+    $format = "BRG-" . $bulan . $tahun . $tambah;
+}
+$tanggal_masuk = date("Y-m-d");
+
 ?>
 
 
@@ -70,25 +90,25 @@ $sesName = $_SESSION['name'];
             </li>
             <li>
                 <a href="../barangMasuk.php">
-                    <i class='bx bx-cart'></i>
+                    <i class='bx bxs-cart-add'></i>
                     <span class="links_name">Transaksi Masuk</span>
                 </a>
             </li>
             <li>
                 <a href="../barangKeluar.php" class="">
-                    <i class='bx bx-cart'></i>
+                    <i class='bx bxs-cart-download'></i>
                     <span class="links_name">Transaksi Keluar</span>
                 </a>
             </li>
             <li>
                 <a href="../reportMasuk.php" class="">
-                    <i class='bx bx-book-alt'></i>
+                    <i class='bx bxs-archive-in'></i>
                     <span class="links_name">Laporan Masuk</span>
                 </a>
             </li>
             <li>
                 <a href="../reportKeluar.php" class="">
-                    <i class='bx bx-book-alt'></i>
+                    <i class='bx bxs-archive-out'></i>
                     <span class="links_name">Laporan Keluar</span>
                 </a>
             </li>
@@ -134,12 +154,16 @@ $sesName = $_SESSION['name'];
                         <form method="POST" action="proses_tambah.php" enctype="multipart/form-data">
                             <section class="base">
                                 <div>
+                                    <label for="id_brg">Kode Barang</label>
+                                    <input type="text" name="id_brg" id="id_brg" value="<?php echo $format; ?>" readonly />
+                                </div>
+                                <div>
                                     <label class="control-label" for="barang">Nama Product</label>
                                     <input type="text" name="barang" class="form-control" id="barang" autofocus="" required="" />
                                 </div>
                                 <div>
                                     <label class="control-label" for="tgl_masuk">Tanggal Masuk Product</label>
-                                    <input type="date" name="tgl_masuk" class="form-control" id="tgl_masuk" autofocus="" required="" />
+                                    <input type="date" name="tgl_masuk" class="form-control" id="tgl_masuk" value="<?php echo $tanggal_masuk; ?>" />
                                 </div>
                                 <div>
                                     <label class="control-label" for="hg_beli">Harga Beli Product</label>

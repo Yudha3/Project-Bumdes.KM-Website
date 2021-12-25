@@ -136,6 +136,7 @@ $sesName = $_SESSION['name'];
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Kode Mitra</th>
                                         <th>Nama Mitra</th>
                                         <th>Alamat</th>
                                         <th>Nomer Telepon</th>
@@ -163,6 +164,7 @@ $sesName = $_SESSION['name'];
                                     ?>
                                         <tr>
                                             <td align="center"><?php echo $no; ?></td>
+                                            <td><?php echo $row['kd_mitra']; ?></td>
                                             <td><?php echo $row['nama_mitra']; ?></td>
                                             <td><?php echo $row['alamat']; ?></td>
                                             <td><?php echo $row['no_tlp']; ?></td>

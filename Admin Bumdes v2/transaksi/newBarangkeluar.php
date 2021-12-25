@@ -91,25 +91,25 @@ $tanggal_keluar = date("Y-m-d");
             </li>
             <li>
                 <a href="../barangMasuk.php">
-                    <i class='bx bx-cart'></i>
+                    <i class='bx bxs-cart-add'></i>
                     <span class="links_name">Transaksi Masuk</span>
                 </a>
             </li>
             <li>
                 <a href="../barangKeluar.php" class="active">
-                    <i class='bx bx-cart'></i>
+                    <i class='bx bxs-cart-download'></i>
                     <span class="links_name">Transaksi Keluar</span>
                 </a>
             </li>
             <li>
                 <a href="../reportMasuk.php" class="">
-                    <i class='bx bx-book-alt'></i>
+                    <i class='bx bxs-archive-in'></i>
                     <span class="links_name">Laporan Masuk</span>
                 </a>
             </li>
             <li>
                 <a href="../reportKeluar.php" class="">
-                    <i class='bx bx-book-alt'></i>
+                    <i class='bx bxs-archive-out'></i>
                     <span class="links_name">Laporan Keluar</span>
                 </a>
             </li>

@@ -137,6 +137,7 @@ $sesName = $_SESSION['name'];
                                         <th>No</th>
                                         <th>Id Transaksi</th>
                                         <th>Tanggal</th>
+                                        <th>Kode Barang</th>
                                         <th>Barang</th>
                                         <th>Pengirim</th>
                                         <th>Jumlah</th>
@@ -158,6 +159,7 @@ $sesName = $_SESSION['name'];
                                             <td><?php echo $b['id_transaksi'] ?></td>
                                             <td><?php $tanggals = $b['tgl_msk'];
                                                 echo date("d-M-Y", strtotime($tanggals)) ?></td>
+                                            <td><?php echo $b['id_brg'] ?></td>
                                             <td><?php echo $b['barang'] ?></td>
                                             <td><?php echo $b['pengirim'] ?></td>
                                             <td><?php echo $b['jml_masuk'] ?></td>

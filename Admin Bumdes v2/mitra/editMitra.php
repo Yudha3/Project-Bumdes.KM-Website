@@ -94,25 +94,25 @@ if (isset($_GET['id'])) {
             </li>
             <li>
                 <a href="../barangMasuk.php">
-                    <i class='bx bx-cart'></i>
+                    <i class='bx bxs-cart-add'></i>
                     <span class="links_name">Transaksi Masuk</span>
                 </a>
             </li>
             <li>
                 <a href="../barangKeluar.php" class="">
-                    <i class='bx bx-cart'></i>
+                    <i class='bx bxs-cart-download'></i>
                     <span class="links_name">Transaksi Keluar</span>
                 </a>
             </li>
             <li>
                 <a href="../reportMasuk.php" class="">
-                    <i class='bx bx-book-alt'></i>
+                    <i class='bx bxs-archive-in'></i>
                     <span class="links_name">Laporan Masuk</span>
                 </a>
             </li>
             <li>
                 <a href="../reportKeluar.php" class="">
-                    <i class='bx bx-book-alt'></i>
+                    <i class='bx bxs-archive-out'></i>
                     <span class="links_name">Laporan Keluar</span>
                 </a>
             </li>
@@ -159,6 +159,10 @@ if (isset($_GET['id'])) {
                             <section class="base">
                                 <!-- menampung nilai id produk yang akan di edit -->
                                 <input name="id" value="<?php echo $data['id']; ?>" hidden />
+                                <div>
+                                    <label for="kd_mitra">Kode Mitra</label>
+                                    <input type="text" name="kd_mitra" id="kd_mitra" value="<?php echo $data['kd_mitra']; ?>" readonly />
+                                </div>
                                 <div>
                                     <label for="nama_mitra">Nama Mitra</label>
                                     <input type="text" name="nama_mitra" id="nama_mitra" value="<?php echo $data['nama_mitra']; ?>" autofocus="" required="" />

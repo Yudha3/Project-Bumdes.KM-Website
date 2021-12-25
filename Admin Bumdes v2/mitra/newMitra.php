@@ -22,6 +22,26 @@ if (isset($_GET['aksi'])) {
 require('../koneksi.php');
 $sesName = $_SESSION['name'];
 
+$no = mysqli_query($koneksi, "select kd_mitra from data_mitra order by kd_mitra desc");
+$idtran = mysqli_fetch_array($no);
+$kode = isset($idtran['kd_mitra']) ? $idtran['kd_mitra'] : '';
+// $kode = $idtran['id_transaksi'];
+
+
+$urut = substr($kode, 8, 3);
+$tambah = rand(1, 999);
+$bulan = date("m");
+$tahun = date("y");
+
+if (strlen($tambah) == 1) {
+    $format = "MTR-" . $bulan . $tahun . "00" . $tambah;
+} else if (strlen($tambah) == 2) {
+    $format = "MTR-" . $bulan . $tahun . "0" . $tambah;
+} else {
+    $format = "MTR-" . $bulan . $tahun . $tambah;
+}
+$tanggal_masuk = date("Y-m-d");
+
 ?>
 
 
@@ -70,25 +90,25 @@ $sesName = $_SESSION['name'];
             </li>
             <li>
                 <a href="../barangMasuk.php">
-                    <i class='bx bx-cart'></i>
+                    <i class='bx bxs-cart-add'></i>
                     <span class="links_name">Transaksi Masuk</span>
                 </a>
             </li>
             <li>
                 <a href="../barangKeluar.php" class="">
-                    <i class='bx bx-cart'></i>
+                    <i class='bx bxs-cart-download'></i>
                     <span class="links_name">Transaksi Keluar</span>
                 </a>
             </li>
             <li>
                 <a href="../reportMasuk.php" class="">
-                    <i class='bx bx-book-alt'></i>
+                    <i class='bx bxs-archive-in'></i>
                     <span class="links_name">Laporan Masuk</span>
                 </a>
             </li>
             <li>
                 <a href="../reportKeluar.php" class="">
-                    <i class='bx bx-book-alt'></i>
+                    <i class='bx bxs-archive-out'></i>
                     <span class="links_name">Laporan Keluar</span>
                 </a>
             </li>
@@ -134,6 +154,10 @@ $sesName = $_SESSION['name'];
                         <form method="POST" action="proses_tambah.php" enctype="multipart/form-data">
                             <section class="base">
                                 <div>
+                                    <label for="kd_mitra">Kode Mitra</label>
+                                    <input type="text" name="kd_mitra" id="kd_mitra" value="<?php echo $format; ?>" readonly />
+                                </div>
+                                <div>
                                     <label for="nama_mitra">Nama Mitra</label>
                                     <input type="text" name="nama_mitra" id="nama_mitra" autofocus="" required="" />
                                 </div>
@@ -147,7 +171,7 @@ $sesName = $_SESSION['name'];
                                 </div>
                                 <div>
                                     <label for="tgl_gabung">Tanggal Gabung</label>
-                                    <input type="date" name="tgl_gabung" id="tgl_gabung" autofocus="" required="" />
+                                    <input type="date" name="tgl_gabung" id="tgl_gabung" value="<?php echo $tanggal_masuk; ?>" />
                                 </div>
                                 <div>
                                     <label for="barang">Barang</label>

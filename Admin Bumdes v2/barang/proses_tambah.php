@@ -3,6 +3,7 @@
 include '../koneksi.php';
 
 // membuat variabel untuk menampung data dari form
+$kode_barang = $_POST['id_brg'];
 $nama_barang   = $_POST['barang'];
 $tanggal_masuk  = $_POST['tgl_masuk'];
 $harga_beli    = $_POST['hg_beli'];
@@ -42,7 +43,7 @@ if ($gambar_produk != "") {
     if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
         move_uploaded_file($file_tmp, '../images/barang/' . $nama_gambar_baru); //memindah file gambar ke folder gambar
         // jalankan query INSERT untuk menambah data ke database pastikan sesuai urutan (id tidak perlu karena dibikin otomatis)
-        $query = "INSERT INTO data_brg (barang, tgl_masuk, hg_beli, hg_jual, jml_stok, deskripsi, gambar) VALUES ('$nama_barang', '$tanggal_masuk', '$harga_beli', '$harga_jual', '$stok_barang', '$deskripsi', '$nama_gambar_baru')";
+        $query = "INSERT INTO data_brg (id_brg,barang, tgl_masuk, hg_beli, hg_jual, jml_stok, deskripsi, gambar) VALUES ('$kode_barang','$nama_barang', '$tanggal_masuk', '$harga_beli', '$harga_jual', '$stok_barang', '$deskripsi', '$nama_gambar_baru')";
         $result = mysqli_query($koneksi, $query);
         // periska query apakah ada error
         if (!$result) {
@@ -58,7 +59,7 @@ if ($gambar_produk != "") {
         echo "<script>alert('Ekstensi gambar yang boleh hanya jpg atau png.');window.location='newBarang.php';</script>";
     }
 } else {
-    $query = "INSERT INTO data_brg (barang, tgl_masuk, hg_beli, hg_jual, jml_stok, deskripsi, gambar) VALUES ('$nama_barang', '$tanggal_masuk', '$harga_beli', '$harga_jual', '$stok_barang', '$deskripsi', null)";
+    $query = "INSERT INTO data_brg (id_brg, barang, tgl_masuk, hg_beli, hg_jual, jml_stok, deskripsi, gambar) VALUES ('$kode_barang','$nama_barang', '$tanggal_masuk', '$harga_beli', '$harga_jual', '$stok_barang', '$deskripsi', null)";
     $result = mysqli_query($koneksi, $query);
     // periska query apakah ada error
     if (!$result) {

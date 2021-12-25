@@ -93,26 +93,26 @@ if (isset($_GET['id_brg'])) {
                 </a>
             </li>
             <li>
-                <a href="barangMasuk.php">
-                    <i class='bx bx-cart'></i>
+                <a href="../barangMasuk.php">
+                    <i class='bx bxs-cart-add'></i>
                     <span class="links_name">Transaksi Masuk</span>
                 </a>
             </li>
             <li>
-                <a href="barangKeluar.php" class="">
-                    <i class='bx bx-cart'></i>
+                <a href="../barangKeluar.php" class="">
+                    <i class='bx bxs-cart-download'></i>
                     <span class="links_name">Transaksi Keluar</span>
                 </a>
             </li>
             <li>
-                <a href="reportMasuk.php" class="">
-                    <i class='bx bx-book-alt'></i>
+                <a href="../reportMasuk.php" class="">
+                    <i class='bx bxs-archive-in'></i>
                     <span class="links_name">Laporan Masuk</span>
                 </a>
             </li>
             <li>
-                <a href="reportKeluar.php" class="">
-                    <i class='bx bx-book-alt'></i>
+                <a href="../reportKeluar.php" class="">
+                    <i class='bx bxs-archive-out'></i>
                     <span class="links_name">Laporan Keluar</span>
                 </a>
             </li>
@@ -158,7 +158,11 @@ if (isset($_GET['id_brg'])) {
                         <form method="POST" action="proses_edit.php" enctype="multipart/form-data">
                             <section class="base">
                                 <!-- menampung nilai id produk yang akan di edit -->
-                                <input name="id_brg" value="<?php echo $data['id_brg']; ?>" hidden />
+                                <input name="id" value="<?php echo $data['id_brg']; ?>" hidden />
+                                <div>
+                                    <label for="id_brg">Kode Barang</label>
+                                    <input type="text" name="id_brg" id="id_brg" value="<?php echo $data['id_brg']; ?>" readonly />
+                                </div>
                                 <div>
                                     <label for="barang">Nama Product</label>
                                     <input type="text" name="barang" id="barang" value="<?php echo $data['barang']; ?>" autofocus="" required="" />

@@ -136,6 +136,7 @@ $sesName = $_SESSION['name'];
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Kode Barang</th>
                                         <th>Nama Barang</th>
                                         <th>Harga Barang</th>
                                         <th>Stok Barang</th>
@@ -162,6 +163,7 @@ $sesName = $_SESSION['name'];
                                     ?>
                                         <tr>
                                             <td align="center"><?php echo $no; ?></td>
+                                            <td><?php echo $row['id_brg']; ?></td>
                                             <td><?php echo $row['barang']; ?></td>
                                             <td>Rp <?php echo $row['hg_jual']; ?></td>
                                             <td><?php echo $row['jml_stok']; ?></td>

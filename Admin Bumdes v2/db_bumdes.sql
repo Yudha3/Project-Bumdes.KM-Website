@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 25, 2021 at 04:38 AM
+-- Generation Time: Dec 25, 2021 at 01:54 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -70,28 +70,15 @@ INSERT INTO `data_admin` (`id`, `nama`, `telp`, `alamat`, `username`, `password`
 --
 
 CREATE TABLE `data_brg` (
-  `id_brg` int(5) NOT NULL,
+  `id_brg` varchar(50) NOT NULL,
   `barang` varchar(30) NOT NULL,
   `tgl_masuk` date NOT NULL,
   `hg_beli` int(30) NOT NULL,
   `hg_jual` int(30) NOT NULL,
-  `jml_stok` int(5) NOT NULL,
+  `jml_stok` int(11) NOT NULL,
   `deskripsi` text NOT NULL,
   `gambar` varchar(99) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `data_brg`
---
-
-INSERT INTO `data_brg` (`id_brg`, `barang`, `tgl_masuk`, `hg_beli`, `hg_jual`, `jml_stok`, `deskripsi`, `gambar`) VALUES
-(1, 'Asbak Domba', '2021-12-02', 395000, 590000, 1390, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque,', '253-ceramic-jar-6585077_1920.jpg'),
-(2, 'Kerajinan Tas Anyaman', '2021-11-27', 580000, 700000, 627, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque, laboriosam ea iusto nisi! Asperiores, impedit expedita labore fugit exercitationem quam maxime! Numquam, error repellendus nihil culpa explicabo saepe corporis eveniet beatae fugiat deleniti!', '735-bag-3688900_1920.jpg'),
-(5, 'Lampu Bambu', '2021-12-01', 45000, 60000, 1085, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque, laboriosam ea iusto nisi! Asperiores, impedit expedita labore fugit exercitationem quam maxime! Numquam, error repellendus nihil culpa explicabo saepe corporis eveniet beatae fugiat deleniti!', '571-candle-1021137_1920.jpg'),
-(6, 'Angklung', '2021-11-30', 125000, 160000, 815, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque, laboriosam ea iusto nisi! Asperiores, impedit expedita labore fugit exercitationem quam maxime! Numquam, error repellendus nihil culpa explicabo saepe corporis eveniet beatae fugiat deleniti!', '473-angklung-376513_1920.jpg'),
-(7, 'Vas Bunga', '2021-11-29', 65000, 80000, 674, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque,', '30-flower-3175428_1280.jpg'),
-(8, 'Lampu Kayu Burung Hantu', '2021-12-02', 49000, 64000, 712, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque, laboriosam ea iusto nisi! Asperiores, impedit expedita labore fugit exercitationem quam maxime! Numquam, error repellendus nihil culpa explicabo saepe corporis eveniet beatae fugiat deleniti!', '996-lamps-575870_1280.png'),
-(9, 'Wadah Bambu', '2021-12-03', 38000, 50000, 718, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure, repudiandae eius corrupti ipsum esse atque itaque eum quos cupiditate provident, mollitia porro commodi ex odit voluptatem assumenda in illo quasi doloremque, laboriosam ea iusto nisi! Asperiores, impedit expedita labore fugit exercitationem quam maxime! Numquam, error repellendus nihil culpa explicabo saepe corporis eveniet beatae fugiat deleniti!', '294-bamboo-373814_1280.jpg');
 
 -- --------------------------------------------------------
 
@@ -119,29 +106,13 @@ CREATE TABLE `data_klr` (
 
 CREATE TABLE `data_mitra` (
   `id` int(5) NOT NULL,
+  `kd_mitra` varchar(10) NOT NULL,
   `nama_mitra` varchar(50) NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `no_tlp` varchar(13) NOT NULL,
   `tgl_gabung` date NOT NULL,
   `barang` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `data_mitra`
---
-
-INSERT INTO `data_mitra` (`id`, `nama_mitra`, `alamat`, `no_tlp`, `tgl_gabung`, `barang`) VALUES
-(12, 'Lingkar Jati Abadi', 'Patrang', '085731379198', '2021-12-01', 'Kursi'),
-(13, 'Komiku', 'Kaliurang', '0854728365181', '2021-12-02', 'bola'),
-(14, 'Venerable', 'Sumbersari', '087654789123', '2021-12-10', 'Gajah'),
-(15, 'Live As', 'Mangli', '089765123890', '2021-12-08', 'Kain'),
-(16, 'Mount', 'Krajan Timur', '089789543678', '2021-12-04', 'air'),
-(17, 'Asura', 'Balung Wetan', '085678908123', '2021-12-12', 'sapu'),
-(18, 'Shall', 'Semeru', '085731379198', '2021-12-01', 'Kursi'),
-(19, 'Spirit', 'Patrang', '085731379198', '2021-12-07', 'bola'),
-(20, 'Scribe', 'Kaliurang', '085731379198', '2021-12-05', 'Kursi'),
-(21, 'The Way', 'Sumbersari', '085731379198', '2021-12-08', 'bola'),
-(22, 'ShenWang', 'Mojokerto', '085731379198', '2021-12-06', 'Kursi');
 
 -- --------------------------------------------------------
 
@@ -189,21 +160,12 @@ INSERT INTO `data_ongkir` (`id_ongkir`, `jenis_ongkir`, `ongkos_kirim`) VALUES
 
 CREATE TABLE `data_reseller` (
   `id` int(5) NOT NULL,
+  `kd_reseller` varchar(10) NOT NULL,
   `nama_reseller` varchar(50) NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `no_tlp` varchar(13) NOT NULL,
   `tgl_gabung` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `data_reseller`
---
-
-INSERT INTO `data_reseller` (`id`, `nama_reseller`, `alamat`, `no_tlp`, `tgl_gabung`) VALUES
-(2, 'Dwiki Gaming', 'Pasuruan', '085731379198', '2021-11-26'),
-(4, 'Anton Gaming', 'Bondowoso', '085731379198', '2021-12-15'),
-(5, 'Boy Gaming', 'Pasuruan', '085731379198', '2021-12-15'),
-(6, 'Anton Pro', 'Kaliurang', '085731379198', '2021-12-21');
 
 -- --------------------------------------------------------
 
@@ -218,14 +180,6 @@ CREATE TABLE `keranjang` (
   `qty` int(3) NOT NULL,
   `subtotal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `keranjang`
---
-
-INSERT INTO `keranjang` (`id_keranjang`, `id_user`, `id_barang`, `qty`, `subtotal`) VALUES
-(1, 2, 2, 1, 70000),
-(2, 1, 5, 1, 60000);
 
 -- --------------------------------------------------------
 
@@ -398,8 +352,7 @@ ALTER TABLE `data_reseller`
 --
 ALTER TABLE `keranjang`
   ADD PRIMARY KEY (`id_keranjang`),
-  ADD KEY `id_user` (`id_user`),
-  ADD KEY `id_barang` (`id_barang`);
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `report_klr`
@@ -426,8 +379,7 @@ ALTER TABLE `transaksi`
 --
 ALTER TABLE `transaksi_produk`
   ADD PRIMARY KEY (`id_transaksi_produk`),
-  ADD KEY `id_transaksi` (`id_transaksi`),
-  ADD KEY `id_brg` (`id_brg`);
+  ADD KEY `id_transaksi` (`id_transaksi`);
 
 --
 -- Indexes for table `users`
@@ -440,12 +392,6 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `data_brg`
---
-ALTER TABLE `data_brg`
-  MODIFY `id_brg` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
 -- AUTO_INCREMENT for table `data_klr`
 --
 ALTER TABLE `data_klr`
@@ -455,7 +401,7 @@ ALTER TABLE `data_klr`
 -- AUTO_INCREMENT for table `data_mitra`
 --
 ALTER TABLE `data_mitra`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `data_msk`
@@ -519,8 +465,7 @@ ALTER TABLE `users`
 -- Constraints for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  ADD CONSTRAINT `keranjang_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `keranjang_ibfk_2` FOREIGN KEY (`id_barang`) REFERENCES `data_brg` (`id_brg`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `keranjang_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `transaksi`
@@ -533,7 +478,6 @@ ALTER TABLE `transaksi`
 -- Constraints for table `transaksi_produk`
 --
 ALTER TABLE `transaksi_produk`
-  ADD CONSTRAINT `transaksi_produk_ibfk_1` FOREIGN KEY (`id_brg`) REFERENCES `data_brg` (`id_brg`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `transaksi_produk_ibfk_2` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksi` (`id_transaksi`);
 COMMIT;
 

@@ -162,7 +162,7 @@ public class EditProfilActivity extends AppCompatActivity {
                 String no_telp = response.body().getNo_telp();
                 String foto_profil = response.body().getFoto_profil();
 
-                Glide.with(getApplicationContext()).load(Global.IMG_USER_URL + foto_profil).circleCrop().into(imgEdit);
+                Glide.with(getApplicationContext()).load(Global.IMG_USER_URL + foto_profil).placeholder(R.drawable.user).circleCrop().into(imgEdit);
                 etEmail.setText(email);
                 etFullname.setText(fullname);
                 etNoTelp.setText(no_telp);

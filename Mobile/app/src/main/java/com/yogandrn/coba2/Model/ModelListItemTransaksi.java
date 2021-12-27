@@ -1,8 +1,8 @@
 package com.yogandrn.coba2.Model;
 
 public class ModelListItemTransaksi {
-    private int id_transaksi_produk, id_transaksi, id_brg, subtotal, harga, qty;
-    private String barang, gambar;
+    private int id_transaksi_produk, id_transaksi, subtotal, harga, qty;
+    private String barang, gambar,  id_brg;
 
     public int getId_transaksi_produk() {
         return id_transaksi_produk;
@@ -20,11 +20,11 @@ public class ModelListItemTransaksi {
         this.id_transaksi = id_transaksi;
     }
 
-    public int getId_brg() {
+    public String getId_brg() {
         return id_brg;
     }
 
-    public void setId_brg(int id_brg) {
+    public void setId_brg(String id_brg) {
         this.id_brg = id_brg;
     }
 

@@ -5,13 +5,15 @@ if ( $conn ) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM users WHERE email='$email' AND password='$password' ";
+    $query = "SELECT * FROM users WHERE email='$email' OR no_telp = '$email' OR username = '$email' ";
+    // $query = "SELECT * FROM users WHERE email='$email' AND password='$password' ";
     $result = mysqli_query($conn, $query);
     // $response = array();
 
     $row = mysqli_num_rows($result);
     // $rows = mysqli_fetch_array($result);
     if ( $row > 0 ) {
+        $rows = mysqli_fetch_assoc($result);
         // $response['pesan'] = "BERHASIL";
         // $response['data'] = array();
 
@@ -26,8 +28,9 @@ if ( $conn ) {
         //     array_push($response['data'], $F);
         // }
         
-            $rows = mysqli_fetch_assoc($result);
-         $pesan = "BERHASIL";
+            // $rows = mysqli_fetch_assoc($result);
+        if ( password_verify($password, $rows["password"]) ) {
+            $pesan = "BERHASIL";
            $id_user = $rows['id_user'];
            $fullname = $rows['fullname'];
            $username = $rows['username'];
@@ -35,9 +38,13 @@ if ( $conn ) {
            $no_telp = $rows['no_telp'];
            $foto_profil = $rows['foto_profil'];
 
-           $response = array('pesan'=>$pesan, 'id_user' => $id_user, 'fullname' => $fullname, 'username' => $username, 'email' => $email, 'no_telp' => $no_telp, 'foto_profil' => $foto_profil);
+        $response= array('pesan'=>$pesan,'id_user' => $id_user, 'fullname' => $fullname, 'username' => $username, 'email' => $email, 'no_telp' => $no_telp, 'foto_profil' => $foto_profil);
+        //     $response['pesan'] = $pesan;
+        //   $response['datauser'] = array('id_user' => $id_user, 'fullname' => $fullname, 'username' => $username, 'email' => $email, 'no_telp' => $no_telp, 'foto_profil' => $foto_profil);
       
-
+        } else {
+            $response['pesan'] = "WRONG";
+        }
         // $temp = array();
 	
         // $temp['id_user'] = $id_user;
@@ -47,7 +54,7 @@ if ( $conn ) {
         //     array_push($response, $temp);
         
     } else {
-        $response['pesan'] = "WRONG";
+        $response['pesan'] = "NOT FOUND";
     }
 } else {
     $response['pesan'] = "FAILED";

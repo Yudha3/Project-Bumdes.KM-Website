@@ -1,9 +1,9 @@
 <?php
 
 $host = "localhost";
-$user = "id17675329_yogandrn";
-$password = "PHPNative_100602";
-$db   = "id17675329_db_bumdes";
+$user = "u1694897_c_reg_5";
+$password = "jtipolije";
+$db   = "u1694897_c_reg_5_db";
 
 $conn = mysqli_connect($host, $user, $password, $db) or die("Gagal menghubungi server!");;
 

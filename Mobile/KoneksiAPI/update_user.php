@@ -5,6 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
   if ($conn) {
     $id_user = $_POST['id_user'];
     $fullname = $_POST['fullname'];
+    $jkelamin = $_POST['jkelamin'];
     $email = $_POST['email'];
     $no_telp = $_POST['no_telp'];
     // $encoded_file = $_POST["EN_IMAGE"];
@@ -21,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
             echo json_encode($response);
             exit;
         } else {
-            mysqli_query($conn, "UPDATE users SET fullname = '$fullname', email = '$email', no_telp = '$no_telp' WHERE id_user = '$id_user'");
+            mysqli_query($conn, "UPDATE users SET fullname = '$fullname', jenis_kelamin = '$jkelamin', email = '$email', no_telp = '$no_telp' WHERE id_user = '$id_user'");
             if (mysqli_affected_rows($conn) > 0) {
             $response = array('pesan' => 'BERHASIL');
           } else {
@@ -29,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
           }
         }
     } else {
-        mysqli_query($conn, "UPDATE users SET fullname = '$fullname', email = '$email', no_telp = '$no_telp' WHERE id_user = '$id_user' ");
+        mysqli_query($conn, "UPDATE users SET fullname = '$fullname',jenis_kelamin = '$jkelamin', email = '$email', no_telp = '$no_telp' WHERE id_user = '$id_user' ");
           if (mysqli_affected_rows($conn) > 0) {
             $response = array('pesan' => 'BERHASIL');
           } else {

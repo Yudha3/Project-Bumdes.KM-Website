@@ -7,9 +7,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,13 +32,14 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    TextInputEditText txtFullname, txtUsername, txtEmail, txtPassword, txtConfpass, txtNoTelp;
+    EditText txtFullname, txtUsername, txtEmail, txtPassword, txtConfpass, txtNoTelp;
     TextView txtLogin;
     Button btnRegister, btnLogin;
     String fullname, username, email, password, no_telp, confpass;
     String SERVER_REGISTER_URL = "http://undeveloppedcity.000webhostapp.com/android/volley/register.php";
     private ProgressBar pbLoading;
     private View vLoading;
+    private boolean passwordVisible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +47,66 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
-        txtFullname = (TextInputEditText) findViewById(R.id.txtFullname_register);
-        txtUsername = (TextInputEditText) findViewById(R.id.txtUsername_register);
-        txtEmail = (TextInputEditText) findViewById(R.id.txtEmail_register);
-        txtNoTelp = (TextInputEditText) findViewById(R.id.txtTelp_register);
-        txtPassword = (TextInputEditText) findViewById(R.id.txtPassword_register);
-        txtConfpass = (TextInputEditText) findViewById(R.id.txtConfPass_register);
+
+        txtFullname = (EditText) findViewById(R.id.txtFullname_register);
+        txtUsername = (EditText) findViewById(R.id.txtUsername_register);
+        txtEmail = (EditText) findViewById(R.id.txtEmail_register);
+        txtNoTelp = (EditText) findViewById(R.id.txtTelp_register);
+        txtPassword = (EditText) findViewById(R.id.txtPassword_register);
+        txtConfpass = (EditText) findViewById(R.id.txtConfPass_register);
         txtLogin = (TextView) findViewById(R.id.txtLogin_register);
         btnLogin = (Button) findViewById(R.id.btnLogin_register);
         btnRegister = (Button) findViewById(R.id.btnRegister_register);
         pbLoading = (ProgressBar) findViewById(R.id.progressRegister) ;
         vLoading = (View) findViewById(R.id.view_loading);
+
+        txtPassword.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                final int Right = 2;
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    if(motionEvent.getRawX() >= txtPassword.getRight()-txtPassword.getCompoundDrawables()[Right].getBounds().width()){
+                        int selection = txtPassword.getSelectionEnd();
+                        if (passwordVisible) {
+                            txtPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_visibility, 0);
+                            txtPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                            passwordVisible= false;
+                        } else {
+                            txtPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_visibility_off, 0);
+                            txtPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                            passwordVisible= true;
+                        }
+                        txtPassword.setSelection(selection);
+                        return  true;
+                    }
+                }
+                return false;
+            }
+        });
+
+        txtConfpass.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                final int Right = 2;
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    if(motionEvent.getRawX() >= txtConfpass.getRight()-txtConfpass.getCompoundDrawables()[Right].getBounds().width()){
+                        int selection = txtConfpass.getSelectionEnd();
+                        if (passwordVisible) {
+                            txtConfpass.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_visibility_grey, 0);
+                            txtConfpass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                            passwordVisible= false;
+                        } else {
+                            txtConfpass.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_visibility_grey_off, 0);
+                            txtConfpass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                            passwordVisible= true;
+                        }
+                        txtConfpass.setSelection(selection);
+                        return  true;
+                    }
+                }
+                return false;
+            }
+        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,13 +116,13 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-//        txtLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
-//                startActivity(loginIntent);
-//            }
-//        });
+        txtLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(loginIntent);
+            }
+        });
 
         txtLogin.setText(fromHtml("Sudah punya akun? " + "<font color='#24882A'>Masuk</font>"));
 
@@ -112,11 +166,32 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseUser> call, Response<ResponseUser> response) {
                 String pesan = response.body().getPesan();
+                if (pesan.equals("Daftar berhasil!")){
                 pbLoading.setVisibility(View.INVISIBLE);
                 vLoading.setVisibility(View.INVISIBLE);
-                Toast.makeText(RegisterActivity.this, pesan, Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Registrasi berhasil", Toast.LENGTH_SHORT).show();
                 Intent login = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(login);
+                } else if (pesan.equals("Daftar gagal!")){
+                    pbLoading.setVisibility(View.INVISIBLE);
+                    vLoading.setVisibility(View.INVISIBLE);
+                    Toast.makeText(RegisterActivity.this, "Gagal melakukan registrasi", Toast.LENGTH_SHORT).show();
+                } else if (pesan.equals("Username terdaftar")){
+                    pbLoading.setVisibility(View.INVISIBLE);
+                    vLoading.setVisibility(View.INVISIBLE);
+                    txtUsername.setError("Username sudah terdaftar");
+                    Toast.makeText(RegisterActivity.this, "Username sudah terdaftar!", Toast.LENGTH_SHORT).show(); 
+                } else if (pesan.equals("Email terdaftar")) {
+                    pbLoading.setVisibility(View.INVISIBLE);
+                    vLoading.setVisibility(View.INVISIBLE);
+                    txtEmail.setError("Email sudah terdaftar");
+                    Toast.makeText(RegisterActivity.this, "Email sudah terdaftar!", Toast.LENGTH_SHORT).show();
+                } else if (pesan.equals("Nomor telepon terdaftar")) {
+                    pbLoading.setVisibility(View.INVISIBLE);
+                    vLoading.setVisibility(View.INVISIBLE);
+                    txtNoTelp.setError("Nomor telepon sudah terdaftar");
+                    Toast.makeText(RegisterActivity.this, "Nomor telepon sudah terdaftar", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

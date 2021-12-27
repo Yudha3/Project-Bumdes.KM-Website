@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:visibility="http://schemas.android.com/tools"
     android:layout_margin="5dp"
     app:cardElevation="4dp"
     android:paddingHorizontal="6dp"
@@ -41,8 +42,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ID Buku"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:layout_marginHorizontal="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_marginEnd="24dp"
+                android:layout_height="wrap_content"
+                android:text="Preorder"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
+                android:layout_height="wrap_content"
+                android:paddingVertical="4dp"
+                android:paddingHorizontal="12dp"
+                android:text="Preorder"
+                android:textColor="#ffffff"
+                android:layout_marginEnd="12dp"
+                android:textAlignment="center"
+                android:background="@drawable/bg_red" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvBarang"

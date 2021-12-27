@@ -32,7 +32,7 @@ public class ProfilActivity extends AppCompatActivity {
 
     private TextView titleUsername, titleEmail, txtEmail, txtFullname, txtUsername, txtID, txtNoTelp, txtJKelamin;
     private CircleImageView fotoProfil;
-    private Button btnEdit, btnLogout;
+    private Button btnEdit, btnLogout, btnUbahPassword;
     private SwipeRefreshLayout srlProfil;
     private ProgressBar pbProfil;
     SessionManager sessionManager;
@@ -57,6 +57,7 @@ public class ProfilActivity extends AppCompatActivity {
 
         btnEdit = (Button) findViewById(R.id.btn_edit_profil);
         btnLogout = (Button) findViewById(R.id.btn_logout_profil);
+        btnUbahPassword = (Button) findViewById(R.id.btn_ubah_password);
         fotoProfil = (CircleImageView) findViewById(R.id.img_profil_profil);
         titleEmail = (TextView) findViewById(R.id.title_email);
         titleUsername = (TextView) findViewById(R.id.title_username);
@@ -99,7 +100,7 @@ public class ProfilActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         sessionManager.logoutSession();
-                        Intent intent = new Intent(ProfilActivity.this, LoginActivity.class);
+                        Intent intent = new Intent(ProfilActivity.this, WelcomeScreen.class);
                         // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -114,6 +115,14 @@ public class ProfilActivity extends AppCompatActivity {
                     }
                 });
                 dialogLogout.show();
+            }
+        });
+
+        btnUbahPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProfilActivity.this, CekPassword.class));
+                finish();
             }
         });
 
@@ -142,7 +151,7 @@ public class ProfilActivity extends AppCompatActivity {
                 String no_telp = response.body().getNo_telp();
                 String foto_profil = response.body().getFoto_profil();
 
-                Glide.with(getApplicationContext()).load(Global.IMG_USER_URL + foto_profil).circleCrop().into(fotoProfil);
+                Glide.with(getApplicationContext()).load(Global.IMG_USER_URL + foto_profil).placeholder(R.drawable.user).circleCrop().into(fotoProfil);
                 titleEmail.setText(email);
                 titleUsername.setText(username);
                 txtFullname.setText(fullname);

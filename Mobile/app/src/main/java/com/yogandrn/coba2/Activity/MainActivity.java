@@ -3,14 +3,11 @@ package com.yogandrn.coba2.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,8 +23,6 @@ import com.yogandrn.coba2.Global;
 import com.yogandrn.coba2.Model.ResponseUser;
 import com.yogandrn.coba2.R;
 import com.yogandrn.coba2.SessionManager;
-
-import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -128,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         btnPreorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent preorder = new Intent(MainActivity.this, PreorderActivity.class);
+                Intent preorder = new Intent(MainActivity.this, ListPreorderActivity.class);
 //                preorder.putExtra("id_user", id_user);
                 startActivity(preorder);
             }
@@ -178,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void moveToLogin() {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent intent = new Intent(MainActivity.this, WelcomeScreen.class);
 //        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -201,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
                 txtWelcome.setText(fullname);
 
-                Glide.with(getApplicationContext()).load(Global.IMG_USER_URL + foto_profil).placeholder(R.drawable.bg_foto_default).circleCrop().into(imgProfil);
+                Glide.with(getApplicationContext()).load(Global.IMG_USER_URL + foto_profil).placeholder(R.drawable.user).circleCrop().into(imgProfil);
                 pbMainmenu.setVisibility(View.GONE);
             }
 

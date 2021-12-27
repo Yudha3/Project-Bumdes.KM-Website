@@ -14,8 +14,10 @@ import retrofit2.Response;
 public class Global {
     public static String id_user;
     public static String fullname;
-    public static String IMG_PRODUK_URL = "http://undeveloppedcity.000webhostapp.com/android/img/produk/";
-    public static String IMG_USER_URL = "http://undeveloppedcity.000webhostapp.com/android/img/user/";
+//    public static String IMG_PRODUK_URL = "http://undeveloppedcity.000webhostapp.com/android/img/produk/";
+    public static String IMG_PRODUK_URL = "http://ws-tif.com/bumdes.km/images/barang/";
+//    public static String IMG_USER_URL = "http://undeveloppedcity.000webhostapp.com/android/img/user/";public static String IMG_PRODUK_URL = "http://undeveloppedcity.000webhostapp.com/android/img/produk/";
+    public static String IMG_USER_URL = "http://ws-tif.com/bumdes.km/images/user/";
     public static int total;
     SessionManager sessionManager;
     public static  String id;

@@ -1,8 +1,8 @@
 package com.yogandrn.coba2.Model;
 
 public class ModelKeranjang {
-    private int id_keranjang, id_brg, id_user, qty, subtotal, harga;
-    private String barang, gambar;
+    private int id_keranjang,  id_user, qty, subtotal, harga;
+    private String barang, gambar, id_brg;
 
     public String getGambar() {
         return gambar;
@@ -34,11 +34,11 @@ public class ModelKeranjang {
         this.id_keranjang = id_keranjang;
     }
 
-    public int getId_brg() {
+    public String getId_brg() {
         return id_brg;
     }
 
-    public void setId_brg(int id_brg) {
+    public void setId_brg(String id_brg) {
         this.id_brg = id_brg;
     }
 

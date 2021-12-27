@@ -189,8 +189,9 @@ import retrofit2.Response;
 
     public void buatTransaksi() {
          pbOrder.setVisibility(View.VISIBLE);
+         String id = String.valueOf(sessionManager.getSessionID());
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-        Call<ResponseTransaksi> transaksi = apiRequestData.createTransaksi(String.valueOf(sessionManager.getSessionID()), penerima, alamat, no_telp, id_ongkir);
+        Call<ResponseTransaksi> transaksi = apiRequestData.createTransaksi(id, penerima, alamat, no_telp, id_ongkir);
         transaksi.enqueue(new Callback<ResponseTransaksi>() {
             @Override
             public void onResponse(Call<ResponseTransaksi> call, Response<ResponseTransaksi> response) {

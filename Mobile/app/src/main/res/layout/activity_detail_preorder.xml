@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.DetailPreorder">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/srl_detail_preorder">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#eaeaea">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="12dp"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.4"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:text="Status Preorder"
+                    android:textSize="13sp"
+                    android:textColor="#404040"
+                    android:fontFamily="@font/productsans_regular"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:layout_marginHorizontal="16dp"
+                    android:text="..."
+                    android:textAllCaps="true"
+                    android:textColor="@color/primaryGreen"
+                    android:textSize="14sp"
+                    android:textAlignment="textEnd"
+                    android:fontFamily="@font/productsans_bold"
+                    android:id="@+id/txt_status_detail_preorder"/>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#606060"
+                android:visibility="visible"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.4"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:text="Nomor Preorder"
+                    android:textSize="13sp"
+                    android:textColor="#404040"
+                    android:fontFamily="@font/productsans_regular"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:layout_marginHorizontal="16dp"
+                    android:text="..."
+                    android:textColor="#404040"
+                    android:textSize="13sp"
+                    android:textAlignment="textEnd"
+                    android:fontFamily="@font/productsans_medium"
+                    android:id="@+id/txt_id_preorder_detail"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="6dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.4"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:text="Tangal Preorder"
+                    android:textSize="13sp"
+                    android:textColor="#404040"
+                    android:fontFamily="@font/productsans_regular"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:layout_marginHorizontal="16dp"
+                    android:text="..."
+                    android:textColor="#404040"
+                    android:textSize="13sp"
+                    android:textAlignment="textEnd"
+                    android:fontFamily="@font/productsans_medium"
+                    android:id="@+id/txt_tgl_detail_preorder"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="12dp"
+            android:paddingVertical="16dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:text="Alamat Penerima "
+                android:textColor="@color/abu_gelap"
+                android:textSize="14sp"
+                android:fontFamily="@font/productsans_medium"/>
+
+            <TextView
+                android:id="@+id/txt_penerima_detail_preorder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:textSize="14sp"
+                android:textColor="#303030"
+                android:fontFamily="@font/productsans_regular"
+                android:maxLines="5"
+                android:text="..."
+                android:layout_marginTop="1dp"/>
+
+            <TextView
+                android:id="@+id/txt_alamat_detail_preorder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:textSize="14sp"
+                android:textColor="#303030"
+                android:fontFamily="@font/productsans_regular"
+                android:maxLines="5"
+                android:text="..."
+                android:layout_marginTop="1dp"/>
+
+            <TextView
+                android:id="@+id/txt_telp_detail_preorder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:textSize="14sp"
+                android:textColor="#303030"
+                android:fontFamily="@font/productsans_regular"
+                android:maxLines="5"
+                android:text="..."
+                android:layout_marginTop="1dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pesanan"
+                android:textColor="@color/abu_gelap"
+                android:textSize="14sp"
+                android:fontFamily="@font/productsans_medium"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rvDetailPreorder"
+                android:layout_marginHorizontal="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Total Belanja "
+                    android:textColor="@color/abu_gelap"
+                    android:fontFamily="@font/productsans_medium"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.6"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_subtotal_detail_preorder"
+                    android:text="Rp ..."
+                    android:textAlignment="textEnd"
+                    android:textSize="15sp"
+                    android:textColor="@color/primaryGreen"
+                    android:fontFamily="@font/productsans_medium"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Informasi Pengiriman"
+                android:layout_marginHorizontal="16dp"
+                android:textSize="14sp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/abu_gelap"
+                android:fontFamily="@font/productsans_medium"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_pengiriman_detail_preorder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:textColor="#303030"
+                    android:textSize="14sp"/>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Biaya Pengiriman"
+                    android:fontFamily="@font/productsans_medium"
+                    android:textColor="#303030"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/txt_ongkir_detail_preorder"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:text="Rp ..."
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/primaryGreen"
+                    android:fontFamily="@font/productsans_medium"
+                    android:textSize="15sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="24dp"
+            android:background="@color/white"
+            android:paddingHorizontal="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Transaksi"
+                    android:textSize="15sp"
+                    android:textColor="#303030"
+                    android:fontFamily="@font/productsans_medium"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_total_detail_preorder"
+                    android:text="Rp ..."
+                    android:textColor="@color/primaryGreen"
+                    android:fontFamily="@font/productsans_bold"
+                    android:textSize="15sp"
+                    android:textAlignment="textEnd"/>
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </LinearLayout>
+
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_back_preorder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginHorizontal="12dp"
+        android:background="@drawable/bg_buttton_green_rounded"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:fontFamily="@font/productsans_medium"
+        android:textAllCaps="false"
+        android:text="Kembali"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ProgressBar
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/progress_detail_preorder"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

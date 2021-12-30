@@ -23,6 +23,45 @@
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvBarang"
+                android:layout_width="0dp"
+                android:layout_weight="0.9"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/productsans_regular"
+                android:text="Nama Barang"
+                android:textColor="#303030"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/icon_preorder"
+                android:visibility="visible"
+                android:layout_gravity="end"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/bg_red"
+                android:padding="3dp"
+                android:src="@drawable/ic_baseline_access_time_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="8dp"
+                visibility:ignore="MissingConstraints" />
+        </LinearLayout>
+
         <TextView
             android:id="@+id/tvID_Brg"
             android:layout_width="wrap_content"
@@ -73,23 +112,10 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvBarang"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="10dp"
-            android:text="Nama Barang"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="#303030"
-            android:fontFamily="@font/productsans_regular"/>
-
-        <TextView
             android:id="@+id/tvHarga"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="2dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"

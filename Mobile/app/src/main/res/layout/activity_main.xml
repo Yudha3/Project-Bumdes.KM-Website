@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -67,7 +68,7 @@
                     android:id="@+id/btn_search"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    android:background="@drawable/search_icon_background"
+                    android:background="@drawable/bg_search_button"
                     android:contentDescription="@string/app_name"
                     android:padding="4dp"
                     android:src="@drawable/ic_search" />
@@ -80,6 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginEnd="3dp"
                 android:src="@drawable/ic_shopping_cart_white" />
 
             <ImageView
@@ -127,6 +129,14 @@
             app:layout_constraintTop_toBottomOf="@id/nav" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -351,6 +361,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
+        android:layout_marginBottom="24dp"
         android:layout_marginHorizontal="30dp"
         android:background="@drawable/heading_background_1"
         android:padding="12dp"
@@ -409,8 +420,31 @@
             android:layout_marginTop="7dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout></ScrollView>
         </LinearLayout>
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_hubungi_kami"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_floating_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="10dp"
+        android:layout_marginEnd="32dp"
+        android:clickable="true"
+        android:layout_marginBottom="24dp">
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_help"/>
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         app:layout_constraintEnd_toEndOf="parent"
@@ -419,10 +453,15 @@
         android:layout_marginEnd="32dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_hubungi_kami"
-        app:backgroundTint="#24C1C6"
+        app:backgroundTint="#115115"
         android:clickable="true"
-        android:src="@drawable/ic_chat"/>
+        android:focusable="true"
+        app:fabSize="normal"
+        app:rippleColor="@color/darkGreen"
+        android:tint="@color/white"
+        android:src="@drawable/ic_faq"
+        android:visibility="gone"/>
+
 
     <ProgressBar
         android:layout_width="48dp"

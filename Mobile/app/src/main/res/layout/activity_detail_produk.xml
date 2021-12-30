@@ -26,8 +26,8 @@
         <ImageView
             android:id="@+id/img_detail"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:scaleType="centerCrop"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
             android:background="@drawable/bg_foto_default"
             android:elevation="4dp"/>
 

@@ -111,7 +111,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:layout_marginHorizontal="20dp">
 
         <View
@@ -135,7 +135,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="20dp">
 
             <View
@@ -159,7 +159,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="20dp">
 
             <View
@@ -183,7 +183,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="20dp">
 
             <View
@@ -207,7 +207,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="20dp">
 
             <View
@@ -231,7 +231,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="20dp">
 
             <View
@@ -247,7 +247,7 @@
                 android:layout_marginStart="12dp"
                 android:textSize="13sp"
                 android:textColor="#303030"
-                android:text="6.	Jika berhasil melakukan transfer, unggah bukti pembayaran di daftar pesanan."/>
+                android:text="Jika berhasil melakukan transfer, unggah bukti pembayaran di daftar pesanan."/>
 
         </LinearLayout>
 
@@ -256,15 +256,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:visibility="gone">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginHorizontal="20dp"
-        android:textSize="14sp"
-        android:textColor="#303030"
-        android:fontFamily="@font/productsans_regular"
-        android:text="@string/tutor_bayar"/>
 
     <TextView
         android:layout_width="match_parent"

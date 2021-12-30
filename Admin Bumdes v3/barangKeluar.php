@@ -134,7 +134,6 @@ $sesName = $_SESSION['name'];
                                         <th>Tanggal</th>
                                         <th>Penerima</th>
                                         <th>Status</th>
-                                        <th>Keterangan</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -153,7 +152,6 @@ $sesName = $_SESSION['name'];
                                                 echo date("d-M-Y", strtotime($tanggals)) ?></td>
                                             <td><?php echo $b['penerima'] ?></td>
                                             <td><?php echo $b['status'] ?></td>
-                                            <td><?php echo $b['keterangan'] ?></td>
                                             <td>
                                                 <a href="transaksi/editBarangkeluar.php?id_transaksi=<?php echo $b['id_transaksi'] ?>" style="text-decoration: none;">Edit</a> |
                                                 <a href="transaksi/proses_hapus.php?id_transaksi=<?php echo $b['id_transaksi'] ?>" onclick="return confirm('Apakah Anda yakin ingin membatalkan transaksi keluar?')" style="text-decoration: none;">Batal</a> |

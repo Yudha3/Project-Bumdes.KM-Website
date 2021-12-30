@@ -192,11 +192,11 @@ $queryItem = mysqli_query($koneksi, "SELECT * FROM transaksi_produk WHERE id_tra
                                     <input type="text" name="resi" id="resi" value="<?php echo $dataTransaksi['resi'] ?>" />
                                 </div>
                                 <div>
-                                    <label for="keterangan">Keterangan</label>
-                                    <select name="keterangan" class="custom-select form-control" id="keterangan" autofocus="" required="">
-                                        <option value="<?php echo $dataTransaksi['keterangan'];?>"><?php echo $dataTransaksi['keterangan'];?></option>
+                                    <label for="status">Status</label>
+                                    <select name="status" class="custom-select form-control" id="status" autofocus="" required="">
+                                        <option value="<?php echo $dataTransaksi['status'];?>"><?php echo $dataTransaksi['status'];?></option>
                                         <option value="#">-- Pilih Option --</option>
-                                        <option>Pembayaran diterima</option>
+                                        <option>Transaksi sedang diproses</option>
                                         <option>Barang sedang dikirim</option>
                                     </select>
                                 </div>

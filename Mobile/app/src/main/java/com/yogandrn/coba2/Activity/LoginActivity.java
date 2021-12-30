@@ -9,10 +9,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 //        implements View.OnClickListener
 
 
-    TextInputEditText txtEmail, txtPassword;
+    private EditText txtEmail, txtPassword;
     String email, password;
     TextView txtRegister;
     Button btnLogin,  btnRegister;
@@ -44,7 +49,9 @@ public class LoginActivity extends AppCompatActivity {
     String SERVER_LOGIN_URL = "http://undeveloppedcity.000webhostapp.com/android/volley/checklogin.php";
     ProgressDialog progressDialog;
     SessionManager sessionManager;
-    private LinearLayout loading;
+    private boolean passwordVisible;
+    private ProgressBar loading;
+    private View vLoading;
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
     public static final String session = "session";
@@ -56,13 +63,13 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
-        txtEmail = (TextInputEditText) findViewById(R.id.txtEmail_login);
-        txtPassword = (TextInputEditText) findViewById(R.id.txtPassword_login);
+        txtEmail = findViewById(R.id.txtEmail_login);
+        txtPassword =  findViewById(R.id.txtPassword_login);
         txtRegister = (TextView) findViewById(R.id.txtRegister_login);
         btnLogin = (Button) findViewById(R.id.btnLogin_login);
         btnRegister = (Button) findViewById(R.id.btnRegister_login);
-        loading = (LinearLayout) findViewById(R.id.progressLogin);
-
+        loading = (ProgressBar) findViewById(R.id.progress_login);
+        vLoading = findViewById(R.id.view_login);
 
 
         //mengakses halaman register
@@ -76,6 +83,13 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         txtRegister.setText(fromHtml("Belum punya akun? " + "<font color='#24882A'>Daftar</font>"));
+        txtRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                finish();
+            }
+        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,10 +107,34 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        txtPassword.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                final int Right = 2;
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    if(motionEvent.getRawX() >= txtPassword.getRight()-txtPassword.getCompoundDrawables()[Right].getBounds().width()){
+                        int selection = txtPassword.getSelectionEnd();
+                        if (passwordVisible) {
+                            txtPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_visibility, 0);
+                            txtPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                            passwordVisible= false;
+                        } else {
+                            txtPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_visibility_off, 0);
+                            txtPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                            passwordVisible= true;
+                        }
+                        txtPassword.setSelection(selection);
+                        return  true;
+                    }
+                }
+                return false;
+            }
+        });
 
     }
 
     public void checkLogin() {
+        vLoading.setVisibility(View.VISIBLE);
         loading.setVisibility(View.VISIBLE);
         sessionManager =  new SessionManager(LoginActivity.this);
 
@@ -122,15 +160,18 @@ public class LoginActivity extends AppCompatActivity {
                     gb.getTotal(String.valueOf(sessionManager.getSessionID()));
 
                     Intent login = new Intent(LoginActivity.this, MainActivity.class);
+                    vLoading.setVisibility(View.INVISIBLE);
                     loading.setVisibility(View.INVISIBLE);
                     startActivity(login);
                     finish();
                 } else if (pesan.equals("WRONG")) {
                     Toast.makeText(LoginActivity.this, "Email atau Password salah!", Toast.LENGTH_SHORT).show();
                     loading.setVisibility(View.INVISIBLE);
+                    vLoading.setVisibility(View.INVISIBLE);
                 } else if (pesan.equals("FAILED")) {
                     Toast.makeText(LoginActivity.this, "Terjadi kesalahan saat menghubungi server!", Toast.LENGTH_SHORT).show();
                     loading.setVisibility(View.INVISIBLE);
+                    vLoading.setVisibility(View.INVISIBLE);
                 }
 
             }
@@ -138,6 +179,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseUser> call, Throwable t) {
                 loading.setVisibility(View.INVISIBLE);
+                vLoading.setVisibility(View.INVISIBLE);
                 Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

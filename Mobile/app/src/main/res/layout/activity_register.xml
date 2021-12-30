@@ -10,23 +10,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="42dp"
         android:layout_gravity="center"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/logobumdes"/>
+        android:src="@drawable/logobumdes"
+        android:visibility="visible"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
         android:text="Daftar"
         android:textAlignment="center"
         android:layout_gravity="center"
@@ -35,15 +38,107 @@
         android:textColor="@color/primaryGreen"
         android:fontFamily="@font/productsans_medium"/>
 
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/txtFullname_register"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_input_green_round"
+                android:hint="Nama Lengkap"
+                android:inputType="textPersonName"
+                android:textColor="#404040"
+                android:textSize="15sp"
+                android:paddingHorizontal="16dp"
+                android:fontFamily="@font/productsans_medium"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/txtUsername_register"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/custom_input_green_round"
+                android:hint="Username"
+                android:inputType="textPersonName"
+                android:textColor="#404040"
+                android:textSize="15sp"
+                android:paddingHorizontal="16dp"
+                android:fontFamily="@font/productsans_medium"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/txtEmail_register"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/custom_input_green_round"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:textColor="#404040"
+                android:textSize="15sp"
+                android:paddingHorizontal="16dp"
+                android:fontFamily="@font/productsans_medium"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/txtTelp_register"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/custom_input_green_round"
+                android:hint="Nomor Telepon"
+                android:inputType="phone"
+                android:textColor="#404040"
+                android:textSize="15sp"
+                android:paddingHorizontal="16dp"
+                android:fontFamily="@font/productsans_medium"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+
+                android:id="@+id/txtPassword_register"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/custom_input_green_round"
+                android:drawableRight="@drawable/ic_visibility"
+                android:hint="Password"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="4dp"
+                android:textColor="#404040"
+                android:textSize="15sp"
+                android:fontFamily="@font/productsans_medium"
+                android:longClickable="false"
+                android:inputType="textPassword"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/txtConfPass_register"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/custom_input_green_round"
+                android:drawableRight="@drawable/ic_visibility"
+                android:hint="Konfirmasi password"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="4dp"
+                android:textColor="#404040"
+                android:textSize="15sp"
+                android:fontFamily="@font/productsans_medium"
+                android:longClickable="false"
+                android:inputType="textPassword"/>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4sp"
-        android:layout_marginHorizontal="28dp">
+        android:layout_marginHorizontal="28dp"
+        android:visibility="gone">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtFullname_register"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -56,10 +151,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12sp"
-        android:layout_marginHorizontal="28dp">
+        android:layout_marginHorizontal="28dp"
+        android:visibility="gone">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtUsername_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/productsans_regular"
@@ -72,10 +167,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12sp"
-        android:layout_marginHorizontal="28dp">
+        android:layout_marginHorizontal="28dp"
+        android:visibility="gone">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtEmail_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -88,10 +183,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12sp"
-        android:layout_marginHorizontal="28dp">
+        android:layout_marginHorizontal="28dp"
+        android:visibility="gone">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtTelp_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -105,10 +200,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12sp"
         android:layout_marginHorizontal="28dp"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        android:visibility="gone">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtPassword_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -122,10 +217,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12sp"
         android:layout_marginHorizontal="28dp"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        android:visibility="gone">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtConfPass_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -141,7 +236,7 @@
         android:layout_height="wrap_content"
         android:paddingVertical="6dp"
         android:layout_marginLeft="24sp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="24dp"
         android:layout_marginRight="24sp"
         android:background="@drawable/bg_buttton_green_rounded"
         android:fontFamily="@font/productsans_medium"
@@ -164,19 +259,21 @@
         android:textColor="@color/primaryGreen"
         style="@style/Widget.AppCompat.Button.Colored"
         android:fontFamily="@font/productsans_medium"
-        android:textSize="18sp"/>
+        android:textSize="18sp"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/txtLogin_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="16sp"
+        android:layout_marginTop="18sp"
+        android:layout_marginBottom="96dp"
         android:text="Sudah punya akun? Login"
         android:textColor="#6e6e6e"
-        android:fontFamily="@font/productsans_medium"
-        android:textSize="15sp"
-        android:visibility="gone"/>
+        android:fontFamily="@font/leaguespartan_bold"
+        android:textSize="13sp"
+        android:visibility="visible"/>
 
         </LinearLayout>
     </ScrollView>
@@ -190,8 +287,8 @@
 
     <ProgressBar
         android:id="@+id/progressRegister"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

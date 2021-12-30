@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($conn) {
     $id_user = $_POST['id_user'];
 
-    $queryGET = mysqli_query($conn, "SELECT * FROM transaksi WHERE id_user = '$id_user' ");
+    $queryGET = mysqli_query($conn, "SELECT * FROM transaksi WHERE id_user = '$id_user' ORDER BY id_transaksi DESC");
     
     if (mysqli_num_rows($queryGET) > 0) {
       $response["kode"] = 1;

@@ -2,14 +2,14 @@ package com.yogandrn.coba2.Model;
 
 public class ModelProduk {
 
-    private int id_brg, hg_jual, jml_stok ;
-    private String barang, deskripsi, gambar;
+    private int  hg_jual, jml_stok ;
+    private String barang, deskripsi, gambar, id_brg;
 
-    public int getId_brg() {
+    public String getId_brg() {
         return id_brg;
     }
 
-    public void setId_brg(int id_brg) {
+    public void setId_brg(String id_brg) {
         this.id_brg = id_brg;
     }
 

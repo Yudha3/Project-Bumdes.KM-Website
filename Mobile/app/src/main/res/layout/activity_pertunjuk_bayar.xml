@@ -12,44 +12,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="20dp">
-
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.4"
-            android:text="Total Pembayaran"
-            android:textSize="15sp"
-            android:textColor="#303030"
-            android:fontFamily="@font/productsans_medium"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.6"
-            android:id="@+id/txt_total_petunjuk"
-            android:text="Rp ..."
-            android:textAlignment="textEnd"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="@font/productsans_medium"
-            android:textColor="@color/primaryGreen"
-            android:textSize="16sp"/>
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:text="Transfer ke"
-        android:textSize="15sp"
-        android:textColor="#303030"
-        android:fontFamily="@font/productsans_medium"/>
+            android:text="Transfer ke"
+            android:textColor="#303030"
+            android:textSize="15sp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -82,7 +53,7 @@
 
         <ImageView
             android:layout_width="84dp"
-            android:layout_height="38dp"
+            android:layout_height="40dp"
             android:src="@drawable/bni_logo"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -90,6 +61,35 @@
             android:layout_marginEnd="4dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_marginHorizontal="20dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:text="Total Pembayaran"
+                android:textSize="15sp"
+                android:textColor="#303030"
+                android:fontFamily="@font/productsans_medium"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:id="@+id/txt_total_petunjuk"
+                android:text="Rp ..."
+                android:textAlignment="textEnd"
+                android:fontFamily="@font/productsans_medium"
+                android:textColor="@color/primaryGreen"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -111,14 +111,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:layout_marginHorizontal="20dp">
 
         <View
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:layout_marginTop="2dp"
-            android:background="@drawable/bg_buttton_green_rounded"
+            android:background="@drawable/bg_buttton_green"
             android:visibility="visible"/>
 
         <TextView
@@ -135,7 +135,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="20dp">
 
             <View
@@ -159,7 +159,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="20dp">
 
             <View
@@ -183,7 +183,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="20dp">
 
             <View
@@ -207,7 +207,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="20dp">
 
             <View
@@ -231,7 +231,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="20dp">
 
             <View
@@ -247,19 +247,15 @@
                 android:layout_marginStart="12dp"
                 android:textSize="13sp"
                 android:textColor="#303030"
-                android:text="6.	Jika berhasil melakukan transfer, unggah bukti pembayaran di daftar pesanan."/>
+                android:text="Jika berhasil melakukan transfer, unggah bukti pembayaran di daftar pesanan."/>
 
         </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginHorizontal="20dp"
-        android:textSize="14sp"
-        android:textColor="#303030"
-        android:fontFamily="@font/productsans_regular"
-        android:text="@string/tutor_bayar"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
 
     <TextView
         android:layout_width="match_parent"
@@ -339,6 +335,8 @@
         android:textColor="#303030"
         android:fontFamily="@font/productsans_regular"
         android:text="9. Lorem ipsum dolor sit amet consectetur adipisicing."/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

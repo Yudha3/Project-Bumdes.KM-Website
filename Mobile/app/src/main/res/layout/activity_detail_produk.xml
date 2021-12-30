@@ -26,8 +26,8 @@
         <ImageView
             android:id="@+id/img_detail"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:scaleType="centerCrop"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
             android:background="@drawable/bg_foto_default"
             android:elevation="4dp"/>
 
@@ -156,7 +156,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:onClick="increment"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_add_to_cart"
             android:background="@drawable/bg_buttton_green_rounded"
             android:fontFamily="@font/productsans_medium"
@@ -165,12 +165,32 @@
             android:layout_weight="0.6"
             android:paddingVertical="6dp"
             android:text="Add to Cart"
+            android:textColor="@color/white"
             android:textSize="17sp"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            android:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_add_preorder"
+            android:background="@drawable/bg_buttton_green_rounded"
+            android:fontFamily="@font/productsans_medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:paddingVertical="6dp"
+            android:text="Preorder"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            tools:ignore="MissingConstraints"
+            android:visibility="visible"/>
 
     </LinearLayout>
 

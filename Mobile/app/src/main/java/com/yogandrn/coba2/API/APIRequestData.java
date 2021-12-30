@@ -149,4 +149,19 @@ public interface APIRequestData {
     Call<ResponseProduk> searchProduk(
             @Field("keyword") String keyword
     );
+
+    @FormUrlEncoded
+    @POST("cek_password.php")
+    Call<ResponseModel> cekPassword(
+            @Field("id_user") String id_user,
+            @Field("password") String password
+    );
+
+    @FormUrlEncoded
+    @POST("ubah_password.php")
+    Call<ResponseModel> ubahPassword(
+            @Field("id_user") String id_user,
+            @Field("old_password") String old_password,
+            @Field("new_password") String new_password
+    );
 }

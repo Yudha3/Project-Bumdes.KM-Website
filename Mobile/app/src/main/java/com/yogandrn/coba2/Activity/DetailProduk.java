@@ -45,11 +45,10 @@ public class DetailProduk extends AppCompatActivity {
     private TextView qtyProduk;
     private int qty = 1;
 //    String qty;
-    private Button add, increment, decrement;
+    private Button add, increment, decrement, preorder;
     private EditText etQty;
     private ImageView img_produk;
     private List<ModelProduk> listData;
-    private String IMG_PRODUK_URL = "http://undeveloppedcity.000webhostapp.com/android/img/produk/";
     private String id_barang, barang, deskripsi, gambar;
     private int stok, harga;
     private int subtotal = 0;
@@ -75,6 +74,7 @@ public class DetailProduk extends AppCompatActivity {
         txtstok = (TextView) findViewById(R.id.tv_stok_detail);
         txtdeskripsi = (TextView) findViewById(R.id.tv_deskripsi_detail);
         add = (Button) findViewById(R.id.btn_add_to_cart);
+        preorder = (Button) findViewById(R.id.btn_add_preorder);
         increment = (Button) findViewById(R.id.btn_increment);
         decrement = (Button) findViewById(R.id.btn_decrement);
         qtyProduk = (TextView) findViewById(R.id.et_qty_detail);
@@ -137,6 +137,13 @@ public class DetailProduk extends AppCompatActivity {
                     harga = response.body().getHarga();
                     deskripsi = response.body().getDeskripsi();
                     gambar = response.body().getGambar();
+
+                    if (stok == 0) {
+                        preorder.setVisibility(View.VISIBLE);
+                    } else if (stok > 0) {
+                        preorder.setVisibility(View.GONE);
+                        add.setVisibility(View.VISIBLE);
+                    }
 
                     Glide.with(DetailProduk.this).load(Global.IMG_PRODUK_URL + gambar).into(img_produk);
                     txtid_brg.setText(id_barang);

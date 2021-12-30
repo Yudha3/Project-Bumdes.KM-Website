@@ -110,7 +110,7 @@ public class UbahFotoProfil extends AppCompatActivity {
                 if (pesan.equals("BERHASIL")) {
                     Toast.makeText(UbahFotoProfil.this, "Foto profil berhasil diubah", Toast.LENGTH_SHORT).show();
                     pbEditFoto.setVisibility(View.GONE);
-                    startActivity(new Intent(UbahFotoProfil.this, EditProfilActivity.class));
+                    startActivity(new Intent(UbahFotoProfil.this, ProfilActivity.class));
                     finish();
                 } else if (pesan.equals("GAGAL")) {
                     Toast.makeText(UbahFotoProfil.this, "Gagal mengubah data\nCobalah beberapa saat lagi", Toast.LENGTH_SHORT).show();

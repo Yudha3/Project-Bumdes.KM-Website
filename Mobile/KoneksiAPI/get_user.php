@@ -29,12 +29,13 @@ if ($cek > 0){
          $pesan = "BERHASIL";
            $id_user = $rows['id_user'];
            $fullname = $rows['fullname'];
+           $jenis_kelamin = $rows['jenis_kelamin'];
            $username = $rows['username'];
            $email = $rows['email'];
            $no_telp = $rows['no_telp'];
            $foto_profil = $rows['foto_profil'];
 
-           $response = array('pesan'=>$pesan, 'id_user' => $id_user, 'fullname' => $fullname, 'username' => $username, 'email' => $email, 'no_telp' => $no_telp, 'foto_profil' => $foto_profil);
+           $response = array('pesan'=>$pesan, 'id_user' => $id_user, 'fullname' => $fullname, 'jenis_kelamin'=>$jenis_kelamin, 'username' => $username, 'email' => $email, 'no_telp' => $no_telp, 'foto_profil' => $foto_profil);
     
 } else {
     $response['pesan'] = "GAGAL";

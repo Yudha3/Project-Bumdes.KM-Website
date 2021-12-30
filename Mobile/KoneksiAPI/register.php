@@ -35,7 +35,8 @@
                 'pesan' => 'Nomor telepon sudah terdaftar!'
             );
         } else {
-            $query_insert = "INSERT INTO users (fullname, username, email, no_telp, password, foto_profil) VALUES('$fullname', '$username', '$email', '$no_telp', '$password', 'default_user.png')";
+            $encryptedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $query_insert = "INSERT INTO users (fullname, username, email, no_telp, password, foto_profil) VALUES('$fullname', '$username', '$email', '$no_telp', '$encryptedPassword', 'default_user.png')";
             if (mysqli_query($conn, $query_insert)) {
                 $response = array(
                     'kode' => 201,

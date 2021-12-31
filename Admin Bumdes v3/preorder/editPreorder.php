@@ -127,7 +127,7 @@ $queryItem = mysqli_query($koneksi, "SELECT * FROM item_preorder WHERE id_preord
             <div class="sales-boxes">
                 <div class="recent-sales1 box">
                     <div class="card-header1">
-                        <h3>Edit Pre Order List</h3>
+                        <h3>Detail Pre Order List</h3>
                         <button>
                             <a href="../preOrder.php" style="text-decoration: none;">Kembali</a>
                             <span class="bx bx-right-arrow-alt"></span>
@@ -135,9 +135,9 @@ $queryItem = mysqli_query($koneksi, "SELECT * FROM item_preorder WHERE id_preord
                     </div>
                     <div class="tambah">
                         <center>
-                            <h1>Edit Pre Order</h1>
+                            <h1>Detail Pre Order</h1>
                         <center>
-                        <form method="POST" action="#" enctype="multipart/form-data">
+                        <form method="POST" action="proses_edit.php" enctype="multipart/form-data">
                             <section class="base">
                                 <!-- menampung nilai id produk yang akan di edit -->
                                 <input type="hidden" name="id_preorder" value="<?php echo $dataTransaksi['id_preorder'] ?>">
@@ -186,6 +186,17 @@ $queryItem = mysqli_query($koneksi, "SELECT * FROM item_preorder WHERE id_preord
                                 <div>
                                     <label for="total_preorder">Total Harga</label>
                                     <input type="number" name="total_preorder" id="total_preorder" value="<?php echo $dataTransaksi['total_preorder'] ?>" readonly />
+                                </div>
+                                <div>
+                                    <label for="status">Status</label>
+                                    <select name="status" class="custom-select form-control" id="status" autofocus="" required="">
+                                        <option value="<?php echo $dataTransaksi['status'];?>"><?php echo $dataTransaksi['status'];?></option>
+                                        <option value="#">-- Pilih Option --</option>
+                                        <option>Pre Order di Tolak</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <button type="submit" name="update">Simpan Perubahan</button>
                                 </div>
                             </section>
                         </form>

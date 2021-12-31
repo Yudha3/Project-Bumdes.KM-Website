@@ -3,9 +3,9 @@ include '../koneksi.php';
 
 if(isset($_POST['update'])){
     $id = $_POST['id_preorder']; //iddata
-    $keterangan = $_POST['keterangan'];
+    $status = $_POST['status'];
 
-    $query  = "UPDATE preorder SET keterangan = '$keterangan'";
+    $query  = "UPDATE preorder SET status = '$status'";
     $query .= "WHERE id_preorder = '$id'";
     $result = mysqli_query($koneksi, $query);
     // periska query apakah ada error

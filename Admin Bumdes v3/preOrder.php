@@ -133,8 +133,8 @@ $sesName = $_SESSION['name'];
                                         <th>ID Transaksi</th>
                                         <th>Tanggal</th>
                                         <th>Penerima</th>
+                                        <th>Total Harga</th>
                                         <th>Status</th>
-                                        <th>Keterangan</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -152,8 +152,8 @@ $sesName = $_SESSION['name'];
                                             <td><?php $tanggals = $b['tgl_preorder'];
                                                 echo date("d-M-Y", strtotime($tanggals)) ?></td>
                                             <td><?php echo $b['penerima'] ?></td>
+                                            <td><?php echo $b['total_preorder'] ?></td>
                                             <td><?php echo $b['status'] ?></td>
-                                            <td><?php echo $b['keterangan'] ?></td>
                                             <td>
                                                 <a href="preorder/editPreorder.php?id_preorder=<?php echo $b['id_preorder'] ?>" style="text-decoration: none;">Detail</a> |
                                                 <a href="preorder/proses_hapus.php?id_preorder=<?php echo $b['id_preorder'] ?>" onclick="return confirm('Apakah Anda yakin ingin menolak Pre Order ini?')" style="text-decoration: none;">Tolak</a> |

@@ -206,31 +206,28 @@ $jml_transaksi = mysqli_num_rows($transaksi);
                     <th>No</th>
                     <th>ID Transaksi</th>
                     <th>Tanggal</th>
-                    <th>Barang</th>
-                    <th>Jumlah</th>
-                    <th>Total Harga</th>
                     <th>Penerima</th>
-                    <th>Keterangan</th>
+                    <th>Alamat</th>
+                    <th>Total Harga</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                  $brg = mysqli_query($koneksi, "SELECT * FROM data_klr sb, data_brg st where st.id_brg=sb.id_brg ORDER BY id DESC");
+                  $brg = mysqli_query($koneksi, "SELECT * FROM transaksi ORDER BY id_transaksi DESC");
                   $no = 1;
                   while ($b = mysqli_fetch_array($brg)) {
-                    $idb = $b['id_brg'];
-                    $id = $b['id'];
+                    $idb = $b['id_transaksi'];
                   ?>
                     <tr>
                       <td align="center"><?php echo $no; ?></td>
                       <td><?php echo $b['id_transaksi'] ?></td>
-                      <td><?php $tanggals = $b['tgl_keluar'];
+                      <td><?php $tanggals = $b['tgl_transaksi'];
                           echo date("d-M-Y", strtotime($tanggals)) ?></td>
-                      <td><?php echo $b['barang'] ?></td>
-                      <td><?php echo $b['jml_keluar'] ?></td>
-                      <td><?php echo $b['total_hrg'] ?></td>
                       <td><?php echo $b['penerima'] ?></td>
-                      <td><?php echo $b['keterangan'] ?></td>
+                      <td><?php echo $b['alamat'] ?></td>
+                      <td><?php echo $b['total_transaksi'] ?></td>
+                      <td><?php echo $b['status'] ?></td>
                     </tr>
                   <?php
                     $no++; //untuk nomor urut terus bertambah 1

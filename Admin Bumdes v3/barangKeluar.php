@@ -133,6 +133,7 @@ $sesName = $_SESSION['name'];
                                         <th>ID Transaksi</th>
                                         <th>Tanggal</th>
                                         <th>Penerima</th>
+                                        <th>Total Harga</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -151,6 +152,7 @@ $sesName = $_SESSION['name'];
                                             <td><?php $tanggals = $b['tgl_transaksi'];
                                                 echo date("d-M-Y", strtotime($tanggals)) ?></td>
                                             <td><?php echo $b['penerima'] ?></td>
+                                            <td>Rp <?php echo $b['total_transaksi'] ?></td>
                                             <td><?php echo $b['status'] ?></td>
                                             <td>
                                                 <a href="transaksi/editBarangkeluar.php?id_transaksi=<?php echo $b['id_transaksi'] ?>" style="text-decoration: none;">Edit</a> |

@@ -31,6 +31,7 @@ while ($itemPreorder = mysqli_fetch_assoc($getItemPrerder)) {
     $updateStok = mysqli_query($koneksi, "UPDATE data_brg SET jml_stok = jml_stok - '$qty' WHERE id_brg = '$id_brg'");
 
 } 
+$delete =  mysqli_query($koneksi, "DELETE FROM preorder WHERE id_preorder = '$id'");
 $delete =  mysqli_query($koneksi, "DELETE FROM item_preorder WHERE id_preorder = '$id'");
 
 if (!$delete) {

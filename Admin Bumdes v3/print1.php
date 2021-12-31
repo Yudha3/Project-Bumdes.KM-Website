@@ -14,8 +14,10 @@ function generateRow(){
             <td>".$no++."</td>
             <td>".$row['id_transaksi']."</td>
             <td>".$row['tgl_msk']."</td>
+            <td>".$row['id_brg']."</td>
             <td>".$row['barang']."</td>
             <td>".$row['pengirim']."</td>
+            <td>".$row['hg_beli']."</td>
             <td>".$row['jml_masuk']."</td>
             <td>".$row['total_hrg']."</td>
             </tr>
@@ -32,8 +34,10 @@ function generateRow(){
             <td>".$no++."</td>
             <td>".$row['id_transaksi']."</td>
             <td>".$row['tgl_msk']."</td>
+            <td>".$row['id_brg']."</td>
             <td>".$row['barang']."</td>
             <td>".$row['pengirim']."</td>
+            <td>".$row['hg_beli']."</td>
             <td>".$row['jml_masuk']."</td>
             <td>".$row['total_hrg']."</td>
             </tr>
@@ -68,8 +72,10 @@ $content .= '
 <th >No</th>
 <th >ID Transaksi</th>
 <th >Tanggal Transaksi</th>
+<th >Kode Barang</th>
 <th >Barang</th>
 <th >Pengirim</th> 
+<th >Harga Beli</th> 
 <th >Jumlah Stok</th> 
 <th >Total Harga</th> 
 </tr>  

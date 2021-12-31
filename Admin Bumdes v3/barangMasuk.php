@@ -147,7 +147,7 @@ $sesName = $_SESSION['name'];
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $brg = mysqli_query($koneksi, "SELECT * FROM data_msk sb, data_brg st where st.id_brg=sb.id_brg ORDER BY sb.id DESC");
+                                    $brg = mysqli_query($koneksi, "SELECT * FROM data_msk ORDER BY id DESC");
                                     $no = 1;
                                     while ($b = mysqli_fetch_array($brg)) {
                                         $idb = $b['id_brg'];

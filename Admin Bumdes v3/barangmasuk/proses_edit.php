@@ -26,7 +26,7 @@ if(isset($_POST['update'])){
         //cek apakah berhasil
         if ($updatedata1 && $queryx){
 
-            echo "<script>alert('Data berhasil dihapus.');window.location='../barangMasuk.php';</script>";
+            echo "<script>alert('Data berhasil diubah.');window.location='../barangMasuk.php';</script>";
         } else {
           echo "<script>alert('Data gagal dihapus.');window.location='../barangMasuk.php';</script>";
         };

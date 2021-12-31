@@ -211,10 +211,6 @@ $tanggal_masuk = date("Y-m-d");
                                             </select>
                                         </div>
                                         <div>
-                                            <label for="keterangan">Keterangan</label>
-                                            <input type="text" name="keterangan" id="keterangan" autofocus="" />
-                                        </div>
-                                        <div>
                                             <button type="submit" name="simpan">Simpan Product</button>
                                         </div>
                                     </section>

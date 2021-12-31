@@ -13,13 +13,11 @@ function generateRow(){
         <tr>
         <td>".$no++."</td>
         <td>".$row['id_transaksi']."</td>
-        <td>".$row['tgl_keluar']."</td>
-        <td>".$row['barang']."</td>
-        <td>".$row['hg_jual']."</td>
-        <td>".$row['jml_keluar']."</td>
-        <td>".$row['total_hrg']."</td>
+        <td>".$row['tgl_transaksi']."</td>
         <td>".$row['penerima']."</td>
-        <td>".$row['keterangan']."</td>
+        <td>".$row['alamat']."</td>
+        <td>".$row['total_transaksi']."</td>
+        <td>".$row['status']."</td>
         </tr>
         ";
     }
@@ -33,13 +31,11 @@ function generateRow(){
         <tr>
         <td>".$no++."</td>
         <td>".$row['id_transaksi']."</td>
-        <td>".$row['tgl_keluar']."</td>
-        <td>".$row['barang']."</td>
-        <td>".$row['hg_jual']."</td>
-        <td>".$row['jml_keluar']."</td>
-        <td>".$row['total_hrg']."</td>
+        <td>".$row['tgl_transaksi']."</td>
         <td>".$row['penerima']."</td>
-        <td>".$row['keterangan']."</td>
+        <td>".$row['alamat']."</td>
+        <td>".$row['total_transaksi']."</td>
+        <td>".$row['status']."</td>
         </tr>
         ";
     }
@@ -72,12 +68,10 @@ $content .= '
 <th >No</th>
 <th >ID Transaksi</th>
 <th >Tanggal Transaksi</th>
-<th >Barang</th> 
-<th >Harga Jual</th>
-<th >Jumlah Stok</th>
-<th >Total Harga</th> 
 <th >Penerima</th>
-<th >Keterangan</th> 
+<th >Alamat</th>
+<th >Total Transaksi</th>
+<th >Status</th> 
 </tr>  
 ';   
 $content .= generateRow();  

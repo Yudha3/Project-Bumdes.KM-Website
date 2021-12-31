@@ -183,10 +183,6 @@ $data = mysqli_fetch_assoc($result);
                                     <input type="number" name="total_hrg" id="total_hrg" value="<?php echo $data['total_hrg'] ?>" readonly />
                                 </div>
                                 <div>
-                                    <label for="keterangan">Keterangan</label>
-                                    <input type="text" name="keterangan" id="keterangan" value="<?php echo $data['keterangan'] ?>"  />
-                                </div>
-                                <div>
                                     <button type="submit" name="update">Simpan Perubahan</button>
                                 </div>
                             </section>

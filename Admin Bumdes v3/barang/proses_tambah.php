@@ -11,26 +11,6 @@ $harga_jual    = $_POST['hg_jual'];
 $stok_barang    = $_POST['jml_stok'];
 $deskripsi     = $_POST['deskripsi'];
 
-// $extensi = explode(".", $_FILES['gambar']['name']);
-// $gambar_brg = "brg-" . round(microtime(true)) . "." . end($extensi);
-// $sumber = $_FILES['gambar']['tmp_name'];
-
-// $upload = move_uploaded_file($sumber, "../images/barang/" . $gambar_brg);
-// if ($upload) {
-//     $query = "INSERT INTO data_brg (barang, tgl_masuk, hg_beli, hg_jual, jml_stok, deskripsi, gambar) VALUES ('$nama_barang', '$tanggal_masuk', '$harga_beli', '$harga_jual', '$stok_barang', '$deskripsi', '$gambar_brg')";
-//     $result = mysqli_query($koneksi, $query);
-//     // periska query apakah ada error
-//     if (!$result) {
-//         die("Query gagal dijalankan: " . mysqli_errno($koneksi) .
-//             " - " . mysqli_error($koneksi));
-//     } else {
-//         //tampil alert dan akan redirect ke halaman index.php
-//         //silahkan ganti index.php sesuai halaman yang akan dituju
-//         echo "<script>alert('Data berhasil ditambah.');window.location='../barang.php';</script>";
-//     }
-// } else {
-//     echo "<script>alert('Upload gambar gagal!')</script>";
-// }
 $gambar_produk = $_FILES['gambar']['name'];
 //cek dulu jika ada gambar produk jalankan coding ini
 if ($gambar_produk != "") {

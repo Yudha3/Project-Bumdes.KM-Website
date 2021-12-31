@@ -37,9 +37,6 @@ $sesName = $_SESSION['name'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css" />
-    <!-- <link rel="stylesheet" href="assets/plugin/jquery-ui/jquery-ui.min.css" /> Load file css jquery-ui -->
-    <!-- <script src="assets/js/jquery-1.10.2.js"></script>
-    <script src="assets/datepicker/js/bootstrap-datepicker.js"></script> -->
     <link rel="stylesheet" href="assets/datepicker/css/datepicker.css">
 </head>
 
@@ -118,14 +115,8 @@ $sesName = $_SESSION['name'];
                 <i class='bx bx-menu sidebarBtn'></i>
                 <span class="dashboard">Laporan Barang Keluar</span>
             </div>
-            <!-- <div class="search-box">
-            <input type="text" placeholder="Search...">
-            <i class='bx bx-search'></i>
-            </div> -->
             <div class="profile-details">
-                <!-- <img src="images/profile.jpg" alt=""> -->
                 <span class="admin_name"><?php echo $sesName; ?></span>
-                <!-- <i class='bx bx-chevron-down'></i> -->
             </div>
         </nav>
 
@@ -135,12 +126,6 @@ $sesName = $_SESSION['name'];
                     <div class="card-header1">
                         <h3>Data Laporan</h3>
                     </div>
-                    <!-- <form method="GET">
-                        <label>Pilih Tanggal</label>
-                        <input type="date" name="tanggal">
-                        <input type="submit" value="FILTER">
-                        <a href="./">Back</a>
-                    </form> -->
                     <form action="reportKeluar.php" method="get" style="margin-bottom: 1rem;">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
@@ -172,9 +157,10 @@ $sesName = $_SESSION['name'];
                                         <th>No</th>
                                         <th>ID Transaksi</th>
                                         <th>Tanggal Transaksi</th>
-                                        <th>Total Transaksi</th>
                                         <th>Penerima</th>
-                                        <th>Keterangan</th>
+                                        <th>Alamat</th>
+                                        <th>Total Transaksi</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -201,8 +187,9 @@ $sesName = $_SESSION['name'];
                                             <td><?php echo $d["id_transaksi"]; ?></td>
                                             <td><?php $tanggals = $d['tgl_transaksi'];
                                                 echo date("d-M-Y", strtotime($tanggals)) ?></td>
-                                            <td><?php echo $d["total_transaksi"];   ?></td>
                                             <td><?php echo $d["penerima"];   ?></td>
+                                            <td><?php echo $d["alamat"];   ?></td>
+                                            <td><?php echo $d["total_transaksi"];   ?></td>
                                             <td><?php echo $d["status"];   ?></td>
                                         </tr>
                                     <?php
@@ -219,27 +206,6 @@ $sesName = $_SESSION['name'];
             </div>
         </div>
     </section>
-
-    <!-- <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery-1.10.2.js"></script>
-    <script src="assets/datepicker/js/bootstrap-datepicker.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            $(".datepicker").datepicker({
-                format: 'dd-mm-yyyy',
-                autoclose: true,
-                todayHighlight: false,
-            });
-            $("#tgl_mulai").on('changeDate', function(selected) {
-                var startDate = new Date(selected.date.valueOf());
-                $("#tgl_akhir").datepicker('setStartDate', startDate);
-                if ($("#tgl_mulai").val() > $("#tgl_akhir").val()) {
-                    $("#tgl_akhir").val($("#tgl_mulai").val());
-                }
-            });
-        });
-    </script> -->
-    <!-- <script src="assets/plugin/jquery-ui/jquery-ui.min.js"></script> Load file plugin js jquery-ui -->
 
     <script>
         let sidebar = document.querySelector(".sidebar");

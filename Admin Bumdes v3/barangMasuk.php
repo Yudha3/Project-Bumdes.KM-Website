@@ -113,14 +113,8 @@ $sesName = $_SESSION['name'];
                 <i class='bx bx-menu sidebarBtn'></i>
                 <span class="dashboard">Barang Masuk</span>
             </div>
-            <!-- <div class="search-box">
-            <input type="text" placeholder="Search...">
-            <i class='bx bx-search'></i>
-            </div> -->
             <div class="profile-details">
-                <!-- <img src="images/profile.jpg" alt=""> -->
                 <span class="admin_name"><?php echo $sesName; ?></span>
-                <!-- <i class='bx bx-chevron-down'></i> -->
             </div>
         </nav>
 
@@ -148,7 +142,6 @@ $sesName = $_SESSION['name'];
                                         <th>Pengirim</th>
                                         <th>Jumlah</th>
                                         <th>Total Harga</th>
-                                        <th>Keterangan</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -170,7 +163,6 @@ $sesName = $_SESSION['name'];
                                             <td><?php echo $b['pengirim'] ?></td>
                                             <td><?php echo $b['jml_masuk'] ?></td>
                                             <td>Rp <?php echo $b['total_hrg'] ?></td>
-                                            <td><?php echo $b['keterangan'] ?></td>
                                             <td>
                                                 <a href="barangmasuk/editBarangmasuk.php?id=<?php echo $b['id'] ?>" style="text-decoration: none;">Edit</a> |
                                                 <a href="barangmasuk/proses_hapus.php?id=<?php echo $b['id'] ?>" onclick="return confirm('Apakah Anda yakin ingin membatalkan stock barang ini dari transaksi masuk? *Stock akan berkurang')" style="text-decoration: none;">Batal</a> |

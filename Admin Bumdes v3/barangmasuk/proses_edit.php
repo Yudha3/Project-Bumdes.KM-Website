@@ -6,7 +6,6 @@ if(isset($_POST['update'])){
     $id_brg = $_POST['id_brg']; //idbarang
     $jml_masuk = $_POST['jml_masuk'];
     $total_hrg = $_POST['total_hrg'];
-    $keterangan = $_POST['keterangan'];
 
     $lihatstock = mysqli_query($koneksi,"select * from data_brg where id_brg='$id_brg'"); //lihat stock barang itu saat ini
     $stocknya = mysqli_fetch_array($lihatstock); //ambil datanya
@@ -22,20 +21,15 @@ if(isset($_POST['update'])){
         $tambahistock = $stockskrg+$hitungselisih;
 
         $queryx = mysqli_query($koneksi,"update data_brg set jml_stok='$tambahistock' where id_brg='$id_brg'");
-        $updatedata1 = mysqli_query($koneksi,"update data_msk set jml_masuk='$jml_masuk',total_hrg='$total_hrg',keterangan='$keterangan' where id='$id'");
+        $updatedata1 = mysqli_query($koneksi,"update data_msk set jml_masuk='$jml_masuk',total_hrg='$total_hrg' where id='$id'");
         
         //cek apakah berhasil
         if ($updatedata1 && $queryx){
 
-            echo " <div class='alert alert-success'>
-                <strong>Success!</strong> Redirecting you back in 1 seconds.
-            </div>
-            <meta http-equiv='refresh' content='1; url= ../barangMasuk.php'/>  ";
-            } else { echo "<div class='alert alert-warning'>
-                <strong>Failed!</strong> Redirecting you back in 3 seconds.
-            </div>
-            <meta http-equiv='refresh' content='3; url= ../barangMasuk.php'/> ";
-            };
+            echo "<script>alert('Data berhasil dihapus.');window.location='../barangMasuk.php';</script>";
+        } else {
+          echo "<script>alert('Data gagal dihapus.');window.location='../barangMasuk.php';</script>";
+        };
 
     } else {
         //ternyata inputan baru lebih kecil jml_masuk masuknya, maka kurangi lagi stock barang
@@ -44,20 +38,15 @@ if(isset($_POST['update'])){
 
         $query1 = mysqli_query($koneksi,"update data_brg set jml_stok='$kurangistock' where id_brg='$id_brg'");
 
-        $updatedata = mysqli_query($koneksi,"update data_msk set jml_masuk='$jml_masuk',total_hrg='$total_hrg', keterangan='$keterangan' where id='$id'");
+        $updatedata = mysqli_query($koneksi,"update data_msk set jml_masuk='$jml_masuk',total_hrg='$total_hrg' where id='$id'");
         
         //cek apakah berhasil
         if ($query1 && $updatedata){
 
-            echo " <div class='alert alert-success'>
-                <strong>Success!</strong> Redirecting you back in 1 seconds.
-            </div>
-            <meta http-equiv='refresh' content='1; url= ../barangMasuk.php'/>  ";
-            } else { echo "<div class='alert alert-warning'>
-                <strong>Failed!</strong> Redirecting you back in 3 seconds.
-            </div>
-            <meta http-equiv='refresh' content='3; url= ../barangMasuk.php'/> ";
-            };
+            echo "<script>alert('Data berhasil dihapus.');window.location='../barangMasuk.php';</script>";
+        } else {
+          echo "<script>alert('Data gagal dihapus.');window.location='../barangMasuk.php';</script>";
+        };
 
     };
 

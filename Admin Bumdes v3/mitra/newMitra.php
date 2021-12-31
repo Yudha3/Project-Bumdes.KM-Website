@@ -132,14 +132,8 @@ $tanggal_masuk = date("Y-m-d");
                 <i class='bx bx-menu sidebarBtn'></i>
                 <span class="dashboard">Mitra</span>
             </div>
-            <!-- <div class="search-box">
-                <input type="text" placeholder="Search...">
-                <i class='bx bx-search'></i>
-            </div> -->
             <div class="profile-details">
-                <!-- <img src="../images/profile.jpg" alt=""> -->
                 <span class="admin_name"><?php echo $sesName; ?></span>
-                <!-- <i class='bx bx-chevron-down'></i> -->
             </div>
         </nav>
 

@@ -25,7 +25,6 @@ $sesName = $_SESSION['name'];
 $no = mysqli_query($koneksi, "select id_transaksi from data_klr order by id_transaksi desc");
 $idtran = mysqli_fetch_array($no);
 $kode = isset($idtran['id_transaksi']) ? $idtran['id_transaksi'] : '';
-// $kode = $idtran['id_transaksi'];
 
 
 $urut = substr($kode, 8, 3);
@@ -133,14 +132,8 @@ $tanggal_keluar = date("Y-m-d");
                 <i class='bx bx-menu sidebarBtn'></i>
                 <span class="dashboard">Barang Keluar</span>
             </div>
-            <!-- <div class="search-box">
-                <input type="text" placeholder="Search...">
-                <i class='bx bx-search'></i>
-            </div> -->
             <div class="profile-details">
-                <!-- <img src="../images/profile.jpg" alt=""> -->
                 <span class="admin_name"><?php echo $sesName; ?></span>
-                <!-- <i class='bx bx-chevron-down'></i> -->
             </div>
         </nav>
 

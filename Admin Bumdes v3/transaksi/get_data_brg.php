@@ -1,6 +1,5 @@
 <?php
 
-// if(isset($_POST['id'])){
     include '../koneksi.php';
 
     $id = $_POST['id'];
@@ -11,7 +10,4 @@
 
     $harga_beli = $data['hg_jual'];
     echo $harga_beli;
-// } else {
-//     echo "gak ada post";
-// }
 ?>

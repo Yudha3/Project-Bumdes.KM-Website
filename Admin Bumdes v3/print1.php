@@ -18,7 +18,6 @@ function generateRow(){
             <td>".$row['pengirim']."</td>
             <td>".$row['jml_masuk']."</td>
             <td>".$row['total_hrg']."</td>
-            <td>".$row['keterangan']."</td>
             </tr>
             ";
         }
@@ -37,7 +36,6 @@ function generateRow(){
             <td>".$row['pengirim']."</td>
             <td>".$row['jml_masuk']."</td>
             <td>".$row['total_hrg']."</td>
-            <td>".$row['keterangan']."</td>
             </tr>
             ";
         }
@@ -74,7 +72,6 @@ $content .= '
 <th >Pengirim</th> 
 <th >Jumlah Stok</th> 
 <th >Total Harga</th> 
-<th >Keterangan</th> 
 </tr>  
 ';   
 $content .= generateRow();  

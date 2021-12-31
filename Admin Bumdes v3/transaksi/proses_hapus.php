@@ -3,7 +3,6 @@ include '../koneksi.php';
 
 if($_GET["id_transaksi"]){
   $id = $_GET['id_transaksi'];
-  // $id_brg = "select id_brg from data_msk where id='$id'";
 
   $queryx = mysqli_query($koneksi,"delete from transaksi where id_transaksi='$id'");
   $del = mysqli_query($koneksi,"delete from transaksi_produk where id_transaksi_produk='$id'");

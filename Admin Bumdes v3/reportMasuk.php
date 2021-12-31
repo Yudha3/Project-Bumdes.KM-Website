@@ -37,9 +37,6 @@ $sesName = $_SESSION['name'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css" />
-    <!-- <link rel="stylesheet" href="assets/plugin/jquery-ui/jquery-ui.min.css" /> Load file css jquery-ui -->
-    <!-- <script src="assets/js/jquery-1.10.2.js"></script>
-    <script src="assets/datepicker/js/bootstrap-datepicker.js"></script> -->
     <link rel="stylesheet" href="assets/datepicker/css/datepicker.css">
 </head>
 
@@ -118,14 +115,8 @@ $sesName = $_SESSION['name'];
                 <i class='bx bx-menu sidebarBtn'></i>
                 <span class="dashboard">Laporan Barang Masuk</span>
             </div>
-            <!-- <div class="search-box">
-            <input type="text" placeholder="Search...">
-            <i class='bx bx-search'></i>
-            </div> -->
             <div class="profile-details">
-                <!-- <img src="images/profile.jpg" alt=""> -->
                 <span class="admin_name"><?php echo $sesName; ?></span>
-                <!-- <i class='bx bx-chevron-down'></i> -->
             </div>
         </nav>
 
@@ -135,12 +126,6 @@ $sesName = $_SESSION['name'];
                     <div class="card-header1">
                         <h3>Data Laporan</h3>
                     </div>
-                    <!-- <form method="GET">
-                        <label>Pilih Tanggal</label>
-                        <input type="date" name="tanggal">
-                        <input type="submit" value="FILTER">
-                        <a href="./">Back</a>
-                    </form> -->
                     <form action="reportMasuk.php" method="get" style="margin-bottom: 1rem;">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
@@ -176,7 +161,6 @@ $sesName = $_SESSION['name'];
                                         <th>Pengirim</th>
                                         <th>Jumlah</th>
                                         <th>Total Harga</th>
-                                        <th>Keterangan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -207,7 +191,6 @@ $sesName = $_SESSION['name'];
                                             <td><?php echo $d["pengirim"];   ?></td>
                                             <td><?php echo $d["jml_masuk"];   ?></td>
                                             <td><?php echo $d["total_hrg"];   ?></td>
-                                            <td><?php echo $d["keterangan"];   ?></td>
                                         </tr>
                                     <?php
                                     }

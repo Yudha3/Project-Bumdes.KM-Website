@@ -5,11 +5,11 @@ $id = $_GET["id_transaksi"];
 $find = mysqli_query($koneksi, "SELECT * FROM transaksi WHERE id_transaksi ='$id'");
 
 while ($data = mysqli_fetch_assoc($find)){
-    $id_trx = ['id_transaksi'];
+    $id_trx = $data['id_transaksi'];
     $tgl = substr($data['tgl_transaksi'], 0, -9);
-    $penerima = ['penerima'];
-    $alamat = ['alamat'];
-    $total = ['total_transaksi'];
+    $penerima = $data['penerima'];
+    $alamat = $data['alamat'];
+    $total = $data['total_transaksi'];
 
     mysqli_query($koneksi, "INSERT INTO report_klr (id_transaksi, tgl_transaksi, penerima, alamat, total_transaksi,status) VALUES ('$id_trx','$tgl','$penerima','$alamat','$total','Selesai')");
 

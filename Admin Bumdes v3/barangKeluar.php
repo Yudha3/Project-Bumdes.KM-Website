@@ -156,7 +156,6 @@ $sesName = $_SESSION['name'];
                                             <td><?php echo $b['status'] ?></td>
                                             <td>
                                                 <a href="transaksi/editBarangkeluar.php?id_transaksi=<?php echo $b['id_transaksi'] ?>" style="text-decoration: none;">Edit</a> |
-                                                <a href="transaksi/proses_hapus.php?id_transaksi=<?php echo $b['id_transaksi'] ?>" onclick="return confirm('Apakah Anda yakin ingin membatalkan transaksi keluar?')" style="text-decoration: none;">Batal</a> |
                                                 <a href="transaksi/pindahData.php?id_transaksi=<?php echo $b['id_transaksi'] ?>" style="text-decoration: none;" onclick="return confirm('Apakah anda yakin ingin menyelesaikan transaksi keluar ini? *Data akan dipindahkan ke laporan keluar')">Selesai</a>
                                             </td>
                                         </tr>

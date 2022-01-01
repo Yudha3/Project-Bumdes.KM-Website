@@ -196,7 +196,7 @@ $queryItem = mysqli_query($koneksi, "SELECT * FROM transaksi_produk WHERE id_tra
                                     <select name="status" class="custom-select form-control" id="status" autofocus="" required="">
                                         <option value="<?php echo $dataTransaksi['status'];?>"><?php echo $dataTransaksi['status'];?></option>
                                         <option value="#">-- Pilih Option --</option>
-                                        <option>Transaksi di Tolak</option>
+                                        <option>Ditolak</option>
                                         <option>Transaksi sedang diproses</option>
                                         <option>Barang sedang dikirim</option>
                                     </select>

@@ -192,7 +192,7 @@ $queryItem = mysqli_query($koneksi, "SELECT * FROM item_preorder WHERE id_preord
                                     <select name="status" class="custom-select form-control" id="status" autofocus="" required="">
                                         <option value="<?php echo $dataTransaksi['status'];?>"><?php echo $dataTransaksi['status'];?></option>
                                         <option value="#">-- Pilih Option --</option>
-                                        <option>Pre Order di Tolak</option>
+                                        <option>Ditolak</option>
                                     </select>
                                 </div>
                                 <div>

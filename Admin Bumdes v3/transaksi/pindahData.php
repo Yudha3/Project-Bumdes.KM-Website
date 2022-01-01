@@ -14,14 +14,7 @@ while ($data = mysqli_fetch_assoc($find)){
     mysqli_query($koneksi, "INSERT INTO report_klr (id_transaksi, tgl_transaksi, penerima, alamat, total_transaksi,status) VALUES ('$id_trx','$tgl','$penerima','$alamat','$total','Selesai')");
 
     if (mysqli_affected_rows($koneksi) > 0) {
-        $deleteTransaksi = mysqli_query($koneksi, "DELETE FROM transaksi WHERE id_transaksi = '$id'");
-        $deleteItem = mysqli_query($koneksi, "DELETE FROM transaksi_produk WHERE id_transaksi = '$id'");
-        if (!$deleteTransaksi && !$deleteItem) {
-                die("Gagal menghapus data: " . mysqli_errno($koneksi) .
-                    " - " . mysqli_error($koneksi));
-            } else {
-                echo "<script>alert('Data berhasil dihapus.');window.location='../barangKeluar.php';</script>";
-            }
+        echo "<script>alert('Data menambahkan ke Laporan Transaksi.');window.location='../barangKeluar.php';</script>";
     } else {
         die("Gagal memindahkan data: " . mysqli_errno($koneksi) .
             " - " . mysqli_error($koneksi));

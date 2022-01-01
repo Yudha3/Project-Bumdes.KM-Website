@@ -189,7 +189,9 @@ $queryItem = mysqli_query($koneksi, "SELECT * FROM transaksi_produk WHERE id_tra
                                 </div>
                                 <div>
                                     <label for="bukti_tf">Bukti Transfer</label>
-                                    <img src="../images/pembayaran/<?php echo $dataTransaksi['bukti_tf']; ?>" style="width: 120px;float: left;margin-bottom: 5px;">
+                                    <a target="blank" href="http://ws-tif.com/bumdes.km/images/pembayaran/<?= $dataTransaksi['bukti_tf'];?>">
+                                        <img src="../images/pembayaran/<?php echo $dataTransaksi['bukti_tf']; ?>" style="width: 120px;float: left;margin-bottom: 5px;">
+                                    </a>
                                 </div>
                                 <div>
                                     <label for="resi">Resi</label>

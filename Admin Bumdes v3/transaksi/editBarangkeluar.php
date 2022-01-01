@@ -188,10 +188,8 @@ $queryItem = mysqli_query($koneksi, "SELECT * FROM transaksi_produk WHERE id_tra
                                     <input type="number" name="total_transaksi" id="total_transaksi" value="<?php echo $dataTransaksi['total_transaksi'] ?>" readonly />
                                 </div>
                                 <div>
-                                    <label for="gambar">Gambar Product</label>
-                                    <img src="../images/pembayaran/<?php echo $dataTransaksi['gambar']; ?>" style="width: 120px;float: left;margin-bottom: 5px;">
-                                    <input type="file" name="gambar" />
-                                    <input type="hidden" name="fotolama" value="<?php echo $dataTransaksi['gambar']; ?>">
+                                    <label for="bukti_tf">Gambar Product</label>
+                                    <img src="../images/pembayaran/<?php echo $dataTransaksi['bukti_tf']; ?>" style="width: 120px;float: left;margin-bottom: 5px;">
                                 </div>
                                 <div>
                                     <label for="resi">Resi</label>

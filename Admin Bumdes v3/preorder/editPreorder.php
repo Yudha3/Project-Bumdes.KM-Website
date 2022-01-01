@@ -127,7 +127,7 @@ $queryItem = mysqli_query($koneksi, "SELECT * FROM item_preorder WHERE id_preord
             <div class="sales-boxes">
                 <div class="recent-sales1 box">
                     <div class="card-header1">
-                        <h3>Detail Pre Order List</h3>
+                        <h3>Edit Pre Order List</h3>
                         <button>
                             <a href="../preOrder.php" style="text-decoration: none;">Kembali</a>
                             <span class="bx bx-right-arrow-alt"></span>
@@ -135,7 +135,7 @@ $queryItem = mysqli_query($koneksi, "SELECT * FROM item_preorder WHERE id_preord
                     </div>
                     <div class="tambah">
                         <center>
-                            <h1>Detail Pre Order</h1>
+                            <h1>Edit Pre Order</h1>
                         <center>
                         <form method="POST" action="proses_edit.php" enctype="multipart/form-data">
                             <section class="base">

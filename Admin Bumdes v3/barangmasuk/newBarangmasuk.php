@@ -166,12 +166,12 @@ $tanggal_masuk = date("Y-m-d");
                                         </div>
                                         <div>
                                             <label for="tgl_msk">Tanggal Masuk</label>
-                                            <input type="date" name="tgl_msk" id="tgl_msk" value="<?php echo $tanggal_masuk; ?>" />
+                                            <input type="date" name="tgl_msk" id="tgl_msk" value="<?php echo $tanggal_masuk; ?>" readonly/>
                                         </div>
                                         <div>
                                             <label for="barang">Barang</label>
-                                            <select name="barang" class="custom-select form-control" id="cmb_barang" autofocus="" required="">
-                                                <option selected>-- Pilih barang --</option>
+                                            <select name="barang" class="custom-select form-control" id="cmb_barang" autofocus required>
+                                                <option selected>-- Pilih Barang --</option>
                                                 <?php
                                                 $det = mysqli_query($koneksi, "select * from data_brg order by id_brg ASC");
                                                 while ($d = mysqli_fetch_array($det)) {
@@ -184,11 +184,11 @@ $tanggal_masuk = date("Y-m-d");
                                         </div>
                                         <div>
                                             <label for="hg_beli">Harga Beli</label>
-                                            <input type="number" name="hg_beli" id="hg_beli" readonly maxlength="11"/>
+                                            <input type="number" name="hg_beli" id="hg_beli" readonly required maxlength="11"/>
                                         </div>
                                         <div>
                                             <label for="jml_masuk">Jumlah</label>
-                                            <input type="number" onkeyup="sum()" name="jml_masuk" id="jml_masuk" autofocus="" required="" maxlength="4" />
+                                            <input type="number" onkeyup="sum()" name="jml_masuk" id="jml_masuk" autofocus required maxlength="4" />
                                         </div>
 
                                         <div>
@@ -198,7 +198,7 @@ $tanggal_masuk = date("Y-m-d");
 
                                         <div>
                                             <label for="pengirim">Mitra</label>
-                                            <select name="pengirim" class="custom-select form-control" id="pengirim" autofocus="" required="">
+                                            <select name="pengirim" class="custom-select form-control" id="pengirim" autofocus required>
                                                 <option selected>-- Pilih Mitra --</option>
                                                 <?php
                                                 $det = mysqli_query($koneksi, "select * from data_mitra order by nama_mitra ASC");

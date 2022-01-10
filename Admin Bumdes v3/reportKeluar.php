@@ -170,7 +170,7 @@ $sesName = $_SESSION['name'];
                                     $tgl_akhir = @$_GET['ke']; // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
                                     if (empty($tgl_awal) or empty($tgl_akhir)) {
                                         //jika tidak ada tanggal dari dan tanggal ke maka tampilkan seluruh data
-                                        $data = mysqli_query($koneksi, "select * from report_klr");
+                                        $data = mysqli_query($koneksi, "select * from report_klr ORDER BY tgl_transaksi DESC");
                                         $url_cetak = "print2.php";
                                     } else {
                                         // tampilkan data yang sesuai dengan range tanggal yang dicari 

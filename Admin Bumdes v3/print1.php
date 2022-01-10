@@ -26,7 +26,7 @@ function generateRow(){
         return $contents;
 
     } else {
-        $query = mysqli_query($koneksi,"SELECT * FROM report_msk WHERE (tgl_msk BETWEEN '$from' AND '$end') ORDER BY tgl_masuk DESC");
+        $query = mysqli_query($koneksi,"SELECT * FROM report_msk WHERE (tgl_msk BETWEEN '$from' AND '$end')");
         $no = 1;
         while($row = $query->fetch_assoc()){
             $contents .= "

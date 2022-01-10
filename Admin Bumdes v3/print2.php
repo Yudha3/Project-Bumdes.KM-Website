@@ -6,7 +6,7 @@ function generateRow(){
  $from=@$_GET['dari'];
  $end=@$_GET['ke'];
  if (empty ($from) or empty ($end)) {
-    $query = mysqli_query($koneksi,"select * from report_klr ");
+    $query = mysqli_query($koneksi,"SELECT * FROM report_klr ORDER BY tgl_transaksi DESC");
     $no = 1;
     while($row = $query->fetch_assoc()){
         $contents .= "
@@ -24,7 +24,7 @@ function generateRow(){
     return $contents;
 
 } else {
-    $query = mysqli_query($koneksi,"select * from report_klr WHERE (tgl_transaksi BETWEEN '$from' AND '$end')");
+    $query = mysqli_query($koneksi,"SELECT * FROM report_klr WHERE (tgl_transaksi BETWEEN '$from' AND '$end') ORDER BY tgl_transaksi DESC");
     $no = 1;
     while($row = $query->fetch_assoc()){
         $contents .= "

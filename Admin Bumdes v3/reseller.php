@@ -44,6 +44,7 @@ $sesName = $_SESSION['name'];
         <div class="logo-details">
             <i class='bx bx-analyse'></i>
             <span class="logo_name">Bumdes.KM</span>
+ 
         </div>
         <ul class="nav-links">
             <li>

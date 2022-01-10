@@ -4,7 +4,8 @@ include '../koneksi.php';
 $id = $_GET["id_transaksi"];
 $find = mysqli_query($koneksi, "SELECT * FROM transaksi WHERE id_transaksi ='$id'");
 
-while ($data = mysqli_fetch_assoc($find)){
+$data = mysqli_fetch_assoc($find);
+// while ($data = mysqli_fetch_assoc($find)){
     $id_trx = $data['id_transaksi'];
     $tgl = substr($data['tgl_transaksi'], 0, -9);
     $penerima = $data['penerima'];
@@ -19,5 +20,5 @@ while ($data = mysqli_fetch_assoc($find)){
         die("Gagal memindahkan data: " . mysqli_errno($koneksi) .
             " - " . mysqli_error($koneksi));
     }
-}
+// }
 ?>                              

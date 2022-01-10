@@ -173,7 +173,7 @@ if (isset($_GET['id'])) {
                                 </div>
                                 <div>
                                     <label for="no_tlp">Nomer Telepon</label>
-                                    <input type="text" name="no_tlp" id="no_tlp" value="<?php echo $data['no_tlp']; ?>" autofocus="" required="" />
+                                    <input type="text" name="no_tlp" id="no_tlp" value="<?php echo $data['no_tlp']; ?>" autofocus="" required="" minlength="10"/>
                                 </div>
                                 <div>
                                     <label for="tgl_gabung">Tanggal Gabung</label>

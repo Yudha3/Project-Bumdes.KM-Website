@@ -184,11 +184,11 @@ $tanggal_masuk = date("Y-m-d");
                                         </div>
                                         <div>
                                             <label for="hg_beli">Harga Beli</label>
-                                            <input type="number" name="hg_beli" id="hg_beli" readonly />
+                                            <input type="number" name="hg_beli" id="hg_beli" readonly maxlength="11"/>
                                         </div>
                                         <div>
                                             <label for="jml_masuk">Jumlah</label>
-                                            <input type="number" onkeyup="sum()" name="jml_masuk" id="jml_masuk" autofocus="" required="" />
+                                            <input type="number" onkeyup="sum()" name="jml_masuk" id="jml_masuk" autofocus="" required="" maxlength="4" />
                                         </div>
 
                                         <div>

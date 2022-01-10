@@ -176,7 +176,7 @@ $data = mysqli_fetch_assoc($result);
                                 </div>
                                 <div>
                                     <label for="jml_masuk">Jumlah</label>
-                                    <input type="number" name="jml_masuk" onkeyup="sum()" id="jml_masuk" value="<?php echo $data['jml_masuk'] ?>" autofocus required="" />
+                                    <input type="number" name="jml_masuk" onkeyup="sum()" id="jml_masuk" value="<?php echo $data['jml_masuk'] ?>" autofocus required maxlength="4" />
                                 </div>
                                 <div>
                                     <label for="total_hrg">Total Harga</label>

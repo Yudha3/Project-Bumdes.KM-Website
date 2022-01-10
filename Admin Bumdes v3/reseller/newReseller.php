@@ -166,7 +166,7 @@ $tanggal_masuk = date("Y-m-d");
                                 </div>
                                 <div>
                                     <label for="no_tlp">Nomer Telepon</label>
-                                    <input type="number" name="no_tlp" id="no_tlp" autofocus="" required="" />
+                                    <input type="number" name="no_tlp" id="no_tlp" autofocus="" required="" minlength="10"/>
                                 </div>
                                 <div>
                                     <label for="tgl_gabung">Tanggal Gabung</label>

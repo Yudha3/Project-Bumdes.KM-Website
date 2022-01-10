@@ -24,7 +24,7 @@ $sesName = $_SESSION['name'];
 $data_barang = mysqli_query($koneksi, "SELECT * FROM data_brg");
 $data_mitra = mysqli_query($koneksi, "SELECT * FROM data_mitra");
 $data_reseller = mysqli_query($koneksi, "SELECT * FROM data_reseller");
-$transaksi = mysqli_query($koneksi, "SELECT * FROM data_klr");
+$transaksi = mysqli_query($koneksi, "SELECT * FROM transaksi");
 
 $jml_barang = mysqli_num_rows($data_barang);
 $jml_mitra = mysqli_num_rows($data_mitra);

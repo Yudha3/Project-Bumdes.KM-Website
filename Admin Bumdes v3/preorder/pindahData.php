@@ -28,7 +28,7 @@ while ($itemPreorder = mysqli_fetch_assoc($getItemPrerder)) {
 
     $insertItem = mysqli_query($koneksi, "INSERT INTO transaksi_produk (id_transaksi, id_brg, qty, subtotal) VALUES ('$id_trx', '$id_brg', '$qty', '$subtotal')");
 
-    $updateStok = mysqli_query($koneksi, "UPDATE data_brg SET jml_stok = jml_stok - '$qty' WHERE id_brg = '$id_brg'");
+    // $updateStok = mysqli_query($koneksi, "UPDATE data_brg SET jml_stok = jml_stok - '$qty' WHERE id_brg = '$id_brg'");
 
 } 
 $delete =  mysqli_query($koneksi, "DELETE FROM preorder WHERE id_preorder = '$id'");

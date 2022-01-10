@@ -6,7 +6,7 @@ function generateRow(){
  $from=@$_GET['dari'];
  $end=@$_GET['ke'];
  if (empty ($from) or empty ($end)) {
-        $query = mysqli_query($koneksi,"SELECT * FROM report_msk ORDER BY tgl_masuk DESC");
+        $query = mysqli_query($koneksi,"SELECT * FROM report_msk ORDER BY id DESC");
         $no = 1;
         while($row = $query->fetch_assoc()){
             $contents .= "

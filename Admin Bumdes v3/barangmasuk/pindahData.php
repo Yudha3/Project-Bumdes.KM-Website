@@ -23,6 +23,7 @@ $total = $data['total_hrg'];
     
 mysqli_query($koneksi, "INSERT INTO report_msk (id_transaksi, tgl_msk, id_brg, barang, pengirim, hg_beli, jml_masuk, total_hrg) 
                         VALUES ('$id_trx','$tgl','$idb','$barang','$pengirim','$harga', '$jml', '$total')");
+mysqli_query($koneksi, "DELETE FROM data_msk WHERE id = '$id'");
     
 if (mysqli_affected_rows($koneksi) > 0) {
     echo "<script>alert('Berhasil menambahkan Data ke Laporan Transaksi.');window.location='../barangMasuk.php';</script>";

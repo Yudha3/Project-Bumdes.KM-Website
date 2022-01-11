@@ -152,7 +152,7 @@ $sesName = $_SESSION['name'];
                                             <td><?php $tanggals = $b['tgl_preorder'];
                                                 echo date("d-M-Y", strtotime($tanggals)) ?></td>
                                             <td><?php echo $b['penerima'] ?></td>
-                                            <td>Rp <?php echo $b['total_preorder'] ?></td>
+                                            <td>Rp <?php echo number_format($b['total_preorder'],0,',','.') ?></td>
                                             <td><?php echo $b['status'] ?></td>
                                             <td>
                                                 <a href="preorder/editPreorder.php?id_preorder=<?php echo $b['id_preorder'] ?>" style="text-decoration: none;">Detail</a> |

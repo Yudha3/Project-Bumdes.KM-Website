@@ -189,7 +189,7 @@ $sesName = $_SESSION['name'];
                                                 echo date("d-M-Y", strtotime($tanggals)) ?></td>
                                             <td><?php echo $d["penerima"];   ?></td>
                                             <td><?php echo $d["alamat"];   ?></td>
-                                            <td><?php echo $d["total_transaksi"];   ?></td>
+                                            <td><?php echo number_format($d["total_transaksi"],0,',','.');   ?></td>
                                             <td><?php echo $d["status"];   ?></td>
                                         </tr>
                                     <?php

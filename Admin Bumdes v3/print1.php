@@ -17,9 +17,9 @@ function generateRow(){
             <td>".$row['id_brg']."</td>
             <td>".$row['barang']."</td>
             <td>".$row['pengirim']."</td>
-            <td>".$row['hg_beli']."</td>
+            <td>".number_format($row['hg_beli'],0,',','.')."</td>
             <td>".$row['jml_masuk']."</td>
-            <td>".$row['total_hrg']."</td>
+            <td>".number_format($row['total_hrg'],0,',','.')."</td>
             </tr>
             ";
         }
@@ -37,9 +37,9 @@ function generateRow(){
             <td>".$row['id_brg']."</td>
             <td>".$row['barang']."</td>
             <td>".$row['pengirim']."</td>
-            <td>".$row['hg_beli']."</td>
+            <td>".number_format($row['hg_beli'],0,',','.')."</td>
             <td>".$row['jml_masuk']."</td>
-            <td>".$row['total_hrg']."</td>
+            <td>".number_format($row['total_hrg'],0,',','.')."</td>
             </tr>
             ";
         }

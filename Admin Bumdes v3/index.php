@@ -134,7 +134,7 @@ $jml_transaksi = mysqli_num_rows($transaksi);
             <div class="number"><?php echo $jml_transaksi; ?></div>
             <div class="indicator">
               <i class='bx bx-left-arrow-alt right'></i>
-              <a href="transaksi.php" class="text">
+              <a href="barangKeluar.php" class="text">
                 See All
               </a>
             </div>
@@ -220,7 +220,7 @@ $jml_transaksi = mysqli_num_rows($transaksi);
                           echo date("d-M-Y", strtotime($tanggals)) ?></td>
                       <td><?php echo $b['penerima'] ?></td>
                       <td><?php echo $b['alamat'] ?></td>
-                      <td><?php echo $b['total_transaksi'] ?></td>
+                      <td>Rp <?php echo number_format($b['total_transaksi'],0,',','.') ?></td>
                       <td><?php echo $b['status'] ?></td>
                     </tr>
                   <?php

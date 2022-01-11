@@ -152,7 +152,7 @@ $sesName = $_SESSION['name'];
                                             <td><?php $tanggals = $b['tgl_transaksi'];
                                                 echo date("d-M-Y", strtotime($tanggals)) ?></td>
                                             <td><?php echo $b['penerima'] ?></td>
-                                            <td>Rp <?php echo $b['total_transaksi'] ?></td>
+                                            <td>Rp <?php echo number_format($b['total_transaksi'],0,',','.') ?></td>
                                             <td><?php echo $b['status'] ?></td>
                                             <td>
                                                 <a href="transaksi/editBarangkeluar.php?id_transaksi=<?php echo $b['id_transaksi'] ?>" style="text-decoration: none;">Edit</a> |

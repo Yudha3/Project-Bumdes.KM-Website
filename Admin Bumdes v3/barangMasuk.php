@@ -162,7 +162,7 @@ $sesName = $_SESSION['name'];
                                             <td><?php echo $b['barang'] ?></td>
                                             <td><?php echo $b['pengirim'] ?></td>
                                             <td><?php echo $b['jml_masuk'] ?></td>
-                                            <td>Rp <?php echo $b['total_hrg'] ?></td>
+                                            <td>Rp <?php echo number_format($b['total_hrg'],0,',','.') ?></td>
                                             <td>
                                                 <a href="barangmasuk/editBarangmasuk.php?id=<?php echo $b['id'] ?>" style="text-decoration: none;">Edit</a> |
                                                 <a href="barangmasuk/proses_hapus.php?id=<?php echo $b['id'] ?>" onclick="return confirm('Apakah Anda yakin ingin membatalkan stock barang ini dari transaksi masuk? *Stock akan berkurang')" style="text-decoration: none;">Batal</a> |

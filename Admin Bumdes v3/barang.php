@@ -165,7 +165,7 @@ $sesName = $_SESSION['name'];
                                             <td align="center"><?php echo $no; ?></td>
                                             <td><?php echo $row['id_brg']; ?></td>
                                             <td><?php echo $row['barang']; ?></td>
-                                            <td>Rp <?php echo $row['hg_jual']; ?></td>
+                                            <td>Rp <?php echo number_format($row['hg_jual'],0,',','.'); ?></td>
                                             <td><?php echo $row['jml_stok']; ?></td>
                                             <td style="text-align: center;"><img src="images/barang/<?php echo $row['gambar']; ?>" style="width: 120px;"></td>
                                             <td>

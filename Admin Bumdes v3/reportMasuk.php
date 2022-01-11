@@ -190,7 +190,7 @@ $sesName = $_SESSION['name'];
                                             <td><?php echo $d["barang"];   ?></td>
                                             <td><?php echo $d["pengirim"];   ?></td>
                                             <td><?php echo $d["jml_masuk"];   ?></td>
-                                            <td><?php echo $d["total_hrg"];   ?></td>
+                                            <td><?php echo number_format($d["total_hrg"],0,',','.');   ?></td>
                                         </tr>
                                     <?php
                                     }

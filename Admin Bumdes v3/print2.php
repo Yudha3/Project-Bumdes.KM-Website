@@ -16,7 +16,7 @@ function generateRow(){
         <td>".$row['tgl_transaksi']."</td>
         <td>".$row['penerima']."</td>
         <td>".$row['alamat']."</td>
-        <td>".$row['total_transaksi']."</td>
+        <td>".number_format($row['total_transaksi'],0,',','.')."</td>
         <td>".$row['status']."</td>
         </tr>
         ";
@@ -34,7 +34,7 @@ function generateRow(){
         <td>".$row['tgl_transaksi']."</td>
         <td>".$row['penerima']."</td>
         <td>".$row['alamat']."</td>
-        <td>".$row['total_transaksi']."</td>
+        <td>".number_format($row['total_transaksi'],0,',','.')."</td>
         <td>".$row['status']."</td>
         </tr>
         ";

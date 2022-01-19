@@ -31,6 +31,13 @@ $jml_mitra = mysqli_num_rows($data_mitra);
 $jml_reseller = mysqli_num_rows($data_reseller);
 $jml_transaksi = mysqli_num_rows($transaksi);
 
+$bulanini = date("Y-m");
+$getUntung = mysqli_query($koneksi, "SELECT * FROM transaksi WHERE tgl_transaksi LIKE '%$bulanini%' AND status = 'Selesai'");
+$untung = 0;
+while ($hitungUntung = mysqli_fetch_assoc($getUntung)) {
+  $untung += $hitungUntung['untung'];
+}
+
 ?>
 
 
@@ -134,7 +141,7 @@ $jml_transaksi = mysqli_num_rows($transaksi);
             <div class="number"><?php echo $jml_transaksi; ?></div>
             <div class="indicator">
               <i class='bx bx-left-arrow-alt right'></i>
-              <a href="barangKeluar.php" class="text">
+              <a href="transaksi.php" class="text">
                 See All
               </a>
             </div>
@@ -182,8 +189,44 @@ $jml_transaksi = mysqli_num_rows($transaksi);
         </div>
       </div>
 
+      <style>
+        .my-box{
+          background-color: white;
+          padding: 1.4rem;
+          margin: 25px 20px;
+          border-radius: 16px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color:rgb(16, 37, 88, 0.25);
+          /* background-color: #FFF; */
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        .group {
+          display: flex;
+          float: left;
+          align-items: center;
+        }
+        .icon-untung {
+          display: flex;
+          align-items: center;
+          font-size:32px; color:#355091;
+          margin-right: 6px;
+        }
+        </style>
+
+      <div class="my-box">
+        <div class="group">
+          <div class="icon-untung">
+          <i class='bx bxs-badge-dollar' ></i>
+          </div>
+          <p style="font-size:17px; font-weight:500;">Total Keuntungan Bulan ini :</p>
+        </div>
+        <h3>Rp <?= number_format($untung,2,',','.'). ',-'; ?></h3>
+      </div>
+
       <div class="sales-boxes">
-        <div class="recent-sales1 box">
+        <div class="recent-sales1 box" >
           <div class="card-header1">
             <h3>Recent Transaksi</h3>
 
@@ -220,7 +263,7 @@ $jml_transaksi = mysqli_num_rows($transaksi);
                           echo date("d-M-Y", strtotime($tanggals)) ?></td>
                       <td><?php echo $b['penerima'] ?></td>
                       <td><?php echo $b['alamat'] ?></td>
-                      <td>Rp <?php echo number_format($b['total_transaksi'],0,',','.') ?></td>
+                      <td><?php echo $b['total_transaksi'] ?></td>
                       <td><?php echo $b['status'] ?></td>
                     </tr>
                   <?php

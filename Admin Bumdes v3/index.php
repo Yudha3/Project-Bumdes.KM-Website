@@ -190,37 +190,37 @@ while ($hitungUntung = mysqli_fetch_assoc($getUntung)) {
       </div>
 
       <style>
-        .my-box{
-          background-color: white;
-          padding: 1.4rem;
-          margin: 25px 20px;
-          border-radius: 16px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          background-color:rgb(16, 37, 88, 0.25);
-          /* background-color: #FFF; */
-          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        }
-        .group {
-          display: flex;
-          float: left;
-          align-items: center;
-        }
-        .icon-untung {
-          display: flex;
-          align-items: center;
-          font-size:32px; color:#355091;
-          margin-right: 6px;
-        }
-        </style>
+              .my-box {
+        background-color: white;
+        padding: 1.4rem;
+        margin: 25px 20px;
+        border-radius: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgb(16, 37, 88, 0.25);
+        /* background-color: #FFF; */
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      }
+      .group {
+        display: flex;
+        float: left;
+        align-items: center;
+      }
+      .icon-untung {
+        display: flex;
+        align-items: center;
+        font-size: 32px;
+        color: #355091;
+        margin-right: 6px;
+      }
+      
+    </style>
 
       <div class="my-box">
         <div class="group">
-          <div class="icon-untung">
-          <i class='bx bxs-badge-dollar' ></i>
-          </div>
-          <p style="font-size:17px; font-weight:500;">Total Keuntungan Bulan ini :</p>
+          <i class='bx bxs-badge-dollar ' style="color: #355091; font-size: 32px; margin-right: 6px;"></i>
+          <p style="font-size:17px; font-weight:500; ">Total Keuntungan Bulan ini :</p>
         </div>
         <h3>Rp <?= number_format($untung,2,',','.'). ',-'; ?></h3>
       </div>

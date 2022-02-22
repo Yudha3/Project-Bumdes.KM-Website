@@ -137,7 +137,7 @@ $sesName = $_SESSION['name'];
                                         <th>No</th>
                                         <th>Id Transaksi</th>
                                         <th>Tanggal</th>
-                                        <th>Kode Barang</th>
+                                        <!-- <th>Kode Barang</th> -->
                                         <th>Barang</th>
                                         <th>Pengirim</th>
                                         <th>Jumlah</th>
@@ -158,15 +158,15 @@ $sesName = $_SESSION['name'];
                                             <td><?php echo $b['id_transaksi'] ?></td>
                                             <td><?php $tanggals = $b['tgl_msk'];
                                                 echo date("d-M-Y", strtotime($tanggals)) ?></td>
-                                            <td><?php echo $b['id_brg'] ?></td>
+                                            <!-- <td><?php echo $b['id_brg'] ?></td> -->
                                             <td><?php echo $b['barang'] ?></td>
                                             <td><?php echo $b['pengirim'] ?></td>
                                             <td><?php echo $b['jml_masuk'] ?></td>
-                                            <td>Rp <?php echo number_format($b['total_hrg'],0,',','.') ?></td>
+                                            <td>Rp <?php echo $b['total_hrg'] ?></td>
                                             <td>
-                                                <a href="barangmasuk/editBarangmasuk.php?id=<?php echo $b['id'] ?>" style="text-decoration: none;">Edit</a> |
-                                                <a href="barangmasuk/proses_hapus.php?id=<?php echo $b['id'] ?>" onclick="return confirm('Apakah Anda yakin ingin membatalkan stock barang ini dari transaksi masuk? *Stock akan berkurang')" style="text-decoration: none;">Batal</a> |
-                                                <a href="barangmasuk/pindahData.php?id=<?php echo $b['id'] ?>" style="text-decoration: none;" onclick="return confirm('Apakah anda yakin ingin menyelesaikan transaksi masuk ini? *Data akan dipindahkan ke laporan masuk')">Selesai</a>
+                                                <a href="barangmasuk/editBarangmasuk.php?id=<?php echo $b['id'] ?>" class="btn-edit" style="font-size:16px; "><i class='bx bxs-edit'></i></a>
+                                                <a href="barangmasuk/proses_hapus.php?id=<?php echo $b['id'] ?>" onclick="return confirm('Apakah Anda yakin ingin membatalkan stock barang ini dari transaksi masuk? *Stock akan berkurang')" class="btn-hapus" style="font-size:16px; "><i class='bx bx-x-circle'></i></a>
+                                                <a href="barangmasuk/pindahData.php?id=<?php echo $b['id'] ?>" class="btn-selesai" onclick="return confirm('Apakah anda yakin ingin menyelesaikan transaksi masuk ini? *Data akan dipindahkan ke laporan masuk')" style="font-size:16px; "><i class='bx bx-check-circle'></i></a>
                                             </td>
                                         </tr>
                                     <?php

@@ -25,6 +25,11 @@ $sesName = $_SESSION['name'];
 $id = $_GET['id_transaksi'];
 $queryTransaksi = mysqli_query($koneksi, "SELECT * FROM transaksi WHERE id_transaksi = '$id'");
 $dataTransaksi = mysqli_fetch_assoc($queryTransaksi);
+if ($dataTransaksi['status'] == 'Menunggu Pembayaran' || $dataTransaksi['status'] == 'Selesai' || $dataTransaksi['status'] == 'Ditolak' || $dataTransaksi['status'] == 'Dibayar') {
+    $validasiResi = 'readonly';
+} else {
+    $validasiResi = '';
+}
 
 $queryItem = mysqli_query($koneksi, "SELECT * FROM transaksi_produk WHERE id_transaksi = '$id'");
 
@@ -189,19 +194,23 @@ $queryItem = mysqli_query($koneksi, "SELECT * FROM transaksi_produk WHERE id_tra
                                 </div>
                                 <div>
                                     <label for="bukti_tf">Bukti Transfer</label>
-                                    <a target="blank" href="http://ws-tif.com/bumdes.km/images/pembayaran/<?= $dataTransaksi['bukti_tf'];?>">
-                                        <img src="../images/pembayaran/<?php echo $dataTransaksi['bukti_tf']; ?>" style="width: 120px;float: left;margin-bottom: 5px;">
-                                    </a>
+                                    <?php if ($dataTransaksi['bukti_tf'] == "-") {?>
+                                        <p style="float: left;margin-bottom: 5px; color:#102558; font-size:17px; font-weight:500;">Belum dibayar</p>
+                                    <?php } else { ?>
+                                        <a target="blank" href="http://ws-tif.com/bumdes.km/images/pembayaran/<?= $dataTransaksi['bukti_tf'];?>">
+                                            <img src="../images/pembayaran/<?php echo $dataTransaksi['bukti_tf']; ?>" style="width: 120px;float: left;margin-bottom: 5px;" alt="Belum dibayar">
+                                        </a>
+                                    <?php } ?>
                                 </div>
                                 <div>
                                     <label for="resi">Resi</label>
-                                    <input type="text" name="resi" id="resi" value="<?php echo $dataTransaksi['resi'] ?>" />
+                                    <input type="text" name="resi" id="resi" value="<?php echo $dataTransaksi['resi'] ?>" <?= $validasiResi; ?>/>
                                 </div>
                                 <div>
                                     <label for="status">Status</label>
                                     <select name="status" class="custom-select form-control" id="status" autofocus="" required="">
                                         <option value="<?php echo $dataTransaksi['status'];?>"><?php echo $dataTransaksi['status'];?></option>
-                                        <option value="#">-- Pilih Option --</option>
+                                        <!-- <option value="#">-- Pilih Option --</option> -->
                                         <option>Ditolak</option>
                                         <option>Transaksi sedang diproses</option>
                                         <option>Barang sedang dikirim</option>

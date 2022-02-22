@@ -171,8 +171,8 @@ $sesName = $_SESSION['name'];
                                             <td><?php echo $row['tgl_gabung']; ?></td>
                                             <td><?php echo $row['barang']; ?></td>
                                             <td>
-                                                <a href="mitra/editMitra.php?id=<?php echo $row['id']; ?>" style="text-decoration: none;">Edit</a> |
-                                                <a href="mitra/proses_hapus.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')" style="text-decoration: none;">Hapus</a>
+                                                <a href="mitra/editMitra.php?id=<?php echo $row['id']; ?>" class="btn-edit"><i class='bx bxs-edit'></i></a>
+                                                <a href="mitra/proses_hapus.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')" class="btn-hapus"><i class='bx bx-trash'></i></a>
                                             </td>
                                         </tr>
                                     <?php

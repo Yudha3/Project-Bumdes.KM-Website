@@ -152,11 +152,11 @@ $sesName = $_SESSION['name'];
                                             <td><?php $tanggals = $b['tgl_transaksi'];
                                                 echo date("d-M-Y", strtotime($tanggals)) ?></td>
                                             <td><?php echo $b['penerima'] ?></td>
-                                            <td>Rp <?php echo number_format($b['total_transaksi'],0,',','.') ?></td>
+                                            <td>Rp <?php echo $b['total_transaksi'] ?></td>
                                             <td><?php echo $b['status'] ?></td>
                                             <td>
-                                                <a href="transaksi/editBarangkeluar.php?id_transaksi=<?php echo $b['id_transaksi'] ?>" style="text-decoration: none;">Edit</a> |
-                                                <a href="transaksi/pindahData.php?id_transaksi=<?php echo $b['id_transaksi'] ?>" style="text-decoration: none;" onclick="return confirm('Apakah anda yakin ingin menyelesaikan transaksi keluar ini? *Data akan dipindahkan ke laporan keluar')">Selesai</a>
+                                                <a href="transaksi/editBarangkeluar.php?id_transaksi=<?php echo $b['id_transaksi'] ?>" class="btn-edit"><i class='bx bxs-show'></i></a>
+                                                <a href="transaksi/pindahData.php?id_transaksi=<?php echo $b['id_transaksi'] ?>" class="btn-selesai" onclick="return confirm('Apakah anda yakin ingin menyelesaikan transaksi keluar ini? *Data akan dipindahkan ke laporan keluar')"><i class='bx bx-check-circle'></i></a>
                                             </td>
                                         </tr>
                                     <?php

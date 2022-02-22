@@ -152,11 +152,11 @@ $sesName = $_SESSION['name'];
                                             <td><?php $tanggals = $b['tgl_preorder'];
                                                 echo date("d-M-Y", strtotime($tanggals)) ?></td>
                                             <td><?php echo $b['penerima'] ?></td>
-                                            <td>Rp <?php echo number_format($b['total_preorder'],0,',','.') ?></td>
+                                            <td>Rp <?php echo $b['total_preorder'] ?></td>
                                             <td><?php echo $b['status'] ?></td>
                                             <td>
-                                                <a href="preorder/editPreorder.php?id_preorder=<?php echo $b['id_preorder'] ?>" style="text-decoration: none;">Detail</a> |
-                                                <a href="preorder/pindahData.php?id_preorder=<?php echo $b['id_preorder'] ?>" style="text-decoration: none;" onclick="return confirm('Apakah anda yakin ingin menerima Pre Order ini? *Data akan dipindahkan ke transaksi keluar')">Terima</a>
+                                                <a href="preorder/editPreorder.php?id_preorder=<?php echo $b['id_preorder'] ?>" class="btn-edit"><i class='bx bxs-show'></i></a>
+                                                <a href="preorder/pindahData.php?id_preorder=<?php echo $b['id_preorder'] ?>" class="btn-selesai" onclick="return confirm('Apakah anda yakin ingin menerima Pre Order ini? *Data akan dipindahkan ke transaksi keluar')"><i class='bx bx-check-circle'></i></a>
                                             </td>
                                         </tr>
                                     <?php
